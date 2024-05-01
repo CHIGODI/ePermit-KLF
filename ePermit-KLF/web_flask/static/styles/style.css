@@ -12,9 +12,11 @@
     justify-content: center;
 }
 .col-2 {
-    background-color: pink;
     width: 50%;
     height: 100vh;
+    background-image: url('/web_flask/static/images/Stone\ Town\ Restaurants_\ What\ and\ Where\ to\ Eat.jpeg');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 .my-form {
     display: flex;
