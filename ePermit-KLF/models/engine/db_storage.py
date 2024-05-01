@@ -36,6 +36,12 @@ class DBStorage:
     def save(self):
         """ commits all changes to the database """
         self.__session.commit()
+    
+    def get(self, cls, id):
+        """ retrieves an object from the database """
+        if cls is None or id is None:
+            return None
+        return self.__session.query(cls).get(id)
         
     def reload(self):
         """reloads data from the database"""
@@ -43,3 +49,7 @@ class DBStorage:
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
+        
+    def close(self):
+        """ closes the session """
+        self.__session.remove()
