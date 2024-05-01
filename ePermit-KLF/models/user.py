@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String
+from models.business import Business
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 

@@ -2,7 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import requests
 import json
 from models.user import User
+from models import storage
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
@@ -15,7 +17,7 @@ login_manager.login_view = 'signin'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return storage.get(User, user_id)
 
 @app.route('/', strict_slashes=False)
 def index():
@@ -24,11 +26,14 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'], strict_slashes=False)
 def sign_up():
     if request.method == 'POST':
-        user = User(username=request.form.get("username"),
+        user = User(email=request.form.get("email"),
                     password=request.form.get("password"))
-        user.save()
-        flash('Account created successfully')
-        return redirect(url_for("signin"))
+        if request.form.get('password') != request.form.get("confirm_password"):
+            flash('Passwords do not match')
+        else:
+            user.save()
+            flash('Account created successfully')
+            return redirect(url_for("signin"))
     return render_template("sign_up.html")
         
         
@@ -36,10 +41,13 @@ def sign_up():
 def signin():
     """ Sign in route """
     if request.method == "POST":
-        user = User.query.filter_by(username=request.form.get("username")).first()
-        if user and user.password == request.form.get("password"):
-            login_user(user)
-            return redirect(url_for("dashboard"))
+        users = storage.all(User) # returns a list of all users objects
+        if users:
+            for user in users:
+                if user.email == request.form.get("email"):
+                    if user.password == request.form.get("password"):
+                        login_user(user)
+                return redirect(url_for("dashboard"))
     return render_template("landing_page.html")
 
 

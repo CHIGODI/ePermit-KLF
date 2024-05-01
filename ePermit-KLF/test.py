@@ -16,4 +16,5 @@ import models
 u = User(email="diana@gmail.com", password="password")
 models.storage.reload()
 u.save()
-print(u)
+users = models.storage.all(User)
+print(users)
