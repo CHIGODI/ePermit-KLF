@@ -1,25 +1,56 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, flash
 import requests
 import json
+from models.user import User
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
 
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "epermit_secret_key"
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'signin'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.get(user_id)
 
 @app.route('/', strict_slashes=False)
 def index():
     return render_template('landing_page.html')
 
-
-@app.route('/signup', strict_slashes=False)
+@app.route('/signup', methods=['GET', 'POST'], strict_slashes=False)
 def sign_up():
-    return render_template('sign_up.html')
-
-
-@app.route('/signin', strict_slashes=False)
+    if request.method == 'POST':
+        user = User(username=request.form.get("username"),
+                    password=request.form.get("password"))
+        user.save()
+        flash('Account created successfully')
+        return redirect(url_for("signin"))
+    return render_template("sign_up.html")
+        
+        
+@app.route('/signin', methods=['GET', 'POST'], strict_slashes=False)
 def signin():
-    return render_template('landing_page.html')
+    """ Sign in route """
+    if request.method == "POST":
+        user = User.query.filter_by(username=request.form.get("username")).first()
+        if user and user.password == request.form.get("password"):
+            login_user(user)
+            return redirect(url_for("dashboard"))
+    return render_template("landing_page.html")
 
 
+@app.route('/dashboard', strict_slashes=False)
+def dashboard():
+    return render_template("dashboard.html")
+
+
+@app.route('/password/reset', strict_slashes=False)
+def change_password():
+    return render_template('forgot_password.html')
 
 @app.route('/pay', methods=['POST'])
 def process_form():
