@@ -26,11 +26,13 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'], strict_slashes=False)
 def sign_up():
     if request.method == 'POST':
-        user = User(email=request.form.get("email"),
-                    password=request.form.get("password"))
-        if request.form.get('password') != request.form.get("confirm_password"):
+        email = request.form.get("email")
+        password = request.form.get("password")
+        confirm_password = request.form.get('confirmed_password')
+        if password != confirm_password:
             flash('Passwords do not match')
         else:
+            user = User(email=email, password=password)
             user.save()
             flash('Account created successfully')
             return redirect(url_for("signin"))
