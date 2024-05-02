@@ -40,7 +40,7 @@ class DBStorage:
     def all(self, cls=None):
         """ retrieves all objects from the database """
         if cls is None:
-            return self.__session.query(cls).all()
+            return self.__session.query().all()
         return self.__session.query(cls).all()
     
     def get(self, cls, id):
