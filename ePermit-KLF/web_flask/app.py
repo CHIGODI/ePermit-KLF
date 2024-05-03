@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+# from flask_flash import Flash
 import requests
 import json
 from models.user import User
@@ -8,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
+# flash = Flash(app)
 app.config["SECRET_KEY"] = "epermit_secret_key"
 
 login_manager = LoginManager()
@@ -29,27 +31,45 @@ def sign_up():
         email = request.form.get("email")
         password = request.form.get("password")
         confirm_password = request.form.get('confirmed_password')
+
+        # Check if email exixts in db
+        users = storage.all(User)
+        print(users)
+        for user in users:
+            print(f"User email: {user.email}, Input email: {email}")
+            if user.email == email:
+                flash('Email already exist. Please use a different email or sign in')
+                return render_template('sign_up.html')
+        # check if email and confirm email match
         if password != confirm_password:
             flash('Passwords do not match')
+            return render_template('sign_up.html')
         else:
             user = User(email=email, password=password)
-            user.save()
-            flash('Account created successfully')
+            storage.new(user)
+            storage.save()
+            flash('Account created successfully', 'success')
             return redirect(url_for("signin"))
     return render_template("sign_up.html")
         
-        
+
+# Modified to authenticate correct password and email as per user data in the database       
 @app.route('/signin', methods=['GET', 'POST'], strict_slashes=False)
 def signin():
     """ Sign in route """
+    error = None
+    users = storage.all(User)
     if request.method == "POST":
-        users = storage.all(User) # returns a list of all users objects
-        if users:
-            for user in users:
-                if user.email == request.form.get("email"):
-                    if user.password == request.form.get("password"):
-                        login_user(user)
-                return redirect(url_for("dashboard"))
+        user_email = request.form.get('email')
+        user_password = request.form.get('first_password')
+        for user in users:
+            if user_email == user.email:
+                if user_password != user.password:
+                    error = "Invalid Password"
+                    return render_template("password_error.html")
+                else:
+                    flash("You are successfully login in ePermit")
+                    return redirect(url_for("dashboard"))
     return render_template("landing_page.html")
 
 
