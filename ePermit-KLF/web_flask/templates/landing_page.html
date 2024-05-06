@@ -8,6 +8,11 @@
     <title>Landing Page</title>
 </head>
 <body>
+  {% if error %}
+    <p><strong>{{ error }}</strong></p>
+  {% endif %}
+  
+
     <div class="container">
         <div class="row">
           <div class="col-1">
@@ -18,7 +23,7 @@
               </div>
               <div class="password">
                 <Label for="password">Password</Label>
-                <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                <input type="password" name="first_password" id="password" placeholder="Enter Password" required>
               </div>
               <div class="links">
                 <button type="submit">Sign In</button>

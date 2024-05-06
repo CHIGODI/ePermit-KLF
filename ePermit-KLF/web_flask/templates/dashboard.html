@@ -8,13 +8,21 @@
     <title>Landing Page</title>
 </head>
 <body>
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
     <div class="container">
         <div class="row">
           <div class="col-1">
             logged in  successfully
           </div>
           <div class="col-2">
-            2 of 2
+            <a href="{{url_for('signin')}}">login</a>
           </div>
         </div>
     </div>
