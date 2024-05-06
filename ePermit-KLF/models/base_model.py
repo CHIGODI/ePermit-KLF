@@ -7,18 +7,19 @@ from sqlalchemy.ext.declarative import declarative_base
 import models
 
 Base = declarative_base()
-
+# Used this in the to_dict method
+time = "%Y-%m-%dT%H:%M:%S.%f"
 
 class BaseModel:
     """ Base class for all other classes """
     from sqlalchemy import Column, DateTime, String
-    created_at = Column(DateTime,
-                        nullable=False,
-                        default=datetime.now(timezone.utc))
-    updated_at = Column(DateTime,
-                        nullable=False,
-                        default=datetime.now(timezone.utc))
-    id = Column(String(60), unique=True, nullable=False, primary_key=True)
+    created_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
+
+    # changed the nullable=false to be at the end
+    updated_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
+
+    id = Column(String(60), unique=True, primary_key=True,  nullable=False)
+
     def __init__(self, *args, **kwargs):
         """ Initializes the base class """
         if kwargs:
@@ -32,24 +33,34 @@ class BaseModel:
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
+            self.created_at = datetime.utcnow()
+            self.updated_at = datetime.utcnow()
             
     def __str__(self):
         """ Returns a string representation of the class """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
     
+    #Removed the reload method to avoid creating new sessions
     def save(self):
         """ Updates the updated_at attribute with the current datetime """
-        self.updated_at = datetime.now()
-        models.storage.reload()
+        self.updated_at = datetime.utcnow()
+        # models.storage.reload()
         models.storage.new(self)
         models.storage.save()
-        
+
+    #Updated the to dict method to use the time format specified above 
     def to_dict(self):
-        """ Returns a dictionary representation of the class """
+        """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
-        new_dict['__class__'] = self.__class__.__name__
-        new_dict['created_at'] = self.created_at.isoformat()
-        new_dict['updated_at'] = self.updated_at.isoformat()
-        return new_dict
+        if "created_at" in new_dict:
+            new_dict["created_at"] = new_dict["created_at"].strftime(time)
+        if "updated_at" in new_dict:
+            new_dict["updated_at"] = new_dict["updated_at"].strftime(time)
+        new_dict["__class__"] = self.__class__.__name__
+        if "_sa_instance_state" in new_dict:
+            del new_dict["_sa_instance_state"]
+
+    # Added the delete method
+    def delete(self):
+        """delete the current instance from the storage"""
+        models.storage.delete(self)
