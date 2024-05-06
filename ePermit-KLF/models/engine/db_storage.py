@@ -10,7 +10,7 @@ from models.business import Business
 from models.category import Category
 
 
-
+#Added the classes dictionary to hold the classes 
 classes = {"User": User, "Business": Business, "Category": Category}
 
 
@@ -43,6 +43,8 @@ class DBStorage:
         """ commits all changes to the database """
         self.__session.commit()
     
+    #Changed this method to handle retrieveing objects from db
+    #The other method was retrieving a list of objects
     def all(self, cls=None):
         """ retrieves all objects from the database """
         new_dict = {}
@@ -61,6 +63,7 @@ class DBStorage:
             return None
         return self.__session.query(cls).get(id)
 
+    # Added the delete method to delete items from db
     def delete(self, obj=None):
         """ deletes an object from the current database """
         if obj is not None:
@@ -73,6 +76,7 @@ class DBStorage:
         Session = scoped_session(sess_factory)
         self.__session = Session
     
+    #Added this method to know the number of Objects in the database
     def count(self, cls=None):
         """ counts the number of objects in the database """
         if cls is None:
