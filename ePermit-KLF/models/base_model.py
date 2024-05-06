@@ -7,6 +7,7 @@ from sqlalchemy.ext.declarative import declarative_base
 import models
 
 Base = declarative_base()
+# Used this in the to_dict method
 time = "%Y-%m-%dT%H:%M:%S.%f"
 
 class BaseModel:
@@ -14,6 +15,7 @@ class BaseModel:
     from sqlalchemy import Column, DateTime, String
     created_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
 
+    # changed the nullable=false to be at the end
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
 
     id = Column(String(60), unique=True, primary_key=True,  nullable=False)
@@ -38,14 +40,16 @@ class BaseModel:
         """ Returns a string representation of the class """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
     
+    #Removed the reload method to avoid creating new sessions
     def save(self):
         """ Updates the updated_at attribute with the current datetime """
         self.updated_at = datetime.utcnow()
         # models.storage.reload()
         models.storage.new(self)
         models.storage.save()
-        
-    def to_dict(self, save_fs=None):
+
+    #Updated the to dict method to use the time format specified above 
+    def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
         if "created_at" in new_dict:
@@ -55,11 +59,8 @@ class BaseModel:
         new_dict["__class__"] = self.__class__.__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
-        if save_fs is None:
-            if "password" in new_dict:
-                del new_dict["password"]
-        return new_dict
 
+    # Added the delete method
     def delete(self):
         """delete the current instance from the storage"""
         models.storage.delete(self)
