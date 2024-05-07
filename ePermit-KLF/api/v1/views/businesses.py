@@ -10,7 +10,6 @@ from models.business import Business
 def get_businesses():
     """ method that retrieves all businesses """
     businesses = storage.all(Business).values()
-    businesses_list = []
     businesses_list = [business.to_dict() for business in businesses]
     return jsonify(businesses_list)
 
@@ -43,8 +42,6 @@ def create_business():
         abort(400, "Not a JSON")
     if 'name' not in business_json:
         abort(400, "Missing name")
-    if 'description' not in business_json:
-        abort(400, "Missing description")
     if 'category_id' not in business_json:
         abort(400, "Missing category_id")
     if 'user_id' not in business_json:

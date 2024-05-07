@@ -14,10 +14,7 @@ class BaseModel:
     """ Base class for all other classes """
     from sqlalchemy import Column, DateTime, String
     created_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
-
-    # changed the nullable=false to be at the end
     updated_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
-
     id = Column(String(60), unique=True, primary_key=True,  nullable=False)
 
     def __init__(self, *args, **kwargs):
@@ -33,8 +30,8 @@ class BaseModel:
                     setattr(self, key, value)
         else:
             self.id = str(uuid.uuid4())
-            self.created_at = datetime.utcnow()
-            self.updated_at = datetime.utcnow()
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
             
     def __str__(self):
         """ Returns a string representation of the class """
@@ -43,7 +40,7 @@ class BaseModel:
     #Removed the reload method to avoid creating new sessions
     def save(self):
         """ Updates the updated_at attribute with the current datetime """
-        self.updated_at = datetime.utcnow()
+        self.updated_at = datetime.now()
         # models.storage.reload()
         models.storage.new(self)
         models.storage.save()
@@ -59,6 +56,7 @@ class BaseModel:
         new_dict["__class__"] = self.__class__.__name__
         if "_sa_instance_state" in new_dict:
             del new_dict["_sa_instance_state"]
+        return new_dict
 
     # Added the delete method
     def delete(self):

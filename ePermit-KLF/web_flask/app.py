@@ -82,6 +82,18 @@ def dashboard():
 def change_password():
     return render_template('forgot_password.html')
 
+
+
+@app.route('/register', methods=['POST'], strict_slashes=False)
+@login_required
+def register():
+    """ registers a business """
+    return render_template('payment.html')
+
+
+
+
+
 @app.route('/pay', methods=['POST'])
 def process_form():
     phone_number = request.form['phone_number']
