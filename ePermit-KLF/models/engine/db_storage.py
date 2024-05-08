@@ -34,6 +34,7 @@ class DBStorage:
         
         if EPERMIT_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
+        
             
     def new(self, obj):
         """ saves an object to the database """
@@ -62,6 +63,13 @@ class DBStorage:
         if cls is None or id is None:
             return None
         return self.__session.query(cls).get(id)
+    
+    # Added this method to get user by their emails
+    def get_user_by_email(self, email):
+        """ retrieves a user by email """
+        if email is None:
+            return None
+        return self.__session.query(User).filter(User.email == email).first()
 
     # Added the delete method to delete items from db
     def delete(self, obj=None):
