@@ -3,19 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="../static/styles/register.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap" async defer></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js?"></script>
+    <script src="../static/scripts/0-epermit.js"></script>
+    <title>registration</title>
 </head>
 <body>
     <div class="container">
-        <div class="register-bs">
-            <form action="/register">
-                <label for="first_name">first name</label>
-                <input type="text" name="first name" id="firt_name">
-                <label for="last_name">last name</label>
-                <input type="text" name="last name" id="last_name">
-                <button type="submit">register</button>
-            </form>
-        </div>
+        <form class="form-control" id="register-bs" method="POST" action="/register/business">
+            <div class="business-info">
+                <h4>Business Information</h4>
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label">Business Name</label>
+                    <input type="name" id="name" class="form-control" aria-describedby="businessNameHelpBlock">
+                    <div id="businessNameHelpBlock" class="form-text">Maximum of 64 characters allowed</div>
+                    <div id="charCount" class="form-text">Currently Entered: 0 characters.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="origin">Business Entity Origin</label>
+                    <select name="origin" class="form-select" id="origin">
+                        <option selected></option>
+                        <option value="kenyan">Kenyan</option>
+                        <option value="foreigner">Foreigner</option>
+                    </select><br><br>
+                </div>
+
+                <div class="mb-3">
+                    <label for="vat" class="form-label">VAT No</label>
+                    <input type="vat" id="vat" class="form-control" aria-describedby="vatHelpBlock">
+                    <div id="vatHelpBlock" class="form-text">Maximum of 20 characters allowed</div>
+                    <div id="charCount" class="form-text">Currently Entered: 0 characters.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="box" class="form-label">P.O BOX</label>
+                    <input type="box" id="box" class="form-control" required aria-describedby="boxHelpBlock">
+                    <div id="boxHelpBlock" class="form-text">Maximum of 10 characters allowed</div>
+                    <div id="charCount" class="form-text">Currently Entered: 0 characters.</div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="business_telephone" class="form-label">Business Telephone No.</label>
+                    <input type="business_telephone" id="business_telephone" class="form-control" required>
+                </div>
+                
+
+                <label for="description">Activity description</label>
+                <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
+                
+                <label for="category">Category:</label>
+                <select id="category" name="category_id">
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select><br><br>
+                
+                <div id="map"></div>
+                
+                <label for="Latitude">Latitude:</label>
+                <input type="text" id="Latitude" name="Latitude"><br><br>
+                
+                <label for="longitude">Longitude:</label>
+                <input type="text" id="longitude" name="longitude"><br><br>
+
+            </div>
+            <div class="owner-info">
+                <h4>Onwer's Information</h4>
+                <label for="first name">First Name:</label>
+                <input type="text" id="name" name="first_name" required><br><br>
+                
+                <label for="first name">Last Name:</label>
+                <input type="text" id="name" name="last_name" required><br><br>
+                
+                <label for="ID_number">ID No:</label>
+                <input type="ID_number" id="ID_number" name="ID_number" required><br><br>
+
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br><br>
+                
+                <label for="KRA_pin">KRA PIN:</label>
+                <input type="text" id="KRA_pin" name="KRA_pin" required><br><br>
+
+                <label for="declaration">Declaration:</label><br>
+                Name of applicant: <input type="text" id="applicant_name" name="applicant_name" required><br>
+                Signature: <input type="text" id="signature" name="signature" required><br>
+                Designation: <input type="text" id="designation" name="designation" required><br>
+                Date: <input type="date" id="date" name="date" required><br><br>
+            </div>
+            <button type="submit">Submit</button>
+            <button type="button" class="btn btn-outline-primary">Primary</button>
+            <!-- <div class="mb-3">
+                <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="inputPassword6" class="col-form-label">Password</label>
+                </div>
+                <div class="col-auto">
+                    <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+                </div>
+                <div class="col-auto">
+                    <span id="passwordHelpInline" class="form-text">
+                        Must be 8-20 characters long.
+                    </span>
+                </div>
+            </div> -->
+        </form>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
 </body>
 </html>

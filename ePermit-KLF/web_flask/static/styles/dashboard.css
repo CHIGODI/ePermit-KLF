@@ -1,0 +1,13 @@
+.container{
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+
+}
+.col-1, .col-2{
+    background-color: yellow;
+    width: 50%;
+    height: 20%;
+}

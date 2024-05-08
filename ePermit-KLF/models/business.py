@@ -2,7 +2,7 @@
 """ Contains the Business class """
 
 from models.base_model import BaseModel, Base
-from sqlalchemy import String, Column, Float, ForeignKey
+from sqlalchemy import String, Column, Float, ForeignKey, Integer
 from sqlalchemy.orm import relationship
 
 
@@ -16,5 +16,9 @@ class Business(BaseModel, Base):
     category_id = Column(String(60), ForeignKey('categories.id'), nullable=False)
     Latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    address = Column(String(128), nullable=False)
+    box_number = Column(Integer, nullable=False)
+    sub_county = Column(String, nullable=False)
+    ward = Column(String, nullable=False)
+    plot_number=Column(String(60), nullable=True)
     KRA_pin = Column(String(60), nullable=False)
+    

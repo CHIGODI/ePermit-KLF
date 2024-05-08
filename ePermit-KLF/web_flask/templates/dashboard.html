@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../static/styles/dashboard.css">
 
     <title>Landing Page</title>
 </head>
@@ -18,12 +18,13 @@
 
     <div class="container">
         <div class="row">
-          <div class="col-1">
-            logged in  successfully
-          </div>
-          <div class="col-2">
-            <a href="{{url_for('signin')}}">login</a>
-          </div>
+          <a href="{{url_for('register')}}" target="_blank" rel="noopener noreferrer">
+            <div class="col-1"></div>
+          </a>
+          <a href="{{url_for('register')}}" target="_blank" rel="noopener noreferrer">
+            <div class="col-2">
+            </div>
+          </a>
         </div>
     </div>
 </body>

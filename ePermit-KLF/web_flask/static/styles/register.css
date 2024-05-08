@@ -1,0 +1,35 @@
+/* *{
+    color: #131313;
+}
+
+
+ .register-bs{
+    width: 1000px;
+    
+ }
+ .registration-form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;;
+ }
+ .registration-form input, textarea{
+    border: 1px green solid;
+    outline: none;
+    padding: 10px 40px;
+    border-radius: 8px;
+ } */
+ #register-bs{
+    width: 1000px;
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ }
+
+ #map {
+     width: 500px;
+     height: 250px;
+ }
