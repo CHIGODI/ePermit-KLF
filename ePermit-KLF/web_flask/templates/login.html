@@ -7,7 +7,7 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification is-danger">
-                {{ messages[0] }}. Don't have an account? <a href="{{ url_for('auth.signup') }}">signup here</a>.
+                {{ messages[0] }} Sign up <a href="{{ url_for('auth.signup') }}">here</a>.
             </div>
         {% endif %}
         {% endwith %}

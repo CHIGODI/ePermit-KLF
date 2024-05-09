@@ -17,7 +17,7 @@ def login():
         user = storage.get_user_by_email(user_email)
         
         if user is None or not check_password_hash(user.password, password):
-            flash('Wrong email or password.')
+            flash("Wrong email or password. Don't have an account?")
             return redirect(url_for('auth.login')) 
         else:
             login_user(user, remember=remember)
@@ -37,8 +37,8 @@ def signup():
         user = storage.get_user_by_email(email)
 
         if user:
-            flash('Email address already exists')
-            return redirect(url_for('auth.login'))
+            flash('Email address exists. Already have an account?')
+            return redirect(url_for('auth.signup'))
 
         new_user = User(email=email, first_name=name, password=generate_password_hash(password, method='pbkdf2:sha256'))
 
