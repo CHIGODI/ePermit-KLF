@@ -11,8 +11,13 @@ app = Flask(__name__)
 
 cache_id = uuid.uuid4()
 
+@app.route('/', methods=['GET'], strict_slashes=False)
+def dashboard():
+    """ registers a business """  
+    return render_template('dashboard.html', cache_id=cache_id)
 
-@app.route('/register', methods=['POST', 'GET'], strict_slashes=False)
+
+@app.route('/register', methods=['GET'], strict_slashes=False)
 def register_page():
     """ registers a business """  
     return render_template('register.html', cache_id=cache_id)
@@ -21,13 +26,40 @@ def register_page():
 @app.route('/register/business', methods=['POST'], strict_slashes=False)
 def register_business():
     """ registers a business """
+    categories = storage.all(Category).values()
     if request.method == 'POST':
-        business_name =request.form.get('name')
-        description = request.form.get('description')
-        categories = storage.all(Category)    
-        return render_template('payment.html', categores=categories, cache_id=cache_id)
+        kwargs_business = {
+            'name': request.form.get('name'),
+            'entity_origin': request.form.get('origin'),
+            'kra_pin': request.form.get('KRA_pin'),
+            'vat_no': request.form.get('vat'),
+            'po_box': request.form.get('box'),
+            'postal_code': request.form.get('postal_code'),
+            'business_telephone': request.form.get('business_telephone'),
+            'activity_description': request.form.get('description'),
+            'category_id': request.form.get('category_id'),
+            'latitude': request.form.get('Latitude'),
+            'longitude': request.form.get('longitude'),
+        }
+        kwargs_owner = {
+            'first_name': request.form.get('owner_first_name'),
+            'last_name': request.form.get('owner_last_name'),
+            'id_number': request.form.get('ID_number'),
+            'gender': request.form.get('gender'),
+            'designation': request.form.get('designation'),
+            'phone_number': request.form.get('phone_number'),
+            'signature': request.form.get('signature')
+        }
+        return render_template('payment.html',
+                               kwargs_business=kwargs_business,
+                               kwargs_owner=kwargs_owner,
+                               categores=categories,
+                               cache_id=cache_id)
 
-
+@app.route('/pay', methods=['GET'], strict_slashes=False)
+def pay():
+    """ registers a business """  
+    return render_template('payment.html', cache_id=cache_id)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

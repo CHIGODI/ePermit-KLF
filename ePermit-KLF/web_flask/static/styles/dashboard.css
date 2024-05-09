@@ -1,13 +1,22 @@
-.container{
-    background-color: red;
+.nav{
+    height: 70px;
+    width: 100%;
+    background-color: black;
+}
+.dashboard{
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
-    width: 100%;
-    height: 100vh;
-
 }
-.col-1, .col-2{
-    background-color: yellow;
-    width: 50%;
-    height: 20%;
+
+.side-nav {
+    background-color: #DDDDDD;
+    width: 20%;
+    height: 100vh;
+}
+.main{
+    margin: 24px auto;
+    width:80%;
+    height: 100%;
 }
