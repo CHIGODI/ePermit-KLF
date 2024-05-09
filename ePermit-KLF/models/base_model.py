@@ -5,6 +5,10 @@ from datetime import datetime, timezone
 import uuid
 from sqlalchemy.ext.declarative import declarative_base
 import models
+# from flask_sqlalchemy import SQLAlchemy
+
+
+# db = SQLAlchemy()
 
 Base = declarative_base()
 # Used this in the to_dict method

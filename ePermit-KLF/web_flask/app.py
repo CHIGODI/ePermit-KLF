@@ -1,65 +1,29 @@
-from flask import Flask, request, render_template
-import requests
-import json
-from models.user import User
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 from models import storage
-from models.category import Category
-import uuid
-
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'epermit_secret_key'
 
-cache_id = uuid.uuid4()
+# blueprint for auth routes in our app
+from .auth import auth as auth_blueprint
+app.register_blueprint(auth_blueprint)
 
-@app.route('/', methods=['GET'], strict_slashes=False)
-def dashboard():
-    """ registers a business """  
-    return render_template('dashboard.html', cache_id=cache_id)
+# blueprint for non-auth parts of app
+from .main import main as main_blueprint
+app.register_blueprint(main_blueprint)
 
+login_manager = LoginManager()
+login_manager.login_view = 'auth.login'
+login_manager.init_app(app)
 
-@app.route('/register', methods=['GET'], strict_slashes=False)
-def register_page():
-    """ registers a business """  
-    return render_template('register.html', cache_id=cache_id)
+from models.user import User
 
-
-@app.route('/register/business', methods=['POST'], strict_slashes=False)
-def register_business():
-    """ registers a business """
-    categories = storage.all(Category).values()
-    if request.method == 'POST':
-        kwargs_business = {
-            'name': request.form.get('name'),
-            'entity_origin': request.form.get('origin'),
-            'kra_pin': request.form.get('KRA_pin'),
-            'vat_no': request.form.get('vat'),
-            'po_box': request.form.get('box'),
-            'postal_code': request.form.get('postal_code'),
-            'business_telephone': request.form.get('business_telephone'),
-            'activity_description': request.form.get('description'),
-            'category_id': request.form.get('category_id'),
-            'latitude': request.form.get('Latitude'),
-            'longitude': request.form.get('longitude'),
-        }
-        kwargs_owner = {
-            'first_name': request.form.get('owner_first_name'),
-            'last_name': request.form.get('owner_last_name'),
-            'id_number': request.form.get('ID_number'),
-            'gender': request.form.get('gender'),
-            'designation': request.form.get('designation'),
-            'phone_number': request.form.get('phone_number'),
-            'signature': request.form.get('signature')
-        }
-        return render_template('payment.html',
-                               kwargs_business=kwargs_business,
-                               kwargs_owner=kwargs_owner,
-                               categores=categories,
-                               cache_id=cache_id)
-
-@app.route('/pay', methods=['GET'], strict_slashes=False)
-def pay():
-    """ registers a business """  
-    return render_template('payment.html', cache_id=cache_id)
+@login_manager.user_loader
+def load_user(user_id):
+    # since the user_id is just the primary key of our user table, use it in the query for the user
+    return storage.get(User, user_id)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

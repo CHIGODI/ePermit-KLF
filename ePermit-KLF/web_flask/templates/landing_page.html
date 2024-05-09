@@ -1,41 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/landing_page.css">
+{% extends "base.html" %}
 
-    <title>Landing Page</title>
-</head>
-<body>
-  {% if error %}
-    <p><strong>{{ error }}</strong></p>
-  {% endif %}
-  
+{% block content %}
+<h1 class="title">
+  Welcome to ePermit landing page
 
-    <div class="container">
-        <div class="row">
-          <div class="col-1">
-            <form class="my-form" action="/signin" method="post">
-              <div class="email">
-                <Label for="email">Email address</Label>
-                <input type="email" name="email" id="email" placeholder="Enter your email" required>
-              </div>
-              <div class="password">
-                <Label for="password">Password</Label>
-                <input type="password" name="first_password" id="password" placeholder="Enter Password" required>
-              </div>
-              <div class="links">
-                <button type="submit">Sign In</button>
-                <a href="/password/reset">Forgot password</a>
-                <a href="/signup">Sign Up</a>
-              </div>
-              
-            </form>
-          </div>
-          <div class="col-2">
-          </div>
-        </div>
-    </div>
-</body>
-</html>
+</h1>
+<h2>
+  Please login to continue
+</h2>
+{% endblock %}

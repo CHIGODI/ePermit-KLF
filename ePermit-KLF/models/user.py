@@ -7,7 +7,6 @@ from models.business import Business
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
-
 class User(BaseModel, Base, UserMixin):
     """ Class for user instances """
     __tablename__ = 'users'
