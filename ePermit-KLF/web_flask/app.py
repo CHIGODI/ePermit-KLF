@@ -2,20 +2,14 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from models import storage
+from web_flask import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'epermit_secret_key'
 
-# blueprint for auth routes in our app
-from .auth import auth as auth_blueprint
-app.register_blueprint(auth_blueprint)
-
-from .reg import register as register_blueprint
-app.register_blueprint(register_blueprint)
-
-# blueprint for non-auth parts of app
-from .main import main as main_blueprint
-app.register_blueprint(main_blueprint)
+app.register_blueprint(auth)
+app.register_blueprint(main)
+app.register_blueprint(register)
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -25,7 +19,7 @@ from models.user import User
 
 @login_manager.user_loader
 def load_user(user_id):
-    # since the user_id is just the primary key of our user table, use it in the query for the user
+    #use the storage class to get the user by id
     return storage.get(User, user_id)
 
 if __name__ == '__main__':
