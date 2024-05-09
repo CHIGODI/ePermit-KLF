@@ -6,10 +6,7 @@ from models import storage
 from models.category import Category
 import uuid
 from flask import Blueprint
-
-
-app = Flask(__name__)
-register = Blueprint('register', __name__)
+from web_flask import register
 
 cache_id = uuid.uuid4()
 
@@ -19,7 +16,7 @@ def dashboard():
     return render_template('dashboard.html', cache_id=cache_id)
 
 
-@register.route('/reg', methods=['GET'], strict_slashes=False)
+@register.route('/register', methods=['GET'], strict_slashes=False)
 def register_page():
     """ registers a business """  
     return render_template('register.html', cache_id=cache_id)
@@ -63,8 +60,6 @@ def pay():
     """ registers a business """  
     return render_template('payment.html', cache_id=cache_id)
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
 
 
 
