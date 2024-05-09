@@ -5,25 +5,27 @@ from models.user import User
 from models import storage
 from models.category import Category
 import uuid
+from flask import Blueprint
 
 
 app = Flask(__name__)
+register = Blueprint('register', __name__)
 
 cache_id = uuid.uuid4()
 
-@app.route('/', methods=['GET'], strict_slashes=False)
+@register.route('/', methods=['GET'], strict_slashes=False)
 def dashboard():
     """ registers a business """  
     return render_template('dashboard.html', cache_id=cache_id)
 
 
-@app.route('/register', methods=['GET'], strict_slashes=False)
+@register.route('/reg', methods=['GET'], strict_slashes=False)
 def register_page():
     """ registers a business """  
     return render_template('register.html', cache_id=cache_id)
 
 
-@app.route('/register/business', methods=['POST'], strict_slashes=False)
+@register.route('/register/business', methods=['POST'], strict_slashes=False)
 def register_business():
     """ registers a business """
     categories = storage.all(Category).values()
@@ -56,7 +58,7 @@ def register_business():
                                categores=categories,
                                cache_id=cache_id)
 
-@app.route('/pay', methods=['GET'], strict_slashes=False)
+@register.route('/pay', methods=['GET'], strict_slashes=False)
 def pay():
     """ registers a business """  
     return render_template('payment.html', cache_id=cache_id)
