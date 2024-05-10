@@ -21,8 +21,6 @@ class Business(BaseModel, Base):
     category_id = Column(String(60), ForeignKey('categories.id'), nullable=False)
     Latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
-    
-   
     sub_county = Column(String, nullable=False)
     ward = Column(String, nullable=False)
     plot_number=Column(String(60), nullable=True)

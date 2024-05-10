@@ -15,11 +15,9 @@ login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
-from models.user import User
-
 @login_manager.user_loader
 def load_user(user_id):
-    #use the storage class to get the user by id
+    from models.user import User
     return storage.get(User, user_id)
 
 if __name__ == '__main__':

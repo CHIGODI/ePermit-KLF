@@ -40,7 +40,9 @@ def signup():
             flash('Email address exists. Already have an account?')
             return redirect(url_for('auth.signup'))
 
-        new_user = User(email=email, first_name=name, password=generate_password_hash(password, method='pbkdf2:sha256'))
+        new_user = User(email=email,
+                        first_name=name,
+                        password=generate_password_hash(password, method='pbkdf2:sha256'))
 
         # add the new user to the database
         storage.new(new_user)

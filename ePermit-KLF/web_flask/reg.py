@@ -1,13 +1,16 @@
-from flask import Flask, request, render_template
+#!/usr/bin/env python3
+from datetime import datetime
+from flask import request, render_template
 import requests
 import json
 from models.user import User
 from models import storage
 from models.category import Category
 import uuid
-from flask import Blueprint
 from web_flask import register
 from flask_login import login_required
+from base64 import b64encode
+from requests.auth import HTTPBasicAuth
 
 cache_id = uuid.uuid4()
 
@@ -59,47 +62,57 @@ def register_business():
                                categores=categories,
                                cache_id=cache_id)
 
-@register.route('/pay', methods=['GET'], strict_slashes=False)
+
+# get access token to work with daraja API
+def get_access_token(consumer_key, consumer_secret):
+    url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
+    if response.status_code == 200:
+        return response.json().get('access_token')
+    else:
+        print('Failed to obtain access token.')
+        return None
+
+
+@register.route('/pay', methods=['POST', 'GET'], strict_slashes=False)
+def mpesa_express():
+    """ registers a business """
+    if request.method == 'POST':
+        consumer_key = 'ogBEljyvnKUgUQYyyBDzD1QQqsiQUgxRFI2RrjGramfqv0Qs'
+        consumer_secret = '5kZfOqrXAfWFMcBB2hZtNbu4hGwrEWrCrIyWhWWjJ9z85R4lCJtcMwNUAWsE8k0L'
+        access_token = get_access_token(consumer_key, consumer_secret)
+        time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        password = "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" + time_stamp
+        pwd = b64encode(password.encode("utf-8")).decode("utf-8")
+        phone_number = request.form.get('phone_number')
+        headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+        }
+
+        payload = {
+        "BusinessShortCode": 174379,
+        "Password": pwd,
+        "Timestamp": time_stamp,
+        "TransactionType": "CustomerPayBillOnline",
+        "Amount": 1,
+        "PartyA": phone_number,
+        "PartyB": 174379,
+        "PhoneNumber": phone_number,
+        "CallBackURL": "https://mydomain.com/path",
+        "AccountReference": "CompanyXLTD",
+        "TransactionDesc": "Payment of X" 
+        }
+        payload_json = json.dumps(payload)
+        response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
+        print(response.json())
+        return render_template('payment.html')
+    else:
+        return render_template('payment.html')
+
+@register.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
 @login_required
-def pay():
-    """ registers a business """  
+def mpesa_callback():
+    data = request.data
+    print(data)
     return render_template('payment.html', cache_id=cache_id)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @app.route('/pay', methods=['POST'])
-# def process_form():
-#     phone_number = request.form['phone_number']
-#     headers = {
-#     'Content-Type': 'application/json',
-#     'Authorization': 'Bearer ZZLb2ATpyPZxKqtyjO3jNoYL3jtz'
-#     }
-
-#     payload = {
-#     "BusinessShortCode": 174379,
-#     "Password": "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwNDMwMjE1NjEx",
-#     "Timestamp": "20240430215611",
-#     "TransactionType": "CustomerPayBillOnline",
-#     "Amount": 1,
-#     "PartyA": phone_number,
-#     "PartyB": 174379,
-#     "PhoneNumber": phone_number,
-#     "CallBackURL": "https://mydomain.com/path",
-#     "AccountReference": "CompanyXLTD",
-#     "TransactionDesc": "Payment of X" 
-#     }
-#     payload_json = json.dumps(payload)
-#     response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
-#     print(response.text.encode('utf8'))
-#     return render_template('payment_success.html')
-
