@@ -7,22 +7,26 @@ from models.category import Category
 import uuid
 from flask import Blueprint
 from web_flask import register
+from flask_login import login_required
 
 cache_id = uuid.uuid4()
 
 @register.route('/', methods=['GET'], strict_slashes=False)
+@login_required
 def dashboard():
     """ registers a business """  
     return render_template('dashboard.html', cache_id=cache_id)
 
 
 @register.route('/register', methods=['GET'], strict_slashes=False)
+@login_required
 def register_page():
     """ registers a business """  
     return render_template('register.html', cache_id=cache_id)
 
 
 @register.route('/register/business', methods=['POST'], strict_slashes=False)
+@login_required
 def register_business():
     """ registers a business """
     categories = storage.all(Category).values()
@@ -56,6 +60,7 @@ def register_business():
                                cache_id=cache_id)
 
 @register.route('/pay', methods=['GET'], strict_slashes=False)
+@login_required
 def pay():
     """ registers a business """  
     return render_template('payment.html', cache_id=cache_id)

@@ -1,3 +1,50 @@
+.auth-form-div{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    border-radius: 8px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.form-auth{
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
+}
+
+.auth-form-div h3{
+    color: green;
+    text-align: center;
+}
+.field{
+    margin:12px;
+}
+
+.auth{
+    margin: auto auto;
+    width: 50%;
+}
+.sign-up{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 12px auto;
+}
+.sign-up a{
+    color: green;
+    text-decoration: none;
+}
+.sign-up a:hover{
+    color: cornflowerblue;
+}
+
+/* --------------------------------------------------- */
 
 .row {
     width: 100%;

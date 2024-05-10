@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="login-form">
+<div class="auth-form-div">
     <h3 class="title">Login</h3>
     <div>
         {% with messages = get_flashed_messages() %}
@@ -11,7 +11,7 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form class="form-login" method="POST" action="/login">
+        <form class="form-auth" method="POST" action="/login">
             <div class="field">
                 <label for="email" class="form-label">Email <span class="required">*</span></label>
                 <input type="email" name="email" class="form-control" placeholder="Your Email">
@@ -27,7 +27,7 @@
                     Remember me
                 </label>
             </div>
-            <button class="btn btn-primary">Login</button>
+            <button class="btn btn-primary auth">Login</button>
             <div class="sign-up">
                 <a href="{{ url_for('auth.signup') }}">Dont have an account? Register</a>
             </div>

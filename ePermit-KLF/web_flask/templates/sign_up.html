@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-4 is-offset-4">
+<div class="auth-form-div">
     <h3 class="title">Sign Up</h3>
-    <div class="box">
+    <div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification is-danger">
@@ -11,26 +11,29 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form method="POST" action="/signup">
+        <form class="form-auth" method="POST" action="/signup">
             <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Email" autofocus="">
-                </div>
+                <label for="email" class="form-label">Email <span class="required">*</span></label>
+                <input type="email" name="email" class="form-control" placeholder="Your Email">
             </div>
 
             <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="text" name="name" placeholder="Name" autofocus="">
-                </div>
+                <label for="name" class="form-label">Username <span class="required">*</span></label>
+                <input class="form-control" type="text" name="name" placeholder="Name" autofocus="">
             </div>
-
             <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Password">
-                </div>
+                <label for="password" class="form-label">Password <span class="required">*</span></label>
+                <input type="password" name="password" class="form-control" placeholder="Your Password">
+            </div>
+            <div class="field">
+                <label for="password" class="form-label">Confirm Password <span class="required">*</span></label>
+                <input type="password" name="password" class="form-control" placeholder="Re-enter Password">
             </div>
 
-            <button class="button is-block is-info is-large is-fullwidth">Sign Up</button>
+            <button class="btn btn-primary auth">Sign Up</button>
+            <div class="sign-up">
+                <a href="{{ url_for('auth.login') }}">Already have an account? Login</a>
+            </div>
         </form>
     </div>
 </div>
