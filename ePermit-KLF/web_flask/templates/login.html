@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="column is-4 is-offset-4">
+<div class="login-form">
     <h3 class="title">Login</h3>
-    <div class="box">
+    <div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification is-danger">
@@ -11,17 +11,15 @@
             </div>
         {% endif %}
         {% endwith %}
-        <form method="POST" action="/login">
+        <form class="form-login" method="POST" action="/login">
             <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="email" name="email" placeholder="Your Email" autofocus="">
-                </div>
+                <label for="email" class="form-label">Email <span class="required">*</span></label>
+                <input type="email" name="email" class="form-control" placeholder="Your Email">
             </div>
-
+           
             <div class="field">
-                <div class="control">
-                    <input class="input is-large" type="password" name="password" placeholder="Your Password">
-                </div>
+                <label for="password" class="form-label">Password <span class="required">*</span></label>
+                <input type="password" name="password" class="form-control" placeholder="Your Password">
             </div>
             <div class="field">
                 <label class="checkbox">
@@ -29,7 +27,10 @@
                     Remember me
                 </label>
             </div>
-            <button class="button is-block is-info is-large is-fullwidth">Login</button>
+            <button class="btn btn-primary">Login</button>
+            <div class="sign-up">
+                <a href="{{ url_for('auth.signup') }}">Dont have an account? Register</a>
+            </div>
         </form>
     </div>
 </div>
