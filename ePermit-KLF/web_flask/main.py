@@ -9,8 +9,14 @@ def landing():
 @main.route('/profile')
 @login_required
 def profile():
-    return render_template('dashboard.html', name=current_user.first_name)
-
+     if current_user.is_authenticated:
+        user_id = current_user.id
+        email = current_user.email
+        print(email)
+        return render_template('dashboard.html',
+                               user_id=user_id,
+                               email=email)
+   
 @main.route('/comingsoon')
 def comingsoon():
     return render_template('coming_soon.html')

@@ -11,13 +11,19 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap" async
       defer></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js?"></script>
+    <script src="https://kit.fontawesome.com/5c143bf368.js" crossorigin="anonymous"></script>
     <script src="../static/scripts/0-epermit.js"></script>
     <link rel="icon" href="../static/images/klf.jpeg" />
     <title>Landing Page</title>
 </head>
 <body>
-    <nav class="nav">
-      <div class="logo"></div>
+    <nav class="nav-dashboard">
+      <div class="profile">
+        <i class="fa-regular fa-user"></i>
+        <a href="#">
+          <button class="logout">Sign Out<i class="fa-solid fa-right-from-bracket"></i></button>
+        </a>
+      </div>
     </nav>
     <div class="dashboard">
       <div class="side-nav">
@@ -27,9 +33,36 @@
           <img src="..." class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">Register Business</h5>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.
+            <p class="card-text">Get started with your business journey in just a click.
             </p>
-            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Go somewhere</a>
+            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register Business</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Register Business</h5>
+            <p class="card-text">Get started with your business journey in just a click.
+            </p>
+            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register Business</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Register Business</h5>
+            <p class="card-text">Get started with your business journey in just a click.
+            </p>
+            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register Business</a>
+          </div>
+        </div>
+        <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Register Business</h5>
+            <p class="card-text">Get started with your business journey in just a click.
+            </p>
+            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register Business</a>
           </div>
         </div>
       </div>

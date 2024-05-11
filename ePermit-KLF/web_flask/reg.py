@@ -8,7 +8,7 @@ from models import storage
 from models.category import Category
 import uuid
 from web_flask import register
-from flask_login import login_required
+from flask_login import login_required, current_user
 from base64 import b64encode
 from requests.auth import HTTPBasicAuth
 
@@ -17,8 +17,15 @@ cache_id = uuid.uuid4()
 @register.route('/', methods=['GET'], strict_slashes=False)
 @login_required
 def dashboard():
-    """ registers a business """  
-    return render_template('dashboard.html', cache_id=cache_id)
+    """ registers a business """
+    if current_user.is_authenticated:
+        user_id = current_user.id
+        email = current_user.email
+        print(email)
+        return render_template('dashboard.html',
+                               cache_id=cache_id,
+                               user_id=user_id,
+                               email=email)
 
 
 @register.route('/register', methods=['GET'], strict_slashes=False)
@@ -80,7 +87,7 @@ def mpesa_express():
     if request.method == 'POST':
         consumer_key = 'ogBEljyvnKUgUQYyyBDzD1QQqsiQUgxRFI2RrjGramfqv0Qs'
         consumer_secret = '5kZfOqrXAfWFMcBB2hZtNbu4hGwrEWrCrIyWhWWjJ9z85R4lCJtcMwNUAWsE8k0L'
-        access_token = get_access_token(consumer_key, consumer_secret)
+        access_token = 'RmCFwd8Hz3ZOId06Fr5VT2yY1JnF' #get_access_token(consumer_key, consumer_secret)
         time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
         password = "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" + time_stamp
         pwd = b64encode(password.encode("utf-8")).decode("utf-8")
@@ -89,7 +96,6 @@ def mpesa_express():
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {access_token}'
         }
-
         payload = {
         "BusinessShortCode": 174379,
         "Password": pwd,
@@ -99,20 +105,19 @@ def mpesa_express():
         "PartyA": phone_number,
         "PartyB": 174379,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://mydomain.com/path",
+        "CallBackURL": "https://1003-102-166-221-241.ngrok-free.app/callback",
         "AccountReference": "CompanyXLTD",
         "TransactionDesc": "Payment of X" 
         }
         payload_json = json.dumps(payload)
         response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
-        print(response.json())
-        return render_template('payment.html')
+        return response.json()
     else:
         return render_template('payment.html')
 
 @register.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
-@login_required
 def mpesa_callback():
+    print('imeingia mpya before')
     data = request.data
     print(data)
     return render_template('payment.html', cache_id=cache_id)
