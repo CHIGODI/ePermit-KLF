@@ -1,32 +1,44 @@
-from flask import render_template, redirect, url_for, request, flash, jsonify, make_response, current_app, session
+#!/usr/bin/env python3
+""" 
+This module contains routes for user authentication and authorisation
+"""
+
+
+from dotenv import load_dotenv
+from datetime import datetime, timedelta
+import jwt
+from flask import render_template, redirect, url_for, session
+from flask import request, flash, jsonify, make_response, current_app
+from flask_mail import Message
+from functools import wraps
+from os import getenv
 from werkzeug.security import generate_password_hash, check_password_hash
+from web_flask import auth
 from models.user import User
 from models import storage
-import re
-import jwt
-from datetime import datetime, timedelta
-from functools import wraps
-from web_flask import auth
-from os import getenv
 import random
 import string
-from flask_mail import Mail, Message
-from dotenv import load_dotenv
+
+#loading environment variables
 load_dotenv()
 
+
 def token_required(func):
+    """ Decorator function to check if token is passed """
     @wraps(func)
     def decorated(*args, **kwargs):
+        """ Decorator function to check if token is passed """
         token = request.cookies.get('x-access-token')
 
         # return 401 if token is not passed
         if not token:
-            return jsonify({'message' : 'Token is missing !!'}), 401
+            return make_response(jsonify({'message' : 'Token is missing !!'}), 401)
   
         try:
             # decoding the payload to fetch the stored details
             data = jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
             current_user = storage.get_user_by_id(User, data['id'])
+            kwargs['current_user'] = current_user
            
         except:
             return jsonify({
@@ -76,7 +88,7 @@ def generate_verification_code(length=6):
 
 @auth.route('/signup', methods=['POST', 'GET'])
 def signup():
-    """ """
+    """ This route allows users to create an account """
     if request.method == 'POST':     
         # Get form data
         email = request.form.get('email')
@@ -106,7 +118,7 @@ def signup():
         verification_code = generate_verification_code()
         timestamp = datetime.utcnow()
 
-        # Store verification code and timestamp  and user details in session
+        # Store verification code and timestamp  and user details in Flask session
         session['verification_data'] = {
             'email': email,
             'password': generate_password_hash(password),
@@ -121,13 +133,18 @@ def signup():
         msg.body = f'Your verification code is: {verification_code}'
         current_app.extensions['mail'].send(msg)
 
-        flash('An email with the verification code has been sent to your email address. Code expires after 5 minutes', 'success')
+        flash('An email with the verification code has been '
+              'sent to your email address. '
+              'Code expires after 5 minutes', 'success')
+
         return redirect(url_for('auth.verify_email'))
     
     return make_response(render_template('sign_up.html'), 200)
 
-@auth.route('/verify_email', methods=['POST', 'GET'])
+
+@auth.route('/verify_email/', methods=['POST', 'GET'], strict_slashes=False)
 def verify_email():
+    """ This route allows users to verify their email address """
     if request.method == 'POST':
         data = session.get('verification_data')
         verification_code = request.form.get('verification_code')
@@ -144,6 +161,7 @@ def verify_email():
         # Calculate time difference
         time_diff = current_time - timestamp
 
+        # if time diff is more that 5 minutes / verification code expired
         if time_diff.total_seconds() > 300:
             flash('Verification code expired. Account creation was not successful.', 'error')
             session.pop('verification_data', None)
@@ -165,9 +183,74 @@ def verify_email():
         return redirect(url_for('auth.login'))
     return render_template('verify_email.html')
 
+
 @auth.route('/logout', methods=['GET'])
 def logout():
+    """ This route logs out users """
     response = make_response(redirect(url_for('auth.login')))
     response.set_cookie('x-access-token', '', expires=0)
     flash('You have been logged out successfully.', 'success')
     return response
+
+
+@auth.route('/forgot_password', methods=['GET', 'POST'], strict_slashes=False)
+def forgot_password(): 
+    """ Route for requesting password reset """   
+    if request.method == 'POST':
+        email = request.form.get('email')
+        user = storage.get_user_by_email(email)
+        if user:
+            # Generate token
+            token = jwt.encode({
+                'id': user.id,
+                'exp': datetime.utcnow() + timedelta(minutes=30)
+            }, getenv('SECRET_KEY'), algorithm='HS256')
+            
+            # Send reset email set with a JWT
+            password_reset_link = url_for('reset_password', token=token, _external=True)
+            message = Message('Password Reset ePermit',
+                              sender=getenv('MAIL_USERNAME'),
+                              recipients=[email])
+            message.body = f'Click the link to reset your password: {password_reset_link} '\
+                'If you did not make this request then simply ignore this email and no changes will be made.'
+            current_app.extensions['mail'].send(message)
+            
+            flash('Password reset email sent. Check email.', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Email address not found.')
+    return render_template('forgot_password.html')
+
+
+@auth.route('/reset_password', methods=['GET', 'POST'], strict_slashes=flash)
+def reset_password(token):
+    """ Route for handling password reset """
+    token = request.args.get('token')
+    try:
+        data = jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
+        email = data.get('email')
+        user = storage.get_user_by_email(email)
+    except jwt.ExpiredSignatureError:
+        flash('The reset link has expired.', 'error')
+        return redirect(url_for('login'))
+    except jwt.InvalidTokenError:
+        flash('Invalid token.', 'error')
+        return redirect(url_for('login'))
+        
+    if request.method == 'POST':
+        new_password = request.form.get('password')
+        confirm_new_password = request.form.get('confirm_new_password')
+        
+        if len(new_password) < 8:
+            flash('Password must be at least 8 characters long.', 'error')
+            return redirect(url_for('auth.reset_password'))
+            
+        if new_password != confirm_new_password:
+            flash('Passwords do not match', 'error')
+            return redirect(url_for('reset_password'))
+        
+        user.password = generate_password_hash(new_password)
+        user.save()
+        flash('Password updated successfully.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html')

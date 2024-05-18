@@ -1,7 +1,6 @@
 $(function () {
 
-// Authentication script
-
+    // Authentication scripts
     setTimeout(function () {
         $('#flash-message').fadeOut('slow', function () {
             $(this).remove();

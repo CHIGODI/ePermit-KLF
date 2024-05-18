@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+""" Module for registering businesses. """
+
 from datetime import datetime
 from flask import request, render_template
 import requests
@@ -14,10 +16,11 @@ from . import token_required
 
 cache_id = uuid.uuid4()
 
+
 @register.route('/register', methods=['GET'], strict_slashes=False)
 @token_required
 def register_page():
-    """ registers a business """  
+    """ renders the register page"""  
     return render_template('register.html', cache_id=cache_id)
 
 
@@ -58,6 +61,7 @@ def register_business():
 
 # get access token to work with daraja API
 def get_access_token(consumer_key, consumer_secret):
+    """ Get access token to work with daraja API """
     url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
     response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
     if response.status_code == 200:
@@ -70,7 +74,7 @@ def get_access_token(consumer_key, consumer_secret):
 @register.route('/pay', methods=['POST', 'GET'], strict_slashes=False)
 @token_required
 def mpesa_express():
-    """ registers a business """
+    """ This function initiates a payment request to the M-Pesa API. """
     if request.method == 'POST':
         consumer_key = 'ogBEljyvnKUgUQYyyBDzD1QQqsiQUgxRFI2RrjGramfqv0Qs'
         consumer_secret = '5kZfOqrXAfWFMcBB2hZtNbu4hGwrEWrCrIyWhWWjJ9z85R4lCJtcMwNUAWsE8k0L'
@@ -105,6 +109,7 @@ def mpesa_express():
 @register.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
 @token_required
 def mpesa_callback():
+    """ This function receives the callback from the M-Pesa API. """
     print('imeingia mpya before')
     data = request.data
     print(data)

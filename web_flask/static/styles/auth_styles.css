@@ -1,3 +1,5 @@
+/* ---styling for login and sign-up-------- */
+
 .auth-form-div{
     display: flex;
     justify-content: center;
@@ -5,6 +7,11 @@
     width: 100%;
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.auth-form-div h3 {
+    color: green;
+    text-align: center;
 }
 
 .flash-success{
@@ -34,31 +41,35 @@
     height: 100%;
 }
 
-.auth-form-div h3{
-    color: green;
-    text-align: center;
-}
 .field{
     margin:12px;
+}
+
+.field ::placeholder{
+    font-size: 0.8rem;
+    color: #DDDDDD;
 }
 
 .auth{
     margin: auto auto;
     width: 50%;
 }
+
 .sign-up{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 12px auto;
+    margin: 24px auto;
 }
 .sign-up a{
     color: green;
-    text-decoration: none;
+    text-decoration: underline;
 }
+
 .sign-up a:hover{
-    color: cornflowerblue;
+    color: #FF0000;
+    text-decoration: none;
 }
 
 /* --------------------------------------------------- */
