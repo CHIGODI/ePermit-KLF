@@ -3,7 +3,6 @@
 This module contains routes for user authentication and authorisation
 """
 
-
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 import jwt
@@ -33,13 +32,13 @@ def token_required(func):
         # return 401 if token is not passed
         if not token:
             return make_response(jsonify({'message' : 'Token is missing !!'}), 401)
-  
+
         try:
             # decoding the payload to fetch the stored details
             data = jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
             current_user = storage.get_user_by_id(User, data['id'])
             kwargs['current_user'] = current_user
-           
+    
         except:
             return jsonify({
                 'message' : 'Token is invalid !!'
@@ -49,7 +48,7 @@ def token_required(func):
     return decorated
 
 
-@auth.route('/login', methods=['POST', 'GET'], strict_slashes=False)
+@auth.route('/login/', methods=['POST', 'GET'], strict_slashes=False)
 def login():
     """ This route authorises users to login and access protected routes """
     if request.method == 'POST':
@@ -75,7 +74,7 @@ def login():
             response.set_cookie('x-access-token', token, httponly=True, max_age=1800) 
             return response
         
-        flash("Wrong email or password. Don't have an account?", 'error')
+        flash("Wrong email or password.", 'error')
         return redirect(url_for('auth.login'))
     
     return render_template('login.html')
@@ -86,7 +85,7 @@ def generate_verification_code(length=6):
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=length))
 
 
-@auth.route('/signup', methods=['POST', 'GET'])
+@auth.route('/signup/', methods=['POST', 'GET'])
 def signup():
     """ This route allows users to create an account """
     if request.method == 'POST':     
@@ -97,7 +96,7 @@ def signup():
 
         # Validate form data
         if not email or not password or not confirm_pwd:
-            flash('Please fill out all fields.')
+            flash('Please fill out all fields.', 'error')
             return redirect(url_for('auth.signup'))
         
         #password length must be 8 chars
@@ -184,7 +183,7 @@ def verify_email():
     return render_template('verify_email.html')
 
 
-@auth.route('/logout', methods=['GET'])
+@auth.route('/logout/', methods=['GET'])
 def logout():
     """ This route logs out users """
     response = make_response(redirect(url_for('auth.login')))
@@ -193,7 +192,7 @@ def logout():
     return response
 
 
-@auth.route('/forgot_password', methods=['GET', 'POST'], strict_slashes=False)
+@auth.route('/forgot_password/', methods=['GET', 'POST'], strict_slashes=False)
 def forgot_password(): 
     """ Route for requesting password reset """   
     if request.method == 'POST':
@@ -222,7 +221,7 @@ def forgot_password():
     return render_template('forgot_password.html')
 
 
-@auth.route('/reset_password', methods=['GET', 'POST'], strict_slashes=flash)
+@auth.route('/reset_password/', methods=['GET', 'POST'], strict_slashes=flash)
 def reset_password(token):
     """ Route for handling password reset """
     token = request.args.get('token')

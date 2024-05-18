@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-""" storage module """
+""" creates storage object that is used to interact with DB """
 from models.engine.db_storage import DBStorage
 
 storage = DBStorage()
