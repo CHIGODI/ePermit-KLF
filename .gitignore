@@ -1,0 +1,13 @@
+# Python
+*.pyc
+__pycache__/
+
+# Virtual Environment
+epermit/
+
+# Environment Variables
+.env
+
+# IDE Directories
+.vscode/
+.idea/

@@ -1,7 +1,7 @@
 # Install the following dependencies
 
-Package                Version 
----------------------- --------
+# Package                Version 
+# ---------------------- --------
 blinker==1.8.2
 cachelib==0.13.0
 certifi==2024.2.2
@@ -35,3 +35,7 @@ zipp==3.18.2
 
 # How to install all requirements
 # pip install -r requirements.txt
+
+
+# delete __pycache__
+# find . -type d -name "__pycache__" -exec rm -r {} +
