@@ -197,6 +197,12 @@ def forgot_password():
     """ Route for requesting password reset """   
     if request.method == 'POST':
         email = request.form.get('email')
+        
+        print('email')
+        
+        if not email:
+            flash('Please fill out missing field', 'error')
+        
         user = storage.get_user_by_email(email)
         if user:
             # Generate token
@@ -206,7 +212,7 @@ def forgot_password():
             }, getenv('SECRET_KEY'), algorithm='HS256')
             
             # Send reset email set with a JWT
-            password_reset_link = url_for('reset_password', token=token, _external=True)
+            password_reset_link = url_for('auth.reset_password', token=token, _external=True)
             message = Message('Password Reset ePermit',
                               sender=getenv('MAIL_USERNAME'),
                               recipients=[email])
@@ -217,7 +223,7 @@ def forgot_password():
             flash('Password reset email sent. Check email.', 'success')
             return redirect(url_for('login'))
         else:
-            flash('Email address not found.')
+            flash('Email address not found.', 'error')
     return render_template('forgot_password.html')
 
 

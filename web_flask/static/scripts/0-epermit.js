@@ -5,7 +5,7 @@ $(function () {
         $('#flash-message').fadeOut('slow', function () {
             $(this).remove();
         });
-    }, 1000);
+    }, 2000);
 
 
 
