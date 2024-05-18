@@ -1,0 +1,68 @@
+
+.required{
+   color: red;
+}
+#register-bs{
+   margin: 5% auto;
+   width: 90%;
+   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+.business-info{
+   margin-top: 24px;
+   width: 70%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+}
+
+.business-info h4{
+   padding: 24px;
+}
+
+#map {
+     width: 100%;
+     height: 60vh;
+}
+
+.mb-3{
+   margin: 0;
+   width: 70%;
+   padding: 10px;
+   border-radius: 4px;
+}
+
+.mb-3 #businessNameHelpBlock,
+.mb-3 #vatHelpBlock,
+.mb-3 #boxHelpBlock,
+.mb-3 #descriptionHelpBlock
+{
+   width: 45%;
+   display: inline-block;;
+}
+.mb-3 .form-text {
+   width: 50%;
+   margin-right: 5px;
+   display: inline-block;
+}
+
+
+.focus-highlight {
+   background-color: #FFFF99;
+}
+
+.owner-info{
+   margin: 24px auto;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+.owner-info h4{
+   padding: 24px;
+}
+.row{
+   width: 80%;
+   margin: auto auto;
+}
+
+

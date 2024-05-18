@@ -1,0 +1,76 @@
+/* -------base html styles-------------- */
+body{
+    background-color: red;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.nav {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: 1000px;
+    top: 0;
+    justify-content: space-between;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.logo{
+    height: 100%;
+    width: 10%;
+    background-image: url('../images/klf.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.nav ul{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.nav ul li a{
+    color: green;
+    font-weight: 400;
+}
+
+.nav ul button{
+    padding: 10px 20px;
+}
+
+.nav ul button li a{
+    color: white;
+}
+.quick-l{
+    position: relative;
+}
+.quick-l::after {
+    position: absolute;
+    content: '';
+    background-color: green;
+    width: 100%;
+    height: 3px;
+    border-radius: 8px;
+    left: 0;
+    bottom: -4px;
+    display: none;
+    transition: width 0.9s ease;
+}
+.quick-l:hover::after {
+    display: block;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10% auto;
+    width: 50%;
+}

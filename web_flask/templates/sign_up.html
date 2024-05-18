@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="auth-form-div">
+    <h3 class="title">Sign Up</h3>
+    <div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger">
+                {{ messages[0] }}</a>.
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form class="form-auth" method="POST" action="/signup">
+            <div class="field">
+                <label for="email" class="form-label">Email <span class="required">*</span></label>
+                <input type="email" name="email" class="form-control" placeholder="Your Email">
+            </div>
+
+            <div class="field">
+                <label for="password" class="form-label">Password <span class="required">*</span></label>
+                <input type="password" name="password" class="form-control" placeholder="Your Password">
+            </div>
+            <div class="field">
+                <label for="password" class="form-label">Confirm Password <span class="required">*</span></label>
+                <input type="password" name="confirm_password" class="form-control" placeholder="Re-enter Password">
+            </div>
+
+            <button class="btn btn-primary auth">Sign Up</button>
+            <div class="sign-up">
+                <a href="{{ url_for('auth.login') }}">Already have an account? Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+# Python
+*.pyc
+__pycache__/
+
+# Virtual Environment
+venv/
+ePermit_env/
+myenv/
+
+# Environment Variables
+.env
+
+# IDE Directories
+.vscode/
+.idea/
