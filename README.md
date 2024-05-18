@@ -34,8 +34,8 @@ The App was contextualised for Kilifi County - Kenya
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/CHIGODI/permit-web-app.git
-    cd permit-web-app
+    git clone https://github.com/CHIGODI/ePermit-KLF.git
+    cd ePermit-KLF
     ```
 
 2. **Create a virtual environment and activate it:**
@@ -59,7 +59,7 @@ The App was contextualised for Kilifi County - Kenya
     SECRET_KEY=''
     SESSION_TYPE=''
     SESSION_FILE_DIR=''
-    SESSION_FILE_THRESHOLD=500
+    SESSION_FILE_THRESHOLD=
     MAIL_SERVER=''
     MAIL_PORT=
     MAIL_USE_TLS=
