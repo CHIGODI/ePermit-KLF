@@ -7,7 +7,7 @@
         {% with messages = get_flashed_messages() %}
         {% if messages %}
             <div class="notification is-danger">
-                {{ messages[0] }} Sign In<a href="{{ url_for('auth.login') }}">here</a>.
+                {{ messages[0] }}</a>.
             </div>
         {% endif %}
         {% endwith %}
@@ -18,16 +18,12 @@
             </div>
 
             <div class="field">
-                <label for="name" class="form-label">Username <span class="required">*</span></label>
-                <input class="form-control" type="text" name="name" placeholder="Name" autofocus="">
-            </div>
-            <div class="field">
                 <label for="password" class="form-label">Password <span class="required">*</span></label>
                 <input type="password" name="password" class="form-control" placeholder="Your Password">
             </div>
             <div class="field">
                 <label for="password" class="form-label">Confirm Password <span class="required">*</span></label>
-                <input type="password" name="password" class="form-control" placeholder="Re-enter Password">
+                <input type="password" name="confirm_password" class="form-control" placeholder="Re-enter Password">
             </div>
 
             <button class="btn btn-primary auth">Sign Up</button>

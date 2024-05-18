@@ -1,22 +1,28 @@
-from flask import Blueprint, render_template
-from flask_login import login_required, current_user
+from flask import Blueprint, render_template, request
 from web_flask import main
+from . import token_required
 
 @main.route('/')
 def landing():
     return render_template('landing_page.html')
 
-@main.route('/profile')
-@login_required
-def profile():
-     if current_user.is_authenticated:
-        user_id = current_user.id
-        email = current_user.email
-        print(email)
-        return render_template('dashboard.html',
-                               user_id=user_id,
-                               email=email)
-   
+
+@main.route('/dashboard')
+@token_required
+def dashboard():
+    """ User dashboard where normal users can register businesses """
+    return render_template('dashboard.html')
+
+
+@main.route('/admin_dashboard')
+@token_required
+def admin_dashboard():
+    """ Admin dashboard where admins can verify business registrations """
+    return render_template('admin_dashboard.html')
+
+
 @main.route('/comingsoon')
+@token_required
 def comingsoon():
+    """ These renders a page for all services that are currently not available"""
     return render_template('coming_soon.html')

@@ -1,18 +1,58 @@
-.dashboard{
-    width: 100%;
+.main-listing{
+    background-color: #E0FBE2;
     height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
+    margin-top: 70px;
+    z-index: 1000;
 }
-
+.service-listing{
+    width: 64%;
+    height: 100vh;
+    background-color: #DDDDDD;
+    margin-left: 30%;
+}
 .side-nav {
     background-color: #DDDDDD;
-    width: 20%;
+    width: 24%;
     height: 100vh;
+    border-radius: 16px;
+    position: fixed;
+    margin-left: 5%;
+}
+.cards{
+    background-color: red;
+    border: 1px solid green;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ---------------------------------- */
+
+.dashboard {
+    width: 100%;
+    height: 100%;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .main{
     margin: 24px auto;
-    width:80%;
+    width: 1000px;
     height: 100%;
 }
 .nav-dashboard{
@@ -20,11 +60,12 @@
     width: 100%;
     display: flex;
     align-items: center;
-    position: fixed;
-    z-index: 1000px;
-    top: 0;
+    position: sticky;
     flex-direction: row-reverse;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 0;
+    background-color: black;
 
 
 }

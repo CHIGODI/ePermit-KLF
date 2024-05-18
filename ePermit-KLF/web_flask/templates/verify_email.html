@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Verify OTP</title>
+</head>
+
+<body>
+    <h2>Verify OTP</h2>
+    <form method="post">
+        <label for="verification_code">OTP:</label>
+        <input type="text" name="verification_code" required>
+        <input type="hidden" name="email" value="{{ email }}">
+        <button type="submit">Verify</button>
+    </form>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+</body>
+
+</html>

@@ -55,13 +55,13 @@ class DBStorage:
         return new_dict
 
     
-    def get(self, cls, id):
+    def get_user_by_id(self, cls, id):
         """ retrieves an object from the database """
         if cls is None or id is None:
             return None
         return self.__session.query(cls).get(id)
     
-    # Added this method to get user by their emails
+
     def get_user_by_email(self, email):
         """ retrieves a user by email """
         if email is None:

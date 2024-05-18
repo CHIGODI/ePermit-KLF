@@ -1,24 +1,39 @@
-from flask import Flask
+from flask import Flask, session
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
 from models import storage
-from web_flask import *
+from web_flask import auth, register, main
+from flask_mail import Mail, Message
+from os import getenv
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'epermit_secret_key'
+app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['SESSION_TYPE'] = getenv('SESSION_TYPE')
+app.config['SESSION_FILE_DIR'] = getenv('SESSION_FILE_DIR')
+app.config['SESSION_FILE_THRESHOLD'] = getenv('SESSION_FILE_THRESHOLD')
+app.config['MAIL_SERVER'] = getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = getenv('MAIL_PORT')
+app.config['MAIL_USE_TLS'] = getenv('MAIL_USE_TLS')
+app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD') 
+
+#Initialise mail service
+mail = Mail(app)
+
+#initilialise session
+Session(app)
 
 app.register_blueprint(auth)
 app.register_blueprint(main)
 app.register_blueprint(register)
 
-login_manager = LoginManager()
-login_manager.login_view = 'auth.login'
-login_manager.init_app(app)
+@app.teardown_appcontext
+def close_session(exception):
+    storage.close()
+    
 
-@login_manager.user_loader
-def load_user(user_id):
-    from models.user import User
-    return storage.get(User, user_id)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)

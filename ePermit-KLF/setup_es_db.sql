@@ -1,4 +1,4 @@
--- prepares a MySQL server for the project
+-- prepares a MySQL server for the ePermit app
 
 CREATE DATABASE IF NOT EXISTS epermit_dev_db;
 

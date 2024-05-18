@@ -40,16 +40,13 @@ class BaseModel:
     def __str__(self):
         """ Returns a string representation of the class """
         return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-    
-    #Removed the reload method to avoid creating new sessions
+ 
     def save(self):
         """ Updates the updated_at attribute with the current datetime """
         self.updated_at = datetime.now()
-        # models.storage.reload()
         models.storage.new(self)
         models.storage.save()
 
-    #Updated the to dict method to use the time format specified above 
     def to_dict(self):
         """returns a dictionary containing all keys/values of the instance"""
         new_dict = self.__dict__.copy()
@@ -62,7 +59,6 @@ class BaseModel:
             del new_dict["_sa_instance_state"]
         return new_dict
 
-    # Added the delete method
     def delete(self):
         """delete the current instance from the storage"""
         models.storage.delete(self)

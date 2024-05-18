@@ -6,8 +6,8 @@
     <div>
         {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <div class="notification is-danger">
-                {{ messages[0] }} Sign up <a href="{{ url_for('auth.signup') }}">here</a>.
+            <div class="notification is-danger" id="flash-message">
+                {{ messages[0] }}</a>.
             </div>
         {% endif %}
         {% endwith %}
@@ -21,13 +21,7 @@
                 <label for="password" class="form-label">Password <span class="required">*</span></label>
                 <input type="password" name="password" class="form-control" placeholder="Your Password">
             </div>
-            <div class="field">
-                <label class="checkbox">
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-            </div>
-            <button class="btn btn-primary auth">Login</button>
+            <button class="btn btn-primary auth" id="login">Login</button>
             <div class="sign-up">
                 <a href="{{ url_for('auth.signup') }}">Dont have an account? Register</a>
             </div>

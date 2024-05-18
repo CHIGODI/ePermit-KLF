@@ -1,4 +1,39 @@
 $(function () {
+
+// Authentication script
+
+    setTimeout(function () {
+        $('#flash-message').fadeOut('slow', function () {
+            $(this).remove();
+        });
+    }, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     let apiKey = "AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw";
     let apiUrl = "https://maps.googleapis.com/maps/api/js?key=" + apiKey + "&callback=initMap";
 
@@ -27,6 +62,12 @@ $(function () {
     $('.mb-3 input, .mb-3 text-area, .row').blur(function () {
         $(this).closest('.mb-3').removeClass('focus-highlight');
     });
+
+
+
+
+
+
 });
 
 function initMap() {

@@ -27,27 +27,10 @@
             <li class="quick-l"><a href="{{ url_for('main.landing') }}">Home</a></li>
             <li class="quick-l"><a href="#">Services</a></li>
             <li class="quick-l"><a href="#">FAQs</a></li>
-            <button type="button" class="btn btn-success">
-                <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-            </button>   
+                <li><a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-success">Login</button></a></li>
         </ul>
         
-        <!-- {% if current_user.is_authenticated %}
-        <a class="navbar-item"> Dashboard</a>
-        {% endif %}
-        {% if not current_user.is_authenticated %}
-        <a href="" class="navbar-item">
-            Login
-        </a>
-        <a href="{{ url_for('auth.signup') }}" class="navbar-item">
-            Sign Up
-        </a>
-        {% endif %}
-        {% if current_user.is_authenticated %}
-        <a href="{{ url_for('auth.logout') }}" class="navbar-item">
-            Logout
-        </a>
-        {% endif %} -->
+       
     </nav>
     <section class="main">
         {% block content %}

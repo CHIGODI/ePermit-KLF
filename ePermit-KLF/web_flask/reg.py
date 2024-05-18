@@ -8,35 +8,21 @@ from models import storage
 from models.category import Category
 import uuid
 from web_flask import register
-from flask_login import login_required, current_user
 from base64 import b64encode
 from requests.auth import HTTPBasicAuth
+from . import token_required
 
 cache_id = uuid.uuid4()
 
-@register.route('/', methods=['GET'], strict_slashes=False)
-@login_required
-def dashboard():
-    """ registers a business """
-    if current_user.is_authenticated:
-        user_id = current_user.id
-        email = current_user.email
-        print(email)
-        return render_template('dashboard.html',
-                               cache_id=cache_id,
-                               user_id=user_id,
-                               email=email)
-
-
 @register.route('/register', methods=['GET'], strict_slashes=False)
-@login_required
+@token_required
 def register_page():
     """ registers a business """  
     return render_template('register.html', cache_id=cache_id)
 
 
 @register.route('/register/business', methods=['POST'], strict_slashes=False)
-@login_required
+@token_required
 def register_business():
     """ registers a business """
     categories = storage.all(Category).values()
@@ -82,12 +68,13 @@ def get_access_token(consumer_key, consumer_secret):
 
 
 @register.route('/pay', methods=['POST', 'GET'], strict_slashes=False)
+@token_required
 def mpesa_express():
     """ registers a business """
     if request.method == 'POST':
         consumer_key = 'ogBEljyvnKUgUQYyyBDzD1QQqsiQUgxRFI2RrjGramfqv0Qs'
         consumer_secret = '5kZfOqrXAfWFMcBB2hZtNbu4hGwrEWrCrIyWhWWjJ9z85R4lCJtcMwNUAWsE8k0L'
-        access_token = 'RmCFwd8Hz3ZOId06Fr5VT2yY1JnF' #get_access_token(consumer_key, consumer_secret)
+        access_token = get_access_token(consumer_key, consumer_secret)
         time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
         password = "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" + time_stamp
         pwd = b64encode(password.encode("utf-8")).decode("utf-8")
@@ -116,6 +103,7 @@ def mpesa_express():
         return render_template('payment.html')
 
 @register.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
+@token_required
 def mpesa_callback():
     print('imeingia mpya before')
     data = request.data

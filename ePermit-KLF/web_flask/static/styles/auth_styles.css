@@ -1,14 +1,15 @@
 .auth-form-div{
+    background-color: red;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    height: fit-content;
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .form-auth{
+    background-color: green;
     margin: auto auto;
     display: flex;
     justify-content: center;
