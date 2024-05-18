@@ -56,36 +56,30 @@ The App was contextualised for Kilifi County - Kenya
     Create a `.env` file in the project root directory with the following content:
 
     ```ini
-    SECRET_KEY=your_secret_key
-    MAIL_SERVER=smtp.your-email-provider.com
-    MAIL_PORT=587
-    MAIL_USE_TLS=1
-    MAIL_USERNAME=your_email@example.com
-    MAIL_PASSWORD=your_email_password
+    SECRET_KEY=''
+    SESSION_TYPE=''
+    SESSION_FILE_DIR=''
+    SESSION_FILE_THRESHOLD=500
+    MAIL_SERVER=''
+    MAIL_PORT=
+    MAIL_USE_TLS=
+    MAIL_USERNAME=''
+    MAIL_PASSWORD=''
+    MAPS_API_KEY = ''
+    CONSUMER_KEY =''
+    CONSUMER_SECRET=''
     ```
 
-5. **Configure the database:**
-
-    Update the `config.py` file to include your database connection details:
-
-    ```python
-    SQLALCHEMY_DATABASE_URI = 'mysql+mysqlconnector://username:password@hostname/dbname'
-    ```
-
-6. **Run database migrations:**
-
-    Ensure you have the flask-migrate tool installed and run the migrations:
+5. **Create the database:**
 
     ```bash
-    flask db init
-    flask db migrate
-    flask db upgrade
+       cat setup_es_db.sql | mysql -uroot -p
     ```
 
 7. **Run the application:**
 
     ```bash
-    flask run
+        EPERMIT_MYSQL_USER=epermit_dev EPERMIT_MYSQL_PWD=epermit_pwd EPERMIT_MYSQL_HOST=localhost EPERMIT_MYSQL_DB=epermit_dev_db python3 -m web_flask.app
     ```
 
 ## Usage
