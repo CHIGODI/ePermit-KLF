@@ -37,7 +37,7 @@ def token_required(func):
             # decoding the payload to fetch the stored details
             data = jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
             current_user = storage.get_user_by_id(User, data['id'])
-            kwargs['current_user'] = current_user
+            # kwargs['current_user'] = current_user
     
         except:
             return jsonify({
@@ -149,7 +149,11 @@ def verify_email():
         verification_code = request.form.get('verification_code')
         
         
-        if not data or data.get('verification_code') != verification_code:
+        if not data:
+            flash('Please enter verification code')
+            return redirect(url_for('auth.verify_email'))
+            
+        if data.get('verification_code') != verification_code:
             flash('Invalid verification code.', 'error')
             return redirect(url_for('auth.verify_email'))
         
