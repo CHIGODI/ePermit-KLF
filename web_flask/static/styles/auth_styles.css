@@ -15,8 +15,8 @@
 }
 
 .flash-success{
-    background-color: green;
-    color: white;
+    background-color: #DFF2BF;
+    color: #4F8A10;
     padding: 12px;
     border-radius: 8px;
     margin: 12px;
@@ -24,8 +24,8 @@
 }
 
 .flash-error{
-    background-color: red;
-    color: white;
+    background-color: #F2DEDE;
+    color: #A94442;
     padding: 12px;
     border-radius: 8px;
     margin: 12px;
@@ -153,4 +153,54 @@
 
 .links button:hover {
     opacity: 90%;
+}
+
+
+/* ------------------verify email------------------ */
+.verify-m{
+    height: 356px;
+}
+.verify-m h3{
+    color: Purple;
+}
+
+.form-auth .verify-b{
+    color: #007bff;
+}
+
+/* --------forgot passowrd page -------- */
+
+.f-forgot-pwd{
+    height: 256px;
+}
+
+.auth-form-div .t-forgot-pwd{
+    color: #555555;
+    font-size: 24px;
+}
+
+.form-auth .auth{
+    background-color: #008080;
+    color: #fff;
+    border: none;
+}
+
+.form-auth .auth:hover{
+    background-color: #005757;
+}
+
+
+/* --------------password reset-------------- */
+.pwd-reset{
+    height: 356px;
+}
+
+.pwd-reset h3{
+    color: #1A237E;
+}
+
+.form-auth .b-pwd-reset{
+    background-color: #2196F3;
+        /* Vibrant Blue */
+        color: #ffffff;
 }
