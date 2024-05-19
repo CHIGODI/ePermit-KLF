@@ -26,18 +26,96 @@
       </div>
     </nav>
     <section class="main-listing">
-      <div class="side-nav"></div>
+
+      <div class="side-nav">
+        <div class="account">
+          <img src="../static/images/card1.jpg" alt="">
+        </div>
+        <div class="account-info">
+          <p>Diana Wangui</p>
+          <p>dianawangui@gmail.com</p>
+        </div>
+        <hr>
+        <div class="information">
+          <button type="button" class="btn btn-light">Profile Details</button>
+          <button type="button" class="btn btn-light">Edit Personal Details</button>
+          <button type="button" class="btn btn-light">Change Password</button>
+          <button type="button" class="btn btn-light">My Businesses</button>
+          <button type="button" class="btn btn-light">Pending Bills</button>
+          <button type="button" class="btn btn-light">Renew permit</button>
+        </div>
+      </div>
+
+      <!-- main nav -->
       <div class="service-listing">
-        <div class="cards" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">Register Business</h5>
+        <!-- card 1 -->
+        <div class="upper">
+        </div>
+        <!-- three cards in one  -->
+        <div class="card-group">
+          <div class="card">
+            <img src="../static/images/card1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Register Business</h5>
             <p class="card-text">Get started with your business journey in just a click.
             </p>
-            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register Business</a>
+            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="../static/images/pay.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Pay Bills</h5>
+              <p class="card-text">Having any pending bills? <br>Click here</p>
+              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Pay here</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="../static/images/card2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">PSV licensing</h5>
+              <p class="card-text">Get started with your business journey in just a click.</p>
+              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <!-- three more cards -->
+        <div class="card-group">
+          <div class="card">
+            <img src="../static/images/card3.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Land registration</h5>
+            <p class="card-text">Get started with your business journey in just a click.
+            </p>
+            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="../static/images/card4.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Hospital services</h5>
+              <p class="card-text">Get started with your business journey in just a click.</p>
+              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <img src="../static/images/card5.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Book parking</h5>
+              <p class="card-text">Get started with your business journey in just a click.</p>
+              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
           </div>
         </div>
-        
+
+        <!--main nav close  -->
       </div>
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
