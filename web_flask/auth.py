@@ -29,7 +29,7 @@ def token_required(func):
         """ Decorator function to check if token is passed """
         token = request.cookies.get('x-access-token')
         if not token:
-            flash('Login required !!', 'error')
+            flash('Please Login to access!', 'error')
             return redirect(url_for('auth.login'))
 
         try:
@@ -57,13 +57,15 @@ def login():
     """ This route authorises users to login and access protected routes """
     if request.method == 'POST':
         auth = request.form
-        if not auth or not auth.get('email') or not auth.get('password'):
+        if not auth.get('email') or not auth.get('password'):
             flash('Please fill out all fields.', 'error')
             return redirect(url_for('auth.login'))
 
         user = storage.get_user_by_email(auth.get('email'))
         if not user:
-            flash('Could not verify. User with this email doesn\'t exist.',
+            flash('An account with this email in was not found. '
+                  'Please Sign Up or contact support if you are unable '
+                  'to access your account.',
                   'error')
             return redirect(url_for('auth.login'))
 
