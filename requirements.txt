@@ -1,6 +1,6 @@
 # Install the following dependencies
 
-# Package                Version 
+# Package                Version
 # ---------------------- --------
 blinker==1.8.2
 cachelib==0.13.0
@@ -32,6 +32,7 @@ typing-extensions==4.11.0
 urllib3==2.2.1
 werkzeug==3.0.3
 zipp==3.18.2
+gunicorn==22.0.0 # for production
 
 # How to install all requirements
 # pip install -r requirements.txt
@@ -39,3 +40,6 @@ zipp==3.18.2
 
 # delete __pycache__
 # find . -type d -name "__pycache__" -exec rm -r {} +
+
+
+# sudo apt install python3-mysqldb # for mysqlclient

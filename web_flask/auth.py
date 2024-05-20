@@ -239,12 +239,8 @@ def reset_password(token):
     """ Route for handling password reset """
     try:
         jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
-        time_diff = time_diff_from_now(session.get('timestamp'))
-        if time_diff > 300:
-            flash('The reset link has expired or is invalid.', 'error')
-            return redirect(url_for('auth.login'))
     except:
-        flash('The reset link has expired.', 'error')
+        flash('The reset link has expired or is invalid.', 'error')
         return redirect(url_for('auth.login'))
 
     if request.method == 'POST':

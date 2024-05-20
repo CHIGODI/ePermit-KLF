@@ -18,14 +18,14 @@ cache_id = uuid.uuid4()
 
 
 @register.route('/register', methods=['GET'], strict_slashes=False)
-@token_required
+# @token_required
 def register_page():
-    """ renders the register page"""  
+    """ renders the register page"""
     return render_template('register.html', cache_id=cache_id)
 
 
 @register.route('/register/business', methods=['POST'], strict_slashes=False)
-@token_required
+# @token_required
 def register_business():
     """ registers a business """
     categories = storage.all(Category).values()
@@ -72,7 +72,7 @@ def get_access_token(consumer_key, consumer_secret):
 
 
 @register.route('/pay', methods=['POST', 'GET'], strict_slashes=False)
-@token_required
+# @token_required
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     if request.method == 'POST':
@@ -98,7 +98,7 @@ def mpesa_express():
         "PhoneNumber": phone_number,
         "CallBackURL": "https://1003-102-166-221-241.ngrok-free.app/callback",
         "AccountReference": "CompanyXLTD",
-        "TransactionDesc": "Payment of X" 
+        "TransactionDesc": "Payment of X"
         }
         payload_json = json.dumps(payload)
         response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
@@ -107,7 +107,7 @@ def mpesa_express():
         return render_template('payment.html')
 
 @register.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
-@token_required
+# @token_required
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
     print('imeingia mpya before')
