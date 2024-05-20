@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/styles/register.css">
     <link rel="stylesheet" href="../static/styles/dashboard.css">
+    <link rel="stylesheet" href="../static/styles/auth_styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap" async defer></script>
@@ -21,14 +22,14 @@
             <form class="form-control" id="register-bs" method="POST" action="/pay">
                 <div class="business-info">
                     <h4>Business Details</h4>
-                    
+
                     <div class="mb-3">
                         <label for="name" class="form-label">Business Name <span class="required">*</span></label>
                         <input type="name" id="name" class="form-control" aria-describedby="businessNameHelpBlock">
                         <div id="charCount" class="form-text">Max 64 characters</div>
                         <div id="businessNameHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="origin" class="form-label" >Business Entity Origin<span class="required">*</span></label>
                         <select name="origin" class="form-select" id="origin">
@@ -49,14 +50,14 @@
                         <div class="form-text">Max 20 characters</div>
                         <div id="vatHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="box" class="form-label">P.O BOX <span class="required">*</span></label>
                         <input type="box" id="box" class="form-control" required aria-describedby="boxHelpBlock">
                         <div class="form-text">Max 10 characters</div>
                         <div id="boxHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="postal_code">Postal Code <span class="required">*</span></label>
                         <select id="postal_ode" class="form-select">
@@ -98,14 +99,14 @@
                         <label for="business_telephone" class="form-label">Business Telephone No.<span class="required">*</span></label>
                         <input type="business_telephone" id="business_telephone" class="form-control" required>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="description" class="form-label">Business Activity description</label>
                         <textarea id="description" class="form-control" rows="4" cols="50" aria-describedby="descriptionHelpBlock"></textarea>
                         <div class="form-text">Max 256 characters</div>
                         <div  id="descriptionHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="category">Category <span class="required">*</span></label>
                         <select id="category" class="form-select">
@@ -144,7 +145,7 @@
                         <label for="ID_number" class="form-label">ID No <span class="required">*</span></label>
                         <input type="ID_number" id="ID_number" class="form-control" required><br><br>
                     </div>
-                    
+
                     <div class="mb-3">
                         <label for="gender">Gender <span class="required">*</span></label>
                         <select name="gender" id="gender" class="form-select">

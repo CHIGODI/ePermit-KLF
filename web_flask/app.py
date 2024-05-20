@@ -1,11 +1,13 @@
+#!/usr/bin/env python3
+""" Main module for the Flask app. """
+
+from dotenv import load_dotenv
 from flask import Flask, session
 from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
 from models import storage
-from web_flask import auth, register, main
-from flask_mail import Mail, Message
 from os import getenv
-from dotenv import load_dotenv
+from web_flask import auth, register, main
 load_dotenv()
 
 app = Flask(__name__)
@@ -19,10 +21,10 @@ app.config['MAIL_USE_TLS'] = getenv('MAIL_USE_TLS')
 app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD') 
 
-#Initialise mail service
+# Initialise mail service
 mail = Mail(app)
 
-#initilialise session
+# Initialise session
 Session(app)
 
 app.register_blueprint(auth)
@@ -31,9 +33,10 @@ app.register_blueprint(register)
 
 @app.teardown_appcontext
 def close_session(exception):
+    """ Closes the current SQLAlchemy session. """
     storage.close()
-    
 
 
 if __name__ == '__main__':
+    """ Runs the Flask app."""
     app.run(host='0.0.0.0', port=5000, debug=True)

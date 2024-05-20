@@ -16,16 +16,17 @@
         <form class="form-auth" method="POST" action="/login">
             <div class="field">
                 <label for="email" class="form-label">Email <span class="required">*</span></label>
-                <input type="email" name="email" class="form-control" placeholder="Your Email">
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
             </div>
-           
+
             <div class="field">
                 <label for="password" class="form-label">Password <span class="required">*</span></label>
-                <input type="password" name="password" class="form-control" placeholder="Your Password">
+                <input type="password" name="password" class="form-control" placeholder="Your Password" required>
             </div>
-            <button class="btn btn-primary auth" id="login">Login</button>
+            <button type="submit" class="btn btn-primary auth" id="login">Login</button>
             <div class="sign-up">
                 <a href="{{ url_for('auth.signup') }}">Dont have an account? Register</a>
+                <a href="{{ url_for('auth.forgot_password') }}">Forgot Password?</a>
             </div>
         </form>
     </div>

@@ -1,12 +1,23 @@
 $(function () {
 
-// Authentication script
-
+    // Authentication scripts
     setTimeout(function () {
         $('#flash-message').fadeOut('slow', function () {
             $(this).remove();
         });
-    }, 1000);
+    }, 6000);
+
+    $('.form-auth').on('submit', function (e) {
+        // Iterate over each input field in the form
+        $(this).find('input').each(function () {
+            if ($(this).val() == '') {
+                $(this).addClass('is-invalid');
+            }
+            if ($(this).val() != '') {
+                $(this).removeClass('is-invalid');
+            }
+        });
+    });
 
 
 
@@ -39,7 +50,7 @@ $(function () {
 
     let scriptTag = document.createElement('script');
     scriptTag.async = true;
-    scriptTag.defer = true; 
+    scriptTag.defer = true;
     scriptTag.src = apiUrl;
     $('head').append(scriptTag);
 
@@ -55,7 +66,7 @@ $(function () {
         charCountElement.text(`Entered: ${currentLength} characters.`);
     });
 
-    
+
     $('.mb-3 input, .mb-3 text-area, row').focus(function () {
         $(this).closest('.mb-3').addClass('focus-highlight');
     });

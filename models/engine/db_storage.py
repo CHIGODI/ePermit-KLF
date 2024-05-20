@@ -2,12 +2,16 @@
 """ Contains the DBStorage class """
 
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
 from os import getenv
 from models.user import User
 from models.business import Business
 from models.category import Category
+
+
+load_dotenv()
 
 
 classes = {"User": User, "Business": Business, "Category": Category}

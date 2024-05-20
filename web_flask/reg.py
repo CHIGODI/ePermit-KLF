@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+""" Module for registering businesses. """
+
 from datetime import datetime
 from flask import request, render_template
 import requests
@@ -14,15 +16,16 @@ from . import token_required
 
 cache_id = uuid.uuid4()
 
+
 @register.route('/register', methods=['GET'], strict_slashes=False)
-@token_required
+# @token_required
 def register_page():
-    """ registers a business """  
+    """ renders the register page"""
     return render_template('register.html', cache_id=cache_id)
 
 
 @register.route('/register/business', methods=['POST'], strict_slashes=False)
-@token_required
+# @token_required
 def register_business():
     """ registers a business """
     categories = storage.all(Category).values()
@@ -58,6 +61,7 @@ def register_business():
 
 # get access token to work with daraja API
 def get_access_token(consumer_key, consumer_secret):
+    """ Get access token to work with daraja API """
     url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
     response = requests.get(url, auth=HTTPBasicAuth(consumer_key, consumer_secret))
     if response.status_code == 200:
@@ -68,9 +72,9 @@ def get_access_token(consumer_key, consumer_secret):
 
 
 @register.route('/pay', methods=['POST', 'GET'], strict_slashes=False)
-@token_required
+# @token_required
 def mpesa_express():
-    """ registers a business """
+    """ This function initiates a payment request to the M-Pesa API. """
     if request.method == 'POST':
         consumer_key = 'ogBEljyvnKUgUQYyyBDzD1QQqsiQUgxRFI2RrjGramfqv0Qs'
         consumer_secret = '5kZfOqrXAfWFMcBB2hZtNbu4hGwrEWrCrIyWhWWjJ9z85R4lCJtcMwNUAWsE8k0L'
@@ -94,7 +98,7 @@ def mpesa_express():
         "PhoneNumber": phone_number,
         "CallBackURL": "https://1003-102-166-221-241.ngrok-free.app/callback",
         "AccountReference": "CompanyXLTD",
-        "TransactionDesc": "Payment of X" 
+        "TransactionDesc": "Payment of X"
         }
         payload_json = json.dumps(payload)
         response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
@@ -103,8 +107,9 @@ def mpesa_express():
         return render_template('payment.html')
 
 @register.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
-@token_required
+# @token_required
 def mpesa_callback():
+    """ This function receives the callback from the M-Pesa API. """
     print('imeingia mpya before')
     data = request.data
     print(data)

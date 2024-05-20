@@ -1,27 +1,30 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
 
-<head>
-    <title>Verify OTP</title>
-</head>
-
-<body>
-    <h2>Verify OTP</h2>
-    <form method="post">
-        <label for="verification_code">OTP:</label>
-        <input type="text" name="verification_code" required>
-        <input type="hidden" name="email" value="{{ email }}">
-        <button type="submit">Verify</button>
-    </form>
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
+{% block content %}
+<div class="auth-form-div verify-m">
+    <h3 class="title">Verify Email</h3>
+    <div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="flash-{{ category }}" id="flash-message">
+            {{ message }}
+        </div>
         {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-</body>
+        {% endif %}
+        {% endwith %}
+        <form class="form-auth" method="POST" action="/verify_email/">
+            <div class="field">
+                <label for="verification_code" class="form-label">Enter Verification code<span class="required">*</span></label>
+                <input type="text" name="verification_code" class="form-control" required>
+            </div>
 
-</html>
+            <div class="field">
+                <input type="hidden" name="email" value="{{ email }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary auth verify-b">Verify</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
