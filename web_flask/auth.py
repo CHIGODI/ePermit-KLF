@@ -37,7 +37,7 @@ def token_required(func):
             # decoding the payload to fetch the stored details
             data = jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
             current_user = storage.get_user_by_id(User, data['id'])
-            kwargs['current_user'] = current_user
+            # kwargs['current_user'] = current_user
     
         except:
             return jsonify({

@@ -1,0 +1,137 @@
+/* ---------------------------------- */
+.dashboard {
+    width: 100%;
+    height: 100%;
+    margin-top: 70px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.main {
+    margin: 24px auto;
+    width: 1000px;
+    height: 100%;
+}
+
+.nav-dashboard {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    flex-direction: row-reverse;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 0;
+    background-color: black;
+    z-index: 10;  /* added to avoid overlapping */
+}
+
+.profile {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-dashboard .profile .logout {
+    background-color: #333333;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 8px 16px;
+}
+
+.nav-dashboard .profile a {
+    text-decoration: none;
+}
+
+/* Main */
+.main-listing {
+    background-color: #E0FBE2;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 70px;
+    position: relative;  /* Use relative positioning */
+    z-index: 1; /* added to avoid overlapping */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.service-listing {
+    width: 74%;
+    height: 100vh;
+    background-color: #DDDDDD;
+    position: absolute;
+    border-radius: 16px;
+    margin-left: 30%;
+    z-index: 1; /* added to avoid overlapping */
+}
+
+.side-nav {
+    background-color: #DDDDDD;
+    height: 100vh;
+    border-radius: 16px;
+    position: fixed;
+    left: 0;
+    top: 70px;
+    width: 0; /* Initial width set to 0 */
+    overflow: hidden; /* Hide content */
+    transition: width 0.3s ease; /* Smooth transition */
+    background-color: #E0FBE2; /* Background color matching the main listing */
+    z-index: 2;
+}
+
+.side-nav:hover {
+    width: 24%; /* On hover, set the width to 24% */
+}
+
+/* Added this */
+.account img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+}
+
+.account-info {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.account-info p {
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.information button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px auto;
+    width: 150px;
+}
+
+.card-group {
+    margin: 16px;
+}
+
+.card {
+    margin: 32px 24px;
+}
+
+.card a {
+    text-decoration: none;
+    background-color: rgb(7, 146, 7);
+    width: 150px;
+}

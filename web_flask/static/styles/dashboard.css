@@ -1,47 +1,4 @@
-.main-listing{
-    background-color: #E0FBE2;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 70px;
-    z-index: 1000;
-}
-.service-listing{
-    width: 64%;
-    height: 100vh;
-    background-color: #DDDDDD;
-    margin-left: 30%;
-}
-.side-nav {
-    background-color: #DDDDDD;
-    width: 24%;
-    height: 100vh;
-    border-radius: 16px;
-    position: fixed;
-    margin-left: 5%;
-}
-.cards{
-    background-color: red;
-    border: 1px solid green;
-    border-top-right-radius: 16px;
-    border-bottom-left-radius: 16px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ---------------------------------- */
-
+/* -----------------------*/
 .dashboard {
     width: 100%;
     height: 100%;
@@ -65,9 +22,9 @@
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
     position: fixed;
     top: 0;
-    background-color: black;
-
-
+    /* background-color: black; */
+    background-color: #585656;
+    z-index: 10;  /*added to avoid overlapping*/
 }
 .profile{
     width: 20%;
@@ -87,4 +44,94 @@
 }
 .nav-dashboard .profile a{
     text-decoration: none;
+}
+
+
+
+/* Main  */
+.main-listing{
+    background-color: red;
+    background-color:#E0FBE2;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 70px;
+    z-index: 1; /*added to avoid overlapping*/
+    position: relative;
+}
+.service-listing{
+    width: 74%;
+    height: 100vh;
+    background-color: #DDDDDD;
+    position: absolute;
+    border-radius: 16px;
+    margin-left: 26%;
+    z-index: 1; /*added to avoid overlapping*/
+}
+.side-nav {
+    background-color: #DDDDDD;
+    width: 5%;
+    height: 100vh;
+    border-radius: 5px;
+    position: fixed;
+    left: 0;
+    overflow: hidden;
+    margin-left: 0;
+    z-index: 2; /*added to avoid overlapping*/
+}
+
+.side-nav:hover{
+    width: 24%;
+    transition: 0.5s;
+
+}
+
+/* Added this */
+
+.account img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: auto auto;
+    display: flex;
+    align-items: center;
+
+}
+
+.account-info {
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+.account-info p {
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bold;
+
+}
+.information button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 24px auto;
+    width: 150px;
+}
+
+.card-group {
+    margin: 16px;
+}
+
+.card {
+    margin: 32px 24px;
+
+}
+
+.card a {
+    text-decoration: none;
+    background-color: rgb(7, 146, 7);
+    width: 150px;
+
 }
