@@ -6,4 +6,4 @@ main = Blueprint('main', __name__)
 register = Blueprint('register', __name__)
 from web_flask.auth import *
 from web_flask.main import *
-from api.v1.views.reg import *
+from web_flask.reg import *

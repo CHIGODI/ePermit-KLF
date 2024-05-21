@@ -17,7 +17,7 @@ class User(BaseModel, Base):
     gender = Column(String(20), nullable=True)
     designation = Column(String(60), nullable=True)
     phone_number = Column(String(20), nullable=True)
-    role = Column(String(6), nullable=True, default='User')
+    role = Column(String(6), nullable=True, default='user')
     businesses = relationship("Business",
                               backref="user",
                               cascade="all, delete-orphan")

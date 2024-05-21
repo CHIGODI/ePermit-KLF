@@ -19,7 +19,7 @@ class Business(BaseModel, Base):
     postal_code = Column(Integer, nullable=False)
     business_telephone = Column(String(20), nullable=False)
     business_telephone_two = Column(String(20), nullable=True)
-    business_email = Column(String(64), nullable=False)
+    business_email = Column(String(64), nullable=True)
     sub_county = Column(String(64), nullable=False)
     ward = Column(String(64), nullable=False)
     physical_address = Column(String(128), nullable=False)
@@ -29,6 +29,8 @@ class Business(BaseModel, Base):
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     number_of_employees = Column(Integer, nullable=False)
+
+    #will be provided backend logic
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
     category_id = Column(String(60), ForeignKey('categories.id'), nullable=False)
     verified = Column(Boolean, nullable=True, default=False)

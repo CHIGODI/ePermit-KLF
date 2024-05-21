@@ -12,7 +12,7 @@ import uuid
 from web_flask import register
 from base64 import b64encode
 from requests.auth import HTTPBasicAuth
-from web_flask.auth import token_required
+from . import token_required
 
 cache_id = uuid.uuid4()
 
