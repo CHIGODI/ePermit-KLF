@@ -82,14 +82,20 @@ $(function () {
     });
 
 
-    $('.mb-3 input, .mb-3 text-area, row').focus(function () {
+    $('.mb-3 input, .mb-3 textarea, .mb-3 select').focus(function () {
         $(this).closest('.mb-3').addClass('focus-highlight');
     });
-    $('.mb-3 input, .mb-3 text-area, .row').blur(function () {
+    $('.mb-3 input, .mb-3 textarea, .mb-3 select').blur(function () {
         $(this).closest('.mb-3').removeClass('focus-highlight');
     });
 
+    $('.latitude-dv, .longitude-dv').find('input').focus(function () {
+        $(this).closest('.col').addClass('focus-highlight');
+    });
 
+    $('.latitude-dv, .longitude-dv').find('input').blur(function () {
+        $(this).closest('.col').removeClass('focus-highlight');
+    });
 
 
 
