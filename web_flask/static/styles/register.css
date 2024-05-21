@@ -87,8 +87,18 @@
 }
 
 .owner-info h4{
-   padding: 24px;
+   padding-top: 24px;
    text-align: center;
+}
+.owner-info h4::after{
+   content: "";
+   display: block;
+   width: 20%;
+   height: 4px;
+   background-color: green;
+   margin-top: 12px;
+   margin: 4px auto;
+   border-radius: 16px;
 }
 
 .own-info{
