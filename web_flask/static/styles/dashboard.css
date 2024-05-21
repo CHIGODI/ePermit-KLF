@@ -152,7 +152,7 @@
 
 .side-nav:not(:hover) .btn-text {
     opacity: 0;
-    margin-left: -100px; 
+    margin-left: -100px;
 }
 
 
@@ -175,7 +175,7 @@
 .side-nav:not(:hover) .profile {
     opacity: 0;
     transform: translateY(100%);
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .profile a {

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Contains the User class """
 
 from models.base_model import BaseModel, Base
@@ -16,7 +16,12 @@ class User(BaseModel, Base):
     ID_number = Column(Integer, nullable=True)
     gender = Column(String(20), nullable=True)
     designation = Column(String(60), nullable=True)
-    phone_number = Column(Integer, nullable=True)
+    phone_number = Column(String(20), nullable=True)
+    role = Column(String(6), nullable=True, default='user')
     businesses = relationship("Business",
                               backref="user",
                               cascade="all, delete-orphan")
+
+    # Add a method to check if the user has a specific role
+    def has_role(self, role):
+        return self.role == role

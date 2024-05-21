@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Contains the DBStorage class """
 
 from sqlalchemy import create_engine
@@ -9,19 +9,21 @@ from os import getenv
 from models.user import User
 from models.business import Business
 from models.category import Category
+from models.permit import Permit
 
 
 load_dotenv()
 
 
-classes = {"User": User, "Business": Business, "Category": Category}
+classes = {"User": User, "Business": Business,
+           "Category": Category, "Permit": Permit}
 
 
 class DBStorage:
     """ storage class for database """
     __session = None
     __engine = None
-    
+
     def __init__(self):
         """ initializes the DBStorage class """
         EPERMIT_MYSQL_USER = getenv('EPERMIT_MYSQL_USER')
@@ -34,15 +36,15 @@ class DBStorage:
                                              EPERMIT_MYSQL_PWD,
                                              EPERMIT_MYSQL_HOST,
                                              EPERMIT_MYSQL_DB))
-        
+
         if EPERMIT_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
-        
-            
+
+
     def new(self, obj):
         """ saves an object to the database """
         self.__session.add(obj)
-            
+
     def save(self):
         """ commits all changes to the database """
         self.__session.commit()
@@ -58,13 +60,13 @@ class DBStorage:
                     new_dict[key] = obj
         return new_dict
 
-    
-    def get_user_by_id(self, cls, id):
+
+    def get_obj_by_id(self, cls, id):
         """ retrieves an object from the database """
         if cls is None or id is None:
             return None
         return self.__session.query(cls).get(id)
-    
+
 
     def get_user_by_email(self, email):
         """ retrieves a user by email """
@@ -76,14 +78,14 @@ class DBStorage:
         """ deletes an object from the current database """
         if obj is not None:
             self.__session.delete(obj)
-        
+
     def reload(self):
         """reloads data from the database"""
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
         self.__session = Session
-    
+
     def count(self, cls=None):
         """ counts the number of objects in the database """
         if cls is None:

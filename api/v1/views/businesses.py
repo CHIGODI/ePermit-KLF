@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Module for the API for businesses """
 from api.v1.views import app_views
 from flask import jsonify, request, abort
@@ -36,20 +36,19 @@ def delete_business(business_id):
 
 @app_views.route('/businesses', methods=['POST'], strict_slashes=False)
 def create_business():
-    """ method that creates a business """
+    """ Create a new business """
     business_json = request.get_json()
     if business_json is None:
         abort(400, "Not a JSON")
-    if 'name' not in business_json:
-        abort(400, "Missing name")
-    if 'category_id' not in business_json:
-        abort(400, "Missing category_id")
-    if 'user_id' not in business_json:
-        abort(400, "Missing user_id")
-    if 'address' not in business_json:
-        abort(400, "Missing address")
-    if 'KRA_pin' not in business_json:
-        abort(400, "Missing KRA-pin")
+    required_fields = ['name', 'entity_origin', 'Certificate_of_Registration_No',
+                       'KRA_pin', 'po_box', 'postal_code', 'business_telephone',
+                       'business_email', 'sub_county', 'ward', 'physical_address',
+                       'activity_code_description', 'latitude', 'longitude',
+                       'number_of_employees', 'user_id', 'category_id']
+    for field in required_fields:
+        if field not in business_json:
+            abort(400, f"Missing {field}")
+
     business = Business(**business_json)
     storage.new(business)
     storage.save()

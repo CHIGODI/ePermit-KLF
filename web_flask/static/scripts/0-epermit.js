@@ -1,11 +1,32 @@
+// Load this script on all pages
 $(function () {
-
     // Authentication scripts
     setTimeout(function () {
         $('#flash-message').fadeOut('slow', function () {
             $(this).remove();
         });
-    }, 2000);
+    }, 6000);
+
+
+    // Registering a business page
+    // Adding a new business location
+    $.ajax({
+        url: "https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap",
+        dataType: "script",
+    });
+
+
+    // submiting business details for registration
+    let form = $('#register-bs');
+    data = form.serialize();
+    console.log(data+ 'heyyyyy');
+    $('#register-bs').submit(function (e) {
+        e.preventDefault();
+
+
+        let form = $(this);
+        console.log(form);
+    });
 
 
 
@@ -26,21 +47,6 @@ $(function () {
 
 
 
-
-
-
-
-
-
-
-    let apiKey = "AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw";
-    let apiUrl = "https://maps.googleapis.com/maps/api/js?key=" + apiKey + "&callback=initMap";
-
-    let scriptTag = document.createElement('script');
-    scriptTag.async = true;
-    scriptTag.defer = true; 
-    scriptTag.src = apiUrl;
-    $('head').append(scriptTag);
 
     $('.form-control').on('input', function () {
         // Find the corresponding form-text element based on the input's aria-describedby attribute
@@ -54,25 +60,43 @@ $(function () {
         charCountElement.text(`Entered: ${currentLength} characters.`);
     });
 
-    
-    $('.mb-3 input, .mb-3 text-area, row').focus(function () {
+
+    $('.mb-3 input, .mb-3 textarea, .mb-3 select').focus(function () {
         $(this).closest('.mb-3').addClass('focus-highlight');
     });
-    $('.mb-3 input, .mb-3 text-area, .row').blur(function () {
+    $('.mb-3 input, .mb-3 textarea, .mb-3 select').blur(function () {
         $(this).closest('.mb-3').removeClass('focus-highlight');
     });
 
+    $('.latitude-dv, .longitude-dv').find('input').focus(function () {
+        $(this).closest('.col').addClass('focus-highlight');
+    });
 
-
-
-
-
+    $('.latitude-dv, .longitude-dv').find('input').blur(function () {
+        $(this).closest('.col').removeClass('focus-highlight');
+    });
 });
 
+
+// callback function for google maps api
 function initMap() {
-    let map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -3.9458, lng: 39.5364 },
-        zoom: 8
+    const mapElement = $("#map").get(0);
+    const map = new google.maps.Map(mapElement, {
+        center: { lat: -3.8825, lng: 39.6211 },
+        disableDefaultUI: true,
+        gestureHandling: "cooperative",
+        mapTypeId: 'hybrid',
+        zoom: 10,
+    });
+
+    map.addListener('click', function (e) {
+        $('.latitude-dv').find('input').val(e.latLng.lat());
+        $('.longitude-dv').find('input').val(e.latLng.lng());
+
+        const marker = new google.maps.Marker({
+            position: { lat: clickedLat, lng: clickedLng },
+            map: map,
+            title: "Clicked Location",
+        });
     });
 }
-

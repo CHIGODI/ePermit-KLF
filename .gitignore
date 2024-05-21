@@ -4,6 +4,8 @@ __pycache__/
 
 # Virtual Environment
 epermit/
+ePermit_key
+ePermit_key.pub
 
 # Environment Variables
 .env
@@ -11,3 +13,9 @@ epermit/
 # IDE Directories
 .vscode/
 .idea/
+
+p
+test.py
+trial.css
+trial.html
+business_permit_pdf

@@ -1,14 +1,13 @@
 
-.required{
-   color: red;
-}
-#register-bs{
+/* --business information--- */
+#register-bs {
    margin: 5% auto;
    width: 90%;
    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
-.business-info{
-   margin-top: 24px;
+
+.business-info {
+   margin: auto auto;
    width: 70%;
    display: flex;
    justify-content: center;
@@ -16,20 +15,18 @@
    flex-direction: column;
 }
 
-.business-info h4{
+.business-info h4 {
    padding: 24px;
 }
 
-#map {
-     width: 100%;
-     height: 60vh;
+.bs-info{
+   width: 100%;
+   padding: 16px;
+   border-radius: 16px;
 }
 
-.mb-3{
-   margin: 0;
-   width: 70%;
-   padding: 10px;
-   border-radius: 4px;
+.required{
+   color: red;
 }
 
 .mb-3 #businessNameHelpBlock,
@@ -46,23 +43,100 @@
    display: inline-block;
 }
 
-
+/* ---class added to elemets with jquery for yellow effect on focus---- */
 .focus-highlight {
    background-color: #FFFF99;
 }
+.is-ivalid{
+   border: 1px solid #A94442;
+   background-color: white;
 
+}
+
+.position-bs{
+   margin: auto auto;
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+   gap: 12px;
+}
+.latitude-dv,
+.longitude-dv{
+   height: 100px;
+   padding: 16px;
+   border-radius: 16px;
+}
+
+.bs-info input::placeholder,
+ .own-info input::placeholder {
+   color: #999;
+   font-style: italic;
+   font-size: 14px;
+}
+
+#map {
+   width: 100%;
+   height: 60vh;
+   margin-bottom: 12px;
+}
+
+
+/* -----Owners infomation----- */
 .owner-info{
+   width: 70%;
    margin: 24px auto;
    display: flex;
    flex-direction: column;
    justify-content: center;
 }
+
 .owner-info h4{
-   padding: 24px;
+   padding-top: 24px;
+   text-align: center;
 }
-.row{
-   width: 80%;
-   margin: auto auto;
+.owner-info h4::after{
+   content: "";
+   display: block;
+   width: 20%;
+   height: 4px;
+   background-color: green;
+   margin-top: 12px;
+   margin: 4px auto;
+   border-radius: 16px;
 }
 
+.own-info{
+   padding: 16px;
+   border-radius: 16px;
+}
+
+/* -----declaration-------- */
+.form-control .declaration{
+   padding: 12px;
+}
+
+/* ----submit button------ */
+.btn-reg{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 5%;
+}
+
+.register-bs-btn{
+   padding: 10px 20px;
+   font-size: 18px;
+   width: 25%;
+   border: none;
+   outline: none;
+   background-color: green;
+   color: white;
+   border-radius: 16px;
+}
+
+.register-bs-btn:hover{
+   background-color: green;
+   opacity: 90%;
+}
 
