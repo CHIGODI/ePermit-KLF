@@ -65,7 +65,7 @@ def login():
         if check_password_hash(user.password, auth.get('password')):
             token = jwt.encode({
                 'id': user.id,
-                'exp': datetime.utcnow() + timedelta(minutes=30)
+                'exp': datetime.utcnow() + timedelta(minutes=3600)
             }, getenv('SECRET_KEY'), algorithm='HS256')
             
             response = make_response(redirect(url_for('main.dashboard')))

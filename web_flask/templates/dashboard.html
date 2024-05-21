@@ -18,49 +18,62 @@
 </head>
 <body>
     <nav class="nav-dashboard">
-      <div class="profile">
+      <div class="account">
+        <i class="fa-regular fa-user"></i>
+      </div>
+      <!-- <div class="profile">
         <i class="fa-regular fa-user"></i>
         <a href="{{ url_for('auth.logout') }}">
           <button class="logout">Sign Out<i class="fa-solid fa-right-from-bracket"></i></button>
         </a>
-      </div>
+      </div> -->
     </nav>
     <section class="main-listing">
 
       <div class="side-nav">
         Menu
         <hr>
-        <div class="information">
-          <div class="personal-info">
-            <button type="button" class="btn btn-light">
-              <img src="../static/images/profile.png" alt="">
-              <span class="btn-text">Personal Details</span>
-            </button>
-          </div>
-                    
-          <div class="business-information">
-            <button type="button" class="btn btn-light">
-              <img src="../static/images/business.png" alt="">
-              <span class="btn-text">My Businesses</span>
-            </button>
-          </div>
+        <ul class="information">
+            <li class="personal-info">
+                <img src="../static/images/profile.png" alt="">
+                <span class="btn-text">Profile</span>
+            </li>
+        </ul>
 
-          <div class="bills-info">
-            <button type="button" class="btn btn-light">
+        <ul class="information">
+            <li class="personal-info">
+                <img src="../static/images/profile.png" alt="">
+                <span class="btn-text">My Businesses</span>
+            </li>
+        </ul>
+
+        <ul class="information">
+            <li class="bills-info">
+                <img src="../static/images/bill.png" alt="">
+                <span class="btn-text">Pending Bills</span>
+            </li>  
+        </ul>
+        <ul class="information">
+            <li class="permit-info">
               <img src="../static/images/bill.png" alt="">
-              <span class="btn-text">Pending Bills</span>
-            </button>
-            </div>
-
-          <div class="permit-info">
-            <button type="button" class="btn btn-light">
+              <span class="btn-text">View Permits</span>
+            </li>
+        </ul>
+        <ul class="information">
+            <li class="permit-info">
               <img src="../static/images/bill.png" alt="">
               <span class="btn-text">Renew Permit</span>
-            </button>
-          </div>
+            </li>
+        </ul>
 
+        <div class="profile">
+            <a href="{{ url_for('auth.logout') }}">
+              <button class="logout">Sign Out<i class="fa-solid fa-right-from-bracket"></i></button>
+            </a>
         </div>
+
       </div>
+    
 
       <!-- main nav -->
       <div class="service-listing">
