@@ -18,7 +18,7 @@ def dashboard():
 
 
 @main.route('/admin_dashboard')
-@token_required
+@token_required('admin')
 def admin_dashboard():
     """ Admin dashboard where admins can verify business registrations """
     return render_template('admin_dashboard.html')

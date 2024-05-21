@@ -43,6 +43,9 @@ def create_category():
         abort(400, "Missing name")
     if 'fee' not in category_json:
         abort(400, "Missing fee")
+    if 'fire_fee' not in category_json:
+        abort(400, "Missing fire_fee")
+
     category = Category(**category_json)
     storage.new(category)
     storage.save()

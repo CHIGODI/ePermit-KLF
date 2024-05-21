@@ -20,6 +20,21 @@ $(function () {
     });
 
 
+    // submiting business details for registration
+
+    $('#register-bsn').on('submit', function (e) {
+        preventDefault(e);
+        $(this).find('input').each(function () {
+            if ($(this).val() == '') {
+                $(this).addClass('is-invalid');
+            }
+            if ($(this).val() != '') {
+                $(this).removeClass('is-invalid');
+            }
+        });
+        let form = $(this);
+        console.log(form);
+    });
 
 
 

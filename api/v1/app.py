@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Module for the API """
 from flask import Flask, jsonify
 from api.v1.views import app_views

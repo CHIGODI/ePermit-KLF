@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Contains functions that are reused in different modules of the app"""
 
 from datetime import datetime
