@@ -23,66 +23,31 @@
     position: fixed;
     top: 0;
     background-color: #585656;
-    z-index: 10;  /*added to avoid overlapping*/
+    z-index: 10;
 }
-/* .profile{
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    height: 10%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    background-color: red;
-}
-
-.profile button {
-    background-color: #9b9898;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 10px;
-    padding: 8px 16px;
-    cursor: pointer;
-    margin-left: 10px;
-
-}
-.nav-dashboard .profile .logout{
-    background-color: #333333;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    padding: 8px 16px;
-}
-.nav-dashboard .profile a{
-    text-decoration: none;
-} */
-
 
 
 /* Main  */
 .main-listing{
-    background-color: red;
-    background-color:#E0FBE2;
+    background-color: #E0FBE2;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 70px;
-    z-index: 1; /*added to avoid overlapping*/
-    position: relative;
+    z-index: 1;
 }
 .service-listing{
-    width: 74%;
-    height: 100vh;
+    width: 64%;
+    /* height: 100vh; */
     background-color: #DDDDDD;
     position: absolute;
-    border-radius: 16px;
-    margin-left: 26%;
+    margin-left: 30%;
+    margin-top: 24px;
+    border-radius: 4px;
     z-index: 1; /*added to avoid overlapping*/
 }
+
 
 .upper {
     display: flex;
@@ -121,38 +86,14 @@
     margin: 0;
 }
 
-/* Keyframes for pop and fade effect */
-@keyframes popFade {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
-}
 
 .side-nav {
     background-color: #DDDDDD;
-    width: 3%;
+    width: 24%;
     height: 100vh;
-    border-radius: 5px;
+    border-radius: 4px;
     position: fixed;
-    left: 0;
-    overflow: hidden;
-    transition: width 0.5s;
-    margin-left: 0;
-    z-index: 2; /*added to avoid overlapping*/
-
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding: 10px 0;
+    margin-left: 5%;
 }
 
 .side-nav:hover{
