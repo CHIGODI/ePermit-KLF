@@ -15,22 +15,22 @@
     <title>registration</title>
 </head>
 <body>
-    <nav class="nav"></nav>
-    <div class="dashboard">
-        <!-- <div class="side-nav"></div> -->
-        <div class="main">
+    <nav class="nav-dashboard"></nav>
+    <div class="main-listing">
+        <div class="side-nav"></div>
+        <div class="service-listing">
             <form class="form-control" id="register-bs">
                 <div class="business-info">
                     <h4>Business Details</h4>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="name" class="form-label">Business Name <span class="required">*</span></label>
                         <input type="name" id="name" class="form-control" aria-describedby="businessNameHelpBlock">
                         <div id="charCount" class="form-text">Max 64 characters</div>
                         <div id="businessNameHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="origin" class="form-label" >Business Entity Origin<span class="required">*</span></label>
                         <select name="origin" class="form-select" id="origin">
                             <option selected></option>
@@ -39,32 +39,32 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="Certificate_of_Registration_No" class="form-label">Certificate of Registration No/ID No. <span class="required">*</span></label>
                         <input type="name" id="name" class="form-control" aria-describedby="Certificate_of_Registration_NoHelpBlock">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="KRA_pin" class="form-lable">PIN <span class="required">*</span></label>
                         <input type="text" id="KRA_pin" class="form-control" required>
                         <div id="charCount" class="form-text">Enter your valid KRA PIN</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="vat" class="form-label">VAT No.</label>
                         <input type="vat" id="vat" class="form-control" aria-describedby="vatHelpBlock">
                         <div class="form-text">Max 20 characters</div>
                         <div id="vatHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="box" class="form-label">P.O BOX <span class="required">*</span></label>
                         <input type="box" id="box" class="form-control" required aria-describedby="boxHelpBlock">
                         <div class="form-text">Max 10 characters</div>
                         <div id="boxHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3- bs-info">
                         <label for="postal_code">Postal Code <span class="required">*</span></label>
                         <select id="postal_ode" class="form-select">
                             <option value="" selected></option>
@@ -101,47 +101,47 @@
                             <option value="83100">83100 Bamba</option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="business_telephone" class="form-label">Business Telephone No.<span class="required">*</span></label>
                         <input type="business_telephone" id="business_telephone" class="form-control" required>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="business_telephone_two" class="form-label">Business Telephone No. 2</label>
                         <input type="business_telephone_two" id="business_telephone_two" class="form-control">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="business_email" class="form-label">Business Email</label>
                         <input type="business_email" id="business_email" class="form-control">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="sub_county" class="form-label">Sub county<span class="required">*</span></label>
                         <select name="sub_county" class="form-select" id="sub_county">
                             <option selected></option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="ward" class="form-label">Ward<span class="required">*</span></label>
                         <select name="ward" class="form-select" id="ward">
                             <option selected></option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="physical_address" class="form-label">Physical address<span class="required">*</span></label>
                         <select name="physical_address" class="form-select" id="physical_address">
                             <option selected></option>
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="plot_no" class="form-label">Plot No.</label>
                         <input type="plot_no" id="plot_no" class="form-control">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="category">  Activity code <span class="required">*</span></label>
                         <select id="category" class="form-select">
                             {% for category in categories %}
@@ -149,14 +149,14 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="description" class="form-label">Detailed description</label>
                         <textarea id="description" class="form-control" rows="4" cols="50" aria-describedby="descriptionHelpBlock"></textarea>
                         <div class="form-text">Max 256 characters</div>
                         <div  id="descriptionHelpBlock" class="form-text">Entered: 0 characters.</div>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 bs-info">
                         <label for="number_of_employees" class="form-label">Number of employees<span class="required">*</span></label>
                         <input type="number_of_employees" id="number_of_employees" class="form-control" required
                             aria-describedby="number_of_employeesHelpBlock">
@@ -215,14 +215,16 @@
                         <input type="phone_number" id="phone_number" class="form-control" required>
                     </div>
 
-                    <label for="declaration" class="mb-3">
-                        <input type="checkbox" id="declaration" name="declaration" required>
+                    <label for="declaration" class="declaration">
+                        <input type="checkbox" id="form-declaration" name="declaration" required>
                         I hereby declare that the information provided is true and correct to the best of my knowledge.
-                        I understand that providing false information is punishable by law.
-                    </label><br><br>
-
+                        I understand that providing false information is punishable by law.<span class="required">*</span>
+                    </label>
                 </div>
-                <button type="submit">Submit</button>
+
+                <div class="btn-reg">
+                    <button type="submit" class="resgister-bs-btn">Submit</button>
+                </div>
             </form>
         </div>
     </div>

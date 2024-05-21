@@ -1,4 +1,20 @@
-.main-listing{
+/* -- Main dashboard styling cut through services -- */
+.nav-dashboard {
+    height: 70px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    flex-direction: row-reverse;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    position: fixed;
+    top: 0;
+    background-color: black;
+
+
+}
+
+ .main-listing{
     background-color: #E0FBE2;
     height: 100%;
     width: 100%;
@@ -7,20 +23,25 @@
     margin-top: 70px;
     z-index: 1000;
 }
+
 .service-listing{
     width: 64%;
-    height: 100vh;
     background-color: #DDDDDD;
     margin-left: 30%;
+    margin-top: 24px;
+    border-radius: 4px;
 }
+
 .side-nav {
     background-color: #DDDDDD;
     width: 24%;
     height: 100vh;
-    border-radius: 16px;
+    border-radius: 4px;
     position: fixed;
     margin-left: 5%;
 }
+
+
 .cards{
     background-color: red;
     border: 1px solid green;
@@ -40,7 +61,7 @@
 
 
 
-/* ---------------------------------- */
+/* 
 
 .dashboard {
     width: 100%;
@@ -55,20 +76,7 @@
     width: 1000px;
     height: 100%;
 }
-.nav-dashboard{
-    height: 70px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    flex-direction: row-reverse;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-    position: fixed;
-    top: 0;
-    background-color: black;
 
-
-}
 .profile{
     width: 20%;
     height: 100%;
@@ -87,4 +95,4 @@
 }
 .nav-dashboard .profile a{
     text-decoration: none;
-}
+} */
