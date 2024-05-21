@@ -132,9 +132,7 @@
 
                     <div class="mb-3 bs-info">
                         <label for="physical_address" class="form-label">Physical address<span class="required">*</span></label>
-                        <select name="physical_address" class="form-select" id="physical_address">
-                            <option selected></option>
-                        </select>
+                        <input name="physical_address" class="form-control" id="physical_address" placeholder="eg. Mazeras-railways" required>
                     </div>
                     <div class="mb-3 bs-info">
                         <label for="plot_no" class="form-label">Plot No.</label>
@@ -158,10 +156,8 @@
 
                     <div class="mb-3 bs-info">
                         <label for="number_of_employees" class="form-label">Number of employees<span class="required">*</span></label>
-                        <input type="number_of_employees" id="number_of_employees" class="form-control" required
-                            aria-describedby="number_of_employeesHelpBlock">
-                        <div class="form-text">Max 5 characters</div>
-                        <div id="number_of_employeesHelpBlock" class="form-text">Entered: 0 characters.</div>
+                        <input type="number_of_employees" id="number_of_employees" class="form-control" placeholder="eg. 12345" required>
+
                     </div>
                 </div>
 
@@ -181,22 +177,22 @@
                 <!-- owner of business information -->
                 <div class="owner-info">
                     <h4>Onwer's Details</h4>
-                    <div class="mb-3">
+                    <div class="mb-3 own-info">
                         <label for="first_name" class="form-label">First Name <span class="required">*</span></label>
                         <input type="text" id="first_name" class="form-control" required>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 own-info">
                         <label for="last_name" class="form-label">Last Name <span class="required">*</span></label>
                         <input type="text" id="last_name" class="form-control" required>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 own-info">
                         <label for="ID_number" class="form-label">ID No <span class="required">*</span></label>
                         <input type="ID_number" id="ID_number" class="form-control" required>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 own-info">
                         <label for="gender">Gender <span class="required">*</span></label>
                         <select name="gender" id="gender" class="form-select">
                             <option value="" selected></option>
@@ -205,12 +201,12 @@
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 own-info">
                         <label for="designation" class="form-label">Designation<span class="required">*</span></label>
-                        <input type="designation" id="designation" class="form-control" required>
+                        <input type="designation" id="designation" class="form-control" placeholder="eg. Manager" required>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3 own-info">
                         <label for="phone_number" class="form-label">Phone number<span class="required">*</span></label>
                         <input type="phone_number" id="phone_number" class="form-control" required>
                     </div>

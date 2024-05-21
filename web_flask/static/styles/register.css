@@ -21,6 +21,8 @@
 
 .bs-info{
    width: 100%;
+   padding: 16px;
+   border-radius: 16px;
 }
 
 .required{
@@ -44,6 +46,13 @@
 
 .focus-highlight {
    background-color: #FFFF99;
+}
+
+.bs-info input::placeholder,
+ .own-info input::placeholder {
+   color: #999;
+   font-style: italic;
+   font-size: 14px;
 }
 
 #map {
