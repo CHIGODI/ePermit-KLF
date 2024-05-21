@@ -44,7 +44,7 @@ reportlab== 4.2.0
 
 
 # sudo apt install python3-mysqldb # for mysqlclient
-
+# npm install @googlemaps/js-api-loader
 #gunicorn service
 # [Unit]
 # Description=Gunicorn daemon/instance to serve ePermit Web App

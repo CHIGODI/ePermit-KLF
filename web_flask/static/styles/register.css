@@ -47,6 +47,11 @@
 .focus-highlight {
    background-color: #FFFF99;
 }
+.is-ivalid{
+   border: 1px solid #A94442;
+   background-color: white;
+
+}
 
 .position-bs{
    margin: auto auto;
@@ -119,7 +124,7 @@
    margin-bottom: 5%;
 }
 
-.resgister-bs-btn{
+.register-bs-btn{
    padding: 10px 20px;
    font-size: 18px;
    width: 25%;
@@ -130,7 +135,7 @@
    border-radius: 16px;
 }
 
-.resgister-bs-btn:hover{
+.register-bs-btn:hover{
    background-color: green;
    opacity: 90%;
 }
