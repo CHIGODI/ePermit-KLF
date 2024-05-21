@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Main module contains routes to main pages of the Flask app. """
 
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash, g
 from web_flask import main
 from . import token_required
 

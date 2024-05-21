@@ -9,45 +9,6 @@ $(function () {
 
 
     // Registering a business page
-    // Adding a new business location
-    $.ajax({
-        url: "https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap",
-        dataType: "script",
-    });
-
-
-    // submiting business details for registration
-    let form = $('#register-bs');
-    data = form.serialize();
-    console.log(data+ 'heyyyyy');
-    $('#register-bs').submit(function (e) {
-        e.preventDefault();
-
-
-        let form = $(this);
-        console.log(form);
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     $('.form-control').on('input', function () {
         // Find the corresponding form-text element based on the input's aria-describedby attribute
         const ariaDescribedBy = $(this).attr('aria-describedby');
@@ -61,11 +22,11 @@ $(function () {
     });
 
 
-    $('.mb-3 input, .mb-3 textarea, .mb-3 select').focus(function () {
-        $(this).closest('.mb-3').addClass('focus-highlight');
+    $('.mb input, .mb textarea, .mb select').focus(function () {
+        $(this).closest('.mb').addClass('focus-highlight');
     });
-    $('.mb-3 input, .mb-3 textarea, .mb-3 select').blur(function () {
-        $(this).closest('.mb-3').removeClass('focus-highlight');
+    $('.mb input, .mb textarea, .mb select').blur(function () {
+        $(this).closest('.mb').removeClass('focus-highlight');
     });
 
     $('.latitude-dv, .longitude-dv').find('input').focus(function () {
@@ -75,6 +36,82 @@ $(function () {
     $('.latitude-dv, .longitude-dv').find('input').blur(function () {
         $(this).closest('.col').removeClass('focus-highlight');
     });
+
+    // Adding a new business location
+    $.ajax({
+        url: "https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap",
+        dataType: "script",
+    });
+
+
+    // submiting business details for registration
+    $('.').click(function (e) {
+
+        //
+        let business_registration_data = {}
+        let owner_info = {}
+
+
+        let rawBusinessFormData = $(this).serializeArray();
+        let rawOwnerFormData = $(this).serializeArray();
+
+
+        $.each(rawBusinessFormData, function (index, obj) {
+            business_registration_data[obj.name] = obj.value;
+        });
+
+        $.ajax({
+            url: "http://localhost:5003/api/v1/businesses",
+            type: "POST",
+            data: JSON.stringify(business_registration_data),
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error: ", textStatus, errorThrown);  // Log error details
+            }
+        });
+
+        $.each(rawOwnerFormData, function (index, obj) {
+            owner_info[obj.name] = obj.value;
+        });
+
+        $.ajax({
+            url: "http://localhost:5003/api/v1/users",
+            type: "PUT",
+            data: JSON.stringify(owner_info),
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("Error: ", textStatus, errorThrown);  // Log error details
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 });
 
 

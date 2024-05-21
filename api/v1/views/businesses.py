@@ -4,6 +4,8 @@ from api.v1.views import app_views
 from flask import jsonify, request, abort
 from models import storage
 from models.business import Business
+from models.category import Category
+from models.user import User
 
 
 @app_views.route('/businesses', methods=['GET'], strict_slashes=False)
@@ -40,11 +42,21 @@ def create_business():
     business_json = request.get_json()
     if business_json is None:
         abort(400, "Not a JSON")
-    required_fields = ['name', 'entity_origin', 'Certificate_of_Registration_No',
-                       'KRA_pin', 'po_box', 'postal_code', 'business_telephone',
-                       'business_email', 'sub_county', 'ward', 'physical_address',
-                       'activity_code_description', 'latitude', 'longitude',
-                       'number_of_employees', 'user_id', 'category_id']
+
+    # retrieve owner and category based on data from reg form
+    user = storage.get_user_by_email(business_json['owner'])
+    owner = user.id
+    # add the owner and category to the business json
+    business_json['owner'] = owner
+
+    required_fields = ['business_name', 'entity_origin',
+                       'Certificate_of_Registration_No',
+                       'KRA_pin', 'po_box', 'postal_code',
+                       'business_telephone', 'sub_county',
+                       'ward', 'physical_address', 'category',
+                       'number_of_employees', 'latitude','longitude',
+                       'owner']
+
     for field in required_fields:
         if field not in business_json:
             abort(400, f"Missing {field}")

@@ -21,23 +21,24 @@
 
 .bs-info{
    width: 100%;
-   padding: 16px;
+   padding: 12px;
    border-radius: 16px;
+   margin-bottom: 0;
 }
 
 .required{
    color: red;
 }
 
-.mb-3 #businessNameHelpBlock,
-.mb-3 #vatHelpBlock,
-.mb-3 #boxHelpBlock,
-.mb-3 #descriptionHelpBlock
+.mb #businessNameHelpBlock,
+.mb #vatHelpBlock,
+.mb #boxHelpBlock,
+.mb #descriptionHelpBlock
 {
    width: 45%;
    display: inline-block;;
 }
-.mb-3 .form-text {
+.mb .form-text {
    width: 50%;
    margin-right: 5px;
    display: inline-block;
@@ -52,7 +53,7 @@
    background-color: white;
 
 }
-
+/* longitude latitude */
 .position-bs{
    margin: auto auto;
    display: flex;
@@ -61,6 +62,7 @@
    align-items: center;
    gap: 12px;
 }
+
 .latitude-dv,
 .longitude-dv{
    height: 100px;
@@ -69,6 +71,7 @@
 }
 
 .bs-info input::placeholder,
+.bs-info textarea::placeholder,
  .own-info input::placeholder {
    color: #999;
    font-style: italic;
