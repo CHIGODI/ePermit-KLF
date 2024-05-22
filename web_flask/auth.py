@@ -169,7 +169,6 @@ def verify_email():
 
         # Calculate time difference
         time_diff = time_diff_from_now(data.get('timestamp'))
-        print(time_diff)
 
         # if time diff is more that 5 minutes / verification code expired
         if time_diff > 300:

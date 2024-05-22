@@ -64,12 +64,11 @@
 /* ----------services  */
 .service-listing{
     width: 64%;
-
     position: absolute;
     margin-left: 30%;
     margin-top: 24px;
     border-radius: 4px;
-    z-index: 1;
+
 }
 .btn-s{
     padding: 10px 40px;
@@ -126,16 +125,21 @@
     background-color: #e9ecef;
 }
 
+
 .side-nav:hover{
     width: 24%;
 
 }
-.side-nav h5{
-    text-align: center;
-    margin-top: 8px;
+
+.side-nav-h{
+    padding: 12px;
+    border-bottom: 1px solid #34495e;
 }
-.line-d{
-    background-color: #34495e;
+
+.side-nav-h h5{
+    text-decoration: none;
+    color: #34495e;
+    text-align: center;
 }
 
 /* Added this */
@@ -164,15 +168,15 @@
     transition: background-color 0.3s;
 }
 
-.information li p{
+.side-nav a{
+    text-decoration: none;
     margin: 0;
     color: #34495e;
 }
 
-.information li:hover {
+.information li:hover{
     background-color: #d5d9db;
 }
-
 
 .information img {
     width: 30px;
@@ -223,14 +227,6 @@
 /* Tablets (portrait) */
 @media (min-width: 576px) and (max-width: 767.98px) {
 
-    .main-listing{
-        background-color: red;
-    }
-    /* CSS for tablets */
-    .service-listing{
-        width: 100%;
-        background-color: red;
-    }
 }
 
 /* Tablets (landscape) */
