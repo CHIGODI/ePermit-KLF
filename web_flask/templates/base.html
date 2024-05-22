@@ -20,14 +20,12 @@
 <body>
     <nav class="nav text-bg-light p-3 nav-base">
         <div class="logo"></div>
-        <ul class="">
+        <ul class="nav-base-l">
             <li class="quick-l"><a href="{{ url_for('main.landing') }}">Home</a></li>
             <li class="quick-l"><a href="#">Services</a></li>
             <li class="quick-l"><a href="#">FAQs</a></li>
-                <li><a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-success">Login</button></a></li>
+            <li class="quick-l"><a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-success">Login</button></a></li>
         </ul>
-
-
     </nav>
     <section class="main">
         {% block content %}

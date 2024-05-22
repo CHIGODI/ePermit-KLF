@@ -12,54 +12,48 @@
     <script src="https://kit.fontawesome.com/5c143bf368.js" crossorigin="anonymous"></script>
     <script src="../static/scripts/0-epermit.js"></script>
     <link rel="icon" href="../static/images/klf.jpeg" />
-    <title>Landing Page</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <nav class="nav-dashboard">
       <div class="account">
         <i class="fa-regular fa-user"></i>
       </div>
-      <!-- <div class="profile">
-        <i class="fa-regular fa-user"></i>
-        <a href="{{ url_for('auth.logout') }}">
-          <button class="logout">Sign Out<i class="fa-solid fa-right-from-bracket"></i></button>
-        </a>
-      </div> -->
     </nav>
     <section class="main-listing">
       <div class="side-nav">
-        Menu
+        <p>Menu</p>
         <hr>
         <ul class="information">
             <li class="personal-info">
                 <img src="../static/images/profile.png" alt="">
-                <span class="btn-text">Profile</span>
+                <p>Profile</p>
             </li>
         </ul>
 
         <ul class="information">
             <li class="personal-info">
                 <img src="../static/images/profile.png" alt="">
-                <span class="btn-text">My Businesses</span>
+                <p>My Businesses</p>
             </li>
         </ul>
 
         <ul class="information">
             <li class="bills-info">
                 <img src="../static/images/bill.png" alt="">
-                <span class="btn-text">Pending Bills</span>
+                <p>Pending Bills</p>
             </li>
         </ul>
         <ul class="information">
             <li class="permit-info">
               <img src="../static/images/bill.png" alt="">
-              <span class="btn-text">View Permits</span>
+              <p>View Permits</p>
             </li>
         </ul>
         <ul class="information">
             <li class="permit-info">
               <img src="../static/images/bill.png" alt="">
-              <span class="btn-text">Renew Permit</span>
+              <p>Renew Permit</p>
             </li>
         </ul>
 
@@ -68,87 +62,11 @@
               <button class="logout">Sign Out<i class="fa-solid fa-right-from-bracket"></i></button>
             </a>
         </div>
-
       </div>
 
-
-      <!-- main nav -->
-      <div class="service-listing">
-        <!-- card 1 -->
-        <div class="upper">
-          <img src="../static/images/profile.png" alt="">
-          <p>Kilifi County eServices Dashboard <br>
-            Welcome to Kilifi County eServices Portal, gateway to smart services for Kilifi</p>
-        </div>
-        <!-- three cards in one  -->
-        <div class="card-group">
-          <div class="card">
-            <img src="../static/images/card1.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Register Business</h5>
-            <p class="card-text">Get started with your business journey in just a click.
-            </p>
-            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="../static/images/pay.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Pay Bills</h5>
-              <p class="card-text">Having any pending bills? <br>Click here</p>
-              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Pay here</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="../static/images/card2.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">PSV licensing</h5>
-              <p class="card-text">Get started with your business journey in just a click.</p>
-              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
-            </div>
-          </div>
-
-
-        </div>
-
-        <!-- three more cards -->
-        <div class="card-group">
-          <div class="card">
-            <img src="../static/images/card3.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Land registration</h5>
-            <p class="card-text">Get started with your business journey in just a click.
-            </p>
-            <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="../static/images/card4.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Hospital services</h5>
-              <p class="card-text">Get started with your business journey in just a click.</p>
-              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <img src="../static/images/card5.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Book parking</h5>
-              <p class="card-text">Get started with your business journey in just a click.</p>
-              <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
-            </div>
-          </div>
-        </div>
-
-        <!--main nav close  -->
-      </div>
+      <!-- all pages have dashboard structure -->
+      {% block content %}
+      {% endblock %}
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
 </body>
 </html>

@@ -1,0 +1,75 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="service-listing">
+    <!-- card 1 -->
+    <div class="upper">
+        <img src="../static/images/profile.png" alt="">
+        <p>Kilifi County eServices Dashboard <br>
+            Welcome to Kilifi County eServices Portal, gateway to smart services for Kilifi</p>
+    </div>
+    <!-- three cards in one  -->
+    <div class="card-group">
+        <div class="card">
+            <img src="../static/images/card1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Register Business</h5>
+                <p class="card-text">Get started with your business journey in just a click.
+                </p>
+                <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Register</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="../static/images/pay.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Pay Bills</h5>
+                <p class="card-text">Having any pending bills? <br>Click here</p>
+                <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Pay here</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="../static/images/card2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">PSV licensing</h5>
+                <p class="card-text">Get started with your business journey in just a click.</p>
+                <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- three more cards -->
+    <div class="card-group">
+        <div class="card">
+            <img src="../static/images/card3.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Land registration</h5>
+                <p class="card-text">Get started with your business journey in just a click.
+                </p>
+                <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="../static/images/card4.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Hospital services</h5>
+                <p class="card-text">Get started with your business journey in just a click.</p>
+                <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+        </div>
+
+        <div class="card">
+            <img src="../static/images/card5.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Book parking</h5>
+                <p class="card-text">Get started with your business journey in just a click.</p>
+                <a href="{{ url_for('register.register_page') }}" class="btn btn-primary">Coming soon</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

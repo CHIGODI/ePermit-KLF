@@ -26,26 +26,23 @@
     z-index: 10;
 }
 
-
-/* Main  */
 .main-listing{
-    background-color: #E0FBE2;
-    height: 100%;
+    background-color: red;
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: row;
     margin-top: 70px;
-    z-index: 1;
+
 }
 .service-listing{
     width: 64%;
-    /* height: 100vh; */
-    background-color: #DDDDDD;
+    background-color: #f8f9fa;
     position: absolute;
     margin-left: 30%;
     margin-top: 24px;
     border-radius: 4px;
-    z-index: 1; /*added to avoid overlapping*/
+    z-index: 1;
 }
 
 
@@ -88,10 +85,9 @@
 
 
 .side-nav {
-    background-color: #DDDDDD;
+    background-color: #34495e;
     width: 24%;
     height: 100vh;
-    border-radius: 4px;
     position: fixed;
     margin-left: 5%;
 }
@@ -205,4 +201,42 @@
     background-color: rgb(7, 146, 7);
     width: 150px;
 
+}
+
+
+/* Smartphones (portrait) */
+@media (max-width: 575.98px) {
+   .service-listing{
+    width: 100%;
+   }
+
+    /* CSS for smartphones */
+}
+
+/* Tablets (portrait) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    .main-listing{
+        background-color: red;
+    }
+    /* CSS for tablets */
+    .service-listing{
+        width: 100%;
+        background-color: red;
+    }
+}
+
+/* Tablets (landscape) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* CSS for tablets landscape mode */
+}
+
+/* Small desktops/laptops */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* CSS for small desktops/laptops */
+}
+
+/* Large desktops/laptops */
+@media (min-width: 1200px) {
+    /* CSS for large desktops/laptops */
 }

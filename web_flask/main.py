@@ -14,7 +14,7 @@ def landing():
 @token_required('user')
 def dashboard():
     """ User dashboard where normal users can register businesses """
-    return render_template('dashboard.html')
+    return render_template('services.html')
 
 
 @main.route('/admin_dashboard', methods=['GET'], strict_slashes=False)
