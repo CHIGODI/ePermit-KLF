@@ -1,27 +1,30 @@
 // Load this script on all pages
 $(function () {
-    // Authentication scripts
+    apiKey =''
+
+    // Adding a map for location
+    $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=initMap',
+        dataType: "script",
+    });
+
+    // Alert timeouts
     setTimeout(function () {
         $('#flash-message, #flash-form-error').fadeOut('slow', function () {
             $(this).remove();
         });
-    }, 6000);
-
+    }, 8000);
 
     // Registering a business page
+    // counts characters as user fills in register bs
     $('.form-control').on('input', function () {
-        // Find the corresponding form-text element based on the input's aria-describedby attribute
         const ariaDescribedBy = $(this).attr('aria-describedby');
         const charCountElement = $('#' + ariaDescribedBy);
-
-        // Get the current length of the input's value
         const currentLength = $(this).val().length;
-
-        // Update the text of the form-text element with the character count
         charCountElement.text(`Entered: ${currentLength} characters.`);
     });
 
-
+    // Adds light yellow on form focus fields
     $('.mb input, .mb textarea, .mb select').focus(function () {
         $(this).closest('.mb').addClass('focus-highlight');
     });
@@ -37,21 +40,17 @@ $(function () {
         $(this).closest('.col').removeClass('focus-highlight');
     });
 
-    // Adding a new business location
-    $.ajax({
-        url: 'https://maps.googleapis.com/maps/api/js?key='+apiKey+'&callback=initMap',
-        dataType: "script",
-    });
-
-
-
-
     // submiting business details for registration
     $('.register-bs-btn').click(function (e) {
         e.preventDefault();
 
+        $(this).text("Processing...");
+
+        // if required fields are missing show error
         isValid = true;
-        $('.form-business, .form-owner').find('input[required], textarea[required], select[required]').each(function(){
+        $('.form-business, .form-owner').find(
+            'input[required], textarea[required], select[required]').each(
+            function(){
             if ($(this).val() == ''){
                 isValid = false;
                 $(this).addClass('is-invalid')
@@ -60,37 +59,33 @@ $(function () {
             }
         })
 
-        function showAlert(message) {
-            $('#flash-form-error').text(message).show();
+        function showAlert(message, type) {
+            $('#flash-form-error').addClass(type).text(message).show();
         }
 
+        // if missing fields return stop executing
         if (!isValid){
-            showAlert('Please fill out all fields')
+            showAlert('Please fill out all fields','error')
+            $('.register-bs-btn').text("Submit");
             return;
-
         }
 
-
-
+        //check if declarition was checked before submitting to server
         if ($('.declaration').find('input').is(':checked')) {
-
             let business_registration_data = {}
             let owner_info = {}
-
-
             let rawBusinessFormData = $('.form-business').serializeArray();
             let rawOwnerFormData = $('.form-owner').serializeArray();
-
 
             // retrieve business info from form object to be sent to the server
             $.each(rawBusinessFormData, function (index, obj) {
                 business_registration_data[obj.name] = obj.value;
             });
 
+            // retrieve owner info from form object to be sent to server
             $.each(rawOwnerFormData, function (index, obj) {
                 owner_info[obj.name] = obj.value;
             });
-
 
             // send business info to the server
             $.ajax({
@@ -99,16 +94,19 @@ $(function () {
                 data: JSON.stringify(business_registration_data),
                 contentType: "application/json",
                 success: function (data) {
-                    console.log(data);
+                    if (ownerInfoSubmitted) {
+                        ownerInfoSubmitted = true;
+                        window.location.href = "/dashboard";
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error: ", textStatus, errorThrown);  // Log error details
+                    showAlert('Something went wrong!', 'error')
+                    $('.register-bs-btn').text("Submit");;
                 }
             });
 
             // retrieve owner info from form object to be sent to the server
             let user_id = owner_info['owner']
-            Console.log(user_id)
             delete owner_info['owner'];
 
             // send owner info to the server
@@ -118,40 +116,22 @@ $(function () {
                 data: JSON.stringify(owner_info),
                 contentType: "application/json",
                 success: function (data) {
-                    console.log(data);
+                    if (businessInfoSubmitted) {
+                        businessInfoSubmitted = true;
+                        window.location.href = "/dashboard";
+                    }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    console.log("Error: ", textStatus, errorThrown);  // Log error details
+                    showAlert("Something went wrong!", 'error');
+                    $('.register-bs-btn').text("Submit");
                 }
             });
         } else {
-            showAlert("Please accept the declaration to proceed.");
+            showAlert("Please accept the declaration to proceed.", 'error');
+            $('.register-bs-btn').text("Submit");
         }
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
-
 
 // callback function for google maps api
 function initMap() {
