@@ -2,7 +2,7 @@
 $(function () {
     // Authentication scripts
     setTimeout(function () {
-        $('#flash-message').fadeOut('slow', function () {
+        $('#flash-message, #flash-form-error').fadeOut('slow', function () {
             $(this).remove();
         });
     }, 6000);
@@ -39,56 +39,94 @@ $(function () {
 
     // Adding a new business location
     $.ajax({
-        url: "https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap",
+        url: 'https://maps.googleapis.com/maps/api/js?key='+apiKey+'&callback=initMap',
         dataType: "script",
     });
 
 
+
+
     // submiting business details for registration
-    $('.').click(function (e) {
+    $('.register-bs-btn').click(function (e) {
+        e.preventDefault();
 
-        //
-        let business_registration_data = {}
-        let owner_info = {}
-
-
-        let rawBusinessFormData = $(this).serializeArray();
-        let rawOwnerFormData = $(this).serializeArray();
-
-
-        $.each(rawBusinessFormData, function (index, obj) {
-            business_registration_data[obj.name] = obj.value;
-        });
-
-        $.ajax({
-            url: "http://localhost:5003/api/v1/businesses",
-            type: "POST",
-            data: JSON.stringify(business_registration_data),
-            contentType: "application/json",
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error: ", textStatus, errorThrown);  // Log error details
+        isValid = true;
+        $('.form-business, .form-owner').find('input[required], textarea[required], select[required]').each(function(){
+            if ($(this).val() == ''){
+                isValid = false;
+                $(this).addClass('is-invalid')
+            } else{
+                $(this).removeClass('is-invalid')
             }
-        });
+        })
 
-        $.each(rawOwnerFormData, function (index, obj) {
-            owner_info[obj.name] = obj.value;
-        });
+        function showAlert(message) {
+            $('#flash-form-error').text(message).show();
+        }
 
-        $.ajax({
-            url: "http://localhost:5003/api/v1/users",
-            type: "PUT",
-            data: JSON.stringify(owner_info),
-            contentType: "application/json",
-            success: function (data) {
-                console.log(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log("Error: ", textStatus, errorThrown);  // Log error details
-            }
-        });
+        if (!isValid){
+            showAlert('Please fill out all fields')
+            return;
+
+        }
+
+
+
+        if ($('.declaration').find('input').is(':checked')) {
+
+            let business_registration_data = {}
+            let owner_info = {}
+
+
+            let rawBusinessFormData = $('.form-business').serializeArray();
+            let rawOwnerFormData = $('.form-owner').serializeArray();
+
+
+            // retrieve business info from form object to be sent to the server
+            $.each(rawBusinessFormData, function (index, obj) {
+                business_registration_data[obj.name] = obj.value;
+            });
+
+            $.each(rawOwnerFormData, function (index, obj) {
+                owner_info[obj.name] = obj.value;
+            });
+
+
+            // send business info to the server
+            $.ajax({
+                url: "http://localhost:5003/api/v1/businesses",
+                type: "POST",
+                data: JSON.stringify(business_registration_data),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error: ", textStatus, errorThrown);  // Log error details
+                }
+            });
+
+            // retrieve owner info from form object to be sent to the server
+            let user_id = owner_info['owner']
+            Console.log(user_id)
+            delete owner_info['owner'];
+
+            // send owner info to the server
+            $.ajax({
+                url: "http://localhost:5003/api/v1/users/" + user_id,
+                type: "PUT",
+                data: JSON.stringify(owner_info),
+                contentType: "application/json",
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("Error: ", textStatus, errorThrown);  // Log error details
+                }
+            });
+        } else {
+            showAlert("Please accept the declaration to proceed.");
+        }
     });
 
 

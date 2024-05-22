@@ -19,10 +19,15 @@ from . import token_required
 def register_page():
     """ renders the register page"""
     current_user = g.get('current_user')
+    categories = storage.all(Category).values()
+
+    for  category in categories:
+        print(category.id)
     if current_user:
-        email = current_user.email
+        user_id = current_user.id
         return render_template('register.html',
-                               email=email)
+                               user_id=user_id,
+                               categories=categories)
     else:
         flash(f'Something went wrong!', 'error')
         return render_template('dashboard.html')

@@ -143,3 +143,75 @@
    opacity: 90%;
 }
 
+#flash-form-error{
+   background-color: #F2DEDE;
+   color: #A94442;
+   width: 100%;
+   height: 70px;
+   position: fixed;
+   z-index: 1000;
+   left: 36%;
+   top: 56px;
+   display: none;
+   text-align: center;
+}
+
+
+
+/* Smartphones (portrait) */
+@media (max-width: 575.98px) {
+   .service-listing {
+         background-color: red;
+         width: 100vw;
+
+      }         
+   .nav {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+   }
+
+   .side-nav {
+      display: none;
+   }
+
+   #register-bs,
+   .business-info
+   .auth-form-div {
+      width: 100%;
+   }
+
+   /* CSS for smartphones */
+}
+
+/* Tablets (portrait) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+   /* CSS for tablets */
+   .service-listing{
+      background-color: red;
+      width: 100vw;
+   }
+   .side-nav{
+      display: none;
+   }
+   #register-bs,
+   .business-info{
+      width: 100%;
+   }
+
+}
+
+/* Tablets (landscape) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+   /* CSS for tablets landscape mode */
+}
+
+/* Small desktops/laptops */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+   /* CSS for small desktops/laptops */
+}
+
+/* Large desktops/laptops */
+@media (min-width: 1200px) {
+   /* CSS for large desktops/laptops */
+}

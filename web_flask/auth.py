@@ -45,10 +45,10 @@ def token_required(role):
                     return redirect(url_for('auth.login'))
 
             except jwt.ExpiredSignatureError:
-                flash('Token has expired. Please log in again.', 'error')
+                flash('Your Session has expired.', 'error')
                 return redirect(url_for('auth.login'))
             except jwt.InvalidTokenError:
-                flash('Invalid token. Please log in again.', 'error')
+                flash('Invalid token. Please log in.', 'error')
                 return redirect(url_for('auth.login'))
             except Exception as e:
                 flash('Something went wrong. Please try again!', 'error')

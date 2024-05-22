@@ -19,8 +19,9 @@
     <div class="main-listing">
         <div class="side-nav"></div>
         <div class="service-listing">
-            <form class="form-control" id="register-bs">
-                <input type="hidden" name="owner" value="{{ email }}">
+            <div class="flash-error" id="flash-form-error"></div>
+            <form class="form-control form-business" id="register-bs">
+                <input type="hidden" name="owner" value="{{ user_id }}">
                 <div class="business-info">
                     <h4>Business Details</h4>
 
@@ -120,7 +121,18 @@
                     <div class="mb bs-info">
                         <label for="sub_county" class="form-label">Sub county<span class="required">*</span></label>
                         <select name="sub_county" class="form-select" id="sub_county">
-                            <option selected></option>
+                            <option value="" selected></option>
+                            <option value="Chonyi">Chonyi</option>
+                            <option value="Ganze">Ganze</option>
+                            <option value="Kaloleni">Kaloleni</option>
+                            <option value="Kauma">Kauma</option>
+                            <option value="Kilifi North">Kilifi North</option>
+                            <option value="Kilifi South">Kilifi South</option>
+                            <option value="Magarini">Magarini</option>
+                            <option value="Malindi">Malindi</option>
+                            <option value="Marafa">Marafa</option>
+                            <option value="Rabai">Rabai</option>
+                            <option value="Sokoke">Sokoke</option>
                         </select>
                     </div>
 
@@ -128,6 +140,41 @@
                         <label for="ward" class="form-label">Ward<span class="required">*</span></label>
                         <select name="ward" class="form-select" id="ward">
                             <option selected></option>
+                            <option value="Tezo">Tezo</option>
+                            <option value="Sokoni">Sokoni</option>
+                            <option value="Kibarani">Kibarani</option>
+                            <option value="Dabaso">Dabaso</option>
+                            <option value="Matsangoni">Matsangoni</option>
+                            <option value="Watamu">Watamu</option>
+                            <option value="Mnarani">Mnarani</option>
+                            <option value="Junju">Junju</option>
+                            <option value="Mwarakaya">Mwarakaya</option>
+                            <option value="Shimo la Tewa">Shimo la Tewa</option>
+                            <option value="Chasimba">Chasimba</option>
+                            <option value="Mtepeni">Mtepeni</option>
+                            <option value="Mariakani">Mariakani</option>
+                            <option value="Kayafungo">Kayafungo</option>
+                            <option value="Kaloleni">Kaloleni</option>
+                            <option value="Mwanamwinga">Mwanamwinga</option>
+                            <option value="Mwawesa">Mwawesa</option>
+                            <option value="Ruruma">Ruruma</option>
+                            <option value="Jibana">Jibana</option>
+                            <option value="Rabai/Kisurutuni">Rabai/Kisurutuni</option>
+                            <option value="Dungicha">Dungicha</option>
+                            <option value="Bamba">Bamba</option>
+                            <option value="Jaribuni">Jaribuni</option>
+                            <option value="Sokoke">Sokoke</option>
+                            <option value="Jilore">Jilore</option>
+                            <option value="Kakuyuni">Kakuyuni</option>
+                            <option value="Ganda">Ganda</option>
+                            <option value="Malindi Town">Malindi Town</option>
+                            <option value="Shella">Shella</option>
+                            <option value="Maarafa">Maarafa</option>
+                            <option value="Magarini">Magarini</option>
+                            <option value="Gongoni">Gongoni</option>
+                            <option value="Adu">Adu</option>
+                            <option value="Garashi">Garashi</option>
+                            <option value="Sabaki">Sabaki</option>
                         </select>
                     </div>
 
@@ -143,8 +190,9 @@
                     <div class="mb bs-info">
                         <label for="category">Activity code<span class="required">*</span></label>
                         <select id="category" class="form-select" name="category">
+                            <option value="" selected></option>
                             {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
+                            <option value="{{ category.id }}">{{ category.category_name }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -177,11 +225,11 @@
             </form>
 
             <!-- owner of business information -->
-            <form class="form-control " id="register-bs">
+            <form class="form-control form-owner" id="register-bs">
                 <div class="owner-info">
                     <h4>Onwer's Details</h4>
 
-                    <input type="hidden" name="owner" value="{{ email }}">
+                    <input type="hidden" name="owner" value="{{ user_id }}">
 
                     <div class="mb own-info">
                         <label for="first_name" class="form-label">First Name <span class="required">*</span></label>

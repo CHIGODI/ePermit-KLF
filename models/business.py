@@ -13,7 +13,7 @@ class Business(BaseModel, Base):
     business_name = Column(String(64), nullable=False)
     entity_origin = Column(String(20), nullable=False)
     Certificate_of_Registration_No = Column(Integer, nullable=False)
-    KRA_pin = Column(String(60), nullable=False)
+    KRA_pin = Column(String(11), nullable=False)
     vat_no = Column(String(24), nullable=True)
     po_box = Column(Integer, nullable=False)
     postal_code = Column(Integer, nullable=False)

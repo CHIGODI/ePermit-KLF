@@ -43,12 +43,6 @@ def create_business():
     if business_json is None:
         abort(400, "Not a JSON")
 
-    # retrieve owner and category based on data from reg form
-    user = storage.get_user_by_email(business_json['owner'])
-    owner = user.id
-    # add the owner and category to the business json
-    business_json['owner'] = owner
-
     required_fields = ['business_name', 'entity_origin',
                        'Certificate_of_Registration_No',
                        'KRA_pin', 'po_box', 'postal_code',
