@@ -18,59 +18,47 @@
 </head>
 
 <body>
-    <!-- <nav class="nav text-bg-light p-3 nav-base">
-        <div class="logo"></div>
-        <ul class="nav-base-l">
-            <li class="quick-l"><a href="{{ url_for('main.landing') }}">Home</a></li>
-            <li class="quick-l"><a href="#">Services</a></li>
-            <li class="quick-l"><a href="#">FAQs</a></li>
-            <li class="quick-l"><a href="{{ url_for('auth.login') }}"><button type="button" class="btn btn-success">Login</button></a></li>
-        </ul>
-    </nav> -->
-
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container-fluid">
-                <a class="navbar-brand me-auto d-flex align-items-center" href="{{ url_for('main.landing') }}">
-                    <img src="../static/images/klf.jpeg" alt="ePermit Logo" width="30" height="30" />
-                    <span>ePermit</span>
-                </a>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Kilifi e-Permit</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                            <li class="h">
-                                <a class="nav-link mx-lg-2 active" aria-current="page" href="{{ url_for('main.landing') }}">Home</a>
-                            </li>
-                            <li class="nav-item h">
-                                <a class="nav-link mx-lg-2" href="#">About</a>
-                            </li>
-                            <li class="nav-item h">
-                                <a class="nav-link mx-lg-2" href="#">Services</a>
-                            </li>
-                            <li class="nav-item h">
-                                <a class="nav-link mx-lg-2" href="#">FAQs</a>
-                            </li>
-                            <li class="nav-item h">
-                                <a class="nav-link mx-lg-2" href="#">Contact</a>
-                            </li>
-                            <li class="nav-item h">
-                                <a class="nav-link mx-lg-2" href="#">Support</a>
-                            </li>
-                        </ul>
-                    </div>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto d-flex align-items-center" href="{{ url_for('main.landing') }}">
+                <img src="../static/images/klf.jpeg" alt="ePermit Logo" width="30" height="30" />
+                <span>ePermit</span>
+            </a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Kilifi e-Permit</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
-                <a href="{{ url_for('auth.login') }}" class="login-button">Login</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                    aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="h">
+                            <a class="nav-link mx-lg-2 active" aria-current="page" href="{{ url_for('main.landing') }}">Home</a>
+                        </li>
+                        <li class="nav-item h">
+                            <a class="nav-link mx-lg-2" href="#">About</a>
+                        </li>
+                        <li class="nav-item h">
+                            <a class="nav-link mx-lg-2" href="#">Services</a>
+                        </li>
+                        <li class="nav-item h">
+                            <a class="nav-link mx-lg-2" href="#">FAQs</a>
+                        </li>
+                        <li class="nav-item h">
+                            <a class="nav-link mx-lg-2" href="#">Contact</a>
+                        </li>
+                        <li class="nav-item h">
+                            <a class="nav-link mx-lg-2" href="#">Support</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </nav>
-
-
+            <a href="{{ url_for('auth.login') }}" class="login-button">Login</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+    </nav>
     <section class="main">
         {% block content %}
         {% endblock %}

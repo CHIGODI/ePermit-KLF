@@ -160,21 +160,6 @@
 
 /* Smartphones (portrait) */
 @media (max-width: 575.98px) {
-   .main-listing{
-      position: relative;
-   }
-
-   .side-nav{
-      position: absolute;
-      left: 0;
-      width: 50%;
-   }
-   .nav {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-   }
-
    #register-bs,
    .business-info
    .auth-form-div {

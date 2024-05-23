@@ -223,10 +223,6 @@
         color: #ffffff;
 }
 
-
-
-
-
 @media (max-width: 575.98px) {
 
     .auth-form-div{
@@ -268,17 +264,4 @@
         .sign-up {
             margin: 16px auto;
         }
-}
-
-
-
-@media (min-width: 768px) and (max-width: 991.98px) {
-
-}
-
-@media (min-width: 992px) and (max-width: 1199.98px) {
-
-}
-
-@media (min-width: 1200px) {
 }

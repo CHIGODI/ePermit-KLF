@@ -131,6 +131,22 @@ $(function () {
             $('.register-bs-btn').text("Submit");
         }
     });
+
+
+// small screens js
+    if ($(window).width() <= 768) {
+        $('.menu').on('click', function () {
+            let sideNav = $('.side-nav');
+            if (sideNav.css('visibility') === 'hidden') {
+                sideNav.css('visibility', 'visible').css('transition', '0.5s');
+            } else {
+                sideNav.css('visibility', 'hidden').css('transition', '0.5s');
+            }
+        });
+    }
+
+
+
 });
 
 // callback function for google maps api
