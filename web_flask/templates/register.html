@@ -1,170 +1,264 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/styles/register.css">
-    <link rel="stylesheet" href="../static/styles/dashboard.css">
-    <link rel="stylesheet" href="../static/styles/auth_styles.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw&callback=initMap" async defer></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js?"></script>
-    <script src="../static/scripts/0-epermit.js"></script>
-    <link rel="icon" href="../static/images/klf.jpeg" />
-    <title>registration</title>
-</head>
-<body>
-    <nav class="nav"></nav>
-    <div class="dashboard">
-        <div class="side-nav"></div>
-        <div class="main">
-            <form class="form-control" id="register-bs" method="POST" action="/pay">
-                <div class="business-info">
-                    <h4>Business Details</h4>
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="service-listing">
+    <div class="flash-error" id="flash-form-error"></div>
+    <form class="form-control form-business" id="register-bs">
+        <input type="hidden" name="owner" value="{{ user_id }}">
+        <div class="business-info">
+            <h4>Business Details</h4>
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Business Name <span class="required">*</span></label>
-                        <input type="name" id="name" class="form-control" aria-describedby="businessNameHelpBlock">
-                        <div id="charCount" class="form-text">Max 64 characters</div>
-                        <div id="businessNameHelpBlock" class="form-text">Entered: 0 characters.</div>
-                    </div>
+            <div class="mb bs-info">
+                <label for="name" class="form-label">Business Name <span class="required">*</span></label>
+                <input type="name" id="name" class="form-control" name="business_name" aria-describedby="businessNameHelpBlock" required>
+                <div id="charCount" class="form-text">Max 64 characters</div>
+                <div id="businessNameHelpBlock" class="form-text">Entered: 0 characters.</div>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="origin" class="form-label" >Business Entity Origin<span class="required">*</span></label>
-                        <select name="origin" class="form-select" id="origin">
-                            <option selected></option>
-                            <option value="kenyan">Kenyan</option>
-                            <option value="foreigner">Foreigner</option>
-                        </select><br><br>
-                    </div>
+            <div class="mb bs-info">
+                <label for="origin" class="form-label" >Business Entity Origin<span class="required">*</span></label>
+                <select name="entity_origin" class="form-select" id="origin">
+                    <option selected></option>
+                    <option value="kenyan">Kenyan</option>
+                    <option value="foreigner">Foreigner</option>
+                </select>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="KRA_pin" class="form-lable">PIN <span class="required">*</span></label>
-                        <input type="text" id="KRA_pin" class="form-control" required>
-                    </div>
+            <div class="mb bs-info">
+                <label for="Certificate_of_Registration_No" class="form-label">Certificate of Registration No/ID No. <span class="required">*</span></label>
+                <input type="name" id="name" class="form-control" name="Certificate_of_Registration_No" aria-describedby="Certificate_of_Registration_NoHelpBlock" required>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="vat" class="form-label">VAT No.</label>
-                        <input type="vat" id="vat" class="form-control" aria-describedby="vatHelpBlock">
-                        <div class="form-text">Max 20 characters</div>
-                        <div id="vatHelpBlock" class="form-text">Entered: 0 characters.</div>
-                    </div>
+            <div class="mb bs-info">
+                <label for="KRA_pin" class="form-lable">PIN <span class="required">*</span></label>
+                <input type="text" id="KRA_pin" class="form-control" name="KRA_pin" required>
+                <div id="charCount" class="form-text">Enter your valid KRA PIN</div>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="box" class="form-label">P.O BOX <span class="required">*</span></label>
-                        <input type="box" id="box" class="form-control" required aria-describedby="boxHelpBlock">
-                        <div class="form-text">Max 10 characters</div>
-                        <div id="boxHelpBlock" class="form-text">Entered: 0 characters.</div>
-                    </div>
+            <div class="mb bs-info">
+                <label for="vat" class="form-label">VAT No.</label>
+                <input type="vat" id="vat" class="form-control" name="vat_no" placeholder="e.g. IE1234567T" aria-describedby="vatHelpBlock">
+                <div class="form-text">Max 20 characters</div>
+                <div id="vatHelpBlock" class="form-text">Entered: 0 characters.</div>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="postal_code">Postal Code <span class="required">*</span></label>
-                        <select id="postal_ode" class="form-select">
-                            <option value="" selected></option>
-                            <option value="80100">80100 Malindi</option>
-                            <option value="80200">80200 Mambrui</option>
-                            <option value="80300">80300 Watamu</option>
-                            <option value="80400">80400 Gede</option>
-                            <option value="80500">80500 Kilifi</option>
-                            <option value="80600">80600 Mtwapa</option>
-                            <option value="80700">80700 Kanamai</option>
-                            <option value="80800">80800 Kaloleni</option>
-                            <option value="80900">80900 Marafa</option>
-                            <option value="81000">81000 Tezo</option>
-                            <option value="81100">81100 Mariakani</option>
-                            <option value="81200">81200 Rabai</option>
-                            <option value="81300">81300 Kilifi Town</option>
-                            <option value="81400">81400 Mavueni</option>
-                            <option value="81500">81500 Kibaoni</option>
-                            <option value="81600">81600 Shariani</option>
-                            <option value="81700">81700 Junju</option>
-                            <option value="81800">81800 Vipingo</option>
-                            <option value="81900">81900 Pingilikani</option>
-                            <option value="82000">82000 Matsangoni</option>
-                            <option value="82100">82100 Garashi</option>
-                            <option value="82200">82200 Kakuyuni</option>
-                            <option value="82300">82300 Sokoni</option>
-                            <option value="82400">82400 Mbaraka</option>
-                            <option value="82500">82500 Takaungu</option>
-                            <option value="82600">82600 Kilindini</option>
-                            <option value="82700">82700 Gongoni</option>
-                            <option value="82800">82800 Ngala</option>
-                            <option value="82900">82900 Sokoke</option>
-                            <option value="83000">83000 Kipini</option>
-                            <option value="83100">83100 Bamba</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="business_telephone" class="form-label">Business Telephone No.<span class="required">*</span></label>
-                        <input type="business_telephone" id="business_telephone" class="form-control" required>
-                    </div>
+            <div class="mb bs-info">
+                <label for="box" class="form-label">P.O BOX <span class="required">*</span></label>
+                <input type="box" id="box" class="form-control" name="po_box" required aria-describedby="boxHelpBlock">
+                <div class="form-text">Max 10 characters</div>
+                <div id="boxHelpBlock" class="form-text">Entered: 0 characters.</div>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Business Activity description</label>
-                        <textarea id="description" class="form-control" rows="4" cols="50" aria-describedby="descriptionHelpBlock"></textarea>
-                        <div class="form-text">Max 256 characters</div>
-                        <div  id="descriptionHelpBlock" class="form-text">Entered: 0 characters.</div>
-                    </div>
+            <div class="mb bs-info">
+                <label for="postal_code">Postal Code <span class="required">*</span></label>
+                <select id="postal_ode" class="form-select" name="postal_code">
+                    <option value="" selected></option>
+                    <option value="80100">80100 Malindi</option>
+                    <option value="80200">80200 Mambrui</option>
+                    <option value="80300">80300 Watamu</option>
+                    <option value="80400">80400 Gede</option>
+                    <option value="80500">80500 Kilifi</option>
+                    <option value="80600">80600 Mtwapa</option>
+                    <option value="80700">80700 Kanamai</option>
+                    <option value="80800">80800 Kaloleni</option>
+                    <option value="80900">80900 Marafa</option>
+                    <option value="81000">81000 Tezo</option>
+                    <option value="81100">81100 Mariakani</option>
+                    <option value="81200">81200 Rabai</option>
+                    <option value="81300">81300 Kilifi Town</option>
+                    <option value="81400">81400 Mavueni</option>
+                    <option value="81500">81500 Kibaoni</option>
+                    <option value="81600">81600 Shariani</option>
+                    <option value="81700">81700 Junju</option>
+                    <option value="81800">81800 Vipingo</option>
+                    <option value="81900">81900 Pingilikani</option>
+                    <option value="82000">82000 Matsangoni</option>
+                    <option value="82100">82100 Garashi</option>
+                    <option value="82200">82200 Kakuyuni</option>
+                    <option value="82300">82300 Sokoni</option>
+                    <option value="82400">82400 Mbaraka</option>
+                    <option value="82500">82500 Takaungu</option>
+                    <option value="82600">82600 Kilindini</option>
+                    <option value="82700">82700 Gongoni</option>
+                    <option value="82800">82800 Ngala</option>
+                    <option value="82900">82900 Sokoke</option>
+                    <option value="83000">83000 Kipini</option>
+                    <option value="83100">83100 Bamba</option>
+                </select>
+            </div>
 
-                    <div class="mb-3">
-                        <label for="category">Category <span class="required">*</span></label>
-                        <select id="category" class="form-select">
-                            {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                </div>
-                <div id="map"></div>
-                <div class="row">
-                    <div class="col">
-                        <label for="Latitude" class="form-label">Latitude:</label>
-                        <input type="text" id="Latitude" class="form-control"><br><br>
-                    </div>
-                    <div class="col">
-                        <label for="longitude" class="form-label">Longitude:</label>
-                        <input type="text" id="longitude" class="form-control"><br><br>
-                    </div>
-                </div>
-                <div class="owner-info">
-                    <h4>Onwer's Details</h4>
-                    <div class="row">
-                        <div class="col">
-                            <label for="first name" class="form-label">First Name <span class="required">*</span></label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="col">
-                            <label for="first name" class="form-label">Last Name <span class="required">*</span></label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                    </div>
+            <div class="mb bs-info">
+                <label for="business_telephone" class="form-label">Business Telephone No.<span class="required">*</span></label>
+                <input type="business_telephone" id="business_telephone" class="form-control" name="business_telephone" required>
+            </div>
 
+            <div class="mb bs-info">
+                <label for="business_telephone_two" class="form-label">Business Telephone No. 2</label>
+                <input type="business_telephone_two" id="business_telephone_two" class="form-control" name="business_telephone_two">
+            </div>
 
-                    <div class="mb-3">
-                        <label for="ID_number" class="form-label">ID No <span class="required">*</span></label>
-                        <input type="ID_number" id="ID_number" class="form-control" required><br><br>
-                    </div>
+            <div class="mb bs-info">
+                <label for="business_email" class="form-label">Business Email</label>
+                <input type="business_email" id="business_email" class="form-control" name="business_email">
+            </div>
 
-                    <div class="mb-3">
-                        <label for="gender">Gender <span class="required">*</span></label>
-                        <select name="gender" id="gender" class="form-select">
-                            <option value="" selected></option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </div>
+            <div class="mb bs-info">
+                <label for="sub_county" class="form-label">Sub county<span class="required">*</span></label>
+                <select name="sub_county" class="form-select" id="sub_county">
+                    <option value="" selected></option>
+                    <option value="Chonyi">Chonyi</option>
+                    <option value="Ganze">Ganze</option>
+                    <option value="Kaloleni">Kaloleni</option>
+                    <option value="Kauma">Kauma</option>
+                    <option value="Kilifi North">Kilifi North</option>
+                    <option value="Kilifi South">Kilifi South</option>
+                    <option value="Magarini">Magarini</option>
+                    <option value="Malindi">Malindi</option>
+                    <option value="Marafa">Marafa</option>
+                    <option value="Rabai">Rabai</option>
+                    <option value="Sokoke">Sokoke</option>
+                </select>
+            </div>
 
-                    <label for="declaration">Declaration</label><br>
+            <div class="mb bs-info">
+                <label for="ward" class="form-label">Ward<span class="required">*</span></label>
+                <select name="ward" class="form-select" id="ward">
+                    <option selected></option>
+                    <option value="Tezo">Tezo</option>
+                    <option value="Sokoni">Sokoni</option>
+                    <option value="Kibarani">Kibarani</option>
+                    <option value="Dabaso">Dabaso</option>
+                    <option value="Matsangoni">Matsangoni</option>
+                    <option value="Watamu">Watamu</option>
+                    <option value="Mnarani">Mnarani</option>
+                    <option value="Junju">Junju</option>
+                    <option value="Mwarakaya">Mwarakaya</option>
+                    <option value="Shimo la Tewa">Shimo la Tewa</option>
+                    <option value="Chasimba">Chasimba</option>
+                    <option value="Mtepeni">Mtepeni</option>
+                    <option value="Mariakani">Mariakani</option>
+                    <option value="Kayafungo">Kayafungo</option>
+                    <option value="Kaloleni">Kaloleni</option>
+                    <option value="Mwanamwinga">Mwanamwinga</option>
+                    <option value="Mwawesa">Mwawesa</option>
+                    <option value="Ruruma">Ruruma</option>
+                    <option value="Jibana">Jibana</option>
+                    <option value="Rabai/Kisurutuni">Rabai/Kisurutuni</option>
+                    <option value="Dungicha">Dungicha</option>
+                    <option value="Bamba">Bamba</option>
+                    <option value="Jaribuni">Jaribuni</option>
+                    <option value="Sokoke">Sokoke</option>
+                    <option value="Jilore">Jilore</option>
+                    <option value="Kakuyuni">Kakuyuni</option>
+                    <option value="Ganda">Ganda</option>
+                    <option value="Malindi Town">Malindi Town</option>
+                    <option value="Shella">Shella</option>
+                    <option value="Maarafa">Maarafa</option>
+                    <option value="Magarini">Magarini</option>
+                    <option value="Gongoni">Gongoni</option>
+                    <option value="Adu">Adu</option>
+                    <option value="Garashi">Garashi</option>
+                    <option value="Sabaki">Sabaki</option>
+                </select>
+            </div>
 
-                </div>
-                <button type="submit"  class="btn btn-success">Submit</button>
-            </form>
+            <div class="mb bs-info">
+                <label for="physical_address" class="form-label">Physical address<span class="required">*</span></label>
+                <input name="physical_address" class="form-control" id="physical_address" placeholder="eg. Mazeras-railways" required>
+            </div>
+
+            <div class="mb bs-info">
+                <label for="plot_no" class="form-label">Plot No.</label>
+                <input type="plot_no" id="plot_no" class="form-control" name="plot_no" placeholder="eg ABC123">
+            </div>
+
+            <div class="mb bs-info">
+                <label for="category">Activity code<span class="required">*</span></label>
+                <select id="category" class="form-select" name="category">
+                    <option value="" selected></option>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.category_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="mb bs-info">
+                <label for="description" class="form-label">Detailed description</label>
+                <textarea id="detailed_description" class="form-control" rows="4" cols="50" name="detailed_description" placeholder="eg. We sell clothes and shoes"
+                    aria-describedby="descriptionHelpBlock"></textarea>
+                <div class="form-text">Max 256 characters</div>
+                <div  id="descriptionHelpBlock" class="form-text">Entered: 0 characters.</div>
+            </div>
+
+            <div class="mb bs-info">
+                <label for="number_of_employees" class="form-label">Number of employees<span class="required">*</span></label>
+                <input type="number_of_employees" id="number_of_employees" class="form-control" name="number_of_employees" placeholder="eg. 12345" required>
+            </div>
         </div>
+
+        <div id="map"></div>
+
+        <div class="position-bs">
+            <div class="col latitude-dv">
+                <label for="latitude" class="form-label">Latitude:</label>
+                <input type="text" id="latitude" class="form-control" name="latitude"><br><br>
+            </div>
+            <div class="col longitude-dv">
+                <label for="longitude" class="form-label">Longitude:</label>
+                <input type="text" id="longitude" class="form-control" name="longitude"><br><br>
+            </div>
+        </div>
+    </form>
+
+    <!-- owner of business information -->
+    <form class="form-control form-owner" id="register-bs">
+        <div class="owner-info">
+            <h4>Onwer's Details</h4>
+
+            <input type="hidden" name="owner" value="{{ user_id }}">
+
+            <div class="mb own-info">
+                <label for="first_name" class="form-label">First Name <span class="required">*</span></label>
+                <input type="text" id="first_name" class="form-control" name="first_name" required>
+            </div>
+
+            <div class="mb own-info">
+                <label for="last_name" class="form-label">Last Name <span class="required">*</span></label>
+                <input type="text" id="last_name" class="form-control" name="last_name" required>
+            </div>
+
+            <div class="mb own-info">
+                <label for="ID_number" class="form-label">ID No <span class="required">*</span></label>
+                <input type="ID_number" id="ID_number" class="form-control" name="ID_number" required>
+            </div>
+
+            <div class="mb own-info">
+                <label for="gender">Gender <span class="required">*</span></label>
+                <select name="gender" id="gender" class="form-select">
+                    <option value="" selected></option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="mb own-info">
+                <label for="designation" class="form-label">Designation<span class="required">*</span></label>
+                <input type="designation" id="designation" class="form-control" name="designation" placeholder="eg. Manager" required>
+            </div>
+
+            <div class="mb own-info">
+                <label for="phone_number" class="form-label">Phone number<span class="required">*</span></label>
+                <input type="phone_number" id="phone_number" class="form-control" name="phone_number" required>
+            </div>
+
+            <label for="declaration" class="declaration">
+                <input type="checkbox" id="form-declaration" name="declaration" required>
+                I hereby declare that the information provided is true and correct to the best of my knowledge.
+                I understand that providing false information is punishable by law.<span class="required">*</span>
+            </label>
+        </div>
+    </form>
+    <div class="btn-reg">
+        <button type="submit" class="register-bs-btn">Submit</button>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous">
-    </script>
-</body>
-</html>
+</div>
+{% endblock %}

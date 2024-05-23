@@ -1,12 +1,25 @@
 /* ---styling for login and sign-up-------- */
-
 .auth-form-div{
+    margin-top: 32px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.auth-form-div h3 {
+    text-align: center;
+}
+
+.form-auth {
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 80%;
+    height: 100%;
 }
 
 .form-auth input:required:focus:invalid,
@@ -28,11 +41,6 @@
     outline: #A94442;
 }
 
-.auth-form-div h3 {
-    color: green;
-    text-align: center;
-}
-
 .flash-success{
     background-color: #DFF2BF;
     color: #4F8A10;
@@ -49,15 +57,6 @@
     border-radius: 8px;
     margin: 12px;
     text-align: center;
-}
-
-.form-auth{
-    margin: auto auto;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 80%;
-    height: 100%;
 }
 
 .field{
@@ -222,4 +221,47 @@
     background-color: #2196F3;
         /* Vibrant Blue */
         color: #ffffff;
+}
+
+@media (max-width: 575.98px) {
+
+    .auth-form-div{
+        width: 80%;
+        margin-top: 0;
+    }
+    .auth-form-div .title{
+        padding-top: 24px;
+        margin: 0;
+    }
+
+    .form-auth{
+        width: 100%;
+    }
+    .autht,
+    .sign-up{
+        margin: 16px auto;
+    }
+
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+
+    .auth-form-div {
+            width: 80%;
+            margin-top: 0;
+        }
+
+        .auth-form-div .title {
+            padding-top: 24px;
+            margin: 0;
+        }
+
+        .form-auth {
+            width: 100%;
+        }
+
+        .autht,
+        .sign-up {
+            margin: 16px auto;
+        }
 }

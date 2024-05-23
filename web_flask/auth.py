@@ -22,34 +22,40 @@ from models import storage
 load_dotenv()
 
 
-def token_required(func):
+def token_required(role):
     """ Decorator function to check if token is passed """
-    @wraps(func)
-    def decorated(*args, **kwargs):
-        """ Decorator function to check if token is passed """
-        token = request.cookies.get('x-access-token')
-        if not token:
-            flash('Please Login to access!', 'error')
-            return redirect(url_for('auth.login'))
+    def decorator(func):
+        @wraps(func)
+        def decorated(*args, **kwargs):
+            """ Decorator function to check if token is passed """
+            token = request.cookies.get('x-access-token')
+            if not token:
+                flash('Please Login to access!', 'error')
+                return redirect(url_for('auth.login'))
 
-        try:
-            # decoding the payload to fetch the stored details
-            data = jwt.decode(token, getenv('SECRET_KEY'),
-                              algorithms=['HS256'])
-            current_user = storage.get_user_by_id(User, data['id'])
-            g.current_user = current_user
+            try:
+                # decoding the payload to fetch the stored details
+                data = jwt.decode(token, getenv('SECRET_KEY'),
+                                algorithms=['HS256'])
+                current_user = storage.get_obj_by_id(User, data['id'])
+                g.current_user = current_user
 
-        except jwt.ExpiredSignatureError:
-            flash('Token has expired. Please log in again.', 'error')
-            return redirect(url_for('auth.login'))
-        except jwt.InvalidTokenError:
-            flash('Invalid token. Please log in again.', 'error')
-            return redirect(url_for('auth.login'))
-        except Exception as e:
-            flash('Login required !!', 'error')
-            return redirect(url_for('auth.login'))
-        return func(*args, **kwargs)
-    return decorated
+                if not current_user.has_role(role):
+                    flash('You do not have permission to access this resource.', 'error')
+                    return redirect(url_for('auth.login'))
+
+            except jwt.ExpiredSignatureError:
+                flash('Your Session has expired.', 'error')
+                return redirect(url_for('auth.login'))
+            except jwt.InvalidTokenError:
+                flash('Invalid token. Please log in.', 'error')
+                return redirect(url_for('auth.login'))
+            except Exception as e:
+                flash('Something went wrong. Please try again!', 'error')
+                return redirect(url_for('auth.login'))
+            return func(*args, **kwargs)
+        return decorated
+    return decorator
 
 
 @auth.route('/login/', methods=['POST', 'GET'], strict_slashes=False)
@@ -72,10 +78,15 @@ def login():
         if check_password_hash(user.password, auth.get('password')):
             token = jwt.encode({
                 'id': user.id,
-                'exp': datetime.utcnow() + timedelta(minutes=30)
+                'exp': datetime.utcnow() + timedelta(minutes=3600)
             }, getenv('SECRET_KEY'), algorithm='HS256')
 
-            response = make_response(redirect(url_for('main.dashboard')))
+            if user.role == 'Admin':
+                dashboard_route = 'main.admin_dashboard'
+            else:
+                dashboard_route = 'main.dashboard'
+
+            response = make_response(redirect(url_for(dashboard_route)))
 
             # Set HTTP-only cookie
             response.set_cookie('x-access-token', token, httponly=True, max_age=1800)
@@ -158,7 +169,6 @@ def verify_email():
 
         # Calculate time difference
         time_diff = time_diff_from_now(data.get('timestamp'))
-        print(time_diff)
 
         # if time diff is more that 5 minutes / verification code expired
         if time_diff > 300:

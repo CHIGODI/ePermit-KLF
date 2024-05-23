@@ -1,90 +1,173 @@
+// Load this script on all pages
 $(function () {
+    apiKey =''
 
-    // Authentication scripts
-    setTimeout(function () {
-        $('#flash-message').fadeOut('slow', function () {
-            $(this).remove();
-        });
-    }, 6000);
-
-    $('.form-auth').on('submit', function (e) {
-        // Iterate over each input field in the form
-        $(this).find('input').each(function () {
-            if ($(this).val() == '') {
-                $(this).addClass('is-invalid');
-            }
-            if ($(this).val() != '') {
-                $(this).removeClass('is-invalid');
-            }
-        });
+    // Adding a map for location
+    $.ajax({
+        url: 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=initMap',
+        dataType: "script",
     });
 
+    // Alert timeouts
+    setTimeout(function () {
+        $('#flash-message, #flash-form-error').fadeOut('slow', function () {
+            $(this).remove();
+        });
+    }, 8000);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    let apiKey = "AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw";
-    let apiUrl = "https://maps.googleapis.com/maps/api/js?key=" + apiKey + "&callback=initMap";
-
-    let scriptTag = document.createElement('script');
-    scriptTag.async = true;
-    scriptTag.defer = true;
-    scriptTag.src = apiUrl;
-    $('head').append(scriptTag);
-
+    // Registering a business page
+    // counts characters as user fills in register bs
     $('.form-control').on('input', function () {
-        // Find the corresponding form-text element based on the input's aria-describedby attribute
         const ariaDescribedBy = $(this).attr('aria-describedby');
         const charCountElement = $('#' + ariaDescribedBy);
-
-        // Get the current length of the input's value
         const currentLength = $(this).val().length;
-
-        // Update the text of the form-text element with the character count
         charCountElement.text(`Entered: ${currentLength} characters.`);
     });
 
-
-    $('.mb-3 input, .mb-3 text-area, row').focus(function () {
-        $(this).closest('.mb-3').addClass('focus-highlight');
+    // Adds light yellow on form focus fields
+    $('.mb input, .mb textarea, .mb select').focus(function () {
+        $(this).closest('.mb').addClass('focus-highlight');
     });
-    $('.mb-3 input, .mb-3 text-area, .row').blur(function () {
-        $(this).closest('.mb-3').removeClass('focus-highlight');
+    $('.mb input, .mb textarea, .mb select').blur(function () {
+        $(this).closest('.mb').removeClass('focus-highlight');
+    });
+
+    $('.latitude-dv, .longitude-dv').find('input').focus(function () {
+        $(this).closest('.col').addClass('focus-highlight');
+    });
+
+    $('.latitude-dv, .longitude-dv').find('input').blur(function () {
+        $(this).closest('.col').removeClass('focus-highlight');
+    });
+
+    // submiting business details for registration
+    $('.register-bs-btn').click(function (e) {
+        e.preventDefault();
+
+        $(this).text("Processing...");
+
+        // if required fields are missing show error
+        isValid = true;
+        $('.form-business, .form-owner').find(
+            'input[required], textarea[required], select[required]').each(
+            function(){
+            if ($(this).val() == ''){
+                isValid = false;
+                $(this).addClass('is-invalid')
+            } else{
+                $(this).removeClass('is-invalid')
+            }
+        })
+
+        function showAlert(message, type) {
+            $('#flash-form-error').addClass(type).text(message).show();
+        }
+
+        // if missing fields return stop executing
+        if (!isValid){
+            showAlert('Please fill out all fields','error')
+            $('.register-bs-btn').text("Submit");
+            return;
+        }
+
+        //check if declarition was checked before submitting to server
+        if ($('.declaration').find('input').is(':checked')) {
+            let business_registration_data = {}
+            let owner_info = {}
+            let rawBusinessFormData = $('.form-business').serializeArray();
+            let rawOwnerFormData = $('.form-owner').serializeArray();
+
+            // retrieve business info from form object to be sent to the server
+            $.each(rawBusinessFormData, function (index, obj) {
+                business_registration_data[obj.name] = obj.value;
+            });
+
+            // retrieve owner info from form object to be sent to server
+            $.each(rawOwnerFormData, function (index, obj) {
+                owner_info[obj.name] = obj.value;
+            });
+
+            // send business info to the server
+            $.ajax({
+                url: "http://localhost:5003/api/v1/businesses",
+                type: "POST",
+                data: JSON.stringify(business_registration_data),
+                contentType: "application/json",
+                success: function (data) {
+                    if (ownerInfoSubmitted) {
+                        ownerInfoSubmitted = true;
+                        window.location.href = "/dashboard";
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showAlert('Something went wrong!', 'error')
+                    $('.register-bs-btn').text("Submit");;
+                }
+            });
+
+            // retrieve owner info from form object to be sent to the server
+            let user_id = owner_info['owner']
+            delete owner_info['owner'];
+
+            // send owner info to the server
+            $.ajax({
+                url: "http://localhost:5003/api/v1/users/" + user_id,
+                type: "PUT",
+                data: JSON.stringify(owner_info),
+                contentType: "application/json",
+                success: function (data) {
+                    if (businessInfoSubmitted) {
+                        businessInfoSubmitted = true;
+                        window.location.href = "/dashboard";
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showAlert("Something went wrong!", 'error');
+                    $('.register-bs-btn').text("Submit");
+                }
+            });
+        } else {
+            showAlert("Please accept the declaration to proceed.", 'error');
+            $('.register-bs-btn').text("Submit");
+        }
     });
 
 
-
+// small screens js
+    if ($(window).width() <= 768) {
+        $('.menu').on('click', function () {
+            let sideNav = $('.side-nav');
+            if (sideNav.css('visibility') === 'hidden') {
+                sideNav.css('visibility', 'visible').css('transition', '0.5s');
+            } else {
+                sideNav.css('visibility', 'hidden').css('transition', '0.5s');
+            }
+        });
+    }
 
 
 
 });
 
+// callback function for google maps api
 function initMap() {
-    let map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -3.9458, lng: 39.5364 },
-        zoom: 8
+    const mapElement = $("#map").get(0);
+    const map = new google.maps.Map(mapElement, {
+        center: { lat: -3.8825, lng: 39.6211 },
+        disableDefaultUI: true,
+        gestureHandling: "cooperative",
+        mapTypeId: 'hybrid',
+        zoom: 10,
+    });
+
+    map.addListener('click', function (e) {
+        $('.latitude-dv').find('input').val(e.latLng.lat());
+        $('.longitude-dv').find('input').val(e.latLng.lng());
+
+        const marker = new google.maps.Marker({
+            position: { lat: clickedLat, lng: clickedLng },
+            map: map,
+            title: "Clicked Location",
+        });
     });
 }
-

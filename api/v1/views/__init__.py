@@ -6,3 +6,4 @@ from api.v1.views.index import *
 from api.v1.views.users import *
 from api.v1.views.businesses import *
 from api.v1.views.categories import *
+from api.v1.views.create_permit import *

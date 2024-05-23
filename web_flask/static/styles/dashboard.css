@@ -1,90 +1,234 @@
-.main-listing{
-    background-color: #E0FBE2;
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    margin-top: 70px;
-    z-index: 1000;
-}
-.service-listing{
-    width: 64%;
-    height: 100vh;
-    background-color: #DDDDDD;
-    margin-left: 30%;
-}
-.side-nav {
-    background-color: #DDDDDD;
-    width: 24%;
-    height: 100vh;
-    border-radius: 16px;
-    position: fixed;
-    margin-left: 5%;
-}
-.cards{
-    background-color: red;
-    border: 1px solid green;
-    border-top-right-radius: 16px;
-    border-bottom-left-radius: 16px;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* ---------------------------------- */
-
-.dashboard {
-    width: 100%;
-    height: 100%;
-    margin-top: 70px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
-.main{
-    margin: 24px auto;
-    width: 1000px;
-    height: 100%;
-}
+/* -----------------------*/
 .nav-dashboard{
     height: 70px;
     width: 100%;
     display: flex;
     align-items: center;
-    position: sticky;
-    flex-direction: row-reverse;
+    justify-content: space-between;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-    position: fixed;
-    top: 0;
-    background-color: black;
-
-
+    background-color: #34495e;
+    z-index: 10;
 }
-.profile{
-    width: 20%;
-    height: 100%;
+
+.main-listing {
+    background-color: #f8f9fa;
+    margin-top: 70px;
     display: flex;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
 }
-.nav-dashboard .profile .logout{
-    background-color: #333333;
-    color: white;
+
+.side-nav {
+    width: 24%;
+    height: 100vh;
+    margin-left: 5%;
+    background-color: #e9ecef;
+}
+
+.service-listing {
+    width: 64%;
+}
+
+
+.menu{
+    margin-left: 5%;
+    display: none;
+}
+
+.fa-bars {
+    font-size: 24px;
+}
+
+.btn-logout{
+    margin-right: 6%;
+}
+
+.btn-logout:hover{
+    opacity: 80%;
+    cursor: pointer;
+}
+
+.nav-info{
+    width: 80%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.fa-bell{
+    font-size: 20px;
+}
+
+.logout{
+    background-color: #5d6d7e;
+    color: #ecf0f1;
+    outline: none;
+    padding: 4px 8px;
+    font-size: 14px;
     border: none;
     border-radius: 8px;
-    font-size: 16px;
-    padding: 8px 16px;
 }
-.nav-dashboard .profile a{
+
+
+.btn-s{
+    padding: 10px 40px;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    background-color: #4682B4;
+}
+
+.upper img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.upper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 20px;
+    background-color: #E0FBE2;
+    border-radius: 8px;
+    margin: 30px;
+    overflow: hidden; /* Ensure content doesn't overflow */
+}
+
+.upper img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 60px;
+}
+
+.upper p {
+    animation: popFade 3s ease-in-out infinite; /* Apply animation */
+    font-size: 18px;
+    color: #333;
+    margin: 0;
+}
+
+.side-nav-h{
+    padding: 12px;
+    border-bottom: 1px solid #34495e;
+}
+
+.side-nav-h h5{
     text-decoration: none;
+    color: #34495e;
+    text-align: center;
+}
+
+/* Added this */
+.information {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.side-nav .information {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 5px 0; /* Bottom margin to separate lists */
+}
+.information li {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 8px;
+    gap: 6px;
+    margin: auto auto;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.side-nav a{
+    text-decoration: none;
+    margin: 0;
+    color: #34495e;
+}
+
+.information li:hover{
+    background-color: #d5d9db;
+}
+
+.information img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+    transition: margin 0.3s;
+}
+
+.information-btn{
+    margin-top: 50%;
+    display: none;
+}
+
+.personal-info, .business-information, .bills-info, .permit-info{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+    font-size: 18px;
+}
+
+.card-group {
+    margin: 16px;
+}
+
+.card {
+    margin: 32px 24px;
+
+}
+
+.card a {
+    text-decoration: none;
+    background-color: rgb(7, 146, 7);
+    width: 150px;
+
+}
+
+
+/* Smartphones (portrait) */
+@media (max-width: 768px) {
+
+    .main-listing {
+        width: 100vw;
+        position: relative;
+    }
+
+    .side-nav {
+        position: absolute;
+        width: 50%;
+        left: -5%;
+        z-index: 2;
+        visibility: hidden;
+    }
+
+    .service-listing{
+        width: 100%;
+        z-index: 0;
+    }
+
+    .upper{
+        flex-direction: column;
+    }
+
+    .upper img{
+       display: none;
+    }
+    .menu{
+        display: block;
+    }
+
+    .btn-logout{
+        display: none;
+    }
+    .nav-info{
+        background-color: red;
+        width: 20%;
+    }
+    /* CSS for smartphones */
 }

@@ -8,7 +8,11 @@ from flask_mail import Mail
 from models import storage
 from os import getenv
 from web_flask import auth, register, main
+import uuid
+
 load_dotenv()
+
+cache_id = uuid.uuid4()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = getenv('SECRET_KEY')
@@ -19,7 +23,7 @@ app.config['MAIL_SERVER'] = getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = int(getenv('MAIL_PORT'))
 app.config['MAIL_USE_TLS'] = getenv('MAIL_USE_TLS')
 app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD') 
+app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
 
 # Initialise mail service
 mail = Mail(app)
@@ -39,4 +43,4 @@ def close_session(exception):
 
 if __name__ == '__main__':
     """ Runs the Flask app."""
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True)

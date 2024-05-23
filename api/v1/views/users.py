@@ -54,7 +54,7 @@ def create_user():
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
 def update_user(user_id):
     """ method that updates a user """
-    user = storage.get(User, user_id)
+    user = storage.get_obj_by_id(User, user_id)
     if user is None:
         abort(404)
     user_json = request.get_json()

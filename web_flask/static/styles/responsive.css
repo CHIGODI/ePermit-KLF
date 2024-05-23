@@ -1,11 +1,6 @@
 /* Smartphones (portrait) */
 @media (max-width: 575.98px) {
-    .nav {
-        display: none;
-        flex-direction: column;
-        align-items: center;
-    }
-    /* CSS for smartphones */
+
 }
 
 /* Tablets (portrait) */

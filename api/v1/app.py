@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """ Module for the API """
 from flask import Flask, jsonify
 from api.v1.views import app_views
@@ -9,7 +9,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(app_views) # Register the blueprint
-CORS(app, resources={r"/*": {"origins": "0.0.0.0"}}) # Enable CORS
+CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS
 
 
 #This that closes the db session
@@ -28,5 +28,5 @@ def not_found(error):
 
 if __name__ == "__main__":
     host = getenv("EPERMIT_API_HOST", "0.0.0.0")
-    port = getenv("EPERMIT_API_PORT", 5000)
+    port = getenv("EPERMIT_API_PORT", 5003)
     app.run(host=host, port=port, threaded=True, debug=True)

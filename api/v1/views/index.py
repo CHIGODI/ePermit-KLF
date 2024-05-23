@@ -18,7 +18,8 @@ def stats():
     from models import storage
     count_stats = {"user": storage.count("User"),
                "business": storage.count("Business"),
-               "category": storage.count("Category")
+               "category": storage.count("Category"),
+               "permit": storage.count("Permit"),
                }
 
     return jsonify(count_stats)
