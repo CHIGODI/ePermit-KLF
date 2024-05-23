@@ -29,3 +29,40 @@ def admin_dashboard():
 def comingsoon():
     """ These renders a page for all services that are currently not available"""
     return render_template('coming_soon.html')
+
+
+
+# Adding User profile page for dashboard
+@main.route('/profile', methods=['GET'], strict_slashes=False)
+@token_required('user')
+def user_profile():
+    """ User profile page """
+    return render_template('profile.html')
+
+# Adding my businesses page for dashboard
+@main.route('/mybusinesses', methods=['GET'], strict_slashes=False)
+@token_required('user')
+def user_businesses():
+    """ User profile page """
+    return render_template('mybusinesses.html')
+
+# Adding bills page for dashboard
+@main.route('/bills', methods=['GET'], strict_slashes=False)
+@token_required('user')
+def user_bills():
+    """ User profile page """
+    return render_template('bills.html')
+
+# Adding permits page for dashboard
+@main.route('/permits', methods=['GET'], strict_slashes=False)
+@token_required('user')
+def user_permits():
+    """ User profile page """
+    return render_template('permits.html')
+
+# adding renew permit
+@main.route('/renewpermit', methods=['GET'], strict_slashes=False)
+@token_required('user')
+def renew_permit():
+    """ User profile page """
+    return render_template('renewpermit.html')

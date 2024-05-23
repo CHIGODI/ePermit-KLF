@@ -34,7 +34,7 @@
   </nav>
   <section class="main-listing">
     <div class="side-nav">
-      <a href="#">
+      <a href="{{ url_for('main.dashboard') }}">
         <div class="side-nav-h">
           <h5>Dashboard</h5>
         </div>
@@ -42,33 +42,33 @@
       <ul class="information">
         <li class="personal-info">
           <i class="fa-solid fa-user"></i>
-          <a href="#">Profile</a>
+          <a href="{{ url_for('main.user_profile') }}">Profile</a>
         </li>
       </ul>
 
       <ul class="information">
         <li class="personal-info">
           <i class="fa-solid fa-briefcase"></i>
-          <a href="#">My Businesses</a>
+          <a href="{{ url_for('main.user_businesses') }}">My Businesses</a>
         </li>
       </ul>
 
       <ul class="information">
         <li class="bills-info">
           <i class="fa-solid fa-money-bills"></i>
-          <a href="#">Pending Bills</a>
+          <a href="{{ url_for('main.user_bills') }}">Pending Bills</a>
         </li>
       </ul>
       <ul class="information">
         <li class="permit-info">
           <i class="fa-solid fa-certificate"></i>
-          <a href="#">View Permits</a>
+          <a href="{{ url_for('main.user_permits') }}">View Permits</a>
         </li>
       </ul>
       <ul class="information">
         <li class="permit-info">
           <i class="fa-solid fa-stamp"></i>
-          <a href="">Renew Permit</a>
+          <a href="{{ url_for('main.renew_permit') }}">Renew Permit</a>
         </li>
       </ul>
 
