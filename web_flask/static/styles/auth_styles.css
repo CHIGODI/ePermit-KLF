@@ -225,9 +225,14 @@
 
 @media (max-width: 575.98px) {
 
+    .login-button{
+        visibility: hidden;
+    }
+
     .auth-form-div{
-        width: 80%;
+        width: 100%;
         margin-top: 0;
+        box-shadow: none;
     }
     .auth-form-div .title{
         padding-top: 24px;

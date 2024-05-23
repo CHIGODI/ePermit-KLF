@@ -140,12 +140,12 @@ $(function () {
             if (sideNav.css('width') === '0px') {
                 sideNav.css({
                     'width': '60%',
-                    'transition': 'width 0.5s'
+                    'transition': 'width 0.5s ease'
                 });
             } else {
                 sideNav.css({
                     'width': '0',
-                    'transition': 'width 0.5s,'
+                    'transition': 'width 0.5s ease'
                 });
             }
         });

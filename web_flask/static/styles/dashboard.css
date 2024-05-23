@@ -20,14 +20,18 @@
 }
 
 .side-nav {
+    position: fixed;
     width: 24%;
     height: 100vh;
     margin-left: 5%;
     background-color: #e9ecef;
+    z-index: 2;
 }
 
 .service-listing {
     width: 64%;
+    z-index: 0;
+    margin-left: 29%;
 }
 
 
@@ -169,7 +173,7 @@
 
 .information-btn{
     margin-top: 50%;
-    display: none;
+    visibility: hidden;
 }
 
 .personal-info, .business-information, .bills-info, .permit-info{
@@ -208,16 +212,17 @@
     }
 
     .side-nav {
-        position: fixed;
         overflow: hidden;
         width: 0;
         left: -5%;
         z-index: 2;
+        white-space: nowrap;
     }
 
     .service-listing{
         width: 100%;
         z-index: 0;
+        margin: auto auto;
     }
 
     .upper{
@@ -237,6 +242,16 @@
     .nav-info{
         margin-right: 20px;
         width: 20%;
+    }
+
+    .information-btn{
+        visibility: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .fa-right-from-bracket{
+        padding: 4px;
     }
 
     /* CSS for smartphones */
