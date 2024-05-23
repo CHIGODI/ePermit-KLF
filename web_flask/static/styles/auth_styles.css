@@ -1,15 +1,15 @@
 /* ---styling for login and sign-up-------- */
 .auth-form-div{
+    margin-top: 32px;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 100%;
+    width: 50%;
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .auth-form-div h3 {
-    color: green;
     text-align: center;
 }
 
@@ -228,38 +228,46 @@
 
 
 @media (max-width: 575.98px) {
-    .nav-base{
-        background-color: blue;
-    }
-    .main {
-            width: 100vw;
-    }
 
     .auth-form-div{
-        margin-top: 50px;
+        width: 80%;
+        margin-top: 0;
+    }
+    .auth-form-div .title{
+        padding-top: 24px;
+        margin: 0;
     }
 
     .form-auth{
         width: 100%;
-        height: 450px;
+    }
+    .autht,
+    .sign-up{
+        margin: 16px auto;
     }
 
 }
 
 @media (min-width: 576px) and (max-width: 767.98px) {
 
-    .main {
-        width: 100vw;
-    }
-
     .auth-form-div {
-        margin-top: 50px;
-    }
+            width: 80%;
+            margin-top: 0;
+        }
 
-    .form-auth {
-        width: 100%;
-        height: 500px;
-    }
+        .auth-form-div .title {
+            padding-top: 24px;
+            margin: 0;
+        }
+
+        .form-auth {
+            width: 100%;
+        }
+
+        .autht,
+        .sign-up {
+            margin: 16px auto;
+        }
 }
 
 
