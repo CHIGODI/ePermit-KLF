@@ -6,7 +6,9 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-    background-color: #34495e;
+    /* background-color: #34495e;
+     */
+     background-color: darkgreen;
     z-index: 10;
 }
 
@@ -36,6 +38,12 @@
 
 .fa-bars {
     font-size: 24px;
+    color: #CCCCCC;
+}
+
+.fa-bars:hover{
+    cursor: pointer;
+
 }
 
 .btn-logout{
@@ -55,6 +63,7 @@
 
 .fa-bell{
     font-size: 20px;
+    color: #CCCCCC;
 }
 
 .logout{
@@ -87,7 +96,8 @@
     align-items: center;
     justify-content: start;
     padding: 20px;
-    background-color: #E0FBE2;
+    /* background-color: #E0FBE2; */
+    background-color: #1E90FF;
     border-radius: 8px;
     margin: 30px;
     overflow: hidden; /* Ensure content doesn't overflow */
@@ -103,7 +113,9 @@
 .upper p {
     animation: popFade 3s ease-in-out infinite; /* Apply animation */
     font-size: 18px;
-    color: #333;
+    /* color: #333;
+     */
+    color: #F5F5DC;
     margin: 0;
 }
 
@@ -154,13 +166,6 @@
     background-color: #d5d9db;
 }
 
-.information img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-    transition: margin 0.3s;
-}
 
 .information-btn{
     margin-top: 50%;
@@ -194,17 +199,20 @@
 /* Smartphones (portrait) */
 @media (max-width: 768px) {
 
+    .nav-dashboard{
+        width: 100vw;
+    }
     .main-listing {
         width: 100vw;
         position: relative;
     }
 
     .side-nav {
-        position: absolute;
-        width: 50%;
+        position: fixed;
+        overflow: hidden;
+        width: 0;
         left: -5%;
         z-index: 2;
-        visibility: hidden;
     }
 
     .service-listing{
@@ -227,8 +235,9 @@
         display: none;
     }
     .nav-info{
-        background-color: red;
+        margin-right: 20px;
         width: 20%;
     }
+
     /* CSS for smartphones */
 }

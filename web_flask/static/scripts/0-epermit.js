@@ -137,10 +137,16 @@ $(function () {
     if ($(window).width() <= 768) {
         $('.menu').on('click', function () {
             let sideNav = $('.side-nav');
-            if (sideNav.css('visibility') === 'hidden') {
-                sideNav.css('visibility', 'visible').css('transition', '0.5s');
+            if (sideNav.css('width') === '0px') {
+                sideNav.css({
+                    'width': '60%',
+                    'transition': 'width 0.5s'
+                });
             } else {
-                sideNav.css('visibility', 'hidden').css('transition', '0.5s');
+                sideNav.css({
+                    'width': '0',
+                    'transition': 'width 0.5s,'
+                });
             }
         });
     }
