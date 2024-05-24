@@ -210,7 +210,6 @@
         width: 100vw;
         position: relative;
     }
-
     .side-nav {
         overflow: hidden;
         width: 0;
@@ -218,13 +217,12 @@
         z-index: 2;
         white-space: nowrap;
     }
-
     .service-listing{
-        width: 100%;
+        width: 100vw;
         z-index: 0;
         margin: auto auto;
+        background-color: white;
     }
-
     .upper{
         flex-direction: column;
     }
@@ -232,8 +230,15 @@
     .upper img{
        display: none;
     }
+
     .menu{
         display: block;
+    }
+
+    .menu :hover{
+        cursor: pointer;
+        border: 1px solid #CCCCCC;
+        border-radius: 4px;
     }
 
     .btn-logout{
@@ -249,7 +254,9 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 50%;
     }
+
     .fa-right-from-bracket{
         padding: 4px;
     }

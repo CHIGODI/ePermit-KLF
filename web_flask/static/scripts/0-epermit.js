@@ -149,6 +149,16 @@ $(function () {
                 });
             }
         });
+
+        $(window).on('click', function (e) {
+            // Check if the click is outside of the menu and the side-nav
+            if (!$(e.target).closest('.menu').length && !$(e.target).closest('.side-nav').length) {
+                $('.side-nav').css({
+                    'width': '0',
+                    'transition': 'width 0.5s ease'
+                });
+            }
+        });
     }
 
 

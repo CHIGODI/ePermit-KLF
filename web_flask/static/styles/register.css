@@ -159,37 +159,32 @@
 
 
 /* Smartphones (portrait) */
-@media (max-width: 575.98px) {
+@media (max-width: 768px) {
+
    #register-bs,
    .business-info
    .auth-form-div {
       width: 100%;
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
+   }
+
+   .mb {
+      width: 100vw;
+   }
+
+   .own-info{
+      margin: auto auto;
+      width: 100%;
+      border-radius: none;
+   }
+   .owner-info{
+      width: 100%;
+   }
+   .btn-reg .register-bs-btn{
+      width: 80%;
    }
 
    /* CSS for smartphones */
-}
-
-/* Tablets (portrait) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-   /* CSS for tablets */
-   #register-bs,
-   .business-info{
-      width: 100%;
-   }
-
-}
-
-/* Tablets (landscape) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-   /* CSS for tablets landscape mode */
-}
-
-/* Small desktops/laptops */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-   /* CSS for small desktops/laptops */
-}
-
-/* Large desktops/laptops */
-@media (min-width: 1200px) {
-   /* CSS for large desktops/laptops */
 }
