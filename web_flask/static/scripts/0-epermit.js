@@ -44,10 +44,13 @@ $(function () {
     $('.register-bs-btn').click(function (e) {
         e.preventDefault();
 
+
+        console.log($('.form-owner').serializeArray())
+        console.log($('.form-business').serializeArray())
         $(this).text("Processing...");
 
         // if required fields are missing show error
-        isValid = true;
+        let isValid = true;
         $('.form-business, .form-owner').find(
             'input[required], textarea[required], select[required]').each(
             function(){
@@ -87,6 +90,8 @@ $(function () {
                 owner_info[obj.name] = obj.value;
             });
 
+            let ownerInfoSubmitted = false;
+            let businessInfoSubmitted = false;
             // send business info to the server
             $.ajax({
                 url: "http://localhost:5003/api/v1/businesses",
@@ -94,14 +99,17 @@ $(function () {
                 data: JSON.stringify(business_registration_data),
                 contentType: "application/json",
                 success: function (data) {
+                    businessInfoSubmitted = true;
                     if (ownerInfoSubmitted) {
-                        ownerInfoSubmitted = true;
-                        window.location.href = "/dashboard";
+                        $('.register-bs-btn').text("Submit");
+                        showAlert("Successfully submited!!", 'success');
+                        window.location.href = "http://127.0.0.1:5001/dashboard";
                     }
+
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showAlert('Something went wrong!', 'error')
-                    $('.register-bs-btn').text("Submit");;
+                    $('.register-bs-btn').text("Submit");
                 }
             });
 
@@ -116,9 +124,11 @@ $(function () {
                 data: JSON.stringify(owner_info),
                 contentType: "application/json",
                 success: function (data) {
+                    ownerInfoSubmitted = true;
                     if (businessInfoSubmitted) {
-                        businessInfoSubmitted = true;
-                        window.location.href = "/dashboard";
+                        $('.register-bs-btn').text("Submit");
+                        showAlert("Successfully submited!!", 'success');
+                        window.location.href = "http://127.0.0.1:5001/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
