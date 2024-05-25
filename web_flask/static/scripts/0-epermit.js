@@ -10,10 +10,21 @@ $(function () {
 
     // Alert timeouts
     setTimeout(function () {
-        $('#flash-message, #flash-form-error').fadeOut('slow', function () {
-            $(this).remove();
+        $('#flash-message').fadeOut('slow', function () {
+            $(this).hide();
         });
     }, 8000);
+    function fadeOut(className) {
+        setTimeout(function () {
+            $('.' + className).fadeOut('slow', function () {
+                $(this).hide();
+            });
+        }, 5000);
+    }
+    function showAlert(message, type) {
+        $('#flash-form-error').addClass(type).text(message).css({ 'padding-top': '18px' }).show();
+    }
+// ------------------------------------------------------------------------
 
     // Registering a business page
     // counts characters as user fills in register bs
@@ -44,9 +55,6 @@ $(function () {
     $('.register-bs-btn').click(function (e) {
         e.preventDefault();
 
-
-        console.log($('.form-owner').serializeArray())
-        console.log($('.form-business').serializeArray())
         $(this).text("Processing...");
 
         // if required fields are missing show error
@@ -62,13 +70,10 @@ $(function () {
             }
         })
 
-        function showAlert(message, type) {
-            $('#flash-form-error').addClass(type).text(message).show();
-        }
-
         // if missing fields return stop executing
         if (!isValid){
             showAlert('Please fill out all fields','error')
+            fadeOut('flash-msg')
             $('.register-bs-btn').text("Submit");
             return;
         }
@@ -103,17 +108,18 @@ $(function () {
                     if (ownerInfoSubmitted) {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success');
+                        fadeOut('.flash-msg')
                         window.location.href = "http://127.0.0.1:5001/dashboard";
                     }
-
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showAlert('Something went wrong!', 'error')
+                    fadeOut('flash-msg')
                     $('.register-bs-btn').text("Submit");
                 }
             });
 
-            // retrieve owner info from form object to be sent to the server
+            // // retrieve owner info from form object to be sent to the server
             let user_id = owner_info['owner']
             delete owner_info['owner'];
 
@@ -128,16 +134,19 @@ $(function () {
                     if (businessInfoSubmitted) {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success');
+                        fadeOut('flash-msg')
                         window.location.href = "http://127.0.0.1:5001/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showAlert("Something went wrong!", 'error');
+                    fadeOut('flash-msg');
                     $('.register-bs-btn').text("Submit");
                 }
             });
         } else {
             showAlert("Please accept the declaration to proceed.", 'error');
+            fadeOut('flash-msg');
             $('.register-bs-btn').text("Submit");
         }
     });
@@ -170,9 +179,6 @@ $(function () {
             }
         });
     }
-
-
-
 });
 
 // callback function for google maps api
@@ -191,7 +197,7 @@ function initMap() {
         $('.longitude-dv').find('input').val(e.latLng.lng());
 
         const marker = new google.maps.Marker({
-            position: { lat: clickedLat, lng: clickedLng },
+            position: e.latLng,
             map: map,
             title: "Clicked Location",
         });
