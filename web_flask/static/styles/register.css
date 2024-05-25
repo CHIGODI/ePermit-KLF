@@ -144,8 +144,6 @@
 }
 
 #flash-form-error {
-   background-color: #F2DEDE;
-   color: #A94442;
    height: 70px;
    position: fixed;
    text-align: center;

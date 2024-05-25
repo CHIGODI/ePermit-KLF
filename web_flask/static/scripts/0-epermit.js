@@ -19,7 +19,7 @@ $(function () {
             $('.' + className).fadeOut('slow', function () {
                 $(this).hide();
             });
-        }, 5000);
+        }, 8000);
     }
     function showAlert(message, type) {
         $('#flash-form-error').addClass(type).text(message).css({ 'padding-top': '18px' }).show();
