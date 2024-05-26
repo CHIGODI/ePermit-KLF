@@ -31,23 +31,20 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                        <li class="h">
+                        <li class="nav-item h">
                             <a class="nav-link mx-lg-2 active" aria-current="page" href="{{ url_for('main.landing') }}">Home</a>
                         </li>
                         <li class="nav-item h">
-                            <a class="nav-link mx-lg-2" href="#">About</a>
+                            <a class="nav-link mx-lg-2" href="#services">Services</a>
                         </li>
                         <li class="nav-item h">
-                            <a class="nav-link mx-lg-2" href="#">Services</a>
+                            <a class="nav-link mx-lg-2" href="#faq">FAQs</a>
                         </li>
                         <li class="nav-item h">
-                            <a class="nav-link mx-lg-2" href="#">FAQs</a>
+                            <a class="nav-link mx-lg-2" href="#footer">Contact</a>
                         </li>
                         <li class="nav-item h">
-                            <a class="nav-link mx-lg-2" href="#">Contact</a>
-                        </li>
-                        <li class="nav-item h">
-                            <a class="nav-link mx-lg-2" href="#">Support</a>
+                            <a class="nav-link mx-lg-2" href="#footer">Support</a>
                         </li>
                     </ul>
                 </div>
@@ -63,6 +60,7 @@
         {% block content %}
         {% endblock %}
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 </body>
 
 </html>

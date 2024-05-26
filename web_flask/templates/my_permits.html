@@ -1,0 +1,9 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="dashboard-pages">
+    {% for permit in permits %}
+        <p>{{ permit.permit_no }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "dashboard.html" %}
+{% block content %}
+<div class="dashboard-pages">
+    {% for business in businesses %}
+        <table>
+            <tr>
+                <td>{{ business.business_name }}</td>
+                {% if business.verified %}
+                    <td>Verified</td>
+                {% else %}
+                    <td>Not Verified</td>
+                {% endif %}
+            </tr>
+        </table>
+    {% endfor %}
+</div>
+
+{% endblock %}
