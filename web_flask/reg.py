@@ -32,7 +32,7 @@ def register_page():
 
 
 @register.route('/pay/', methods=['GET'], strict_slashes=False)
-@token_required('user')
+# @token_required('user')
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     return render_template('payment.html')

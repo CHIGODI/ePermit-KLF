@@ -2,7 +2,7 @@
 """ Module for registering businesses. """
 
 from datetime import datetime
-from flask import request, render_template
+from flask import request, render_template, jsonify
 import requests
 import json
 from models.user import User
@@ -14,8 +14,6 @@ from base64 import b64encode
 from requests.auth import HTTPBasicAuth
 from api.v1.views import app_views
 
-
-cache_id = uuid.uuid4()
 
 
 # get access token to work with daraja API
@@ -30,7 +28,7 @@ def get_access_token(consumer_key, consumer_secret):
         return None
 
 
-@app_views.route('/pay/', methods=['POST'], strict_slashes=False)
+@app_views.route('/pay', methods=['POST'], strict_slashes=False)
 # @token_required
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
@@ -55,7 +53,7 @@ def mpesa_express():
         "PartyA": phone_number,
         "PartyB": 174379,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://1003-102-166-221-241.ngrok-free.app/callback",
+        "CallBackURL": "https://epermit.live/callback",
         "AccountReference": "CompanyXLTD",
         "TransactionDesc": "Payment of X"
         }
@@ -63,10 +61,11 @@ def mpesa_express():
         response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
         return response.json()
 
+
 @app_views.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
     print('imeingia mpya before')
     data = request.data
     print(data)
-    return render_template('payment.html', cache_id=cache_id)
+    return jsonify({"status": "OK"})
