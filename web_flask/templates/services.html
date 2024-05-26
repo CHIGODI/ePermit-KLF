@@ -1,12 +1,10 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="service-listing">
-    <!-- card 1 -->
     <div class="upper">
         <img src="../static/images/profile.png" alt="">
         <p>Kilifi County eServices Dashboard Welcome to Kilifi County eServices Portal, gateway to smart services for Kilifi</p>
     </div>
-    <!-- three cards in one  -->
     <div class="card-group">
         <div class="card">
             <img src="../static/images/card1.jpg" class="card-img-top" alt="...">
@@ -14,16 +12,16 @@
                 <h5 class="card-title">Register Business</h5>
                 <p class="card-text">Get started with your business journey in just a click.
                 </p>
-                <a href="{{ url_for('register.register_page') }}"><button  class="btn-s">Register</button></a>
+                <a href="{{ url_for('register.register_page') }}"><button  class="btn-s">Go to service</button></a>
             </div>
         </div>
 
         <div class="card">
             <img src="../static/images/pay.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Pay Bills</h5>
-                <p class="card-text">Having any pending bills? <br>Click here</p>
-                <a href="{{ url_for('register.register_page') }}"><button class="btn-s">Register</button></a>
+                <h5 class="card-title">Renew Business Permit</h5>
+                <p class="card-text">Stay compliant and renew your business permit hassle-free.</p>
+                <a href="{{ url_for('register.register_page') }}"><button class="btn-s">Go to service</button></a>
             </div>
         </div>
 
@@ -32,31 +30,27 @@
             <div class="card-body">
                 <h5 class="card-title">PSV licensing</h5>
                 <p class="card-text">Get started with your business journey in just a click.</p>
-                <a href="{{ url_for('register.register_page') }}"><button class="btn-s">Register</button></a>
+                <a href="{{ url_for('main.coming_soon') }}"><button class="btn-s">Go to service</button></a>
             </div>
         </div>
-
-
     </div>
-
-    <!-- three more cards -->
     <div class="card-group">
         <div class="card">
             <img src="../static/images/card3.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Land registration</h5>
-                <p class="card-text">Get started with your business journey in just a click.
+                <h5 class="card-title">Land Rates</h5>
+                <p class="card-text">Manage and pay your land rates effortlessly
                 </p>
-                <a href="{{ url_for('register.register_page') }}"><button class="btn-s">Register</button></a>
+                <a href="{{ url_for('main.coming_soon') }}"><button class="btn-s">Go to service</button></a>
             </div>
         </div>
 
         <div class="card">
             <img src="../static/images/card4.jpg" class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Hospital services</h5>
-                <p class="card-text">Get started with your business journey in just a click.</p>
-                <a href="{{ url_for('register.register_page') }}"><button class="btn-s">Register</button></a>
+                <h5 class="card-title">Event ground booking</h5>
+                <p class="card-text">Get your event permit quickly and host without worry.</p>
+                <a href="{{ url_for('main.coming_soon') }}"><button class="btn-s">Go to service</button></a>
             </div>
         </div>
 
@@ -64,8 +58,8 @@
             <img src="../static/images/card5.jpg" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Book parking</h5>
-                <p class="card-text">Get started with your business journey in just a click.</p>
-                <a href="{{ url_for('register.register_page') }}"><button class="btn-s">Register</button></a>
+                <p class="card-text">Reserve your parking spot in advance with ease.</p>
+                <a href="{{ url_for('main.coming_soon') }}"><button class="btn-s">Go to service</button></a>
             </div>
         </div>
     </div>

@@ -55,7 +55,7 @@ def admin_dashboard():
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
-@token_required
-def comingsoon():
+@token_required('user')
+def coming_soon():
     """ These renders a page for all services that are currently not available"""
     return render_template('coming_soon.html')
