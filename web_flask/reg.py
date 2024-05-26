@@ -21,9 +21,7 @@ def register_page():
     current_user = g.get('current_user')
     categories = storage.all(Category).values()
 
-    for  category in categories:
-        print(category.id)
-    if current_user:
+    if current_user and categories:
         user_id = current_user.id
         return render_template('register.html',
                                user_id=user_id,
@@ -34,7 +32,7 @@ def register_page():
 
 
 @register.route('/pay/', methods=['GET'], strict_slashes=False)
-@token_required('user')
+# @token_required('user')
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     return render_template('payment.html')
