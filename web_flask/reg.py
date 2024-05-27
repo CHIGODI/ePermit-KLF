@@ -97,7 +97,6 @@ def mpesa_express():
 
 
 @register.route('/callback', methods=['POST'], strict_slashes=False)
-# @token_required('user')
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
     response = request.get_json()
