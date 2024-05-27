@@ -20,7 +20,6 @@ def register_page():
     """ renders the register page"""
     current_user = g.get('current_user')
     categories = storage.all(Category).values()
-    print(categories)
 
     if current_user and categories:
         user_id = current_user.id
