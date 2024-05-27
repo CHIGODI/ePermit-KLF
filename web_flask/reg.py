@@ -44,7 +44,7 @@ def get_access_token(consumer_key, consumer_secret):
 
 
 @register.route('/pay/', methods=['POST', 'GET'], strict_slashes=False)
-# @token_required
+@token_required('user')
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     if request.method == 'POST':
