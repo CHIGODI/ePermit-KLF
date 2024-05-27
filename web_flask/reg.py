@@ -101,9 +101,13 @@ def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
     response = request.get_json()
 
+    print('success!')
     result_code = response.get('Body').get('stkCallback').get('ResultCode')
     if result_code != '0':
+        print('failed')
         flash('Payment failed or was cancelled. Please try again.', 'error')
-        render_template('payment.html')
-    flash('Payment successful. Your business has been registered.', 'success')
-    return render_template('my_permits.html')
+        return render_template('payment.html')
+    else:
+        print('not triggering')
+        flash('Payment successful. Your business has been registered.', 'success')
+        return render_template('my_permits.html')
