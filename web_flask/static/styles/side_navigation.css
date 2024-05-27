@@ -7,8 +7,9 @@
 .myprofile {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Align items to the start */
+    justify-content: flex-start;
     margin: 50px auto;
+    width: 90%;
 }
 
 .user-icon {
@@ -19,7 +20,7 @@
     height: 250px;
     border-radius: 50%;
     border: 2px solid #34495e;
-    margin-right: 20px; 
+    margin-right: 20px;
     margin-left: 10px;
 }
 
@@ -29,15 +30,15 @@
 
 .profile-content {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-gap: 10px; 
-    flex: 1; 
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    flex: 1;
 }
 
 .profile-content p {
     display: block;
-    width: 100%; 
-    padding: 4px 8px; 
+    width: 100%;
+    padding: 4px 8px;
     font-size: 16px;
     line-height: 1.2;
     color: #333;
