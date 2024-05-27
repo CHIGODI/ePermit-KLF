@@ -67,6 +67,7 @@
     justify-content: flex-start;
     margin: 50px auto;
     width: 90%;
+
 }
 
 .pay-btn{
@@ -78,4 +79,64 @@
     margin: 24px auto;
     width: 30%;
     background-color: green;
+}
+#flash-error-p{
+    height: 70px;
+    position: fixed;
+    text-align: center;
+    border-radius: 8px;
+    width: 50%;
+    left: 35%;
+}
+
+
+/* Tablets (landscape) */
+@media (max-width: 768px) {
+    .dashboard-pages {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .myprofile {
+        margin: 20px auto;
+    }
+
+    .user-icon {
+        width: 150px;
+        height: 150px;
+    }
+
+    .user {
+        font-size: 80px;
+    }
+
+    .profile-content {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .profile-content p {
+        font-size: 14px;
+    }
+
+    .table-bs{
+        width: 100%;
+    }
+
+    .payment {
+        margin: 20px auto;
+    }
+
+    .pay-btn{
+        font-size: 16px;
+    }
+
+    .btn-pay{
+        width: 40%;
+    }
+
+    #flash-error-p{
+        width: 90%;
+        left: 5%;
+    }
+
 }

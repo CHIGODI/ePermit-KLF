@@ -108,7 +108,6 @@ def mpesa_callback():
         flash('Payment successful. Your business has been registered.', 'success')
         return render_template('my_permits.html')
     else:
-        print('failed')
         flash('Payment failed or was cancelled. Please try again.', 'error')
         return render_template('payment.html')
 

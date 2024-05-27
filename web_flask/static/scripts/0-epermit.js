@@ -10,7 +10,7 @@ $(function () {
 
     // Alert timeouts
     setTimeout(function () {
-        $('#flash-message').fadeOut('slow', function () {
+        $('#flash-message, #flash-error-p').fadeOut('slow', function () {
             $(this).hide();
         });
     }, 8000);
