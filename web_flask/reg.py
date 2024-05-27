@@ -43,7 +43,7 @@ def get_access_token(consumer_key, consumer_secret):
         return None
 
 
-@register.route('/pay/', methods=['POST'], strict_slashes=False)
+@register.route('/pay/', methods=['POST', 'GET'], strict_slashes=False)
 # @token_required
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
@@ -76,7 +76,7 @@ def mpesa_express():
         "PartyA": phone_number,
         "PartyB": 174379,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://epermit.live/api/v1/callback",
+        "CallBackURL": "https://epermit.live/callback",
         "AccountReference": "CompanyXLTD",
         "TransactionDesc": "Payment of X"
         }
