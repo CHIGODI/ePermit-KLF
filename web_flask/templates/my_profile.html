@@ -1,9 +1,20 @@
 {% extends "dashboard.html" %}
 {% block content %}
     <div class="dashboard-pages">
-        hello
-        <p>{{ current_user.email }}</p>
-        <p>{{ current_user.first_name }}</p>
+        <div class="myprofile">
+            <div class="user-icon">
+                <i class="fa-solid fa-user user"></i>
+            </div>
+            <div class="profile-content">
+                <p>First Name: {{ current_user.first_name }}</p>
+                <p>Second Name: {{ current_user.second_name }}</p>
+                <p>Email: {{ current_user.email }}</p>
+                <p>Phone Number: {{ current_user.phone_number }}</p>
+                <p>ID Number: {{ current_user.ID_number }}</p>
+                <p>Gender: {{ current_user.gender }}</p>
+            </div>
+
+        </div>  
     </div>
 
 {% endblock %}
