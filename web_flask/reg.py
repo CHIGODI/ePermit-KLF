@@ -76,7 +76,7 @@ def mpesa_express():
         "PartyA": phone_number,
         "PartyB": 174379,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://4760-102-166-65-24.ngrok-free.app/callback",
+        "CallBackURL": "https://www.epermit.live/callback",
         "AccountReference": "CompanyXLTD",
         "TransactionDesc": "Payment of X"
         }
