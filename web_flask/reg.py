@@ -2,7 +2,7 @@
 """ Module for registering businesses. """
 
 from datetime import datetime
-from flask import request, render_template, g, flash
+from flask import request, render_template, g, flash, jsonify
 import requests
 import json
 from models.user import User
@@ -36,3 +36,15 @@ def register_page():
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     return render_template('payment.html')
+
+@register.route('/callback', methods=['POST'], strict_slashes=False)
+# @token_required('user')
+def mpesa_callback():
+    """ This function receives the callback from the M-Pesa API. """
+    response = request.get_json()
+    result_code =response.get('Body').get('stkCallback').get('ResultCode')
+    if result_code != 0:
+        flash('Payment failed. Please try again.', 'error')
+        render_template('payment.html')
+    flash('Payment successful. Your business has been registered.', 'success')
+    return render_template('my_permits.html')

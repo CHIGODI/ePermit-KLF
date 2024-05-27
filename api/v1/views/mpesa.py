@@ -2,7 +2,7 @@
 """ Module for registering businesses. """
 
 from datetime import datetime
-from flask import request, render_template, jsonify
+from flask import request, jsonify
 import requests
 import json
 from models.user import User
@@ -16,7 +16,6 @@ from api.v1.views import app_views
 from os import getenv
 
 
-
 # get access token to work with daraja API
 def get_access_token(consumer_key, consumer_secret):
     """ Get access token to work with daraja API """
@@ -25,7 +24,6 @@ def get_access_token(consumer_key, consumer_secret):
     if response.status_code == 200:
         return response.json().get('access_token')
     else:
-        print('Failed to obtain access token.')
         return None
 
 
@@ -34,11 +32,16 @@ def get_access_token(consumer_key, consumer_secret):
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     if request.method == 'POST':
-        access_token = get_access_token(getenv('CONSUMER_KEY'), getenv('CONSUMER_SECRET'))
+        access_token = get_access_token(getenv('CONSUMER_KEY'),
+                                        getenv('CONSUMER_SECRET'))
         time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
         password = "174379" + "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919" + time_stamp
         pwd = b64encode(password.encode("utf-8")).decode("utf-8")
         phone_number = request.form.get('phone_number')
+
+        if not access_token:
+            return jsonify({"status": "Failed"})
+
         headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {access_token}'
@@ -57,16 +60,21 @@ def mpesa_express():
         "TransactionDesc": "Payment of X"
         }
         payload_json = json.dumps(payload)
-        response = requests.request("POST", 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest', headers = headers, data = payload_json)
+        response = requests.request("POST",
+                                    'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
+                                    headers = headers,
+                                    data = payload_json)
+        response_code = response.json().get('ResponseCode')
+        print(response_code)
+        if response_code != 0:
+            return jsonify({"status": "Failed"})
         return response.json()
 
 
 @app_views.route('/callback', methods=['POST'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
-    response = request.data
+    response = request.get_json()
     result_code = response.get('Body').get('stkCallback').get('ResultCode')
     print(result_code)
-    if result_code != 0:
-        return jsonify({"status": "Failed"})
-    return response.json()
+    return response
