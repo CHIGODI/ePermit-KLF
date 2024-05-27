@@ -21,9 +21,13 @@
     margin-bottom: 20px;
     font-weight: bold;
     color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 .hero-subtitle{
     color: white;
+    font-size: 2rem;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .fall-in-text {
@@ -44,11 +48,6 @@
 }
 
 
-.hero-subtitle {
-    font-size: 2rem;
-    margin-bottom: 40px;
-}
-
 .hero-button {
     font-size: 1.5rem;
     padding: 15px 30px;
@@ -57,14 +56,11 @@
 .services {
     padding: 60px 0;
     text-align: center;
-    background-color: rgba(91, 197, 93, 0.208);
-    /* margin-left: 150pt;
-    /* padding: 100pt;
-    margin-right: 150pt; */
-    /* height: 50vh; */
+    width: 100%;
     display: flex;
     justify-content: center;
 }
+
 
 .service-wrapper {
     padding: 5% 8%;
@@ -77,39 +73,34 @@
 }
 
 #serviceh1 {
-    color: transparent;
-    font-size: 5rem;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-fill-color: transparent;
-    /* left-spacing: 4px; */
-    background-color: rgb(4, 52, 83);
-    background: linear-gradient(8deg, rgba(8, 52, 83, 1) 0%, rgba(0, 230, 173, 1) 41%, rgba(41, 17, 45, 1) 100%);
-    /* -webkit-background-clip: text; */
-    -webkit-text-fill-color: transparent;
+    font-size: 4rem;
     font-weight: bold;
+    color: darkgreen;
+    position: relative;
+}
+
+.fall-in-text-s:nth-child(2) {
+    animation-delay: 0.5s;
+}
+
+@keyframes fallInFromLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 #serviceh1:after {
     content: "";
     position: absolute;
-    top: 100%;
+    top: 102%;
     left: 10%;
-    height: 8px;
+    height: 3px;
     width: 80%;
     border-radius: 8px;
-    background-color: rgba(69, 70, 80, 0.117);
+    background-color: darkgreen;
 }
 
-#serviceh1 span {
-    position: absolute;
-    top: 100%;
-    left: 10%;
-    height: 8px;
-    width: 8px;
-    border-radius: 50%;
-    background-color: #21981f;
-    animation: anim 5s linear infinite;
-}
 
 @keyframes anim {
     95% {
@@ -215,9 +206,14 @@
     }
 }
 
-/* .service-box {
-    margin-bottom: 30px;
-} */
+
+.section-faq-title{
+    margin: auto auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;;
+}
 
 .faq-list {
     padding: 0;
@@ -306,7 +302,14 @@
 
 
 footer section {
-    background-color: rgb(183, 235, 105);
+    width: 100vw;
+    background-color: #343a40;
+}
+footer section p,
+footer section h3,
+footer section h6,
+footer section a {
+    color: #6c757d;
 }
 
 
