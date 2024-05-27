@@ -76,7 +76,7 @@ def mpesa_express():
         "PartyA": phone_number,
         "PartyB": 174379,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://epermit.live/callback",
+        "CallBackURL": "https://4760-102-166-65-24.ngrok-free.app/callback",
         "AccountReference": "CompanyXLTD",
         "TransactionDesc": "Payment of X"
         }
@@ -100,8 +100,9 @@ def mpesa_express():
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
     response = request.get_json()
-    result_code =response.get('Body').get('stkCallback').get('ResultCode')
-    if result_code != 0:
+
+    result_code = response.get('Body').get('stkCallback').get('ResultCode')
+    if result_code != '0':
         flash('Payment failed. Please try again.', 'error')
         render_template('payment.html')
     flash('Payment successful. Your business has been registered.', 'success')
