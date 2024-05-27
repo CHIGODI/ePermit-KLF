@@ -2,7 +2,6 @@
     width: 64%;
     z-index: 0;
     margin-left: 29%;
-    background-color: red;
 }
 
 .myprofile {
@@ -57,4 +56,26 @@
     margin: auto auto;
     width: 90%;
     padding: 24px;
+}
+
+
+
+/* --payment page-- */
+.payment {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 50px auto;
+    width: 90%;
+}
+
+.pay-btn{
+    width: 100%;
+    font-size: 18px;
+}
+
+.btn-pay{
+    margin: 24px auto;
+    width: 30%;
+    background-color: green;
 }
