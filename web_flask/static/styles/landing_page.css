@@ -1,4 +1,8 @@
 
+.main {
+    padding-top: 100px; /* Adjust this value to be greater than the navbar height */
+}
+
 .hero {
     background: url('../images/background.png') no-repeat center center/cover;
     height: 100vh;
@@ -9,28 +13,50 @@
     align-items: center;
     text-align: center;
     flex-direction: column;
+    /* color: white; Ensure text is visible on any background */
+    padding: 100px;
 }
 
 .hero-title {
     font-size: 4rem;
     margin-bottom: 20px;
     font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better readability */
 }
 
 .hero-subtitle {
     font-size: 2rem;
     margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Add text shadow for better readability */
 }
 
 .hero-button {
     font-size: 1.5rem;
     padding: 15px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hero-button:hover {
+    background-color: #0056b3; 
+    transform: translateY(-5px); 
+    color: white;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .services {
     padding: 60px 0;
     text-align: center;
-    background-color: rgba(91, 197, 93, 0.208);
+    background-color: rgba(91, 178, 197, 0.208);
     display: flex;
     justify-content: center;
 }
@@ -76,7 +102,7 @@
     height: 8px;
     width: 8px;
     border-radius: 50%;
-    background-color: #21981f;
+    background-color: #1fc51c;
     animation: anim 5s linear infinite;
 }
 
