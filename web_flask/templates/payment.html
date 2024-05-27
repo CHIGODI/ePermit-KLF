@@ -1,8 +1,9 @@
 {% extends "dashboard.html" %}
 {% block content %}
     <div class="dashboard-pages">
+         <div class="flash-msg" id="flash-form-error"></div>
         <div class="container">
-            <form action="https://www.epermit.live:5003/pay/" method="post">
+            <form action="/pay" method="post">
                 <label for="phone_number"></label>
                 <input type="phone_number" name="phone_number" id="phone_number">
                 <button type="submit">Pay</button>

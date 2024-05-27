@@ -85,12 +85,14 @@ def mpesa_express():
                                     'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
                                     headers = headers,
                                     data = payload_json)
-        response_code = response.json().get('ResponseCode')
-        if response_code != 0:
+        r = response.json()
+        response_code = r.get('ResponseCode')
+        if response_code != '0':
             flash('Payment failed. Please try again.', 'error')
             return render_template('payment.html')
-        flash('Payment successful. Your business has been registered.', 'success')
-        return render_template('waiting_page.html')
+        else:
+            flash('Payment request sent successfully!', 'success')
+            return render_template('waiting_page.html')
     return render_template('payment.html')
 
 
