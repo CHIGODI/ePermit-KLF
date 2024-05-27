@@ -6,9 +6,26 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
-    background-color: #34495e;
+    background-color: darkgreen;
     z-index: 10;
 }
+/* error messages on registration form */
+.error{
+    background-color: #F2DEDE;
+    color: #A94442;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.success{
+    background-color: #DFF2BF;
+    color: #4F8A10;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+/* ---- */
 
 .main-listing {
     background-color: #f8f9fa;
@@ -18,16 +35,20 @@
 }
 
 .side-nav {
+    position: fixed;
     width: 24%;
     height: 100vh;
     margin-left: 5%;
+    white-space: nowrap;
     background-color: #e9ecef;
+    z-index: 2;
 }
 
 .service-listing {
     width: 64%;
+    z-index: 0;
+    margin-left: 29%;
 }
-
 
 .menu{
     margin-left: 5%;
@@ -36,6 +57,12 @@
 
 .fa-bars {
     font-size: 24px;
+    color: #CCCCCC;
+}
+
+.fa-bars:hover{
+    cursor: pointer;
+
 }
 
 .btn-logout{
@@ -55,6 +82,7 @@
 
 .fa-bell{
     font-size: 20px;
+    color: #CCCCCC;
 }
 
 .logout{
@@ -87,7 +115,7 @@
     align-items: center;
     justify-content: start;
     padding: 20px;
-    background-color: #E0FBE2;
+    background-color: #1E90FF;
     border-radius: 8px;
     margin: 30px;
     overflow: hidden; /* Ensure content doesn't overflow */
@@ -103,7 +131,9 @@
 .upper p {
     animation: popFade 3s ease-in-out infinite; /* Apply animation */
     font-size: 18px;
-    color: #333;
+    /* color: #333;
+     */
+    color: #F5F5DC;
     margin: 0;
 }
 
@@ -154,17 +184,10 @@
     background-color: #d5d9db;
 }
 
-.information img {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
-    transition: margin 0.3s;
-}
 
 .information-btn{
     margin-top: 50%;
-    display: none;
+    visibility: hidden;
 }
 
 .personal-info, .business-information, .bills-info, .permit-info{
@@ -187,31 +210,34 @@
     text-decoration: none;
     background-color: rgb(7, 146, 7);
     width: 150px;
-
 }
+
+
 
 
 /* Smartphones (portrait) */
 @media (max-width: 768px) {
 
+    .nav-dashboard{
+        width: 100vw;
+    }
     .main-listing {
         width: 100vw;
         position: relative;
     }
-
     .side-nav {
-        position: absolute;
-        width: 50%;
+        overflow: hidden;
+        width: 0;
         left: -5%;
         z-index: 2;
-        visibility: hidden;
+        white-space: nowrap;
     }
-
     .service-listing{
-        width: 100%;
+        width: 100vw;
         z-index: 0;
+        margin: auto auto;
+        background-color: white;
     }
-
     .upper{
         flex-direction: column;
     }
@@ -219,16 +245,36 @@
     .upper img{
        display: none;
     }
+
     .menu{
         display: block;
+    }
+
+    .menu :hover{
+        cursor: pointer;
+        border: 1px solid #CCCCCC;
+        border-radius: 4px;
     }
 
     .btn-logout{
         display: none;
     }
     .nav-info{
-        background-color: red;
+        margin-right: 20px;
         width: 20%;
     }
+
+    .information-btn{
+        visibility: visible;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 50%;
+    }
+
+    .fa-right-from-bracket{
+        padding: 4px;
+    }
+
     /* CSS for smartphones */
 }

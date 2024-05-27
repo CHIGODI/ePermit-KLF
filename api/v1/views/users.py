@@ -4,9 +4,11 @@ from api.v1.views import app_views
 from flask import jsonify, request, abort
 from models import storage
 from models.user import User
+from api.v1.token import token_required
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
+@token_required('user')
 def get_users():
     """ method that retrieves all users """
     users = storage.all(User).values()

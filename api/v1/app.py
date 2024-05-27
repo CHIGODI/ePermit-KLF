@@ -8,6 +8,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
+app.config['SECREY_KEY'] = getenv('SECRET_KEY')
 app.register_blueprint(app_views) # Register the blueprint
 CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS
 
@@ -28,5 +29,5 @@ def not_found(error):
 
 if __name__ == "__main__":
     host = getenv("EPERMIT_API_HOST", "0.0.0.0")
-    port = getenv("EPERMIT_API_PORT", 5003)
+    port = getenv("EPERMIT_API_PORT", 5000)
     app.run(host=host, port=port, threaded=True, debug=True)

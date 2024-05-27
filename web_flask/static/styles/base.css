@@ -52,7 +52,7 @@
     font-weight: 500;
 
 }
-.navbar-nav .h::after{
+.navbar-l::after{
     position: absolute;
     content: '';
     background-color: green;

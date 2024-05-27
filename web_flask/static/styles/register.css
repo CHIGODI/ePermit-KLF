@@ -143,53 +143,47 @@
    opacity: 90%;
 }
 
-#flash-form-error{
-   background-color: #F2DEDE;
-   color: #A94442;
-   width: 100%;
+#flash-form-error {
    height: 70px;
    position: fixed;
-   z-index: 1000;
-   left: 36%;
-   top: 56px;
-   display: none;
    text-align: center;
+   border-radius: 8px;
+   width: 50%;
+   left: 35%;
+   display: none;
 }
 
-
-
 /* Smartphones (portrait) */
-@media (max-width: 575.98px) {
+@media (max-width: 768px) {
+
    #register-bs,
    .business-info
    .auth-form-div {
       width: 100%;
+      box-shadow: none;
+      border: none;
+      border-radius: 0;
+   }
+
+   .mb {
+      width: 100vw;
+   }
+
+   .own-info{
+      margin: auto auto;
+      width: 100%;
+      border-radius: none;
+   }
+   .owner-info{
+      width: 100%;
+   }
+   .btn-reg .register-bs-btn{
+      width: 80%;
+   }
+   #flash-form-error{
+      width: 100%;
+      left: 0;
    }
 
    /* CSS for smartphones */
-}
-
-/* Tablets (portrait) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-   /* CSS for tablets */
-   #register-bs,
-   .business-info{
-      width: 100%;
-   }
-
-}
-
-/* Tablets (landscape) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-   /* CSS for tablets landscape mode */
-}
-
-/* Small desktops/laptops */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-   /* CSS for small desktops/laptops */
-}
-
-/* Large desktops/laptops */
-@media (min-width: 1200px) {
-   /* CSS for large desktops/laptops */
 }
