@@ -103,11 +103,12 @@ def mpesa_callback():
 
     print('success!')
     result_code = response.get('Body').get('stkCallback').get('ResultCode')
-    if result_code != '0':
-        print('failed')
-        flash('Payment failed or was cancelled. Please try again.', 'error')
-        return render_template('payment.html')
-    else:
+    if result_code == 0:
         print('not triggering')
         flash('Payment successful. Your business has been registered.', 'success')
         return render_template('my_permits.html')
+    else:
+        print('failed')
+        flash('Payment failed or was cancelled. Please try again.', 'error')
+        return render_template('payment.html')
+
