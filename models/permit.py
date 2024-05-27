@@ -13,7 +13,6 @@ class Permit(BaseModel, Base):
     permit_number = Column(String(60), nullable=False, unique=True)
     is_valid = Column(Boolean, default=False, nullable=False)
     business_id = Column(String(60), ForeignKey('businesses.id'), nullable=False)
-    user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
 
     user = relationship('User', backref='permits')
 

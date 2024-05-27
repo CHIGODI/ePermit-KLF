@@ -52,7 +52,7 @@ def mpesa_express():
         "PartyA": phone_number,
         "PartyB": 174379,
         "PhoneNumber": phone_number,
-        "CallBackURL": "https://epermit.live/callback",
+        "CallBackURL": "https://epermit.live/api/v1/callback",
         "AccountReference": "CompanyXLTD",
         "TransactionDesc": "Payment of X"
         }
@@ -61,10 +61,12 @@ def mpesa_express():
         return response.json()
 
 
-@app_views.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
+@app_views.route('/callback', methods=['POST'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
-    print(' test1 ')
-    data = request.data
-    print(data)
-    return jsonify({"status": "OK"})
+    response = request.data
+    result_code = response.get('Body').get('stkCallback').get('ResultCode')
+    print(result_code)
+    if result_code != 0:
+        return jsonify({"status": "Failed"})
+    return response.json()

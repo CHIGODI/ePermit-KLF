@@ -26,8 +26,6 @@ def mybusinesses():
     """ user businesses """
     current_user = g.get('current_user')
     businesses = current_user.businesses
-    print(businesses)
-    # categories = storage.all(Category).values()
     return render_template('my_businesses.html', businesses=businesses)
 
 @main.route('/myprofile', methods=['GET'], strict_slashes=False)

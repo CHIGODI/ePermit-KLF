@@ -1,18 +1,43 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="dashboard-pages">
-    {% for business in businesses %}
+    <div class="table-bs">
         <table>
             <tr>
-                <td>{{ business.business_name }}</td>
-                {% if business.verified %}
-                    <td>Verified</td>
-                {% else %}
-                    <td>Not Verified</td>
-                {% endif %}
+                <th>Business Name</th>
+                <th>Date created</th>
+                <th>Permit No.</th>
+                <th>Status</th>
             </tr>
+            {% for business in businesses %}
+            <tr>
+                <td>{{  }}</td>
+                <td>Row 1, Cell 2</td>
+                <td>Row 1, Cell 3</td>
+                <td>Row 1, Cell 4</td>
+            </tr>
+            {% endfor %}
         </table>
-    {% endfor %}
+    </div>
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
 </div>
 
 {% endblock %}
