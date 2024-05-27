@@ -65,7 +65,7 @@ def mpesa_express():
 @app_views.route('/callback', methods=['POST', 'GET'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
-    print('imeingia mpya before')
+    print(' test1 ')
     data = request.data
     print(data)
     return jsonify({"status": "OK"})
