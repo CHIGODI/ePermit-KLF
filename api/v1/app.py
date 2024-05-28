@@ -8,6 +8,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
+app.config['SECREY_KEY'] = getenv('SECRET_KEY')
 app.register_blueprint(app_views) # Register the blueprint
 CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS
 

@@ -26,9 +26,9 @@ def mybusinesses():
     """ user businesses """
     current_user = g.get('current_user')
     businesses = current_user.businesses
-    categories = storage.all(Category).values()
-    return render_template('my_businesses.html', businesses=businesses,
-                           categories=categories)
+    print(businesses)
+    # categories = storage.all(Category).values()
+    return render_template('my_businesses.html', businesses=businesses)
 
 @main.route('/myprofile', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -45,6 +45,14 @@ def mypermits():
     current_user = g.get('current_user')
     permits = current_user.permits
     return render_template('my_permits.html', permits=permits)
+
+
+@main.route('/renewpermit', methods=['GET'], strict_slashes=False)
+@token_required('user')
+def renewpermit():
+    """ user renew permit """
+    current_user = g.get('current_user')
+    return render_template('renewpermit.html', current_user=current_user)
 
 
 @main.route('/admin_dashboard', methods=['GET'], strict_slashes=False)

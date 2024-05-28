@@ -16,7 +16,7 @@
 
             <div class="mb bs-info">
                 <label for="origin" class="form-label" >Business Entity Origin<span class="required">*</span></label>
-                <select name="entity_origin" class="form-select" id="origin">
+                <select name="entity_origin" class="form-select" id="origin" required>
                     <option selected></option>
                     <option value="kenyan">Kenyan</option>
                     <option value="foreigner">Foreigner</option>
@@ -50,7 +50,7 @@
 
             <div class="mb bs-info">
                 <label for="postal_code">Postal Code <span class="required">*</span></label>
-                <select id="postal_ode" class="form-select" name="postal_code">
+                <select id="postal_ode" class="form-select" name="postal_code" required>
                     <option value="" selected></option>
                     <option value="80100">80100 Malindi</option>
                     <option value="80200">80200 Mambrui</option>
@@ -103,7 +103,7 @@
 
             <div class="mb bs-info">
                 <label for="sub_county" class="form-label">Sub county<span class="required">*</span></label>
-                <select name="sub_county" class="form-select" id="sub_county">
+                <select name="sub_county" class="form-select" id="sub_county" required>
                     <option value="" selected></option>
                     <option value="Chonyi">Chonyi</option>
                     <option value="Ganze">Ganze</option>
@@ -121,7 +121,7 @@
 
             <div class="mb bs-info">
                 <label for="ward" class="form-label">Ward<span class="required">*</span></label>
-                <select name="ward" class="form-select" id="ward">
+                <select name="ward" class="form-select" id="ward" required>
                     <option selected></option>
                     <option value="Tezo">Tezo</option>
                     <option value="Sokoni">Sokoni</option>
@@ -173,7 +173,7 @@
 
             <div class="mb bs-info">
                 <label for="category">Activity code<span class="required">*</span></label>
-                <select id="category" class="form-select" name="category">
+                <select id="category" class="form-select" name="category" required>
                     <option value="" selected></option>
                     {% for category in categories %}
                     <option value="{{ category.id }}">{{ category.activity_code }} {{ category.category_name }}</option>
@@ -200,11 +200,11 @@
         <div class="position-bs">
             <div class="col latitude-dv">
                 <label for="latitude" class="form-label">Latitude:</label>
-                <input type="text" id="latitude" class="form-control" name="latitude"><br><br>
+                <input type="text" id="latitude" class="form-control" name="latitude" required><br><br>
             </div>
             <div class="col longitude-dv">
                 <label for="longitude" class="form-label">Longitude:</label>
-                <input type="text" id="longitude" class="form-control" name="longitude"><br><br>
+                <input type="text" id="longitude" class="form-control" name="longitude" required><br><br>
             </div>
         </div>
     </form>
@@ -233,7 +233,7 @@
 
             <div class="mb own-info">
                 <label for="gender">Gender <span class="required">*</span></label>
-                <select name="gender" id="gender" class="form-select">
+                <select name="gender" id="gender" class="form-select" required>
                     <option value="" selected></option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
