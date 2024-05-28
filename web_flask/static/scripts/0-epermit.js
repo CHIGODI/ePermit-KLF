@@ -10,7 +10,7 @@ $(function () {
 
     // Alert timeouts
     setTimeout(function () {
-        $('#flash-message').fadeOut('slow', function () {
+        $('#flash-message, #flash-error-p').fadeOut('slow', function () {
             $(this).hide();
         });
     }, 8000);
@@ -99,7 +99,7 @@ $(function () {
             let businessInfoSubmitted = false;
             // send business info to the server
             $.ajax({
-                url: "http://localhost:5000/api/v1/businesses",
+                url: "https://www.epermit.live/api/v1/businesses",
                 type: "POST",
                 data: JSON.stringify(business_registration_data),
                 contentType: "application/json",
@@ -125,7 +125,7 @@ $(function () {
 
             // send owner info to the server
             $.ajax({
-                url: "http://localhost:5000/api/v1/users/" + user_id,
+                url: "https://www.epermit.live/api/v1/users/" + user_id,
                 type: "PUT",
                 data: JSON.stringify(owner_info),
                 contentType: "application/json",
@@ -135,7 +135,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success');
                         fadeOut('flash-msg')
-                        window.location.href = "http://localhost:5001/dashboard";
+                        window.location.href = "http://www.epermit.live/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -179,6 +179,49 @@ $(function () {
             }
         });
     }
+
+    // Permit payement
+    $('#pay-permit').on('click', function(e){
+        e.preventDefault()
+        let isValid = true;
+        mpesaForm = $('#mpesa-form')
+        errorMsgDiv = $('.error-p-f')
+
+        mpesaForm.find('input[required], select[required]').each(
+                function () {
+                    if ($(this).val() == '') {
+                        isValid = false;
+                        $(this).addClass('is-invalid')
+                    } else {
+                        $(this).removeClass('is-invalid')
+                    }
+                })
+
+        // if missing fields return stop executing
+        if (!isValid) {
+            showAlert('Please fill out all fields', 'error')
+            fadeOut(errorMsgDiv)
+            $('.register-bs-btn').text("Submit");
+            return;
+        }
+
+        let businessDataReqPermit = {}
+        let mpesaFormRawData = mpesaForm.serializeArray();
+
+        // retrieve business info from form object to be sent to the server
+        $.each(mpesaFormRawData, function (index, obj) {
+            businessDataReqPermit[obj.name] = obj.value;
+        });
+
+        stkPush(businessDataReqPermit)
+    })
+
+
+
+
+
+
+
 });
 
 // callback function for google maps api
@@ -202,4 +245,69 @@ function initMap() {
             title: "Clicked Location",
         });
     });
+}
+
+
+function stkPush(data){
+    $.ajax({
+        url: 'https://www.epermit.live/api/v1/paympesa',
+        type: 'POST',
+        data: JSON.stringify(mpesaExpress),
+        contentType: "application/json",
+        success: function (data) {
+            let  bsShortCode = data.BusinessShortCode;
+            let password = data.password;
+            let timestamp = data.Timestamp;
+            let checkoutRequestID = data.CheckoutRequestID
+
+            // give client 10sec
+            setTimeout(function () {
+                stkQuery(bsShortCode, password, timestamp, checkoutRequestID);
+            }, 10000);
+        },
+        error: function (data) {
+            console.error('Error sending STK push request.');
+            showAlert('An error occurred while processing payment. Please try again.', 'error');
+        }
+
+    })
+
+    function stkQuery(bsShortCode, password, timestamp, checkoutRequestID) {
+        const requestData = {
+            'BusinessShortCode': bsShortCode,
+            'Password': password,
+            'Timestamp': timestamp,
+            'CheckoutRequestID': checkoutRequestID
+        };
+
+        $.ajax({
+            url: 'https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query',
+            type: 'POST',
+            data: JSON.stringify(requestData),
+            contentType: "application/json",
+            success: function (data) {
+                const resultCode = data.ResultCode;
+                handlePaymentStatus(resultCode);
+            },
+            error: function () {
+                console.error('Error querying payment status.');
+                showAlert('An error occurred while querying payment status. Please try again later.', 'error');
+            }
+        });
+    }
+
+}
+
+function handlePaymentStatus(resultCode) {
+    if (resultCode === '0') {
+        showAlert('Payment was successful!', 'success');
+        fadeOut(errorMsgDiv);
+        window.location.href = "https://www.epermit.live/redirecting";
+    } else if (resultCode === '1032') {
+        showAlert('The payment request was canceled by the user.', 'error');
+        fadeOut(errorMsgDiv);
+    } else {
+        showAlert('An error occurred while processing payment. Please try again later.', 'error');
+        fadeOut(errorMsgDiv);
+    }
 }

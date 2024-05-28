@@ -1,9 +1,11 @@
 # Python
 *.pyc
+*~
 __pycache__/
 
 # Virtual Environment
 epermit/
+dee/
 ePermit_key
 ePermit_key.pub
 

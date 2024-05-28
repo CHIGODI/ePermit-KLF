@@ -4,6 +4,7 @@
 from flask import Blueprint, render_template, request, flash, g, redirect, url_for
 from models import storage
 from models.category import Category
+from models.permit import Permit
 from models.business import Business
 from web_flask import main
 from . import token_required
@@ -27,9 +28,10 @@ def mybusinesses():
     """ user businesses """
     current_user = g.get('current_user')
     businesses = current_user.businesses
-    print(businesses)
-    # categories = storage.all(Category).values()
-    return render_template('my_businesses.html', businesses=businesses)
+    permits = storage.all(Permit).values()
+    return render_template('my_businesses.html',
+                           businesses=businesses,
+                           permits=permits)
 
 @main.route('/myprofile', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -44,7 +46,9 @@ def myprofile():
 def mypermits():
     """ user permits """
     current_user = g.get('current_user')
-    permits = current_user.permits
+    businesses = current_user.businesses
+    business_ids = [business.id for business in businesses]
+    permits = [p for p in storage.all(Permit).values() if p.business_id in business_ids]
     return render_template('my_permits.html', permits=permits)
 
 
@@ -54,6 +58,13 @@ def renewpermit():
     """ user renew permit """
     current_user = g.get('current_user')
     return render_template('renewpermit.html', current_user=current_user)
+
+
+@main.route('/admin_dashboard', methods=['GET'], strict_slashes=False)
+@token_required('admin')
+def admin_dashboard():
+    """ Admin dashboard where admins can verify business registrations """
+    return render_template('admin_dashboard.html')
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
@@ -93,7 +104,7 @@ def business_details(business_id=None):
         elif action == 'reject':
             storage.reject_business(business_id)
             return redirect(url_for('main.admin_dashboard'))  # Redirect to admin dashboard
-        
+
     business_details = storage.get_business_details(business_id)
     return render_template('business_details.html', business_details=business_details)
 

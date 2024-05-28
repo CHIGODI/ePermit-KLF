@@ -2,13 +2,15 @@
     width: 64%;
     z-index: 0;
     margin-left: 29%;
+    height: 100vh;
 }
 
 .myprofile {
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Align items to the start */
+    justify-content: flex-start;
     margin: 50px auto;
+    width: 90%;
 }
 
 .user-icon {
@@ -19,7 +21,7 @@
     height: 250px;
     border-radius: 50%;
     border: 2px solid #34495e;
-    margin-right: 20px; 
+    margin-right: 20px;
     margin-left: 10px;
 }
 
@@ -29,15 +31,15 @@
 
 .profile-content {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-gap: 10px; 
-    flex: 1; 
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 10px;
+    flex: 1;
 }
 
 .profile-content p {
     display: block;
-    width: 100%; 
-    padding: 4px 8px; 
+    width: 100%;
+    padding: 4px 8px;
     font-size: 16px;
     line-height: 1.2;
     color: #333;
@@ -51,4 +53,95 @@
 .profile-content .hide {
     display: none;
     background-color: red;
+}
+
+/* ----------mybusinesses------ */
+.table-bs{
+    margin: 10% auto;
+    width: 90%;
+    padding: 24px;
+
+}
+
+
+
+/* --payment page-- */
+.payment {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 50px auto;
+    width: 90%;
+
+}
+
+.pay-btn{
+    width: 100%;
+    font-size: 18px;
+}
+
+.btn-pay{
+    margin: 24px auto;
+    width: 30%;
+    background-color: green;
+}
+#flash-error-p{
+    height: 70px;
+    position: fixed;
+    text-align: center;
+    border-radius: 8px;
+    width: 50%;
+    left: 35%;
+}
+
+
+/* Tablets (landscape) */
+@media (max-width: 768px) {
+    .dashboard-pages {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .myprofile {
+        margin: 20px auto;
+    }
+
+    .user-icon {
+        width: 150px;
+        height: 150px;
+    }
+
+    .user {
+        font-size: 80px;
+    }
+
+    .profile-content {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .profile-content p {
+        font-size: 14px;
+    }
+
+    .table-bs{
+        width: 100%;
+    }
+
+    .payment {
+        margin: 20px auto;
+    }
+
+    .pay-btn{
+        font-size: 16px;
+    }
+
+    .btn-pay{
+        width: 40%;
+    }
+
+    #flash-error-p{
+        width: 90%;
+        left: 5%;
+    }
+
 }

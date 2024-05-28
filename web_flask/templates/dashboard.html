@@ -40,31 +40,39 @@
           <h5>Dashboard</h5>
         </div>
       </a>
-      <ul class="information">
-        <li class="personal-info">
-          <i class="fa-solid fa-user"></i>
-          <a href="{{ url_for('main.myprofile') }}">Profile</a>
-        </li>
-      </ul>
+      <a href="{{ url_for('main.myprofile') }}">
+        <ul class="information">
+          <li class="personal-info">
+            <i class="fa-solid fa-user"></i>
+            <p>Profile</p>
+          </li>
+        </ul>
+      </a>
 
-      <ul class="information">
-        <li class="personal-info">
-          <i class="fa-solid fa-briefcase"></i>
-          <a href="{{ url_for('main.mybusinesses') }}">My Businesses</a>
-        </li>
-      </ul>
-      <ul class="information">
-        <li class="permit-info">
-          <i class="fa-solid fa-certificate"></i>
-          <a href="{{ url_for('main.mypermits') }}">View Permits</a>
-        </li>
-      </ul>
-      <ul class="information">
-        <li class="permit-info">
-          <i class="fa-solid fa-stamp"></i>
-          <a href="{{ url_for('main.renewpermit') }}">Renew Permit</a>
-        </li>
-      </ul>
+      <a href="{{ url_for('main.mybusinesses') }}">
+        <ul class="information">
+            <li class="permit-info">
+              <i class="fa-solid fa-briefcase"></i>
+              <p>My Businesses</p>
+          </li>
+        </ul>
+      </a>
+      <a href="{{ url_for('main.mypermits') }}">
+        <ul class="information">
+            <li class="permit-info">
+              <i class="fa-solid fa-certificate"></i>
+              <p>View Permits</p>
+            </li>
+        </ul>
+      </a>
+      <a href="{{ url_for('register.mpesa_express') }}">
+        <ul class="information">
+          <li class="permit-info">
+            <i class="fa-solid fa-stamp"></i>
+            <p>Bills</p>
+          </li>
+        </ul>
+      </a>
 
       <div class="information-btn">
         <a href="{{ url_for('auth.logout') }}">
