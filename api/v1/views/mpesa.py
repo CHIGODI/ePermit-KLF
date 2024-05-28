@@ -35,7 +35,6 @@ def get_access_token(consumer_key, consumer_secret):
         return None
 
 @app_views.route('/paympesa', methods=['POST'], strict_slashes=False)
-# @token_required('user')
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
     access_token = get_access_token(getenv('CONSUMER_KEY'),
@@ -45,7 +44,8 @@ def mpesa_express():
     Passkey = getenv('PASS_KEY')
     password = Shortcode + Passkey + time_stamp
     pwd = b64encode(password.encode("utf-8")).decode("utf-8")
-    phone = request.form.get('phone_number')
+    data = request.get_json()
+    phone  = data.get('phone_number')
     phone_number = phone[1:10]
     session['business_id'] = request.form.get('business_id')
     session['time_stamp'] = time_stamp
@@ -122,4 +122,4 @@ def mpesa_callback():
                 session.pop('business_id', None)
                 return jsonify({"status": "Success"})
     except:
-        pass
+        return jsonify({'status': 'fail'}), 500
