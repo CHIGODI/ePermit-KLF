@@ -244,11 +244,11 @@ function initMap() {
 }
 
 
-function stkPush(mpesaExpress){
+function stkPush(businessDataReqPermit){
     $.ajax({
         url: 'https://www.epermit.live/api/v1/paympesa',
         type: 'POST',
-        data: JSON.stringify(mpesaExpress),
+        data: JSON.stringify(businessDataReqPermit),
         contentType: "application/json",
         success: function (data) {
             let bsShortCode = data.BusinessShortCode;
@@ -278,10 +278,8 @@ function stkQuery(bsShortCode, password, timestamp, checkoutRequestID) {
     };
 
     $.ajax({
-        url: 'https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query',
-        type: 'POST',
-        data: JSON.stringify(requestData),
-        contentType: "application/json",
+        url: 'https://www.epermit.live/api/v1/stkquery',
+        type: 'GET',
         success: function (data) {
             const resultCode = data.ResultCode;
             handlePaymentStatus(resultCode);
