@@ -57,6 +57,11 @@ def admin_dashboard():
     """ Admin dashboard where admins can verify business registrations """
     return render_template('admin_dashboard.html')
 
+@main.route('/redirecting', methods=['GET'], strict_slashes=False)
+def redirecting():
+    """ waiting page """
+    return render_template('waiting_page.html')
+
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
 @token_required('user')

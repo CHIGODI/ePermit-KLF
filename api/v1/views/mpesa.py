@@ -2,7 +2,7 @@
 
 
 from datetime import datetime
-from flask import request, render_template, g, flash, jsonify, session
+from flask import request, render_template, g, flash, jsonify, session, make_response
 import requests
 import json
 from models.user import User
@@ -38,45 +38,57 @@ def get_access_token(consumer_key, consumer_secret):
 # @token_required('user')
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
-    access_token = get_access_token(getenv('CONSUMER_KEY'),
-                                    getenv('CONSUMER_SECRET'))
-    time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    Shortcode = getenv('SHORT_CODE')
-    Passkey = getenv('PASS_KEY')
-    password = Shortcode + Passkey + time_stamp
-    pwd = b64encode(password.encode("utf-8")).decode("utf-8")
-    phone = request.form.get('phone_number')
-    phone_number = phone[1:10]
-    session['business_id'] = request.form.get('business_id')
+    try:
+        access_token = get_access_token(getenv('CONSUMER_KEY'),
+                                        getenv('CONSUMER_SECRET'))
+        time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        Shortcode = getenv('SHORT_CODE')
+        Passkey = getenv('PASS_KEY')
+        password = Shortcode + Passkey + time_stamp
+        pwd = b64encode(password.encode("utf-8")).decode("utf-8")
+        phone = request.form.get('phone_number')
+        phone_number = phone[1:10]
+        session['business_id'] = request.form.get('business_id')
+        session['time_stamp'] = time_stamp
 
 
-    if not access_token:
-        return  jsonify({"status": "Error. Please try again."}), 500
+        if not access_token:
+            return  jsonify({"status": "Error. Please try again."}), 500
 
-    headers = {
-    'Content-Type': 'application/json',
-    'Authorization': f'Bearer {access_token}'
-    }
-    payload = {
-    "BusinessShortCode": Shortcode,
-    "Password": pwd,
-    "Timestamp": time_stamp,
-    "TransactionType": "CustomerPayBillOnline",
-    "Amount": 1,
-    "PartyA": f'254{phone_number}',
-    "PartyB": Shortcode,
-    "PhoneNumber": f'254{phone_number}',
-    "CallBackURL": "https://www.epermit.live/callback",
-    "AccountReference": "CompanyXLTD",
-    "TransactionDesc": "Payment for Permit"
-    }
-    payload_json = json.dumps(payload)
-    response = requests.request("POST",
-                                'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-                                headers = headers,
-                                data = payload_json)
-    r = response.json()
-    return jsonify(r)
+        headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+        }
+        payload = {
+        "BusinessShortCode": Shortcode,
+        "Password": pwd,
+        "Timestamp": time_stamp,
+        "TransactionType": "CustomerPayBillOnline",
+        "Amount": 1,
+        "PartyA": f'254{phone_number}',
+        "PartyB": Shortcode,
+        "PhoneNumber": f'254{phone_number}',
+        "CallBackURL": "https://www.epermit.live/callback",
+        "AccountReference": "CompanyXLTD",
+        "TransactionDesc": "Payment for Permit"
+        }
+        payload_json = json.dumps(payload)
+        response = requests.request("POST",
+                                    'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
+                                    headers = headers,
+                                    data = payload_json)
+        r = response.json()
+        time_stamp = session.get('time_stamp')
+        data = {
+            'BusinessShortCode': getenv('SHORT_CODE'),
+            'Password': password,
+            'Timestamp': time_stamp,
+        }
+        data.update(r)
+        session.pop('time_stamp', None)
+        return  make_response(jsonify(data), 200)
+    except:
+        return make_response(jsonify({'status': 'fail'}))
 
 
 @app_views.route('/callback', methods=['POST'], strict_slashes=False)
