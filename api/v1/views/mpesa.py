@@ -37,54 +37,56 @@ def get_access_token(consumer_key, consumer_secret):
 @app_views.route('/paympesa', methods=['POST'], strict_slashes=False)
 def stkPush():
     """ This function initiates a payment request to the M-Pesa API. """
-    access_token = get_access_token(getenv('CONSUMER_KEY'),
-                                    getenv('CONSUMER_SECRET'))
-    time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    Shortcode = getenv('SHORT_CODE')
-    Passkey = getenv('PASS_KEY')
-    password = Shortcode + Passkey + time_stamp
-    pwd = b64encode(password.encode("utf-8")).decode("utf-8")
-    data = request.get_json()
-    phone  = data.get('phone_number')
-    phone_number = phone[1:10]
-    session['business_id'] = request.form.get('business_id')
+    try:
+        access_token = get_access_token(getenv('CONSUMER_KEY'),
+                                        getenv('CONSUMER_SECRET'))
+        time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        Shortcode = getenv('SHORT_CODE')
+        Passkey = getenv('PASS_KEY')
+        password = Shortcode + Passkey + time_stamp
+        pwd = b64encode(password.encode("utf-8")).decode("utf-8")
+        data = request.get_json()
+        phone  = data.get('phone_number')
+        phone_number = phone[1:10]
+        session['business_id'] = request.form.get('business_id')
 
-    if not access_token:
-        return  jsonify({"status": "Error. Please try again."}), 500
+        if not access_token:
+            return  jsonify({"status": "Error. Please try again."}), 500
 
-    headers = {
-    'Content-Type': 'application/json',
-    'Authorization': f'Bearer {access_token}'
-    }
-    payload = {
-    "BusinessShortCode": Shortcode,
-    "Password": pwd,
-    "Timestamp": time_stamp,
-    "TransactionType": "CustomerPayBillOnline",
-    "Amount": 1,
-    "PartyA": f'254{phone_number}',
-    "PartyB": Shortcode,
-    "PhoneNumber": f'254{phone_number}',
-    "CallBackURL": "https://www.epermit.live/api/v1/callback",
-    "AccountReference": "CompanyXLTD",
-    "TransactionDesc": "Payment for Permit"
-    }
-    payload_json = json.dumps(payload)
-    response = requests.request("POST",
-                                'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-                                headers = headers,
-                                data = payload_json)
-    r = response.json()
-    session['CheckoutRequestID'] = r.get('CheckoutRequestID')
-    return  make_response(jsonify(r), 200)
+        headers = {
+        'Content-Type': 'application/json',
+        'Authorization': f'Bearer {access_token}'
+        }
+        payload = {
+        "BusinessShortCode": Shortcode,
+        "Password": pwd,
+        "Timestamp": time_stamp,
+        "TransactionType": "CustomerPayBillOnline",
+        "Amount": 1,
+        "PartyA": f'254{phone_number}',
+        "PartyB": Shortcode,
+        "PhoneNumber": f'254{phone_number}',
+        "CallBackURL": "https://www.epermit.live/api/v1/callback",
+        "AccountReference": "CompanyXLTD",
+        "TransactionDesc": "Payment for Permit"
+        }
+        payload_json = json.dumps(payload)
+        response = requests.request("POST",
+                                    'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
+                                    headers = headers,
+                                    data = payload_json)
+        r = response.json()
+        session['CheckoutRequestID'] = r.get('CheckoutRequestID')
+        return  make_response(jsonify(r), 200)
+    except:
+        return jsonify({"status": "Error. Please try again."}), 500
 
 
 @app_views.route('/callback', methods=['POST'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
-    print('sucesss!!!')
-    response = request.get_json()
     try:
+        response = request.get_json()
         if response:
             result_code = response.get('Body').get('stkCallback').get('ResultCode')
             TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
@@ -148,5 +150,6 @@ def stkQuery():
         r = response.json()
         session.pop('CheckoutRequestID', None)
         return  make_response(jsonify(r), 200)
-    except:
+    except Exception as e:
+        print(e)
         return jsonify({"status": "Error. Please try again."}), 500
