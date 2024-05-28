@@ -207,14 +207,52 @@
     }
 }
 
+.apply-link {
+    text-decoration: none;
+    width: 100%;
+}
+
+.apply-button {
+    margin-top: auto;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    text-align: center;
+}
+
+.apply-button:hover {
+    opacity: 0.5;
+}
+
 section #faq {
     min-height: 100vh;
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
+    padding: 60px 0;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
+}
+
+#faq h2 {
+    color: transparent;
+    font-size: 3rem;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(8deg, rgba(8,52,83,1) 0%, rgba(0,230,173,1) 41%, rgba(41,17,45,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    margin-bottom: 1rem;
 }
 
 .title {
@@ -280,12 +318,27 @@ svg {
 .contact {
     padding: 60px 0;
     height: 100%;
+    font-family: inherit;
 }
-
+/* 
 .contact h2 {
     margin-bottom: 30px;
     font-size: 2.5em;
-}
+} */
+
+.contact h2 {
+    color: transparent;
+    font-size: 3rem;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(8deg, rgba(8,52,83,1) 0%, rgba(0,230,173,1) 41%, rgba(41,17,45,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+} 
 
 .contact .form-label {
     font-weight: bold;
@@ -300,6 +353,17 @@ svg {
 
 .contact .btn-primary:hover {
     background-color: #0056b3;
+}
+
+.popup-message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 

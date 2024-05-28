@@ -21,24 +21,28 @@
                 </div>
                 <div class="cards">
                     <div class="card">
-                        <i class="fa-brands fa-chromecast"></i>
+                        <i class="fa-solid fa-id-card"></i>
                         <h2>Business Registration</h2>
                         <p>Submit your application online, upload necessary documents</p>
+                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">Apply</button></a>
+                    </div>
+                    <div class="card">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h2>Permit tracking</h2>
+                        <p> Get real-time status updates, notifications all in one place</p>
+                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">Apply</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-layer-group"></i>
-                        <h2>Permit tracking</h2>
-                        <p> Get real-time status updates, notifications, and manage all related documents in one place</p>
-                    </div>
-                    <div class="card">
-                        <i class="fa-solid fa-user-group"></i>
                         <h2>Permit Renewal</h2>
                         <p>Renew your existing permits effortlessly</p>
+                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">Apply</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-file-signature"></i>
                         <h2>Other Services</h2>
                         <p>Explore a range of additional services, including environmental permits, event permits, and more.</p>
+                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View more</button></a>
                     </div>
                 </div>
             </div>
@@ -178,6 +182,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary w-100">Submit</button>
                     </form>
+                    <div id="popupMessage" class="popup-message">We shall reach back as soon as possible</div>
                 </div>
             </div>
         </div>
