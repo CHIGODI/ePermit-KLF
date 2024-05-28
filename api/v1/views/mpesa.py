@@ -96,7 +96,6 @@ def mpesa_callback():
             business_id = session.get('business_id')
 
             if result_code == 0:
-                storage.reload()
                 kwargs_permit = {
                 'business_id': business_id,
                 }
@@ -114,6 +113,10 @@ def mpesa_callback():
                 save_transaction.save()
                 session.pop('business_id', None)
                 return jsonify({"status": "Success"})
+            elif result_code == 1032:
+                return jsonify({'status': 'cancelled'})
+            else:
+                return jsonify({'status': 'Failed'})
     except:
         pass
 
