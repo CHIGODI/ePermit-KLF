@@ -77,7 +77,7 @@ class DBStorage:
         return self.__session.query(User).filter(User.email == email).first()
 
 
-    
+
     # added function to get unverified/rejected businesses
     def get_unverified_businesses(self):
         """ retrieves all unverified businesses """
@@ -92,7 +92,7 @@ class DBStorage:
     def get_approved_businesses(self):
         """ Retrieve approved businesses """
         return self.__session.query(Business).filter(Business.verified == True).all()
-    
+
     # save rejected businesses
     def reject_business(self, business_id):
         """Rejects a business by setting its verified status to False"""
@@ -108,9 +108,6 @@ class DBStorage:
         if business:
             business.verified = True
             self.save()
-
-    
-    
 
     def delete(self, obj=None):
         """ deletes an object from the current database """
