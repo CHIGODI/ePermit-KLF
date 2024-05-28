@@ -24,10 +24,12 @@ def register_page():
 
     if current_user and categories:
         user_id = current_user.id
+        print(user_id)
         return render_template('register.html',
                                user_id=user_id,
                                categories=categories)
     else:
+        print('here')
         flash(f'Something went wrong!', 'error')
         return render_template('dashboard.html')
 

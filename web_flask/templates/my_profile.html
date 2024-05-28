@@ -6,14 +6,43 @@
                 <i class="fa-solid fa-user user"></i>
             </div>
             <div class="profile-content">
-                <p>First Name: {{ current_user.first_name }}</p>
-                <p>Second Name: {{ current_user.last_name }}</p>
-                <p>Email: {{ current_user.email }}</p>
-                <p>Phone Number: {{ current_user.phone_number }}</p>
-                <p>ID Number: {{ current_user.ID_number }}</p>
-                <p>Gender: {{ current_user.gender }}</p>
+                {% if current_user.first_name is none %}
+                    <p class="hide">First Name: Not Provided</p>
+                {% else %}
+                    <p>First Name: {{ current_user.first_name }}</p>
+                {% endif %}
+            
+                {% if current_user.last_name is none %}
+                    <p class="hide">Second Name: Not Provided</p>
+                {% else %}
+                    <p>Second Name: {{ current_user.last_name }}</p>
+                {% endif %}
+            
+                {% if current_user.email is none %}
+                    <p class="hide">Email: Not Provided</p>
+                {% else %}
+                    <p>Email: {{ current_user.email }}</p>
+                {% endif %}
+            
+                {% if current_user.phone_number is none %}
+                    <p class="hide">Phone Number: Not Provided</p>
+                {% else %}
+                    <p>Phone Number: {{ current_user.phone_number }}</p>
+                {% endif %}
+            
+                {% if current_user.ID_number is none %}
+                    <p class="hide">ID Number: Not Provided</p>
+                {% else %}
+                    <p>ID Number: {{ current_user.ID_number }}</p>
+                {% endif %}
+            
+                {% if current_user.gender is none %}
+                    <p class="hide">Gender: Not Provided</p>
+                {% else %}
+                    <p>Gender: {{ current_user.gender }}</p>
+                {% endif %}
             </div>
-
+            
         </div>
     </div>
 
