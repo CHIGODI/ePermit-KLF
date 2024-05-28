@@ -31,7 +31,7 @@
 }
 
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
-    color: #3a801c;
+    color: green;
 }
 
 .navbar-toggler:focus, .btn-close:focus {
@@ -41,17 +41,17 @@
 
 .nav-link {
     color: #666777;
-    font-size: larger;
-    font-weight: 500;
+    font-size: 1.2rem;
+    font-weight: 600;
 
 }
 
 .nav-link:hover {
-    color: #3a801c;
+    color: green;
 }
 
 .nav-link.active:hover {
-    color: #3a801c;
+    color: green;
 }
 
 @media (min-width: 991px) {
@@ -68,7 +68,7 @@
         transform: translateX(-50%);
         width: 0;
         height: 2px;
-        background-color: #065101;
+        background-color: green;
         visibility: hidden;
         transition: width 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
