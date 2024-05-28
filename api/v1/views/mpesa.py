@@ -87,38 +87,34 @@ def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
     try:
         response = request.get_json()
-        if response:
-            result_code = response.get('Body').get('stkCallback').get('ResultCode')
-            TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
-            Amount = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[0].get('Value')
-            MpesaReceiptNumber = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[1].get('Value')
-            PhoneNumber =  response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[3].get('Value')
-            business_id = session.get('business_id')
+        result_code = response.get('Body').get('stkCallback').get('ResultCode')
+        TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
+        Amount = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[0].get('Value')
+        MpesaReceiptNumber = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[1].get('Value')
+        PhoneNumber =  response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[3].get('Value')
+        business_id = session.get('business_id')
 
-            if result_code == 0:
-                kwargs_permit = {
-                'business_id': business_id,
-                }
+        if result_code == 0:
+            kwargs_permit = {
+            'business_id': business_id,
+            }
 
-                new_permit = Permit(**kwargs_permit)
-                kwargs = {
-                'TransactionDate': TransactionDate,
-                'Amount':  Amount,
-                'MpesaReceiptNumber': MpesaReceiptNumber,
-                'PhoneNumber': PhoneNumber,
-                'permit_id': new_permit.id
-                }
-                save_transaction = Mpesa(**kwargs)
-                new_permit.save()
-                save_transaction.save()
-                session.pop('business_id', None)
-                return jsonify({"status": "Success"})
-            elif result_code == 1032:
-                return jsonify({'status': 'cancelled'})
-            else:
-                return jsonify({'status': 'Failed'})
-    except:
-        pass
+            new_permit = Permit(**kwargs_permit)
+            kwargs = {
+            'TransactionDate': TransactionDate,
+            'Amount':  Amount,
+            'MpesaReceiptNumber': MpesaReceiptNumber,
+            'PhoneNumber': PhoneNumber,
+            'permit_id': new_permit.id
+            }
+            save_transaction = Mpesa(**kwargs)
+            new_permit.save()
+            save_transaction.save()
+            session.pop('business_id', None)
+            return jsonify({"status": "Success"})
+    except Exception as e:
+        print(e)
+        return jsonify({'status': e})
 
 @app_views.route('/stkquery', methods=['GET'], strict_slashes=False)
 def stkQuery():
