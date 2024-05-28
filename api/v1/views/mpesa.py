@@ -44,7 +44,8 @@ def stkPush():
     Passkey = getenv('PASS_KEY')
     password = Shortcode + Passkey + time_stamp
     pwd = b64encode(password.encode("utf-8")).decode("utf-8")
-    phone = request.form.get('phone_number')
+    data = request.get_json()
+    phone  = data.get('phone_number')
     phone_number = phone[1:10]
     session['business_id'] = request.form.get('business_id')
 
