@@ -10,13 +10,15 @@ from models.user import User
 from models.business import Business
 from models.category import Category
 from models.permit import Permit
+from models.mpesa import Mpesa
 
 
 load_dotenv()
 
 
 classes = {"User": User, "Business": Business,
-           "Category": Category, "Permit": Permit}
+           "Category": Category, "Permit": Permit,
+           "Mpesa": Mpesa}
 
 
 class DBStorage:
