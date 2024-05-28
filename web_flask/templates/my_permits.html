@@ -1,9 +1,18 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="dashboard-pages">
-    {% for permit in permits %}
+    {% if not permits %}
+        <h1>You have no permits</h1>
+    {% else %}
+        {% for permit in permits %}
         <p>{{ permit.permit_no }}</p>
-    {% endfor %}
-</div>
+        {% endfor %}
+    {% endif %}
 
+
+
+
+
+</div>
 {% endblock %}
+

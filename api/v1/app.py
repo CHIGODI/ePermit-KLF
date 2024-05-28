@@ -5,10 +5,16 @@ from api.v1.views import app_views
 from os import getenv
 from models import storage
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 app = Flask(__name__)
-app.config['SECREY_KEY'] = getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = getenv('SECRET_KEY')
+app.config['SESSION_TYPE'] = getenv('SESSION_TYPE')
+app.config['SESSION_FILE_DIR'] = getenv('SESSION_FILE_DIR')
+app.config['SESSION_FILE_THRESHOLD'] = int(getenv('SESSION_FILE_THRESHOLD'))
 app.register_blueprint(app_views) # Register the blueprint
 CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS
 

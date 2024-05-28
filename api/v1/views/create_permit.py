@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, jsonify
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
@@ -39,7 +39,7 @@ def generate_pdf(business_id):
         # Business Details Table
         data = [
             ["Business ID No", "666798"],
-            ["Business Name", business.name],
+            ["Business Name", business.business_name],
             ["Certificate of Registration No/ID No", business.Certificate_of_Registration_No],
             ["Pin No.", business.KRA_pin],
             ["VAT No.", business.vat_no]
@@ -63,9 +63,9 @@ def generate_pdf(business_id):
         c.setFont("Helvetica", 10)
         c.drawString(30, height - 330, "To engage in the activity/business/profession or occupation of:")
         c.drawString(30, height - 350, "Business Activity Code & Description:")
-        c.drawString(250, height - 350, business.activity_code_description)
+        c.drawString(250, height - 350, business.category)
         c.drawString(30, height - 370, "Detailed Activity Description")
-        c.drawString(250, height - 370, business.activity_description)
+        c.drawString(250, height - 370, business.detailed_description)
 
         # Fee
         c.drawString(30, height - 410, "Having paid a single Business Permit Fee of:")
@@ -119,7 +119,7 @@ def generate_pdf(business_id):
 
         # Signature Placeholder
         c.drawString(30, height - 830, "No. 36005")
-        c.drawString(400, height - 830, "FS. KILIFI KIMERA")
+        c.drawString(400, height - 830, "Epermit System")
         c.drawString(400, height - 850, "Sub-County Revenue Officer")
         c.drawString(400, height - 870, "for Chief Officer Finance & Economic Planning")
 

@@ -10,14 +10,27 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <div class="payment">
-            <form class="form-control" action="http://127.0.0.1:5001/pay/" method="post">
-                <label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
-                <input type="text" name="phone_number" id="phone_number" class="form-control">
-                <div class="btn-pay">
-                    <button type="submit" class="btn-success btn pay-btn ">Pay</button>
-                </div>
-            </form>
-        </div>
+        {% if not businesses %}
+                <p>You  have no pending bills</p>
+        {% else %}
+            <div class="payment">
+                <form class="form-control" action="https://www.epermit.live/api/v1/paympesa/" method="post">
+                    <label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
+                    <input type="text" name="phone_number" id="phone_number" class="form-control">
+                    <div class="mb-3">
+                        <label for="business_name" class="form-label">Business Name<span class="required">*</span></label>
+                        <select name="business_id" class="form-select" required>
+                            {% for business in businesses_bills %}
+                                <option value="" selected></option>
+                                <option value="business.id">{{ business.business_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="btn-pay">
+                        <button type="submit" class="btn-success btn pay-btn ">Pay</button>
+                    </div>
+                </form>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

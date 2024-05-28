@@ -2,6 +2,7 @@
     width: 64%;
     z-index: 0;
     margin-left: 29%;
+    height: 100vh;
 }
 
 .myprofile {
@@ -52,10 +53,10 @@
 
 /* ----------mybusinesses------ */
 .table-bs{
-    background-color: green;
-    margin: auto auto;
+    margin: 10% auto;
     width: 90%;
     padding: 24px;
+
 }
 
 
