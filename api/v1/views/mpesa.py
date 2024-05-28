@@ -38,88 +38,88 @@ def get_access_token(consumer_key, consumer_secret):
 # @token_required('user')
 def mpesa_express():
     """ This function initiates a payment request to the M-Pesa API. """
-    try:
-        access_token = get_access_token(getenv('CONSUMER_KEY'),
-                                        getenv('CONSUMER_SECRET'))
-        time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        Shortcode = getenv('SHORT_CODE')
-        Passkey = getenv('PASS_KEY')
-        password = Shortcode + Passkey + time_stamp
-        pwd = b64encode(password.encode("utf-8")).decode("utf-8")
-        phone = request.form.get('phone_number')
-        phone_number = phone[1:10]
-        session['business_id'] = request.form.get('business_id')
-        session['time_stamp'] = time_stamp
+    access_token = get_access_token(getenv('CONSUMER_KEY'),
+                                    getenv('CONSUMER_SECRET'))
+    time_stamp = datetime.now().strftime("%Y%m%d%H%M%S")
+    Shortcode = getenv('SHORT_CODE')
+    Passkey = getenv('PASS_KEY')
+    password = Shortcode + Passkey + time_stamp
+    pwd = b64encode(password.encode("utf-8")).decode("utf-8")
+    phone = request.form.get('phone_number')
+    phone_number = phone[1:10]
+    session['business_id'] = request.form.get('business_id')
+    session['time_stamp'] = time_stamp
 
 
-        if not access_token:
-            return  jsonify({"status": "Error. Please try again."}), 500
+    if not access_token:
+        return  jsonify({"status": "Error. Please try again."}), 500
 
-        headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {access_token}'
-        }
-        payload = {
-        "BusinessShortCode": Shortcode,
-        "Password": pwd,
-        "Timestamp": time_stamp,
-        "TransactionType": "CustomerPayBillOnline",
-        "Amount": 1,
-        "PartyA": f'254{phone_number}',
-        "PartyB": Shortcode,
-        "PhoneNumber": f'254{phone_number}',
-        "CallBackURL": "https://www.epermit.live/callback",
-        "AccountReference": "CompanyXLTD",
-        "TransactionDesc": "Payment for Permit"
-        }
-        payload_json = json.dumps(payload)
-        response = requests.request("POST",
-                                    'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-                                    headers = headers,
-                                    data = payload_json)
-        r = response.json()
-        time_stamp = session.get('time_stamp')
-        data = {
-            'BusinessShortCode': getenv('SHORT_CODE'),
-            'Password': password,
-            'Timestamp': time_stamp,
-        }
-        data.update(r)
-        session.pop('time_stamp', None)
-        return  make_response(jsonify(data), 200)
-    except:
-        return make_response(jsonify({'status': 'fail'}))
+    headers = {
+    'Content-Type': 'application/json',
+    'Authorization': f'Bearer {access_token}'
+    }
+    payload = {
+    "BusinessShortCode": Shortcode,
+    "Password": pwd,
+    "Timestamp": time_stamp,
+    "TransactionType": "CustomerPayBillOnline",
+    "Amount": 1,
+    "PartyA": f'254{phone_number}',
+    "PartyB": Shortcode,
+    "PhoneNumber": f'254{phone_number}',
+    "CallBackURL": "https://www.epermit.live/api/v1/callback",
+    "AccountReference": "CompanyXLTD",
+    "TransactionDesc": "Payment for Permit"
+    }
+    payload_json = json.dumps(payload)
+    response = requests.request("POST",
+                                'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
+                                headers = headers,
+                                data = payload_json)
+    r = response.json()
+    time_stamp = session.get('time_stamp')
+    data = {
+        'BusinessShortCode': getenv('SHORT_CODE'),
+        'Password': password,
+        'Timestamp': time_stamp,
+    }
+    data.update(r)
+    session.pop('time_stamp', None)
+    return  make_response(jsonify(data), 200)
 
 
 @app_views.route('/callback', methods=['POST'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
+    print('sucesss!!!')
     response = request.get_json()
+    try:
+        if response:
+            result_code = response.get('Body').get('stkCallback').get('ResultCode')
+            TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
+            Amount = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[0].get('Value')
+            MpesaReceiptNumber = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[1].get('Value')
+            PhoneNumber =  response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[3].get('Value')
+            business_id = session.get('business_id')
 
-    if response:
-        result_code = response.get('Body').get('stkCallback').get('ResultCode')
-        TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
-        Amount = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[0].get('Value')
-        MpesaReceiptNumber = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[1].get('Value')
-        PhoneNumber =  response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[3].get('Value')
-        business_id = session.get('business_id')
+            if result_code == 0:
+                storage.reload()
+                kwargs_permit = {
+                'business_id': business_id,
+                }
 
-        if result_code == 0:
-            storage.reload()
-            kwargs_permit = {
-            'business_id': business_id,
-            }
-
-            new_permit = Permit(**kwargs_permit)
-            kwargs = {
-            'TransactionDate': TransactionDate,
-            'Amount':  Amount,
-            'MpesaReceiptNumber': MpesaReceiptNumber,
-            'PhoneNumber': PhoneNumber,
-            'permit_id': new_permit.id
-            }
-            save_transaction = Mpesa(**kwargs)
-            new_permit.save()
-            save_transaction.save()
-            session.pop('business_id', None)
-            return jsonify({"status": "Success"})
+                new_permit = Permit(**kwargs_permit)
+                kwargs = {
+                'TransactionDate': TransactionDate,
+                'Amount':  Amount,
+                'MpesaReceiptNumber': MpesaReceiptNumber,
+                'PhoneNumber': PhoneNumber,
+                'permit_id': new_permit.id
+                }
+                save_transaction = Mpesa(**kwargs)
+                new_permit.save()
+                save_transaction.save()
+                session.pop('business_id', None)
+                return jsonify({"status": "Success"})
+    except:
+        pass

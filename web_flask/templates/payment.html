@@ -5,18 +5,23 @@
             {% if messages %}
                 {% for category, message in messages %}
                 <div class="flash error-p-f  {{ category }}" id="flash-error-p">
+                    hi guysbjkjkkjbkjbnkjbjkb
                     {{ message }}
                 </div>
                 {% endfor %}
             {% endif %}
         {% endwith %}
+        <div class="bill-hero-section">
+            <h3 class="title">Pay Your Bills Here</h3>
+            <p>Simply select a business and pay</p>
+        </div>
         {% if not businesses_bills %}
                 <p>You  have no pending bills</p>
         {% else %}
             <div class="payment">
                 <form class="form-control" id="mpesa-form" method="post">
                     <label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
-                    <input type="text" name="phone_number" id="phone_number" class="form-control">
+                    <input type="text" name="phone_number" id="phone_number" class="form-control" required>
                     <div class="mb-3">
                         <label for="business_name" class="form-label">Business Name<span class="required">*</span></label>
                         <select name="business_id" class="form-select" required>
