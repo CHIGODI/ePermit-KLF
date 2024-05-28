@@ -134,6 +134,7 @@ $(function () {
                         showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('flash-msg')
                         window.location.href = "https://www.epermit.live/dashboard";
+                        window.location.href = "https://www.epermit.live/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
