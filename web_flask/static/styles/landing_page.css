@@ -4,7 +4,7 @@
 }
 
 .hero {
-    background: url('../images/background.png') no-repeat center center/cover;
+    background: url('../images/background.svg') no-repeat center center/cover;
     height: 100vh;
     width: 100%;
     background-size: 2400px;
@@ -13,7 +13,7 @@
     align-items: center;
     text-align: center;
     flex-direction: column;
-    /* color: white; Ensure text is visible on any background */
+    color: white;
     padding: 100px;
 }
 
@@ -28,6 +28,11 @@
     font-size: 2rem;
     margin-bottom: 40px;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Add text shadow for better readability */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 10px; /* Adjusts the space between the buttons */
 }
 
 .hero-button {
@@ -320,11 +325,6 @@ svg {
     height: 100%;
     font-family: inherit;
 }
-/* 
-.contact h2 {
-    margin-bottom: 30px;
-    font-size: 2.5em;
-} */
 
 .contact h2 {
     color: transparent;

@@ -7,8 +7,10 @@
         <p class="hero-subtitle">
             Your one-stop solution for managing permits online.
         </p>
-        <a href="{{ url_for('auth.signup') }}" class="btn btn-primary hero-button">Create Account</a>
-        <a href="{{ url_for('auth.login') }}" class="btn btn-success hero-button">Login</a>
+        <div class="hero-buttons">
+            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary hero-button">Create Account</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-success hero-button">Login</a>
+        </div>
     </div>
 </section>
 
