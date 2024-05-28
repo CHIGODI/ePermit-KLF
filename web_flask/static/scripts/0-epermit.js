@@ -109,7 +109,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success');
                         fadeOut('.flash-msg')
-                        window.location.href = "http://localhost:5001/dashboard";
+                        window.location.href = "https://www.epermit.live/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -135,7 +135,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success');
                         fadeOut('flash-msg')
-                        window.location.href = "http://www.epermit.live/dashboard";
+                        window.location.href = "https://www.epermit.live/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
