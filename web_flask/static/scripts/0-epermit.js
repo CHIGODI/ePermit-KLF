@@ -14,14 +14,6 @@ $(function () {
             $(this).hide();
         });
     }, 8000);
-    function fadeOut(className) {
-        setTimeout(function () {
-            $('.' + className).fadeOut('slow', function () {
-                $(this).hide();
-            });
-        }, 8000);
-    }
-
     // ------------------------------------------------------------------------
 
     // Registering a business page
@@ -216,6 +208,14 @@ $(function () {
     })
 });
 // -------------------------------- End of document ready -------------------------------------------
+
+function fadeOut(className) {
+    setTimeout(function () {
+        $('.' + className).fadeOut('slow', function () {
+            $(this).hide();
+        });
+    }, 8000);
+}
 
 function showAlert(message, type, id) {
     $('#' + id).addClass(type).text(message).css({ 'padding-top': '18px' }).show();
