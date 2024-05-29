@@ -206,11 +206,13 @@ $(function () {
 
         resultCode  = stkPush(businessDataReqPermit)
 
-        $('.loading').on('click', function(e){
-            e.preventDefault()
-            getPermit(businessDataReqPermit['business_id'])
-        })
     })
+    console.log($('#generatePermitBtn'))
+    $('#generatePermitBtn').on('click', function(e){
+        e.preventDefault()
+        getPermit(businessDataReqPermit['business_id'])
+    })
+
 });
 // -------------------------------- End of document ready -------------------------------------------
 
