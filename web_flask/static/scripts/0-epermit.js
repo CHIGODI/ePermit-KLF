@@ -170,7 +170,7 @@ $(function () {
         });
     }
 
-    let businessDataReqPermit = {}
+    let globalbusinessDataReqPermit = {}
     // Permit payement
     $('#pay-permit').on('click', function(e){
         e.preventDefault()
@@ -196,7 +196,8 @@ $(function () {
             return;
         }
 
-
+        let businessDataReqPermit = {}
+        globalbusinessDataReqPermit = businessDataReqPermit;
         let mpesaFormRawData = mpesaForm.serializeArray();
 
         // retrieve business info from form object to be sent to the server
@@ -208,7 +209,9 @@ $(function () {
         resultCode  = stkPush(businessDataReqPermit)
 
     })
-    console.log(businessDataReqPermit)
+    console.log('---------------------------hrer')
+    console.log(globalbusinessDataReqPermit)
+
     $('#generatePermitBtn').on('click', function(e){
         e.preventDefault()
         getPermit(businessDataReqPermit['business_id'])
