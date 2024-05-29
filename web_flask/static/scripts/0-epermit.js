@@ -170,6 +170,7 @@ $(function () {
         });
     }
 
+    let businessDataReqPermit = {}
     // Permit payement
     $('#pay-permit').on('click', function(e){
         e.preventDefault()
@@ -195,7 +196,7 @@ $(function () {
             return;
         }
 
-        let businessDataReqPermit = {}
+
         let mpesaFormRawData = mpesaForm.serializeArray();
 
         // retrieve business info from form object to be sent to the server
