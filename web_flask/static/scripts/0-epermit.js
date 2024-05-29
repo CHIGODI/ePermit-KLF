@@ -271,8 +271,8 @@ function stkQuery() {
         type: 'GET',
         success: function (data) {
             console.log(data);
-            const resultCode = data.ResultCode;
-            console.log(typeof resultCode)
+            const resultCode = data['ResultCode'];
+            console.log(resultCode)
             handlePaymentStatus(resultCode);
         },
         error: function () {
@@ -282,13 +282,12 @@ function stkQuery() {
     });
 }}
 
-
 function handlePaymentStatus(resultCode) {
-    if (resultCode === 0) {
+    if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
         window.location.href = "https://www.epermit.live/redirecting";
-    } else if (resultCode === 1032) {
+    } else if (resultCode === '1032') {
         showAlert('The payment request was canceled by the user.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
     } else {
