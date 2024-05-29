@@ -317,14 +317,32 @@ function handlePaymentStatus(resultCode, business_id) {
 
 // This functions gets permit
 function getPermit(business_id){
+    console.log(business_id)
     $.ajax({
         url: 'https://www.epermit.live/api/v1/generatepermit/'+ business_id,
         type: 'GET',
+        xhrFields: {
+            responseType: 'blob'
+        },
         success: function (data) {
             console.log(data)
+            $('#loading').hide();
+            $('#generatePermitBtn').prop('disabled', false);
+            const url = window.URL.createObjectURL(data);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'permit.pdf';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            $('#message').text('Permit generated successfully.').addClass('text-success');
         },
         error: function (data) {
             console.log('Error getting permit')
+            $('#loading').hide();
+            $('#generatePermitBtn').prop('disabled', false);
+            $('#message').text('Error getting permit').addClass('text-danger');
         }
     })
 }
