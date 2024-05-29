@@ -205,18 +205,17 @@ $(function () {
         console.log(businessDataReqPermit)
 
 	stkPush(businessDataReqPermit, function(result) {
-            if (result === 1032) {
-		// Payment successful
-		getPermit(businessDataReqPermit['business_id']);
-            } else {
-		// Payment failed
-		console.log('Payment failed');
-            }
-	});
-
+        if (result === 0) {
+            // Payment successful
+            getPermit(businessDataReqPermit['business_id']);
+                } else {
+            // Payment failed
+            console.log('Payment failed');
+                }
+            });
     })
- 
 });
+
 // -------------------------------- End of document ready -------------------------------------------
 
 // This function fades out an element after a given time.
@@ -316,13 +315,12 @@ function handlePaymentStatus(resultCode, callback) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
-        window.location.href = "https://www.epermit.live/pdf";
+        showAlert('Kindly wait as we process permit', 'success', 'flash-error-p');
+        fadeOut('error-p-f', 10000);
         callback(0); // Return 0 indicating success
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
-	showAlert('Kindly wait as permit is being processed.', 'error', 'flash-error-p');
-	fadeOut('error-p-f');
         callback(1032); // Return 1032 indicating cancellation
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
@@ -353,9 +351,6 @@ function getPermit(business_id){
         },
         error: function (data) {
             console.log('Error getting permit')
-            $('#loading').hide();
-            $('#generatePermitBtn').prop('disabled', false);
-            $('#message').text('Error getting permit').addClass('text-danger');
         }
     })
 }
