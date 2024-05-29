@@ -205,6 +205,11 @@ $(function () {
         console.log(businessDataReqPermit)
 
         resultCode  = stkPush(businessDataReqPermit)
+
+        $('.loading').on('click', function(e){
+            e.preventDefault()
+            getPermit(businessDataReqPermit['business_id'])
+        })
     })
 });
 // -------------------------------- End of document ready -------------------------------------------
@@ -266,7 +271,7 @@ function stkPush(businessDataReqPermit){
 
            // give client 15sec before checking payment status
             setTimeout(function () {
-                stkQuery(businessDataReqPermit['business_id']);
+                stkQuery();
             }, 15000);
         },
         error: function (data) {
@@ -277,7 +282,7 @@ function stkPush(businessDataReqPermit){
     })
 
 // stk query
-function stkQuery(business_id) {
+function stkQuery() {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/stkquery',
         type: 'GET',
@@ -290,7 +295,7 @@ function stkQuery(business_id) {
                 console.log(data);
                 const resultCode = data['ResultCode'];
                 console.log(resultCode)
-                handlePaymentStatus(resultCode, business_id);
+                handlePaymentStatus(resultCode);
             }
         },
         error: function () {
@@ -300,7 +305,7 @@ function stkQuery(business_id) {
 }}
 
 // This function handles the payment status
-function handlePaymentStatus(resultCode, business_id) {
+function handlePaymentStatus(resultCode) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
@@ -310,7 +315,6 @@ function handlePaymentStatus(resultCode, business_id) {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
         window.location.href = "https://www.epermit.live/pdf";
-        getPermit(business_id)
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
