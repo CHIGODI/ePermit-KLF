@@ -49,7 +49,7 @@ def stkPush():
         phone  = data.get('phone_number')
         phone_number = phone[1:10]
         amount = 1
-        session['business_id'] = request.form.get('business_id')
+        session['business_id'] = data.get('business_id')
 
         if not access_token:
             return  jsonify({"status": "Error. Please try again."}), 500
@@ -86,8 +86,10 @@ def stkPush():
 @app_views.route('/callback', methods=['POST'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
+    print('they sent callaback')
     response = request.get_json()
     result_code = response.get('Body').get('stkCallback').get('ResultCode')
+    print(result_code)
 
     if result_code == 0:
         TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
