@@ -204,6 +204,7 @@ $(function () {
         });
         console.log(businessDataReqPermit)
 
+        console.log(businessDataReqPermit['business_id']);
         stkPush(businessDataReqPermit, function(result) {
             if (result === 0) {
                     $.ajax({
@@ -323,7 +324,7 @@ function handlePaymentStatus(resultCode, callback) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
-        showAlert('Kindly wait as we process permit', 'success', 'flash-error-p');
+        showAlert('Congratulations! An email will be sent with an attachemnt of permit in the next 10 minutes', 'success', 'flash-error-p');
         fadeOut('error-p-f', 10000);
         callback(0); // Return 0 indicating success
     } else if (resultCode === '1032') {

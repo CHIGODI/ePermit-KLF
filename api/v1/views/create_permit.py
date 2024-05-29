@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify, make_response
+from flask import Flask, send_file, jsonify, make_response, current_app, session, request
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
@@ -12,28 +12,36 @@ from models.category import Category
 from datetime import datetime, timedelta
 from num2words import num2words
 import os
+from flask_mail import Message
+from dotenv import load_dotenv
+from os import getenv
 
-PDF_DIR = '~/generated_pdfs'
-os.makedirs(PDF_DIR, exist_ok=True)
+load_dotenv()
+
 
 @app_views.route('/generatepermit/<business_id>', methods=['GET'], strict_slashes=False)
 def generate_pdf(business_id):
     # Create a PDF file
     business = storage.get_obj_by_id(Business, business_id)
+    owner = storage.get_obj_by_id(User, business.owner)
     print(business)
     category = storage.get_obj_by_id(Category, business.category)
     permit = storage.get_permit_by_business_id(business.id)
     print(permit)
 
     if business.verified is True:
-        pdf_filename = f"{business.business_name}_permit.pdf"
-        pdf_filepath = os.path.join(PDF_DIR, pdf_filename)
-        doc = SimpleDocTemplate(pdf_filepath, pagesize=A4)
+        pdf_filename = "countygovtofklf_permit.pdf"
+        doc = SimpleDocTemplate(pdf_filename, pagesize=A4)
+
         elements = []
         width, height = A4
 
-        # Header and title
         c = canvas.Canvas(pdf_filename, pagesize=A4)
+
+        image_path = "/home/chigow/ePermit-KLF/api/v1/views/klf.jpeg"  # Update with the actual path to your image
+        c.drawImage(image_path, 30, height - 50, width=100, height=50)
+
+        # Header and title
         c.setFont("Helvetica-Bold", 14)
         c.drawString(200, height - 50, "SINGLE BUSINESS PERMIT")
         c.setFont("Helvetica", 12)
@@ -136,8 +144,17 @@ def generate_pdf(business_id):
         c.drawString(400, height - 870, "for Chief Officer Finance & Economic Planning")
 
         c.save()
-        response = make_response(send_file(pdf_filepath, as_attachment=False))
-        response.headers['Content-Disposition'] = f'inline; filename={pdf_filename}'
-        return response
+        recipient_email = owner.email  # Assuming business object has email field
+        subject = "Your Business Permit"
+        body = "Please find attached your business permit."
+
+        msg = Message('Your Business Permit',
+                  sender=getenv('MAIL_USERNAME'),
+                  recipients=[recipient_email])
+        msg.body = body
+        with open(pdf_filename, 'rb') as fp:
+            msg.attach(pdf_filename, "application/pdf", fp.read())
+        current_app.extensions['mail'].send(msg)
+        return jsonify({"status": "Email sent"}), 200
     else:
         return jsonify({"error": "Business is not verified"}), 400

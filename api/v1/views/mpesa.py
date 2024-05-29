@@ -122,7 +122,7 @@ def mpesa_callback():
 @app_views.route('/devcallback/<business_id>', methods=['GET'], strict_slashes=False)
 def dev_mpesa_callback(business_id):
     """ This function creates permit after querying stkquery and responssecode is 0. """
-
+    print(business_id)
     kwargs_permit = {
         'business_id': business_id,
     }
