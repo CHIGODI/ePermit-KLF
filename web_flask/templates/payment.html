@@ -18,7 +18,7 @@
                         <select name="business_id" class="form-select" required>
                             {% for business in businesses_bills %}
                                 <option value="" selected></option>
-                                <option value="business.id">{{ business.business_name }}</option>
+                                <option value="{{ business.id }}">{{ business.business_name }}</option>
                             {% endfor %}
                         </select>
                     </div>

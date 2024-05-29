@@ -39,7 +39,8 @@ def register_page():
 @token_required('user')
 def mpesa_express():
     """ This function renders payment page. """
-    businesses = storage.all(Business).values()
+    current_user = g.get('current_user')
+    businesses = current_user.businesses
     businesses_bills = [business for business in businesses if business.verified]
     business_ids = [business.id for business in businesses]
     permits = [p for p in storage.all(Permit).values() if p.business_id in business_ids]

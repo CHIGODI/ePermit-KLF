@@ -261,7 +261,7 @@ function stkPush(businessDataReqPermit){
         data: JSON.stringify(businessDataReqPermit),
         contentType: "application/json",
         success: function (data) {
-            showAlert('Payment request sent. Please check your phone for STK push.', 'success', 'flash-error-p');
+            showAlert('Payment request sent, Please check your phone.', 'success', 'flash-error-p');
             fadeOut('error-p-f', 10000);
 
            // give client 15sec before checking payment status
@@ -271,7 +271,7 @@ function stkPush(businessDataReqPermit){
         },
         error: function (data) {
             console.error('Error sending STK push request.');
-            showAlert('An error occurred while processing payment. Please try again.', 'error', 'flash-error-p');
+            showAlert('An error occurred. Please try again.', 'error', 'flash-error-p');
         }
 
     })
@@ -284,7 +284,7 @@ function stkQuery() {
         success: function (data) {
             errorCode = data['errorCode'];
             if (errorCode){
-                showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
+                showAlert('An error occurred while processing. Please try again later.', 'error', 'flash-error-p');
                 fadeOut('error-p-f');
             }else{
                 console.log(data);
@@ -294,8 +294,7 @@ function stkQuery() {
             }
         },
         error: function () {
-            console.error('Error querying payment status.');
-            showAlert('An error occurred while querying payment status. Please try again later.', 'error', 'flash-error-p');
+            console.log('Error querying payment status.');
         }
     });
 }}

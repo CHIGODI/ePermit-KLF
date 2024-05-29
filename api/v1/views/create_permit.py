@@ -10,7 +10,7 @@ from models.business import Business
 from models.permit import Permit
 from datetime import datetime, timedelta
 
-@app_views.route('/permits/<busines_id>')
+@app_views.route('/generatepermit/<busines_id>', methods=['GET'], strict_slashes=False)
 def generate_pdf(business_id):
     # Create a PDF file
     business = storage.get_obj_by_id(Business, business_id)

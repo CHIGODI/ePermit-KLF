@@ -48,6 +48,7 @@ def stkPush():
         data = request.get_json()
         phone  = data.get('phone_number')
         phone_number = phone[1:10]
+        amount = 1
         session['business_id'] = request.form.get('business_id')
 
         if not access_token:
@@ -62,7 +63,7 @@ def stkPush():
         "Password": pwd,
         "Timestamp": time_stamp,
         "TransactionType": "CustomerPayBillOnline",
-        "Amount": 1,
+        "Amount": amount,
         "PartyA": f'254{phone_number}',
         "PartyB": Shortcode,
         "PhoneNumber": f'254{phone_number}',
