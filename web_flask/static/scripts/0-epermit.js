@@ -208,7 +208,7 @@ $(function () {
         resultCode  = stkPush(businessDataReqPermit)
 
     })
-    console.log($('#generatePermitBtn'))
+    console.log(businessDataReqPermit)
     $('#generatePermitBtn').on('click', function(e){
         e.preventDefault()
         getPermit(businessDataReqPermit['business_id'])
