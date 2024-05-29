@@ -270,10 +270,16 @@ function stkQuery() {
         url: 'https://www.epermit.live/api/v1/stkquery',
         type: 'GET',
         success: function (data) {
-            console.log(data);
-            const resultCode = data['ResultCode'];
-            console.log(resultCode)
-            handlePaymentStatus(resultCode);
+            errorCode = data['errorCode'];
+            if (errorCode){
+                showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
+                fadeOut('error-p-f');
+            }else{
+                console.log(data);
+                const resultCode = data['ResultCode'];
+                console.log(resultCode)
+                handlePaymentStatus(resultCode);
+            }
         },
         error: function () {
             console.error('Error querying payment status.');

@@ -94,11 +94,11 @@ def mpesa_callback():
         MpesaReceiptNumber = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[1].get('Value')
         PhoneNumber =  response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[3].get('Value')
         business_id = session.get('business_id')
-        
+
         kwargs_permit = {
             'business_id': business_id,
         }
-        
+
         new_permit = Permit(**kwargs_permit)
         kwargs = {
             'TransactionDate': TransactionDate,
@@ -147,6 +147,8 @@ def stkQuery():
                                     headers = headers,
                                     data = payload_json)
         r = response.json()
+        if r.get('errorCode') == '500.001.1001':
+            return jsonify({"errorCode": r.get('errorCode')}), 202
         session.pop('CheckoutRequestID', None)
         return  make_response(jsonify(r), 200)
     except:
