@@ -251,14 +251,10 @@ function stkPush(businessDataReqPermit){
         data: JSON.stringify(businessDataReqPermit),
         contentType: "application/json",
         success: function (data) {
-            let bsShortCode = data.BusinessShortCode;
-            let password = data.password;
-            let timestamp = data.Timestamp;
-            let checkoutRequestID = data.CheckoutRequestID
-
+            console.log(data);
             // give client 10sec
             setTimeout(function () {
-                stkQuery(bsShortCode, password, timestamp, checkoutRequestID);
+                stkQuery();
             }, 10000);
         },
         error: function (data) {
@@ -269,18 +265,12 @@ function stkPush(businessDataReqPermit){
     })
 
 
-function stkQuery(bsShortCode, password, timestamp, checkoutRequestID) {
-    const requestData = {
-        'BusinessShortCode': bsShortCode,
-        'Password': password,
-        'Timestamp': timestamp,
-        'CheckoutRequestID': checkoutRequestID
-    };
-
+function stkQuery() {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/stkquery',
         type: 'GET',
         success: function (data) {
+            console.log(data);
             const resultCode = data.ResultCode;
             handlePaymentStatus(resultCode);
         },
