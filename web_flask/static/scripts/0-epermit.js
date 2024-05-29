@@ -204,15 +204,24 @@ $(function () {
         });
         console.log(businessDataReqPermit)
 
-	stkPush(businessDataReqPermit, function(result) {
-        if (result === 0) {
-            // Payment successful
-            getPermit(businessDataReqPermit['business_id']);
+        stkPush(businessDataReqPermit, function(result) {
+            if (result === 0) {
+                    $.ajax({
+                        url: 'https://www.epermit.live/api/v1/devcallback' + businessDataReqPermit['business_id'],
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(data);
+                            getPermit(businessDataReqPermit['business_id']);
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            console.log('Error getting permit');
+                        }
+                    });
                 } else {
-            // Payment failed
-            console.log('Payment failed');
+                console.log('Payment failed');
                 }
-            });
+        });
     })
 });
 
@@ -271,7 +280,6 @@ function stkPush(businessDataReqPermit, callback) {
         success: function(data) {
             showAlert('Payment request sent, Please check your phone.', 'success', 'flash-error-p');
             fadeOut('error-p-f', 10000);
-
             // Give client 15sec before checking payment status
             setTimeout(function() {
                 stkQuery(callback); // Call stkQuery with the callback

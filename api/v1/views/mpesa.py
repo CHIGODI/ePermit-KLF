@@ -119,6 +119,19 @@ def mpesa_callback():
         return jsonify({'ResultCode': result_code})
 
 
+@app_views.route('/devcallback/<business_id>', methods=['GET'], strict_slashes=False)
+def dev_mpesa_callback(business_id):
+    """ This function creates permit after querying stkquery and responssecode is 0. """
+
+    kwargs_permit = {
+        'business_id': business_id,
+    }
+
+    new_permit = Permit(**kwargs_permit)
+    new_permit.save()
+    return jsonify({"status": "ok"})
+
+
 @app_views.route('/stkquery', methods=['GET'], strict_slashes=False)
 def stkQuery():
     """ This function checks the status of a payment request to the M-Pesa API. """
