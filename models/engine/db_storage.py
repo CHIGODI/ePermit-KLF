@@ -109,6 +109,16 @@ class DBStorage:
             business.verified = True
             self.save()
 
+    def get_permit_by_business_id(self, business_id):
+        """ retrieves a permit by business id """
+        if business_id is None:
+            return None
+        permit = self.__session.query(Permit).filter(Permit.business_id == business_id).first()
+        if permit:
+            return permit
+        else:
+            return None
+
     def delete(self, obj=None):
         """ deletes an object from the current database """
         if obj is not None:

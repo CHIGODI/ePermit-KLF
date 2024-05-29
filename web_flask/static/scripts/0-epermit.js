@@ -204,7 +204,7 @@ $(function () {
         });
         console.log(businessDataReqPermit)
 
-        stkPush(businessDataReqPermit)
+        resultCode  = stkPush(businessDataReqPermit)
     })
 });
 // -------------------------------- End of document ready -------------------------------------------
@@ -266,7 +266,7 @@ function stkPush(businessDataReqPermit){
 
            // give client 15sec before checking payment status
             setTimeout(function () {
-                stkQuery();
+                stkQuery(businessDataReqPermit['business_id']);
             }, 15000);
         },
         error: function (data) {
@@ -277,7 +277,7 @@ function stkPush(businessDataReqPermit){
     })
 
 // stk query
-function stkQuery() {
+function stkQuery(business_id) {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/stkquery',
         type: 'GET',
@@ -290,7 +290,7 @@ function stkQuery() {
                 console.log(data);
                 const resultCode = data['ResultCode'];
                 console.log(resultCode)
-                handlePaymentStatus(resultCode);
+                handlePaymentStatus(resultCode, business_id);
             }
         },
         error: function () {
@@ -300,15 +300,33 @@ function stkQuery() {
 }}
 
 // This function handles the payment status
-function handlePaymentStatus(resultCode) {
+function handlePaymentStatus(resultCode, business_id) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
-        window.location.href = "https://www.epermit.live/mypermits";
+        window.location.href = "https://www.epermit.live/dashboard";
+        getPermit(business_id)
+
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
+        return 1;
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
+        return 1;
     }}
+
+// This functions gets permit
+function getPermit(business_id){
+    $.ajax({
+        url: 'https://www.epermit.live/api/v1/generatepermit'+ business_id,
+        type: 'GET',
+        success: function (data) {
+            console.log(data)
+        },
+        error: function (data) {
+            console.log('Error getting permit')
+        }
+    })
+}
