@@ -209,17 +209,26 @@ $(function () {
 });
 // -------------------------------- End of document ready -------------------------------------------
 
-function fadeOut(className) {
+// This function fades out an element after a given time.
+function fadeOut(className, timeInSec = 8000) {
     setTimeout(function () {
         $('.' + className).fadeOut('slow', function () {
             $(this).hide();
+            if ($(this).hasClass('error')) {
+                $(this).removeClass('error');
+            }else if ($(this).hasClass('success')) {
+                $(this).removeClass('success');
+            }
+            $(this).text('');
         });
     }, 8000);
 }
 
+// This function shows an alert message
 function showAlert(message, type, id) {
     $('#' + id).addClass(type).text(message).css({ 'padding-top': '18px' }).show();
 }
+
 // callback function for google maps api
 function initMap() {
     const mapElement = $("#map").get(0);
@@ -244,6 +253,7 @@ function initMap() {
 }
 
 
+// STK push
 function stkPush(businessDataReqPermit){
     $.ajax({
         url: 'https://www.epermit.live/api/v1/paympesa',
@@ -251,8 +261,10 @@ function stkPush(businessDataReqPermit){
         data: JSON.stringify(businessDataReqPermit),
         contentType: "application/json",
         success: function (data) {
-            console.log(data);
-            // give client 10sec
+            showAlert('Payment request sent. Please check your phone for STK push.', 'success', 'flash-error-p');
+            fadeOut('error-p-f', 10000);
+
+           // give client 15sec before checking payment status
             setTimeout(function () {
                 stkQuery();
             }, 15000);
@@ -264,7 +276,7 @@ function stkPush(businessDataReqPermit){
 
     })
 
-
+// stk query
 function stkQuery() {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/stkquery',
@@ -288,11 +300,12 @@ function stkQuery() {
     });
 }}
 
+// This function handles the payment status
 function handlePaymentStatus(resultCode) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
-        window.location.href = "https://www.epermit.live/redirecting";
+        window.location.href = "https://www.epermit.live/mypermits";
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
