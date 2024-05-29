@@ -255,7 +255,7 @@ function stkPush(businessDataReqPermit){
             // give client 10sec
             setTimeout(function () {
                 stkQuery();
-            }, 10000);
+            }, 15000);
         },
         error: function (data) {
             console.error('Error sending STK push request.');
@@ -294,7 +294,7 @@ function handlePaymentStatus(resultCode) {
         fadeOut('error-p-f');
         window.location.href = "https://www.epermit.live/redirecting";
     } else if (resultCode === '1032') {
-        showAlert('The payment request was canceled by the user.', 'error', 'flash-error-p');
+        showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');

@@ -7,6 +7,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .myprofile {
@@ -96,7 +97,8 @@
     border-radius: 8px;
     width: 50%;
     left: 35%;
-    background-color: red;
+    top: 70px;
+    display: hidden;
 }
 .bill-hero-section{
     width: 100%;

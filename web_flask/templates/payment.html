@@ -1,16 +1,7 @@
 {% extends "dashboard.html" %}
 {% block content %}
     <div class="dashboard-pages">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                <div class="flash error-p-f  {{ category }}" id="flash-error-p">
-                    hi guysbjkjkkjbkjbnkjbjkb
-                    {{ message }}
-                </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+        <div class="flash error-p-f  {{ category }}" id="flash-error-p"></div>
         <div class="bill-hero-section">
             <h3 class="title">Pay Your Bills Here</h3>
             <p>Simply select a business and pay</p>
