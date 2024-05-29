@@ -85,36 +85,36 @@ def stkPush():
 @app_views.route('/callback', methods=['POST'], strict_slashes=False)
 def mpesa_callback():
     """ This function receives the callback from the M-Pesa API. """
-    try:
-        response = request.get_json()
-        result_code = response.get('Body').get('stkCallback').get('ResultCode')
+    response = request.get_json()
+    result_code = response.get('Body').get('stkCallback').get('ResultCode')
+
+    if result_code == 0:
         TransactionDate = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[2].get('Value')
         Amount = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[0].get('Value')
         MpesaReceiptNumber = response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[1].get('Value')
         PhoneNumber =  response.get('Body').get('stkCallback').get('CallbackMetadata').get('Item')[3].get('Value')
         business_id = session.get('business_id')
-
-        if result_code == 0:
-            kwargs_permit = {
+        
+        kwargs_permit = {
             'business_id': business_id,
-            }
-
-            new_permit = Permit(**kwargs_permit)
-            kwargs = {
+        }
+        
+        new_permit = Permit(**kwargs_permit)
+        kwargs = {
             'TransactionDate': TransactionDate,
             'Amount':  Amount,
             'MpesaReceiptNumber': MpesaReceiptNumber,
             'PhoneNumber': PhoneNumber,
             'permit_id': new_permit.id
-            }
-            save_transaction = Mpesa(**kwargs)
-            new_permit.save()
-            save_transaction.save()
-            session.pop('business_id', None)
-            return jsonify({"status": "Success"})
-    except Exception as e:
-        print(e)
-        return jsonify({'status': e})
+        }
+        save_transaction = Mpesa(**kwargs)
+        new_permit.save()
+        save_transaction.save()
+        session.pop('business_id', None)
+        return jsonify({"status": "ok"})
+    else:
+        return jsonify({'ResultCode': result_code})
+
 
 @app_views.route('/stkquery', methods=['GET'], strict_slashes=False)
 def stkQuery():
@@ -149,6 +149,5 @@ def stkQuery():
         r = response.json()
         session.pop('CheckoutRequestID', None)
         return  make_response(jsonify(r), 200)
-    except Exception as e:
-        print(e)
-        return jsonify({"status": "Error. Please try again."}), 500
+    except:
+        return jsonify({"status": "fail"}), 500
