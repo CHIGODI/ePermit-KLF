@@ -210,7 +210,7 @@ $(function () {
 // -------------------------------- End of document ready -------------------------------------------
 
 // This function fades out an element after a given time.
-function fadeOut(className, timeInSec = 8000) {
+function fadeOut(className, timeInSec=8000) {
     setTimeout(function () {
         $('.' + className).fadeOut('slow', function () {
             $(this).hide();
@@ -221,7 +221,7 @@ function fadeOut(className, timeInSec = 8000) {
             }
             $(this).text('');
         });
-    }, 8000);
+    }, timeInSec);
 }
 
 // This function shows an alert message
@@ -304,23 +304,21 @@ function handlePaymentStatus(resultCode, business_id) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
-        window.location.href = "https://www.epermit.live/dashboard";
+        window.location.href = "https://www.epermit.live/pdf";
         getPermit(business_id)
 
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
-        return 1;
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
-        return 1;
     }}
 
 // This functions gets permit
 function getPermit(business_id){
     $.ajax({
-        url: 'https://www.epermit.live/api/v1/generatepermit'+ business_id,
+        url: 'https://www.epermit.live/api/v1/generatepermit/'+ business_id,
         type: 'GET',
         success: function (data) {
             console.log(data)

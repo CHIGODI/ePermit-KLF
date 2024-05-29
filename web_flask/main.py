@@ -52,12 +52,11 @@ def mypermits():
     return render_template('my_permits.html', permits=permits)
 
 
-@main.route('/renewpermit', methods=['GET'], strict_slashes=False)
+@main.route('/pdf', methods=['GET'], strict_slashes=False)
 @token_required('user')
-def renewpermit():
+def pdf():
     """ user renew permit """
-    current_user = g.get('current_user')
-    return render_template('renewpermit.html', current_user=current_user)
+    return render_template('pdf.html')
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
