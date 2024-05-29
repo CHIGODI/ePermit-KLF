@@ -170,7 +170,6 @@ $(function () {
         });
     }
 
-    let globalbusinessDataReqPermit = {}
     // Permit payement
     $('#pay-permit').on('click', function(e){
         e.preventDefault()
@@ -197,7 +196,6 @@ $(function () {
         }
 
         let businessDataReqPermit = {}
-        globalbusinessDataReqPermit = businessDataReqPermit;
         let mpesaFormRawData = mpesaForm.serializeArray();
 
         // retrieve business info from form object to be sent to the server
@@ -206,17 +204,18 @@ $(function () {
         });
         console.log(businessDataReqPermit)
 
-        resultCode  = stkPush(businessDataReqPermit)
+	stkPush(businessDataReqPermit, function(result) {
+            if (result === 1032) {
+		// Payment successful
+		getPermit(businessDataReqPermit['business_id']);
+            } else {
+		// Payment failed
+		console.log('Payment failed');
+            }
+	});
 
     })
-    console.log('---------------------------hrer')
-    console.log(globalbusinessDataReqPermit)
-
-    $('#generatePermitBtn').on('click', function(e){
-        e.preventDefault()
-        getPermit(businessDataReqPermit['business_id'])
-    })
-
+ 
 });
 // -------------------------------- End of document ready -------------------------------------------
 
@@ -263,68 +262,74 @@ function initMap() {
     });
 }
 
-
 // STK push
-function stkPush(businessDataReqPermit){
+function stkPush(businessDataReqPermit, callback) {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/paympesa',
         type: 'POST',
         data: JSON.stringify(businessDataReqPermit),
         contentType: "application/json",
-        success: function (data) {
+        success: function(data) {
             showAlert('Payment request sent, Please check your phone.', 'success', 'flash-error-p');
             fadeOut('error-p-f', 10000);
 
-           // give client 15sec before checking payment status
-            setTimeout(function () {
-                stkQuery();
+            // Give client 15sec before checking payment status
+            setTimeout(function() {
+                stkQuery(callback); // Call stkQuery with the callback
             }, 15000);
         },
-        error: function (data) {
+        error: function(data) {
             console.error('Error sending STK push request.');
             showAlert('An error occurred. Please try again.', 'error', 'flash-error-p');
+            callback(1); // Return 1 indicating error
         }
-
-    })
+    });
+}
 
 // stk query
-function stkQuery() {
+function stkQuery(callback) {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/stkquery',
         type: 'GET',
-        success: function (data) {
+        success: function(data) {
             errorCode = data['errorCode'];
-            if (errorCode){
+            if (errorCode) {
                 showAlert('An error occurred while processing. Please try again later.', 'error', 'flash-error-p');
                 fadeOut('error-p-f');
-            }else{
+                callback(1); // Return 1 indicating error
+            } else {
                 console.log(data);
                 const resultCode = data['ResultCode'];
-                console.log(resultCode)
-                handlePaymentStatus(resultCode);
+                console.log(resultCode);
+                handlePaymentStatus(resultCode, callback); // Call handlePaymentStatus with the callback
             }
         },
-        error: function () {
+        error: function() {
             console.log('Error querying payment status.');
+            callback(1); // Return 1 indicating error
         }
     });
-}}
+}
 
 // This function handles the payment status
-function handlePaymentStatus(resultCode) {
+function handlePaymentStatus(resultCode, callback) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
         window.location.href = "https://www.epermit.live/pdf";
-
+        callback(0); // Return 0 indicating success
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
-        window.location.href = "https://www.epermit.live/pdf";
+	showAlert('Kindly wait as permit is being processed.', 'error', 'flash-error-p');
+	fadeOut('error-p-f');
+        callback(1032); // Return 1032 indicating cancellation
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
-    }}
+        callback(1); // Return 1 indicating other error
+    }
+}
 
 // This functions gets permit
 function getPermit(business_id){
@@ -337,8 +342,6 @@ function getPermit(business_id){
         },
         success: function (data) {
             console.log(data)
-            $('#loading').hide();
-            $('#generatePermitBtn').prop('disabled', false);
             const url = window.URL.createObjectURL(data);
             const a = document.createElement('a');
             a.style.display = 'none';
@@ -347,7 +350,6 @@ function getPermit(business_id){
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);
-            $('#message').text('Permit generated successfully.').addClass('text-success');
         },
         error: function (data) {
             console.log('Error getting permit')

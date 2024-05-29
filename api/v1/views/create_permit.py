@@ -20,8 +20,10 @@ os.makedirs(PDF_DIR, exist_ok=True)
 def generate_pdf(business_id):
     # Create a PDF file
     business = storage.get_obj_by_id(Business, business_id)
+    print(business)
     category = storage.get_obj_by_id(Category, business.category)
-    permit = storage.get_permit_by_business_id(business_id)
+    permit = storage.get_permit_by_business_id(business.id)
+    print(permit)
 
     if business.verified is True:
         pdf_filename = f"{business.business_name}_permit.pdf"
