@@ -100,6 +100,7 @@ def mpesa_callback():
         }
 
         new_permit = Permit(**kwargs_permit)
+        new_permit.save()
         kwargs = {
             'TransactionDate': TransactionDate,
             'Amount':  Amount,
@@ -108,7 +109,6 @@ def mpesa_callback():
             'permit_id': new_permit.id
         }
         save_transaction = Mpesa(**kwargs)
-        new_permit.save()
         save_transaction.save()
         session.pop('business_id', None)
         return jsonify({"status": "ok"})
