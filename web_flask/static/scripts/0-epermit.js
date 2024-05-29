@@ -305,11 +305,12 @@ function handlePaymentStatus(resultCode, business_id) {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
         window.location.href = "https://www.epermit.live/pdf";
-        getPermit(business_id)
 
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
+        window.location.href = "https://www.epermit.live/pdf";
+        getPermit(business_id)
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
