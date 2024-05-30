@@ -12,7 +12,7 @@ class Permit(BaseModel, Base):
     __tablename__ = 'permits'
     permit_number = Column(String(60), nullable=False, unique=True)
     is_valid = Column(Boolean, default=False, nullable=False)
-    business_id = Column(String(60), ForeignKey('businesses.id'), nullable=False)
+    business_id = Column(String(60), ForeignKey('businesses.id'), nullable=True)
 
     def __init__(self, *args, **kwargs):
         """ Override the default init method to set the permit number"""
