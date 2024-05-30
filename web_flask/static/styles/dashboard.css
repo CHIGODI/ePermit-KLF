@@ -177,7 +177,8 @@
     border-radius: 8px;
     margin: 30px;
     overflow: hidden;
-    color: #fff;
+    color: #34495e;
+
 }
 
 .upper-content {
@@ -208,7 +209,7 @@
 .text-content h2 {
     margin: 0;
     font-family: 'Arial', sans-serif;
-    color: #fff;
+    color: #34495e;
     font-weight: 100;
     font-size: 1.5rem;
     animation: fadeIn 1s ease-out; 
@@ -217,7 +218,7 @@
 .text-content p {
     margin: 5px 0 0 0;
     font-family: 'Georgia', serif;
-    color: #f0f8ff;
+    color: #3f5061;
     font-size: 1rem;
     animation: fadeIn 1.5s ease-out;
 }
@@ -297,30 +298,124 @@
     font-style: italic;
 }
 
-.testimonials {
-    margin-top: 30px;
-    overflow: hidden; /* Ensure content doesn't overflow */
-}
+
 
 /* Add div for testimonies */
-.testimonials {
+.testimonies-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-right: 5%;
+    margin-left: 5%;
+}
+
+.testimonials-container {
+    position: relative;
+    width: 90%;
+    height: 100px; /* Adjust based on your content */
+    overflow: hidden;
     margin-top: 30px;
-    overflow: hidden; /* Ensure content doesn't overflow */
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color: #e9ecef;
+    margin-bottom: 30px;
+    padding: 30px 30px;
+}
+
+.testimonials {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
 }
 
 .testimonial {
-    background-color: #f8f9fa;
+    min-width: 100%;
+    flex: 1 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 20px;
     border-radius: 8px;
-    margin-bottom: 20px;
-    opacity: 0; /* Initially hide testimonials */
-    transition: opacity 0.5s ease-in-out; /* Add transition effect */
+    margin: 0;
+    transition: transform 1s ease-in-out; /* Smooth transition for sliding */
 }
 
-.testimonial.active {
-    opacity: 1; /* Show active testimonial */
+.testimonial p.quote {
+    font-style: italic;
+    color: #333;
 }
 
+.testimonial p.author {
+    font-weight: bold;
+    color: #007bff;
+}
+
+
+
+/* footer style */
+
+/* Footer styles */
+footer {
+    width: 100%;
+    background-color: #4682B4; ;
+    color: white;
+    position: relative; /* Changed to sticky */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.footer-container p {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.footer-links li {
+    margin: 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFD700; /* Optional: Hover color */
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-links {
+        margin-top: 10px;
+    }
+}
 
 
 /* Smartphones (portrait) */
