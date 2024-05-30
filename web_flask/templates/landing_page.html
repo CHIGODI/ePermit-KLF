@@ -7,10 +7,7 @@
         <p class="hero-subtitle">
             Your one-stop solution for managing permits online.
         </p>
-        <div class="hero-buttons">
-            <a href="{{ url_for('auth.signup') }}" class="btn btn-primary hero-button">Create Account</a>
-            <a href="{{ url_for('auth.login') }}" class="btn btn-success hero-button">Login</a>
-        </div>
+        <a href="#services" id="primary_button" class="btn btn-primary hero-button">Let's get started</a>
     </div>
 </section>
 
@@ -26,24 +23,18 @@
                         <i class="fa-solid fa-id-card"></i>
                         <h2>Business Registration</h2>
                         <p>Submit your application online, upload necessary documents</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">Apply</button></a>
-                    </div>
-                    <div class="card">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <h2>Permit tracking</h2>
-                        <p> Get real-time status updates, notifications all in one place</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">Apply</button></a>
+                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View Service</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-layer-group"></i>
                         <h2>Permit Renewal</h2>
                         <p>Renew your existing permits effortlessly</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">Apply</button></a>
+                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View Service</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-file-signature"></i>
                         <h2>Other Services</h2>
-                        <p>Explore a range of additional services, including environmental permits, event permits, and more.</p>
+                        <p>Explore  environmental permits, event permits, and more.</p>
                         <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View more</button></a>
                     </div>
                 </div>
@@ -159,37 +150,6 @@
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="text-center mt-5">Contact Us</h2>
-            <p class="text-center mb-5">We would love to hear from you! Please fill out the form below and we will get in touch with you shortly.</p>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <form>
-                        <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="subject" class="form-label">Subject</label>
-                            <input type="text" class="form-control" id="subject" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea class="form-control" id="message" rows="5" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary w-100">Submit</button>
-                    </form>
-                    <div id="popupMessage" class="popup-message">We shall reach back as soon as possible</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer class="text-center text-lg-start bg-light text-muted py-4" id="footer">
         <section class="py-4">
             <div class="container text-center text-md-start mt-5">
@@ -215,10 +175,10 @@
                     </div>
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">Support</h6>
-                        <p><i class="fas fa-home me-3"></i> 1234 Main St, City, State</p>
-                        <p><i class="fas fa-envelope me-3"></i> info@example.com</p>
-                        <p><i class="fas fa-phone me-3"></i> + 01 234 567 88</p>
-                        <p><i class="fas fa-print me-3"></i> + 01 234 567 89</p>
+                        <p><i class="fas fa-home me-3"></i> Ganze, 80205, 80205; Kilifi</p>
+                        <p><i class="fas fa-envelope me-3"></i> support.kilifi@permit.com</p>
+                        <p><i class="fas fa-phone me-3"></i> +254 796 814 864</p>
+                        <p><i class="fas fa-print me-3"></i> +254 708 051 357</p>
                     </div>
                 </div>
             </div>
