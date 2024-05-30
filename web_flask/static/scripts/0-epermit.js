@@ -208,7 +208,7 @@ $(function () {
         stkPush(businessDataReqPermit, function(result) {
             if (result === 0) {
                     $.ajax({
-                        url: 'https://www.epermit.live/api/v1/devcallback' + businessDataReqPermit['business_id'],
+                        url: 'https://www.epermit.live/api/v1/devcallback/' + businessDataReqPermit['business_id'],
                         type: 'GET',
                         success: function(data) {
                             console.log(data);
