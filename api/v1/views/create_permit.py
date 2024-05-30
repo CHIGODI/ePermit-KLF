@@ -38,8 +38,10 @@ def generate_pdf(business_id):
 
         c = canvas.Canvas(pdf_filename, pagesize=A4)
 
-        image_path = "/home/chigow/ePermit-KLF/api/v1/views/klf.jpeg"  # Update with the actual path to your image
-        c.drawImage(image_path, 30, height - 50, width=100, height=50)
+        image_path = "/home/ubuntu/ePermit-KLF/web_flask/static/images/klf.jpeg"
+
+        # Logo
+        c.drawImage(image_path, 30, height - 50, width=100, height=70)
 
         # Header and title
         c.setFont("Helvetica-Bold", 14)
