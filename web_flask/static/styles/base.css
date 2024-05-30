@@ -1,39 +1,28 @@
 /* -------base html styles-------------- */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
 
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.navbar {
+
+ .navbar {
     background-color: #fff;
     height: 80px;
     position: fixed;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    z-index: 1000;
 }
 
 .navbar-brand {
     font-weight: 500;
-    color: #009970;
+    color: #151414;
     font-size: 24px;
     transition: 0.3s color;
-}
+}*/
 
-.login-button {
-    background-color: #009970;
-    color: #fff;
-    font-size: 14px;
-    padding: 8px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: 0.3s background-color;
-}
-
-.login-button:hover {
-    background-color: #00b383;
-}
 
 .navbar-toggler {
     --bs-navbar-toggler-border-color: rgba(var(--bs-emphasis-color-rgb), 0);
@@ -41,62 +30,57 @@
     font-size: 1.25rem;
 }
 
-.navbar-toggler:focus,
-.btn-close:focus {
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: green;
+}
+
+.navbar-toggler:focus, .btn-close:focus {
     box-shadow: none;
     outline: none;
 }
 
 .nav-link {
-    color: green;
-    font-weight: 500;
+    color: #666777;
+    font-size: 1.2rem;
+    font-weight: 600;
 
 }
-.navbar-l::after{
-    position: absolute;
-    content: '';
-    background-color: green;
-    width: 100%;
-    height: 3px;
-    border-radius: 8px;
-    left: 0;
-    bottom: -4px;
-    display: none;
-    transition: width 0.9s ease;
-}
 
-button .nav-link:hover,
-.nav-link.active {
+.nav-link:hover {
     color: green;
 }
 
+.nav-link.active:hover {
+    color: green;
+}
 
-/* will change style starting from tablets */
+@media (min-width: 991px) {
+    .nav-link {
+        position: relative;
+        padding-bottom: 5px; /* Adjust padding as needed */
+    }
 
-@media(min-width:991px) {
     .nav-link::before {
         content: "";
-        position: relative;
+        position: absolute;
         bottom: 0;
         left: 50%;
         transform: translateX(-50%);
-        width: 100%;
+        width: 0;
         height: 2px;
-        background-color: #009970;
+        background-color: green;
         visibility: hidden;
-        transition: 0.3s ease-in-out;
+        transition: width 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
 
-    .nav-link:hover::before {
+    .nav-link:hover::before, .nav-link.active::before {
         width: 100%;
+        visibility: visible;
+    }
+}
+@media (min-width: 991px) {
+    .nav-link {
+        padding-bottom: 5px; /* Ensure consistent padding */
     }
 }
 
-/* ------------before login sections-------------- */
-.main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 0;
-}
