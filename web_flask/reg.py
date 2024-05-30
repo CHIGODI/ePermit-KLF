@@ -49,7 +49,7 @@ def mpesa_express():
         permit = storage.get_permit_by_business_id(business_id)
         permits.append(permit)
 
-    if permits is None:
+    if len(permits) < 1:
         return render_template('payment.html',
                               businesses=businesses)
     else:
