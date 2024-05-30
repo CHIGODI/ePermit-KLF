@@ -204,15 +204,25 @@ $(function () {
         });
         console.log(businessDataReqPermit)
 
-	stkPush(businessDataReqPermit, function(result) {
-        if (result === 0) {
-            // Payment successful
-            getPermit(businessDataReqPermit['business_id']);
+        console.log(businessDataReqPermit['business_id']);
+        stkPush(businessDataReqPermit, function(result) {
+            if (result === 0) {
+                    $.ajax({
+                        url: 'https://www.epermit.live/api/v1/devcallback/' + businessDataReqPermit['business_id'],
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(data);
+                            window.location.href = 'https://www.epermit.live/dashboard';
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            console.log('Error getting permit');
+                        }
+                    });
                 } else {
-            // Payment failed
-            console.log('Payment failed');
+                console.log('Payment failed');
                 }
-            });
+        });
     })
 });
 
@@ -271,7 +281,6 @@ function stkPush(businessDataReqPermit, callback) {
         success: function(data) {
             showAlert('Payment request sent, Please check your phone.', 'success', 'flash-error-p');
             fadeOut('error-p-f', 10000);
-
             // Give client 15sec before checking payment status
             setTimeout(function() {
                 stkQuery(callback); // Call stkQuery with the callback
@@ -315,7 +324,7 @@ function handlePaymentStatus(resultCode, callback) {
     if (resultCode === '0') {
         showAlert('Payment was successful!', 'success', 'flash-error-p');
         fadeOut('error-p-f');
-        showAlert('Kindly wait as we process permit', 'success', 'flash-error-p');
+        showAlert('Congratulations! An email will be sent with an attachemnt of permit in the next 10 minutes', 'success', 'flash-error-p');
         fadeOut('error-p-f', 10000);
         callback(0); // Return 0 indicating success
     } else if (resultCode === '1032') {
@@ -327,30 +336,4 @@ function handlePaymentStatus(resultCode, callback) {
         fadeOut('error-p-f');
         callback(1); // Return 1 indicating other error
     }
-}
-
-// This functions gets permit
-function getPermit(business_id){
-    console.log(business_id)
-    $.ajax({
-        url: 'https://www.epermit.live/api/v1/generatepermit/'+ business_id,
-        type: 'GET',
-        xhrFields: {
-            responseType: 'blob'
-        },
-        success: function (data) {
-            console.log(data)
-            const url = window.URL.createObjectURL(data);
-            const a = document.createElement('a');
-            a.style.display = 'none';
-            a.href = url;
-            a.download = 'permit.pdf';
-            document.body.appendChild(a);
-            a.click();
-            window.URL.revokeObjectURL(url);
-        },
-        error: function (data) {
-            console.log('Error getting permit')
-        }
-    })
 }

@@ -5,14 +5,9 @@
         <h1>You have no permits</h1>
     {% else %}
         {% for permit in permits %}
-        <p>{{ permit.permit_no }}</p>
+        <p>{{ permit.permit_number }}</p>
         {% endfor %}
     {% endif %}
-
-
-
-
-
 </div>
 {% endblock %}
 

@@ -14,6 +14,23 @@ FLUSH PRIVILEGES;
 use epermit_dev_db;
 
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS users (
+    `id` VARCHAR(60) NOT NULL PRIMARY KEY,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    password VARCHAR(512) NOT NULL,
+    first_name VARCHAR(60),
+    last_name VARCHAR(60),
+    ID_number INTEGER,
+    gender VARCHAR(20),
+    designation VARCHAR(60),
+    phone_number VARCHAR(20),
+    role VARCHAR(6),
+    UNIQUE (id)
+);
+
 DROP TABLE IF EXISTS `categories`;
 
 

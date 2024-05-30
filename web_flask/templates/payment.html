@@ -6,7 +6,7 @@
             <h3 class="title">Pay Your Bills Here</h3>
             <p>Simply select a business and pay</p>
         </div>
-        {% if not businesses_bills %}
+        {% if not bswithexpired_permits %}
                 <p>You  have no pending bills</p>
         {% else %}
             <div class="payment">
@@ -16,7 +16,7 @@
                     <div class="mb-3">
                         <label for="business_name" class="form-label">Business Name<span class="required">*</span></label>
                         <select name="business_id" class="form-select" required>
-                            {% for business in businesses_bills %}
+                            {% for business in bswithexpired_permits %}
                                 <option value="" selected></option>
                                 <option value="{{ business.id }}">{{ business.business_name }}</option>
                             {% endfor %}
