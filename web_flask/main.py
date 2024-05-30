@@ -49,14 +49,9 @@ def mypermits():
     businesses = current_user.businesses
     business_ids = [business.id for business in businesses]
     permits = [p for p in storage.all(Permit).values() if p.business_id in business_ids]
+
+    print(permits)
     return render_template('my_permits.html', permits=permits)
-
-
-@main.route('/pdf', methods=['GET'], strict_slashes=False)
-@token_required('user')
-def pdf():
-    """ user renew permit """
-    return render_template('pdf.html')
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
