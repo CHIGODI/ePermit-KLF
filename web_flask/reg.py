@@ -39,10 +39,20 @@ def register_page():
 @token_required('user')
 def mpesa_express():
     """ This function renders payment page. """
-    businesses = storage.all(Business).values()
-    businesses_bills = [business for business in businesses if business.verified]
+    current_user = g.get('current_user')
+    businesses = [business for business in current_user.businesses if business.verified]
     business_ids = [business.id for business in businesses]
-    permits = [p for p in storage.all(Permit).values() if p.business_id in business_ids]
-    invalid_permits = [permit for permit in permits if not permit.is_valid]
+
+
+    permits = []
+    for business_id in business_ids:
+        permits.extend(storage.get_permit_by_business_id(business_id))
+
+    bswithexpired_permits = []
+
+    for permit in permits:
+        if permit.check_validity() is False:
+            business = storage.get_obj_by_id(Business, permit.business_id)
+            bswithexpired_permits.append(business)
     return render_template('payment.html',
-                          businesses_bills=businesses_bills)
+                           bswithexpired_permits=bswithexpired_permits)

@@ -34,6 +34,7 @@ werkzeug==3.0.3
 zipp==3.18.2
 gunicorn==22.0.0 # for production
 reportlab== 4.2.0
+num2words
 
 # How to install all requirements
 # pip install -r requirements.txt

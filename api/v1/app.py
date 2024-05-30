@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 """ Module for the API """
+from flask_session import Session
 from flask import Flask, jsonify
 from api.v1.views import app_views
 from os import getenv
 from models import storage
+from flask_mail import Mail
 from flask_cors import CORS
 from dotenv import load_dotenv
+
 
 load_dotenv()
 
@@ -15,8 +18,17 @@ app.config['SECRET_KEY'] = getenv('SECRET_KEY')
 app.config['SESSION_TYPE'] = getenv('SESSION_TYPE')
 app.config['SESSION_FILE_DIR'] = getenv('SESSION_FILE_DIR')
 app.config['SESSION_FILE_THRESHOLD'] = int(getenv('SESSION_FILE_THRESHOLD'))
-app.register_blueprint(app_views) # Register the blueprint
-CORS(app, resources={r"/*": {"origins": "*"}}) # Enable CORS
+app.config['MAIL_SERVER'] = getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = int(getenv('MAIL_PORT'))
+app.config['MAIL_USE_TLS'] = getenv('MAIL_USE_TLS')
+app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
+app.register_blueprint(app_views)
+
+
+CORS(app, resources={r"/*": {"origins": "*"}})
+Session(app)
+mail = Mail(app)
 
 
 #This that closes the db session

@@ -49,15 +49,9 @@ def mypermits():
     businesses = current_user.businesses
     business_ids = [business.id for business in businesses]
     permits = [p for p in storage.all(Permit).values() if p.business_id in business_ids]
+
+    print(permits)
     return render_template('my_permits.html', permits=permits)
-
-
-@main.route('/renewpermit', methods=['GET'], strict_slashes=False)
-@token_required('user')
-def renewpermit():
-    """ user renew permit """
-    current_user = g.get('current_user')
-    return render_template('renewpermit.html', current_user=current_user)
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)

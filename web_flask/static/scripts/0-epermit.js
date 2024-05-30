@@ -14,17 +14,7 @@ $(function () {
             $(this).hide();
         });
     }, 8000);
-    function fadeOut(className) {
-        setTimeout(function () {
-            $('.' + className).fadeOut('slow', function () {
-                $(this).hide();
-            });
-        }, 8000);
-    }
-    function showAlert(message, type) {
-        $('#flash-form-error').addClass(type).text(message).css({ 'padding-top': '18px' }).show();
-    }
-// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
     // Registering a business page
     // counts characters as user fills in register bs
@@ -72,7 +62,7 @@ $(function () {
 
         // if missing fields return stop executing
         if (!isValid){
-            showAlert('Please fill out all fields','error')
+            showAlert('Please fill out all fields', 'error', 'flash-form-error')
             fadeOut('flash-msg')
             $('.register-bs-btn').text("Submit");
             return;
@@ -107,13 +97,13 @@ $(function () {
                     businessInfoSubmitted = true;
                     if (ownerInfoSubmitted) {
                         $('.register-bs-btn').text("Submit");
-                        showAlert("Successfully submited!!", 'success');
+                        showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('.flash-msg')
-                        window.location.href = "http://localhost:5001/dashboard";
+                        window.location.href = "https://www.epermit.live/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    showAlert('Something went wrong!', 'error')
+                    showAlert('Something went wrong!', 'error', 'flash-form-error')
                     fadeOut('flash-msg')
                     $('.register-bs-btn').text("Submit");
                 }
@@ -133,26 +123,26 @@ $(function () {
                     ownerInfoSubmitted = true;
                     if (businessInfoSubmitted) {
                         $('.register-bs-btn').text("Submit");
-                        showAlert("Successfully submited!!", 'success');
+                        showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('flash-msg')
-                        window.location.href = "http://www.epermit.live/dashboard";
+                        window.location.href = "https://www.epermit.live/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    showAlert("Something went wrong!", 'error');
+                    showAlert("Something went wrong!", 'error', 'flash-form-error');
                     fadeOut('flash-msg');
                     $('.register-bs-btn').text("Submit");
                 }
             });
         } else {
-            showAlert("Please accept the declaration to proceed.", 'error');
+            showAlert("Please accept the declaration to proceed.", 'error', 'flash-form-error');
             fadeOut('flash-msg');
             $('.register-bs-btn').text("Submit");
         }
     });
 
 
-// small screens js
+    // small screens js
     if ($(window).width() <= 768) {
         $('.menu').on('click', function () {
             let sideNav = $('.side-nav');
@@ -199,8 +189,8 @@ $(function () {
 
         // if missing fields return stop executing
         if (!isValid) {
-            showAlert('Please fill out all fields', 'error')
-            fadeOut(errorMsgDiv)
+            showAlert('Please fill out all fields', 'error', 'flash-error-p')
+            fadeOut('error-p-f')
             $('.register-bs-btn').text("Submit");
             return;
         }
@@ -212,17 +202,51 @@ $(function () {
         $.each(mpesaFormRawData, function (index, obj) {
             businessDataReqPermit[obj.name] = obj.value;
         });
+        console.log(businessDataReqPermit)
 
-        stkPush(businessDataReqPermit)
+        console.log(businessDataReqPermit['business_id']);
+        stkPush(businessDataReqPermit, function(result) {
+            if (result === 0) {
+                    $.ajax({
+                        url: 'https://www.epermit.live/api/v1/devcallback/' + businessDataReqPermit['business_id'],
+                        type: 'GET',
+                        success: function(data) {
+                            console.log(data);
+                            window.location.href = 'https://www.epermit.live/dashboard';
+                        },
+                        error: function(data) {
+                            console.log(data);
+                            console.log('Error getting permit');
+                        }
+                    });
+                } else {
+                console.log('Payment failed');
+                }
+        });
     })
-
-
-
-
-
-
-
 });
+
+// -------------------------------- End of document ready -------------------------------------------
+
+// This function fades out an element after a given time.
+function fadeOut(className, timeInSec=8000) {
+    setTimeout(function () {
+        $('.' + className).fadeOut('slow', function () {
+            $(this).hide();
+            if ($(this).hasClass('error')) {
+                $(this).removeClass('error');
+            }else if ($(this).hasClass('success')) {
+                $(this).removeClass('success');
+            }
+            $(this).text('');
+        });
+    }, timeInSec);
+}
+
+// This function shows an alert message
+function showAlert(message, type, id) {
+    $('#' + id).addClass(type).text(message).css({ 'padding-top': '18px' }).show();
+}
 
 // callback function for google maps api
 function initMap() {
@@ -247,67 +271,69 @@ function initMap() {
     });
 }
 
-
-function stkPush(data){
+// STK push
+function stkPush(businessDataReqPermit, callback) {
     $.ajax({
         url: 'https://www.epermit.live/api/v1/paympesa',
         type: 'POST',
-        data: JSON.stringify(mpesaExpress),
+        data: JSON.stringify(businessDataReqPermit),
         contentType: "application/json",
-        success: function (data) {
-            let  bsShortCode = data.BusinessShortCode;
-            let password = data.password;
-            let timestamp = data.Timestamp;
-            let checkoutRequestID = data.CheckoutRequestID
-
-            // give client 10sec
-            setTimeout(function () {
-                stkQuery(bsShortCode, password, timestamp, checkoutRequestID);
-            }, 10000);
+        success: function(data) {
+            showAlert('Payment request sent, Please check your phone.', 'success', 'flash-error-p');
+            fadeOut('error-p-f', 10000);
+            // Give client 15sec before checking payment status
+            setTimeout(function() {
+                stkQuery(callback); // Call stkQuery with the callback
+            }, 15000);
         },
-        error: function (data) {
+        error: function(data) {
             console.error('Error sending STK push request.');
-            showAlert('An error occurred while processing payment. Please try again.', 'error');
+            showAlert('An error occurred. Please try again.', 'error', 'flash-error-p');
+            callback(1); // Return 1 indicating error
         }
-
-    })
-
-    function stkQuery(bsShortCode, password, timestamp, checkoutRequestID) {
-        const requestData = {
-            'BusinessShortCode': bsShortCode,
-            'Password': password,
-            'Timestamp': timestamp,
-            'CheckoutRequestID': checkoutRequestID
-        };
-
-        $.ajax({
-            url: 'https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query',
-            type: 'POST',
-            data: JSON.stringify(requestData),
-            contentType: "application/json",
-            success: function (data) {
-                const resultCode = data.ResultCode;
-                handlePaymentStatus(resultCode);
-            },
-            error: function () {
-                console.error('Error querying payment status.');
-                showAlert('An error occurred while querying payment status. Please try again later.', 'error');
-            }
-        });
-    }
-
+    });
 }
 
-function handlePaymentStatus(resultCode) {
+// stk query
+function stkQuery(callback) {
+    $.ajax({
+        url: 'https://www.epermit.live/api/v1/stkquery',
+        type: 'GET',
+        success: function(data) {
+            errorCode = data['errorCode'];
+            if (errorCode) {
+                showAlert('An error occurred while processing. Please try again later.', 'error', 'flash-error-p');
+                fadeOut('error-p-f');
+                callback(1); // Return 1 indicating error
+            } else {
+                console.log(data);
+                const resultCode = data['ResultCode'];
+                console.log(resultCode);
+                handlePaymentStatus(resultCode, callback); // Call handlePaymentStatus with the callback
+            }
+        },
+        error: function() {
+            console.log('Error querying payment status.');
+            callback(1); // Return 1 indicating error
+        }
+    });
+}
+
+// This function handles the payment status
+function handlePaymentStatus(resultCode, callback) {
     if (resultCode === '0') {
-        showAlert('Payment was successful!', 'success');
-        fadeOut(errorMsgDiv);
-        window.location.href = "https://www.epermit.live/redirecting";
+        showAlert('Payment was successful!', 'success', 'flash-error-p');
+        fadeOut('error-p-f');
+        showAlert('Congratulations! An email will be sent with an attachemnt of permit in the next 10 minutes', 'success', 'flash-error-p');
+        fadeOut('error-p-f', 10000);
+        callback(0); // Return 0 indicating success
     } else if (resultCode === '1032') {
-        showAlert('The payment request was canceled by the user.', 'error');
-        fadeOut(errorMsgDiv);
+        showAlert('The payment request was canceled.', 'error', 'flash-error-p');
+        fadeOut('error-p-f');
+        callback(1032); // Return 1032 indicating cancellation
     } else {
-        showAlert('An error occurred while processing payment. Please try again later.', 'error');
-        fadeOut(errorMsgDiv);
+        showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
+        fadeOut('error-p-f');
+        callback(1); // Return 1 indicating other error
     }
 }

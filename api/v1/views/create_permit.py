@@ -1,4 +1,4 @@
-from flask import Flask, send_file, jsonify
+from flask import Flask, send_file, jsonify, make_response, current_app, session, request
 from reportlab.lib.pagesizes import A4
 from reportlab.pdfgen import canvas
 from reportlab.lib import colors
@@ -8,25 +8,47 @@ from models import storage
 from models.user import User
 from models.business import Business
 from models.permit import Permit
+from models.category import Category
 from datetime import datetime, timedelta
+from num2words import num2words
+import os
+from flask_mail import Message
+from dotenv import load_dotenv
+from os import getenv
 
-@app_views.route('/permits/<busines_id>')
+load_dotenv()
+
+
+@app_views.route('/generatepermit/<business_id>', methods=['GET'], strict_slashes=False)
 def generate_pdf(business_id):
     # Create a PDF file
     business = storage.get_obj_by_id(Business, business_id)
+    owner = storage.get_obj_by_id(User, business.owner)
+    print(business)
+    category = storage.get_obj_by_id(Category, business.category)
+    permit = storage.get_permit_by_business_id(business.id)
+    print(permit)
 
     if business.verified is True:
-        pdf_filename = f"{business.name}_permit.pdf"
+        pdf_filename = "countygovtofklf_permit.pdf"
         doc = SimpleDocTemplate(pdf_filename, pagesize=A4)
+
         elements = []
         width, height = A4
 
-        # Header and title
         c = canvas.Canvas(pdf_filename, pagesize=A4)
+
+        image_path = "/home/ubuntu/ePermit-KLF/web_flask/static/images/klf.jpeg"
+
+        # Logo
+        c.drawImage(image_path, 30, height - 50, width=100, height=70)
+
+        # Header and title
         c.setFont("Helvetica-Bold", 14)
         c.drawString(200, height - 50, "SINGLE BUSINESS PERMIT")
         c.setFont("Helvetica", 12)
         c.drawString(500, height - 50, str(datetime.now().year))
+        c.drawString(400, height - 50, permit.permit_number)
 
         # Permit Information
         c.setFont("Helvetica-Bold", 10)
@@ -38,7 +60,7 @@ def generate_pdf(business_id):
 
         # Business Details Table
         data = [
-            ["Business ID No", "666798"],
+            ["Business ID No", business.id],
             ["Business Name", business.business_name],
             ["Certificate of Registration No/ID No", business.Certificate_of_Registration_No],
             ["Pin No.", business.KRA_pin],
@@ -63,24 +85,24 @@ def generate_pdf(business_id):
         c.setFont("Helvetica", 10)
         c.drawString(30, height - 330, "To engage in the activity/business/profession or occupation of:")
         c.drawString(30, height - 350, "Business Activity Code & Description:")
-        c.drawString(250, height - 350, business.category)
+        c.drawString(250, height - 350, category.category_name)
         c.drawString(30, height - 370, "Detailed Activity Description")
         c.drawString(250, height - 370, business.detailed_description)
 
         # Fee
         c.drawString(30, height - 410, "Having paid a single Business Permit Fee of:")
         c.drawString(250, height - 410, "Kshs")
-        c.drawString(300, height - 410, "5,000.00")
-        c.drawString(30, height - 430, "Kshs (In Words): Five Thousand Only")
+        c.drawString(300, height - 410, str(category.fee))
+        c.drawString(30, height - 430, f"Kshs (In Words): {num2words(category.fee)} Only")
 
         # Address Details Table
         address_data = [
-            ["P.O BOX No:", "N/A"],
-            ["Telephone No:", "0708051357"],
-            ["Telephone No.2:", "N/A"],
-            ["Business Location:", "MAZERAS-RAILWAYS"],
-            ["Plot No:", "Rabai"],
-            ["Building:", "Rabai/Kisurutini"]
+            ["P.O BOX No:", business.po_box],
+            ["Telephone No:", business.business_telephone],
+            ["Telephone No.2:", business.business_telephone_two],
+            ["Physical Adress:", business.physical_address],
+            ["Plot No:", business.plot_no],
+            ["Ward:", business.ward]
         ]
 
         address_table = Table(address_data, colWidths=[200, 300])
@@ -99,15 +121,15 @@ def generate_pdf(business_id):
 
         # Date and Validity
         c.drawString(30, height - 630, "Date of Issue")
-        c.drawString(150, height - 630, permit.created_at)
+        c.drawString(150, height - 630, str(permit.created_at))
         c.drawString(30, height - 650, "Validity Period")
         c.drawString(150, height - 650, (datetime.now() + timedelta(days=365)).strftime("%d-%b-%Y"))
 
         # Officer Information
-        c.drawString(30, height - 690, "Name of the Officer issuing this Permit")
-        c.drawString(250, height - 690, user.name)
-        c.drawString(30, height - 710, "Revenue Licensing Officer")
-        c.drawString(30, height - 730, "COUNTY GOVERNMENT OF KILIFI - RABAI SUB COUNTY")
+        c.drawString(30, height - 690, "This is a system generated Permit")
+        c.drawString(250, height - 690, "ePermit")
+        c.drawString(30, height - 710, "ePermit System Manage")
+        c.drawString(30, height - 730, f"COUNTY GOVERNMENT OF KILIFI - {business.sub_county}")
 
         # Notice
         c.drawString(30, height - 770, "NOTICE: Please note that issuance of this license/permit does not exempt the holder from compliance with other COUNTY")
@@ -124,7 +146,17 @@ def generate_pdf(business_id):
         c.drawString(400, height - 870, "for Chief Officer Finance & Economic Planning")
 
         c.save()
+        recipient_email = owner.email  # Assuming business object has email field
+        subject = "Your Business Permit"
+        body = "Please find attached your business permit."
 
-        return send_file(pdf_filename, as_attachment=True)
+        msg = Message('Your Business Permit',
+                  sender=getenv('MAIL_USERNAME'),
+                  recipients=[recipient_email])
+        msg.body = body
+        with open(pdf_filename, 'rb') as fp:
+            msg.attach(pdf_filename, "application/pdf", fp.read())
+        current_app.extensions['mail'].send(msg)
+        return jsonify({"status": "Email sent"}), 200
     else:
-        return jsonify({''})
+        return jsonify({"error": "Business is not verified"}), 400
