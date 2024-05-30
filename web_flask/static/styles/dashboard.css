@@ -417,7 +417,13 @@ footer {
     }
 }
 
-
+/* horizontal line in header */
+hr {
+    margin-right: 5%;
+    margin-left: 5%;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
 /* Smartphones (portrait) */
 @media (max-width: 768px) {
 
