@@ -8,7 +8,6 @@ from api.v1.token import token_required
 
 
 @app_views.route('/users', methods=['GET'], strict_slashes=False)
-@token_required('user')
 def get_users():
     """ method that retrieves all users """
     users = storage.all(User).values()
@@ -48,8 +47,7 @@ def create_user():
     if 'password' not in user_json:
         abort(400, "Missing password")
     user = User(**user_json)
-    storage.new(user)
-    storage.save()
+    user.save()
     return jsonify(user.to_dict()), 201
 
 

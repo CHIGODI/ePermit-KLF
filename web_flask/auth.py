@@ -40,7 +40,7 @@ def token_required(role):
                 current_user = storage.get_obj_by_id(User, data['id'])
                 g.current_user = current_user
 
-                if not current_user.has_role(role):
+                if current_user.role != role:
                     flash('You do not have permission to access this resource.', 'error')
                     return redirect(url_for('auth.login'))
 
@@ -81,7 +81,7 @@ def login():
                 'exp': datetime.utcnow() + timedelta(minutes=3600)
             }, getenv('SECRET_KEY'), algorithm='HS256')
 
-            if user.role == 'Admin':
+            if user.role == 'admin':
                 dashboard_route = 'main.admin_dashboard'
             else:
                 dashboard_route = 'main.dashboard'

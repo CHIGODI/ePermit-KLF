@@ -1,0 +1,23 @@
+{% extends "admin_dashboard.html" %}
+{% block content %}
+<div class="service-listing">
+    <div class="card-group">
+        {% if unverified_businesses %}
+            {% for business in unverified_businesses %}
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="card-title">Business Name: {{ business.business_name }}</h6>
+                    <h6 class="card-text">Verified Status: {% if business.verified %} Yes {% else %} Pending {% endif %}</h6>
+                    <a href="{{ url_for('main.business_details', business_id=business.id) }}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+        {% else %}
+        <!-- If no pending business -->
+        <div class="no-pending">
+            <h3>No pending businesses at the moment.</h3>
+        </div>
+        {% endif %}
+</div>
+{% endblock %}
