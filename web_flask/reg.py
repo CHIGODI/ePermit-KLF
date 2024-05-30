@@ -46,7 +46,8 @@ def mpesa_express():
 
     permits = []
     for business_id in business_ids:
-        permits.extend(storage.get_permit_by_business_id(business_id))
+        permit = storage.get_permit_by_business_id(business_id)
+        permits.append(permit)
 
     bswithexpired_permits = []
 
