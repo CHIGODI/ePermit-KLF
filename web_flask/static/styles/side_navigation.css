@@ -61,7 +61,7 @@
 }
 
 /* ----------mybusinesses------ */
-.table-bs{
+.table-bs {
     margin: 10% auto;
     width: 90%;
     padding: 24px;
@@ -80,17 +80,18 @@
 
 }
 
-.pay-btn{
+.pay-btn {
     width: 100%;
     font-size: 18px;
 }
 
-.btn-pay{
+.btn-pay {
     margin: 24px auto;
     width: 30%;
     background-color: green;
 }
-#flash-error-p{
+
+#flash-error-p {
     height: 70px;
     position: fixed;
     text-align: center;
@@ -100,7 +101,8 @@
     top: 70px;
     display: hidden;
 }
-.bill-hero-section{
+
+.bill-hero-section {
     width: 100%;
     height: 30%;
     margin: 0 auto;
@@ -139,7 +141,7 @@
         font-size: 14px;
     }
 
-    .table-bs{
+    .table-bs {
         width: 100%;
     }
 
@@ -147,15 +149,15 @@
         margin: 20px auto;
     }
 
-    .pay-btn{
+    .pay-btn {
         font-size: 16px;
     }
 
-    .btn-pay{
+    .btn-pay {
         width: 40%;
     }
 
-    #flash-error-p{
+    #flash-error-p {
         width: 90%;
         left: 5%;
     }

@@ -35,13 +35,15 @@
 }
 
 .btn-group button.btn-reject {
-    background-color: #ff6347; /* Red */
+    background-color: #ff6347;
+    /* Red */
     color: #fff;
     width: 100px;
 }
 
 .btn-group button.btn-approve {
-    background-color: #32cd32; /* Green */
+    background-color: #32cd32;
+    /* Green */
     color: #fff;
     width: 100px;
 }
@@ -58,23 +60,25 @@
     font-weight: bold;
     color: #000;
     margin-top: 20px;
-    
+
 }
 
 
 
 
 /* Approved/rejected businesses style */
-.card-body ul{
+.card-body ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 }
+
 .service-listing h2 {
     font-size: 2.5em;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #3498db; /* Blue color for the text */
+    color: #3498db;
+    /* Blue color for the text */
     text-align: center;
     position: relative;
 }
@@ -84,7 +88,8 @@
     display: block;
     width: 50%;
     height: 1px;
-    background-color: #023455; /* Same blue color as the text */
+    background-color: #023455;
+    /* Same blue color as the text */
     margin: 10px auto 0 auto;
 }
 
