@@ -1,14 +1,14 @@
 /* -------base html styles-------------- */
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap");
 
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 
-.navbar {
+ .navbar {
     background-color: #fff;
     height: 80px;
     position: fixed;
@@ -21,21 +21,20 @@
     color: #151414;
     font-size: 24px;
     transition: 0.3s color;
-}
+}*/
 
-*/ .navbar-toggler {
+
+.navbar-toggler {
     --bs-navbar-toggler-border-color: rgba(var(--bs-emphasis-color-rgb), 0);
     background-color: transparent;
     font-size: 1.25rem;
 }
 
-.navbar-nav .nav-link.active,
-.navbar-nav .nav-link.show {
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
     color: green;
 }
 
-.navbar-toggler:focus,
-.btn-close:focus {
+.navbar-toggler:focus, .btn-close:focus {
     box-shadow: none;
     outline: none;
 }
@@ -58,8 +57,7 @@
 @media (min-width: 991px) {
     .nav-link {
         position: relative;
-        padding-bottom: 5px;
-        /* Adjust padding as needed */
+        padding-bottom: 5px; /* Adjust padding as needed */
     }
 
     .nav-link::before {
@@ -76,14 +74,13 @@
     }
 
     .nav-link:hover::before, .nav-link.active::before {
-        width: 60%;
+        width: 50%;
         visibility: visible;
     }
 }
-
 @media (min-width: 991px) {
     .nav-link {
-        padding-bottom: 5px;
-        /* Ensure consistent padding */
+        padding-bottom: 5px; /* Ensure consistent padding */
     }
 }
+

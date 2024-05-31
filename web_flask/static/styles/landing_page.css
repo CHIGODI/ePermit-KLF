@@ -3,10 +3,6 @@
     padding-top: 100px; /* Adjust this value to be greater than the navbar height */
 }
 
-body {
-    color: aliceblue;
-}
-
 .hero {
     background: url('../images/background.svg') no-repeat center center/cover;
     height: 100vh;
@@ -46,8 +42,8 @@ body {
 }
 
 .hero-button:hover {
-    background-color: #0056b3; 
-    transform: translateY(-5px); 
+    background-color: #0056b3;
+    transform: translateY(-5px);
     color: white;
 }
 
@@ -201,6 +197,155 @@ body {
     margin-bottom: 30px;
 }
 
+@media screen and (max-width:1200px){
+    .hero-title {
+        font-size: 3rem; /* Adjust the font size as needed */
+    }
+
+    .hero-subtitle {
+        font-size: 1.5rem; /* Adjust the font size as needed */
+    }
+
+    .cards{
+        grid-template-columns: repeat(2,1fr)
+    }
+}
+
+@media screen and (max-width:900px){
+    .hero-title {
+        font-size: 2.5rem; /* Adjust the font size as needed */
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem; /* Adjust the font size as needed */
+    }
+
+    .cards{
+        grid-template-columns: repeat(1,1fr)
+    }
+}
+
+/* For screens smaller than 600px */
+@media screen and (max-width: 600px) {
+    .hero {
+        padding: 50px; /* Reduce padding in hero section */
+    }
+    .hero-title {
+        font-size: 2rem; /* Adjust the font size as needed */
+    }
+    .hero-subtitle {
+        font-size: 1rem; /* Adjust the font size as needed */
+        margin-bottom: 20px; /* Add margin for better spacing */
+    }
+    .hero-button {
+        font-size: 1.2rem; /* Adjust the font size of hero button */
+        padding: 10px 20px; /* Adjust padding of hero button */
+        margin: 10px 0; /* Add margin for better spacing */
+    }
+    .services {
+        padding: 30px 0; /* Reduce padding in services section */
+    }
+    .cards {
+        grid-template-columns: repeat(1, 1fr); /* Change to single column layout */
+        gap: 30px; /* Reduce gap between cards */
+        margin-top: 40px; /* Adjust top margin */
+    }
+    .card {
+        width: 100%; /* Make cards full width */
+        height: auto; /* Set height to auto */
+        padding: 10% 5%; /* Adjust padding for smaller screens */
+    }
+    .faq {
+        max-width: 90%; /* Adjust the maximum width of FAQ sections */
+        margin-top: 30px; /* Adjust top margin */
+        padding-bottom: 0.5rem; /* Reduce bottom padding */
+        border-bottom: none; /* Remove bottom border */
+    }
+    #faq h2 {
+        font-size: 2rem; /* Adjust font size of FAQ titles */
+        margin-bottom: 0.5rem; /* Adjust bottom margin */
+    }
+    .answer p {
+        font-size: 1rem; /* Adjust the font size of FAQ answers */
+        line-height: 1.4; /* Adjust line height for better readability */
+    }
+}
+
+/* For screens smaller than 480px */
+@media screen and (max-width: 480px) {
+    .hero {
+        padding: 30px; /* Further reduce padding in hero section */
+    }
+    .hero-title {
+        font-size: 1.8rem; /* Adjust the font size of hero title */
+    }
+    .hero-subtitle {
+        font-size: 0.9rem; /* Adjust the font size of hero subtitle */
+        margin-bottom: 15px; /* Further reduce bottom margin */
+    }
+    .hero-button {
+        font-size: 1rem; /* Adjust the font size of hero button */
+        padding: 8px 15px; /* Further reduce padding of hero button */
+        margin: 8px 0; /* Adjust margin for better spacing */
+    }
+    .cards {
+        gap: 20px; /* Further reduce gap between cards */
+        margin-top: 30px; /* Further reduce top margin */
+    }
+    .card {
+        padding: 8% 5%; /* Adjust padding for smaller screens */
+    }
+    .faq {
+        max-width: 90%; /* Keep the maximum width of FAQ sections */
+        margin-top: 20px; /* Further reduce top margin */
+    }
+    #faq h2 {
+        font-size: 1.6rem; /* Adjust font size of FAQ titles */
+        margin-bottom: 0.3rem; /* Further reduce bottom margin */
+    }
+    .answer p {
+        font-size: 0.9rem; /* Adjust the font size of FAQ answers */
+        line-height: 1.3; /* Further adjust line height for better readability */
+    }
+}
+
+/* For screens smaller than 320px */
+@media screen and (max-width: 320px) {
+    .hero {
+        padding: 20px; /* Further reduce padding in hero section */
+    }
+    .hero-title {
+        font-size: 1.6rem; /* Further reduce font size of hero title */
+    }
+    .hero-subtitle {
+        font-size: 0.8rem; /* Further reduce font size of hero subtitle */
+        margin-bottom: 10px; /* Further reduce bottom margin */
+    }
+    .hero-button {
+        font-size: 0.8rem; /* Further reduce font size of hero button */
+        padding: 6px 12px; /* Further reduce padding of hero button */
+        margin: 6px 0; /* Further adjust margin for better spacing */
+    }
+    .cards {
+        gap: 15px; /* Further reduce gap between cards */
+        margin-top: 20px; /* Further reduce top margin */
+    }
+    .card {
+        padding: 6% 4%; /* Further adjust padding for smaller screens */
+    }
+    .faq {
+        margin-top: 15px; /* Further reduce top margin */
+    }
+    #faq h2 {
+        font-size: 1.4rem; /* Further reduce font size of FAQ titles */
+        margin-bottom: 0.2rem; /* Further reduce bottom margin */
+    }
+    .answer p {
+        font-size: 0.8rem; /* Further reduce font size of FAQ answers */
+        line-height: 1.2; /* Further adjust line height for better readability */
+    }
+}
+
 .apply-link {
     text-decoration: none;
     width: 100%;
@@ -312,202 +457,4 @@ svg {
 footer section{
     color: aliceblue;
     background: linear-gradient(90deg, #01000bd8, #06354d, #000006e6);
-}
-
-.py-4 #quicklinks:hover {
-    color: green;
-}
-
-/* Hover state for footer links */
-footer a:hover {
-    color: #ff6347; /* Desired hover color */
-    text-decoration: underline; /* Adds an underline on hover */
-}
-
-
-@media screen and (max-width:1200px){
-    .hero-title {
-        font-size: 3rem; /* Adjust the font size as needed */
-    }
-
-    .hero-subtitle {
-        font-size: 1.5rem; /* Adjust the font size as needed */
-    }
-
-    .cards{
-        grid-template-columns: repeat(2,1fr)
-    }
-    #serviceh1 {
-        font-size: 4rem; /* Adjust the font size for smaller screens */
-    }
-}
-
-@media screen and (max-width:900px){
-    .hero-title {
-        font-size: 2.5rem; /* Adjust the font size as needed */
-    }
-
-    .hero-subtitle {
-        font-size: 1.2rem; /* Adjust the font size as needed */
-    }
-
-    .cards{
-        grid-template-columns: repeat(1,1fr)
-    }
-    #serviceh1 {
-        font-size: 3.5rem; /* Adjust the font size for smaller screens */
-    }
-}
-
-/* For screens smaller than 600px */
-@media screen and (max-width: 600px) {
-    .hero {
-        padding: 50px; /* Reduce padding in hero section */
-    }
-    .hero-title {
-        font-size: 2rem; /* Adjust the font size as needed */
-    }
-    .hero-subtitle {
-        font-size: 1rem; /* Adjust the font size as needed */
-        margin-bottom: 20px; /* Add margin for better spacing */
-    }
-    .hero-button {
-        font-size: 1.2rem; /* Adjust the font size of hero button */
-        padding: 10px 20px; /* Adjust padding of hero button */
-        margin: 10px 0; /* Add margin for better spacing */
-    }
-    .services {
-        padding: 30px 0; /* Reduce padding in services section */
-    }
-    #serviceh1 {
-        font-size: 3rem; /* Adjust the font size for smaller screens */
-    }
-    .cards {
-        grid-template-columns: repeat(1, 1fr); /* Change to single column layout */
-        gap: 30px; /* Reduce gap between cards */
-        margin-top: 40px; /* Adjust top margin */
-    }
-    
-    .service h2 {
-        font-size: 1rem; /* Adjust the font size of service titles */
-    }
-    .service p {
-        font-size: 1rem; /* Adjust the font size of service paragraphs */
-    }
-    .faq {
-        max-width: 90%; /* Adjust the maximum width of FAQ sections */
-        margin-top: 30px; /* Adjust top margin */
-        padding-bottom: 0.5rem; /* Reduce bottom padding */
-        border-bottom: none; /* Remove bottom border */
-    }
-
-    section #faq {
-        min-height: 0vh;
-        padding: 0 0;
-    }
-
-    #faq h2 {
-        font-size: 1rem; /* Adjust font size of FAQ titles */
-        margin-bottom: 0.5rem; /* Adjust bottom margin */
-    }
-    .question h3{
-        font-size: 1rem;
-    }
-    .answer p {
-        font-size: 1rem; /* Adjust the font size of FAQ answers */
-        line-height: 1.4; /* Adjust line height for better readability */
-    }
-}
-
-/* For screens smaller than 480px */
-@media screen and (max-width: 480px) {
-    .hero {
-        padding: 30px; /* Further reduce padding in hero section */
-    }
-    .hero-title {
-        font-size: 1.8rem; /* Adjust the font size of hero title */
-    }
-    .hero-subtitle {
-        font-size: 0.9rem; /* Adjust the font size of hero subtitle */
-        margin-bottom: 15px; /* Further reduce bottom margin */
-    }
-    .hero-button {
-        font-size: 1rem; /* Adjust the font size of hero button */
-        padding: 8px 15px; /* Further reduce padding of hero button */
-        margin: 8px 0; /* Adjust margin for better spacing */
-    }
-    #serviceh1 {
-        font-size: 2.5rem; /* Adjust the font size for smaller screens */
-    }
-    .service h2 {
-        font-size: 1rem; /* Adjust the font size of service titles */
-    }
-    .service p {
-        font-size: 1rem; /* Adjust the font size of service paragraphs */
-    }
-    .cards {
-        gap: 20px; /* Further reduce gap between cards */
-        margin-top: 30px; /* Further reduce top margin */
-    }
-
-    .card {
-        padding: 8% 5%; /* Adjust padding for smaller screens */
-    }
-    .faq {
-        max-width: 90%; /* Keep the maximum width of FAQ sections */
-        margin-top: 20px; /* Further reduce top margin */
-    }
-    #faq h2 {
-        font-size: 1.6rem; /* Adjust font size of FAQ titles */
-        margin-bottom: 0.3rem; /* Further reduce bottom margin */
-    }
-    .answer p {
-        font-size: 0.9rem; /* Adjust the font size of FAQ answers */
-        line-height: 1.3; /* Further adjust line height for better readability */
-    }
-}
-
-/* For screens smaller than 320px */
-@media screen and (max-width: 320px) {
-    .hero {
-        padding: 20px; /* Further reduce padding in hero section */
-    }
-    .hero-title {
-        font-size: 1.6rem; /* Further reduce font size of hero title */
-    }
-    .hero-subtitle {
-        font-size: 0.8rem; /* Further reduce font size of hero subtitle */
-        margin-bottom: 10px; /* Further reduce bottom margin */
-    }
-    .hero-button {
-        font-size: 0.8rem; /* Further reduce font size of hero button */
-        padding: 6px 12px; /* Further reduce padding of hero button */
-        margin: 6px 0; /* Further adjust margin for better spacing */
-    }
-    #serviceh1 {
-        font-size: 2rem; /* Adjust the font size for smaller screens */
-    }
-    .cards {
-        gap: 15px; /* Further reduce gap between cards */
-        margin-top: 20px; /* Further reduce top margin */
-    }
-
-    .card {
-        width: 100%; /* Make cards full width */
-        align-content: center;
-        height: auto; /* Set height to auto */
-        padding: 15% 15%; 
-    }
-
-    .faq {
-        margin-top: 15px; /* Further reduce top margin */
-    }
-    #faq h2 {
-        font-size: 1.4rem; /* Further reduce font size of FAQ titles */
-        margin-bottom: 0.2rem; /* Further reduce bottom margin */
-    }
-    .answer p {
-        font-size: 0.8rem; /* Further reduce font size of FAQ answers */
-        line-height: 1.2; /* Further adjust line height for better readability */
-    }
 }
