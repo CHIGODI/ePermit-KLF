@@ -1,10 +1,11 @@
 /* ---styling for login and sign-up-------- */
-.auth-form-div{
+.auth-form-div {
     margin-top: 32px;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 50%;
+    margin: auto;
     border-radius: 8px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
@@ -37,11 +38,11 @@
     background-color: white;
 }
 
-.is-invalid{
+.is-invalid {
     outline: #A94442;
 }
 
-.flash-success{
+.flash-success {
     background-color: #DFF2BF;
     color: #4F8A10;
     padding: 12px;
@@ -50,7 +51,7 @@
     text-align: center;
 }
 
-.flash-error{
+.flash-error {
     background-color: #F2DEDE;
     color: #A94442;
     padding: 12px;
@@ -59,33 +60,34 @@
     text-align: center;
 }
 
-.field{
-    margin:12px;
+.field {
+    margin: 12px;
 }
 
-.field ::placeholder{
+.field ::placeholder {
     font-size: 0.8rem;
     color: #DDDDDD;
 }
 
-.auth{
+.auth {
     margin: auto auto;
     width: 50%;
 }
 
-.sign-up{
+.sign-up {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     margin: 24px auto;
 }
-.sign-up a{
+
+.sign-up a {
     color: green;
     text-decoration: underline;
 }
 
-.sign-up a:hover{
+.sign-up a:hover {
     color: #FF0000;
     text-decoration: none;
 }
@@ -175,76 +177,79 @@
 
 
 /* ------------------verify email------------------ */
-.verify-m{
+.verify-m {
     height: 356px;
 }
-.verify-m h3{
+
+.verify-m h3 {
     color: Purple;
 }
 
-.form-auth .verify-b{
+.form-auth .verify-b {
     color: #007bff;
 }
 
 /* --------forgot passowrd page -------- */
 
-.f-forgot-pwd{
+.f-forgot-pwd {
     height: 256px;
 }
 
-.auth-form-div .t-forgot-pwd{
+.auth-form-div .t-forgot-pwd {
     color: #555555;
     font-size: 24px;
 }
 
-.form-auth .auth{
+.form-auth .auth {
     background-color: #008080;
     color: #fff;
     border: none;
 }
 
-.form-auth .auth:hover{
+.form-auth .auth:hover {
     background-color: #005757;
 }
 
 
 /* --------------password reset-------------- */
-.pwd-reset{
+.pwd-reset {
     height: 356px;
 }
 
-.pwd-reset h3{
+.pwd-reset h3 {
     color: #1A237E;
 }
 
-.form-auth .b-pwd-reset{
+.form-auth .b-pwd-reset {
     background-color: #2196F3;
-        /* Vibrant Blue */
-        color: #ffffff;
+    /* Vibrant Blue */
+    color: #ffffff;
 }
 
 @media (max-width: 575.98px) {
 
-    .login-button{
+    .login-button {
         visibility: hidden;
     }
 
-    .auth-form-div{
+    .auth-form-div {
         height: 80vh;
         width: 100%;
         margin-top: 0;
         box-shadow: none;
     }
-    .auth-form-div .title{
+
+    .auth-form-div .title {
         padding-top: 24px;
         margin: 0;
     }
 
-    .form-auth{
+    .form-auth {
         width: 100%;
     }
+
     .autht,
-    .sign-up{
+    .sign-up {
         margin: 16px auto;
     }
 
@@ -253,21 +258,21 @@
 @media (min-width: 576px) and (max-width: 767.98px) {
 
     .auth-form-div {
-            width: 80%;
-            margin-top: 0;
-        }
+        width: 80%;
+        margin-top: 0;
+    }
 
-        .auth-form-div .title {
-            padding-top: 24px;
-            margin: 0;
-        }
+    .auth-form-div .title {
+        padding-top: 24px;
+        margin: 0;
+    }
 
-        .form-auth {
-            width: 100%;
-        }
+    .form-auth {
+        width: 100%;
+    }
 
-        .autht,
-        .sign-up {
-            margin: 16px auto;
-        }
+    .autht,
+    .sign-up {
+        margin: 16px auto;
+    }
 }

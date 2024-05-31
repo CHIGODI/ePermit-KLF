@@ -74,7 +74,7 @@
     }
 
     .nav-link:hover::before, .nav-link.active::before {
-        width: 100%;
+        width: 50%;
         visibility: visible;
     }
 }

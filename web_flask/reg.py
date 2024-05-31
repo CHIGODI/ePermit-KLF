@@ -67,7 +67,7 @@ def mpesa_express():
                 business = storage.get_obj_by_id(Business, permit.business_id)
                 print(business)
                 bswithexpired_permits.append(business)
-        
+
         bswithexpired_permits.extend(new_businesses)
         print(bswithexpired_permits)
         return render_template('payment.html',

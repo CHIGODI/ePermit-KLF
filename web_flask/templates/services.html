@@ -3,10 +3,9 @@
 <div class="service-listing">
     <div class="upper">
         <div class="upper-content">
-            <img src="../static/images/welcome.png" alt="Kilifi Business" class="profile-img">
             <div class="text-content">
-                <h2>Kilifi County eServices Dashboard</h2>
-                <p>Welcome to Kilifi County eServices Portal, your gateway to smart services for Kilifi.</p>
+                <h2 class="animated-text">Kilifi County eServices Dashboard</h2>
+                <p class="animated-text delay-1">Welcome to Kilifi County eServices Portal, your gateway to smart services for Kilifi.</p>
             </div>
         </div>
     </div>
@@ -16,10 +15,10 @@
             <div class="card card-bolder move-on-hover">
                 <img src="../static/images/card1.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Register Business</h5>
+                    <h5 class="card-title ">Register Business</h5>
                     <p class="card-text">Get started with your business journey in just a click.
                     </p>
-                    <a href="{{ url_for('register.register_page') }}"><button  class="btn-x">Go to service</button></a>
+                    <a href="{{ url_for('register.register_page') }}"><button  class="btn-x">Access service</button></a>
                 </div>
             </div>
 
@@ -28,7 +27,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Renew Business Permit</h5>
                     <p class="card-text">Stay compliant and renew your business permit hassle-free.</p>
-                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Go to service</button></a>
+                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Access service</button></a>
                 </div>
             </div>
 
@@ -37,7 +36,7 @@
                 <div class="card-body">
                     <h5 class="card-title">PSV licensing</h5>
                     <p class="card-text">Manage and apply for your Public Service Vehicle licenses with ease.</p>
-                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Go to service</button></a>
+                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Access service</button></a>
                 </div>
             </div>
         </div>
@@ -49,7 +48,7 @@
                     <h5 class="card-title">Land Rates</h5>
                     <p class="card-text">Manage and pay your land rates effortlessly
                     </p>
-                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Go to service</button></a>
+                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Access service</button></a>
                 </div>
             </div>
 
@@ -58,7 +57,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Event ground booking</h5>
                     <p class="card-text">Get your event permit quickly and host without worry.</p>
-                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Go to service</button></a>
+                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Access service</button></a>
                 </div>
             </div>
 
@@ -67,36 +66,10 @@
                 <div class="card-body">
                     <h5 class="card-title">Book parking</h5>
                     <p class="card-text">Reserve your parking spot in advance with ease.</p>
-                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Go to service</button></a>
+                    <a href="{{ url_for('main.coming_soon') }}"><button class="btn-x">Access service</button></a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Testimonies -->
-    <div class="testimonies-header">
-        <h1>Testimonies</h1>
-    </div>
-    <hr>
-    <!-- Add this div after the card groups in your HTML -->
-<div class="testimonials-container">
-    <div class="testimonials">
-        <div class="testimonial">
-            <p class="quote">"Great website! It made managing my business permits a breeze."</p>
-            <p class="author">- John Doe</p>
-        </div>
-        <div class="testimonial">
-            <p class="quote">"I love how easy it is to book parking spots in advance. Saves me a lot of time!"</p>
-            <p class="author">- Jane Smith</p>
-        </div>
-        <div class="testimonial">
-            <p class="quote">"This platform is a game-changer for handling land rates efficiently."</p>
-            <p class="author">- Michael Brown</p>
-        </div>
-    </div>
 </div>
-
-
-
-</div>
-
 {% endblock %}

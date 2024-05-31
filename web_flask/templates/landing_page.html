@@ -1,10 +1,13 @@
 {% extends "base.html" %}
+{% block body_class %}bg-body{% endblock %}
+{% block nav_class %}bg-nav{% endblock %}
+
 
 {% block content %}
 <section class="hero">
     <div class="container">
-        <h1 class="hero-title">Welcome to Kilifi ePermit</h1>
-        <p class="hero-subtitle">
+        <h1 class="hero-title animated-text">Welcome to Kilifi ePermit</h1>
+        <p class="hero-subtitle animated-text delay">
             Your one-stop solution for managing permits online.
         </p>
         <a href="#services" id="primary_button" class="btn btn-primary hero-button">Let's get started</a>
@@ -23,19 +26,19 @@
                         <i class="fa-solid fa-id-card"></i>
                         <h2>Business Registration</h2>
                         <p>Submit your application online, upload necessary documents</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View Service</button></a>
+                        <a href="{{ url_for('auth.login') }}" class="apply-link"><button class="apply-button">View Service</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-layer-group"></i>
                         <h2>Permit Renewal</h2>
                         <p>Renew your existing permits effortlessly</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View Service</button></a>
+                        <a href="{{ url_for('auth.login') }}" class="apply-link"><button class="apply-button">View Service</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-file-signature"></i>
                         <h2>Other Services</h2>
                         <p>Explore  environmental permits, event permits, and more.</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View more</button></a>
+                        <a href="{{ url_for('auth.login') }}" class="apply-link"><button class="apply-button">View more</button></a>
                     </div>
                 </div>
             </div>
@@ -57,8 +60,8 @@
             <div class="answer">
                 <p>
                     To apply for a permit online, you need to first create an account
-                    on our platform. Once logged in, navigate to the "Permits" section
-                    and follow the instructions to fill out the application form.
+                    on our platform. Once logged in, navigate to the "Register business" section
+                    and fill out the application form.
                 </p>
             </div>
         </div>
@@ -73,7 +76,7 @@
             <div class="answer">
                 <p>
                     You can track your permit application status by logging in to your
-                    account and navigating to the "Permits" section. There, you will
+                    account and navigating to the "my businesses" section. There, you will
                     find a list of all your submitted applications along with their
                     current status.
                 </p>
@@ -89,15 +92,13 @@
             </div>
             <div class="answer">
                 <p>
-                    We accept various payment methods, including credit/debit cards,
-                    online bank transfers, and payment wallets. You can choose the
-                    most convenient option for you during the payment process.
+                    We accept mpesa payment method for now,
                 </p>
             </div>
         </div>
         <div class="faq">
             <div class="question">
-                <h3>Can I apply for multiple permits at once?</h3>
+                <h3>Can I apply for multiple businesses at once?</h3>
 
                 <svg width="15" height="10" viewBox="0 0 42 25">
                     <path d="M3 3L21 21L39 3" stroke="white" stroke-width="7" stroke-linecap="round" />
@@ -105,9 +106,9 @@
             </div>
             <div class="answer">
                 <p>
-                    Yes, you can apply for multiple permits simultaneously. Simply
-                    select the permits you need from the available options and fill
-                    out the application forms accordingly.
+                    Yes, you can apply for multiple businesses simultaneously. Simply
+                    fill out  the registartion form and after your business has been
+                    aproved you can go ahead to apply for permit
                 </p>
             </div>
         </div>
@@ -121,10 +122,8 @@
                 </div>
                 <div class="answer">
                     <p>
-                        The processing time for a permit application varies depending on
-                        the type of permit and the volume of applications received.
-                        Typically, it takes between 3 to 5 business days for a standard
-                        permit application to be processed.
+                        The processing time for a permit application should be immidiatley
+                        permits will only be available for verified businesses
                     </p>
                 </div>
             </div>
@@ -140,7 +139,7 @@
                 </div>
                 <div class="answer">
                     <p>
-                        Once a permit application is submitted, it enters the processing
+                        Once a business application is submitted, it enters the processing
                         stage, and changes or cancellations may not be possible. However,
                         you can contact our support team for assistance and further
                         guidance.
@@ -160,23 +159,23 @@
                     </div>
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">Useful Links</h6>
-                        <p>
-                            <a href="#" class="text-reset">Home</a>
+                        <p id="quicklinks">
+                            <a href="{{ url_for('main.landing')}}# " class="text-reset">Home</a>
                         </p>
-                        <p>
-                            <a href="#services" class="text-reset">Services</a>
+                        <p id="quicklinks">
+                            <a href="{{ url_for('main.landing')}}#services" class="text-reset">Services</a>
                         </p>
-                        <p>
-                            <a href="#faq" class="text-reset">FAQs</a>
+                        <p id="quicklinks">
+                            <a href="{{ url_for('main.landing')}}#faq" class="text-reset">FAQs</a>
                         </p>
-                        <p>
+                        <p id="quicklinks">
                             <a href="{{ url_for('auth.login') }}" class="text-reset">Login</a>
                         </p>
                     </div>
                     <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">Support</h6>
-                        <p><i class="fas fa-home me-3"></i> Ganze, 80205, 80205; Kilifi</p>
-                        <p><i class="fas fa-envelope me-3"></i> support.kilifi@permit.com</p>
+                        <p><i class="fas fa-home me-3"></i> Bonje, 80205, 80205; Kilifi</p>
+                        <p><i class="fas fa-envelope me-3"></i> support@epermit.co.ke</p>
                         <p><i class="fas fa-phone me-3"></i> +254 796 814 864</p>
                         <p><i class="fas fa-print me-3"></i> +254 708 051 357</p>
                     </div>

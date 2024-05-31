@@ -42,8 +42,8 @@
 }
 
 .hero-button:hover {
-    background-color: #0056b3; 
-    transform: translateY(-5px); 
+    background-color: #0056b3;
+    transform: translateY(-5px);
     color: white;
 }
 
