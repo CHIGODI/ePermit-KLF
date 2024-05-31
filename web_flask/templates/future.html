@@ -1,0 +1,104 @@
+<style>
+   .contact {
+    padding: 60px 0;
+    height: 100%;
+    font-family: inherit;
+}
+
+.contact h2 {
+    color: transparent;
+    font-size: 3rem;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-fill-color: transparent;
+    background: linear-gradient(8deg, rgba(8,52,83,1) 0%, rgba(0,230,173,1) 41%, rgba(41,17,45,1) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+    position: relative;
+    text-align: center;
+    margin-bottom: 2rem;
+} 
+
+.contact .form-label {
+    font-weight: bold;
+}
+
+.contact .btn-primary {
+    background-color: #007bff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+}
+
+.contact .btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.popup-message {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #28a745;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+ 
+</style>
+
+<section class="contact" id="contact">
+    <div class="container">
+        <h2 class="text-center mt-5">Contact Us</h2>
+        <p class="text-center mb-5">We would love to hear from you! Please fill out the form below and we will get in touch with you shortly.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form>
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Submit</button>
+                </form>
+                <div id="popupMessage" class="popup-message">We shall reach back as soon as possible</div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting the traditional way
+
+    // Capture form data
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+
+    // Optionally, you can send the form data to your server here using fetch or XMLHttpRequest
+
+    // Show the popup message
+    const popupMessage = document.getElementById('popupMessage');
+    popupMessage.style.display = 'block';
+
+    // Hide the popup message after a few seconds
+    setTimeout(function() {
+        popupMessage.style.display = 'none';
+    }, 5000); // Adjust the timeout duration as needed
+
+    // Clear the form fields
+    document.getElementById('contactForm').reset();
+});
+</script>

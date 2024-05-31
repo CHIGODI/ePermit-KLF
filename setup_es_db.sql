@@ -31,6 +31,22 @@ CREATE TABLE IF NOT EXISTS users (
     UNIQUE (id)
 );
 
+INSERT INTO users (id, email, password, first_name, last_name, ID_number, gender, designation, phone_number, role, created_at, updated_at)
+VALUES
+('f16aa55c-543a-4001-a3bf-6126a824406f',
+    'epermit@gmail.ac.ke',
+    'scrypt:32768:8:1$o5txmJPJ32sSxFiM$072ddd89ab0fbcd9aec24827530265838acfe500aab8c35333907445fff9227ac50715431d49b532392b147c6c3a05e4ce1022f1dbcc1d74f43db425c07007a5',
+    'Admin',
+    'User',
+    36691631,
+    NULL,
+    NULL,
+    '0708051357',
+    'admin',
+    '2024-05-28 17:15:49',
+    '2024-05-28 14:28:55');
+
+
 DROP TABLE IF EXISTS `categories`;
 
 

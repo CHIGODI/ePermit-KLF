@@ -37,7 +37,8 @@ class DBStorage:
                                       format(EPERMIT_MYSQL_USER,
                                              EPERMIT_MYSQL_PWD,
                                              EPERMIT_MYSQL_HOST,
-                                             EPERMIT_MYSQL_DB))
+                                             EPERMIT_MYSQL_DB),
+                                      pool_pre_ping=True )
 
         if EPERMIT_ENV == 'test':
             Base.metadata.drop_all(self.__engine)
