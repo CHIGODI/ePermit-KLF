@@ -160,7 +160,6 @@
 }
 
 
-/* Added this */
 .information {
     list-style: none;
     padding: 0;
@@ -170,7 +169,7 @@
 .side-nav .information {
     list-style-type: none;
     padding: 0;
-    margin: 0 0 5px 0; /* Bottom margin to separate lists */
+    margin: 0 0 5px 0;
 }
 .information li {
     display: flex;
@@ -196,7 +195,6 @@
     background-color: #d5d9db;
 }
 
-
 .information-btn{
     margin-top: 50%;
     visibility: hidden;
@@ -213,8 +211,8 @@
     margin: 16px;
 }
 
-.card {
-    margin: 32px 24px;
+.card-bolder {
+    margin: 32px;
 
 }
 
