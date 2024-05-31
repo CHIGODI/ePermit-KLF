@@ -33,7 +33,7 @@ def register_page():
     else:
         print('here')
         flash(f'Something went wrong!', 'error')
-        return render_template('dashboard.html')
+        return render_template('dashboard.html', current_user=current_user)
 
 @register.route('/pay', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -71,4 +71,5 @@ def mpesa_express():
         bswithexpired_permits.extend(new_businesses)
         print(bswithexpired_permits)
         return render_template('payment.html',
-                            bswithexpired_permits=bswithexpired_permits)
+                            bswithexpired_permits=bswithexpired_permits,
+                            current_user=current_user)
