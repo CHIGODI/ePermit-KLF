@@ -1,5 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1 class="title">Coming Soon</h1>
+<div class="container text-center mt-5">
+    <div class="coming-soon">
+        <h1 class="title display-4">Coming Soon</h1>
+        <p class="lead">Exciting new features are on the way. We appreciate your patience and look forward to sharing our latest innovations with you soon!</p>
+        <!-- <p class="lead">We are working hard to bring you something amazing. Stay tuned!</p> -->
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
