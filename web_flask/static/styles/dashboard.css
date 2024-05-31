@@ -45,6 +45,27 @@
     z-index: 2;
 }
 
+.side-nav-h {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.side-nav-h span {
+    padding: 12px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.side-nav-h .fa-house {
+    color: #34495e;
+    font-size: 24px;
+}
+
+
+
+
 .service-listing {
     width: 64%;
     z-index: 0;
@@ -138,16 +159,6 @@
     margin: 0;
 }
 
-.side-nav-h{
-    padding: 12px;
-    border-bottom: 1px solid #34495e;
-}
-
-.side-nav-h h5{
-    text-decoration: none;
-    color: #34495e;
-    text-align: center;
-}
 
 /* Added this */
 .information {
