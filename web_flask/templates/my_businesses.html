@@ -25,7 +25,7 @@
                         <td>{{ business.created_at }}</td>
                         {% set permit = permits|selectattr('business_id', 'equalto', business.id)|first %}
                             {% if permit %}
-                                <td>{{ permit.permit_no }}</td>
+                                <td>{{ permit.permit_number }}</td>
                             {% else %}
                                 <td>-</td>
                             {% endif %}

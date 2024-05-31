@@ -97,47 +97,7 @@
 }
 
 
-.btn-s{
-    padding: 10px 40px;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    background-color: #4682B4;
-}
-
-.upper img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-.upper {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    padding: 20px;
-    background-color: #1E90FF;
-    border-radius: 8px;
-    margin: 30px;
-    overflow: hidden; /* Ensure content doesn't overflow */
-}
-
-.upper img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 60px;
-}
-
-.upper p {
-    animation: popFade 3s ease-in-out infinite; /* Apply animation */
-    font-size: 18px;
-    /* color: #333;
-     */
-    color: #F5F5DC;
-    margin: 0;
-}
-
+/* side nav styles */
 .side-nav-h{
     padding: 12px;
     border-bottom: 1px solid #34495e;
@@ -149,7 +109,6 @@
     text-align: center;
 }
 
-/* Added this */
 .information {
     list-style: none;
     padding: 0;
@@ -159,7 +118,7 @@
 .side-nav .information {
     list-style-type: none;
     padding: 0;
-    margin: 0 0 5px 0; /* Bottom margin to separate lists */
+    margin: 0 0 5px 0;
 }
 .information li {
     display: flex;
@@ -185,7 +144,6 @@
     background-color: #d5d9db;
 }
 
-
 .information-btn{
     margin-top: 50%;
     visibility: hidden;
@@ -198,24 +156,274 @@
     font-size: 18px;
 }
 
+/* Service welcome header style */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px); 
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); 
+    }
+}
+
+.upper {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    background-color: #1E90FF;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 30px;
+    overflow: hidden;
+    color: #34495e;
+
+}
+
+.upper-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.profile-img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.1);
+}
+
+.text-content {
+    max-width: 600px;
+    margin-left: 20px;
+}
+
+.text-content h2 {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #34495e;
+    font-weight: 100;
+    font-size: 1.5rem;
+    animation: fadeIn 1s ease-out; 
+}
+
+.text-content p {
+    margin: 5px 0 0 0;
+    font-family: 'Georgia', serif;
+    color: #3f5061;
+    font-size: 1rem;
+    animation: fadeIn 1.5s ease-out;
+}
+
+.fade-in {
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* services card styles */
 .card-group {
     margin: 16px;
 }
 
-.card {
-    margin: 32px 24px;
+.card-bolder {
+    margin: 32px;
 
 }
 
-.card a {
+.all-card .card-group .card-bolder{
+    border: 1px solid #ffffff;
+}
+
+.all-card .card-group .card {
+    border: 1px solid #ffffff;
+    border-radius: 0px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%; 
+}
+
+/* button and link */
+.card-bolder a {
     text-decoration: none;
-    background-color: rgb(7, 146, 7);
     width: 150px;
+    margin-bottom: 0;
+}
+
+.btn-x {
+    padding: 5px 10px; 
+    width: 150px;
+    border: 2px solid #4682B4; 
+    border-radius: 8px;
+    color: #fff;
+    background-color: #4682B4;
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; 
+}
+
+.btn-x:active {
+    opacity: 0.8; 
+}
+
+.card-body .btn-s {
+    margin-top: auto; 
+}
+
+/* hover effect on card */
+.move-on-hover {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, font-weight 0.2s ease-in-out;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+}
+
+.move-on-hover:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 5px 17px rgba(0, 0, 0, 0.7); 
+}
+
+.move-on-hover:hover .card-title {
+    font-weight: bold;
+}
+.move-on-hover:hover .card-text {
+    font-style: italic;
 }
 
 
 
+/* Add div for testimonies */
+.testimonies-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-right: 5%;
+    margin-left: 5%;
+}
 
+.testimonials-container {
+    position: relative;
+    width: 90%;
+    height: 100px; /* Adjust based on your content */
+    overflow: hidden;
+    margin-top: 30px;
+    margin-right: 5%;
+    margin-left: 5%;
+    background-color: #e9ecef;
+    margin-bottom: 30px;
+    padding: 30px 30px;
+}
+
+.testimonials {
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.testimonial {
+    min-width: 100%;
+    flex: 1 0 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 0;
+    transition: transform 1s ease-in-out; /* Smooth transition for sliding */
+}
+
+.testimonial p.quote {
+    font-style: italic;
+    color: #333;
+}
+
+.testimonial p.author {
+    font-weight: bold;
+    color: #007bff;
+}
+
+
+
+/* footer style */
+
+/* Footer styles */
+footer {
+    width: 100%;
+    background-color: #4682B4; ;
+    color: white;
+    position: relative; /* Changed to sticky */
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.footer-container p {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.footer-links li {
+    margin: 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #FFD700; /* Optional: Hover color */
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer-links {
+        margin-top: 10px;
+    }
+}
+
+/* horizontal line in header */
+hr {
+    margin-right: 5%;
+    margin-left: 5%;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
 /* Smartphones (portrait) */
 @media (max-width: 768px) {
 

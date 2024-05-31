@@ -14,6 +14,39 @@ FLUSH PRIVILEGES;
 use epermit_dev_db;
 
 
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS users (
+    `id` VARCHAR(60) NOT NULL PRIMARY KEY,
+    `created_at` DATETIME NOT NULL,
+    `updated_at` DATETIME NOT NULL,
+    email VARCHAR(128) NOT NULL UNIQUE,
+    password VARCHAR(512) NOT NULL,
+    first_name VARCHAR(60),
+    last_name VARCHAR(60),
+    ID_number INTEGER,
+    gender VARCHAR(20),
+    designation VARCHAR(60),
+    phone_number VARCHAR(20),
+    role VARCHAR(6),
+    UNIQUE (id)
+);
+
+INSERT INTO users (id, email, password, first_name, last_name, ID_number, gender, designation, phone_number, role, created_at, updated_at)
+VALUES
+('f16aa55c-543a-4001-a3bf-6126a824406f',
+    'epermit@gmail.ac.ke',
+    'scrypt:32768:8:1$o5txmJPJ32sSxFiM$072ddd89ab0fbcd9aec24827530265838acfe500aab8c35333907445fff9227ac50715431d49b532392b147c6c3a05e4ce1022f1dbcc1d74f43db425c07007a5',
+    'Admin',
+    'User',
+    36691631,
+    NULL,
+    NULL,
+    '0708051357',
+    'admin',
+    '2024-05-28 17:15:49',
+    '2024-05-28 14:28:55');
+
+
 DROP TABLE IF EXISTS `categories`;
 
 

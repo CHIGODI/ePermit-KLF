@@ -37,11 +37,13 @@
 .btn-group button.btn-reject {
     background-color: #ff6347; /* Red */
     color: #fff;
+    width: 100px;
 }
 
 .btn-group button.btn-approve {
     background-color: #32cd32; /* Green */
     color: #fff;
+    width: 100px;
 }
 
 .btn-group button:hover {
@@ -59,8 +61,156 @@
     
 }
 
+
+
+
+/* Approved/rejected businesses style */
 .card-body ul{
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+.service-listing h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #3498db; /* Blue color for the text */
+    text-align: center;
+    position: relative;
+}
+
+.service-listing h2::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 1px;
+    background-color: #023455; /* Same blue color as the text */
+    margin: 10px auto 0 auto;
+}
+
+.card-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card-group .card {
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    margin: 15px;
+    width: calc(33% - 30px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+.business-details {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.business-details li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.business-details li strong {
+    font-weight: bold;
+    color: #555;
+}
+
+/* business details styles */
+.service-listing .business-details {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.service-listing .business-details:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.service-listing .business-details h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #3498db;
+    text-align: center;
+    position: relative;
+}
+
+.service-listing .business-details h2::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 3px;
+    background-color: #3498db;
+    margin: 10px auto 0 auto;
+}
+
+.service-listing .business-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.service-listing .business-details ul li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.service-listing .business-details ul li strong {
+    font-weight: bold;
+    color: #555;
+}
+
+.service-listing .btn-group {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.service-listing .btn-group button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.service-listing .btn-group button.btn-reject {
+    background-color: #ff6347;
+    color: #fff;
+}
+
+.service-listing .btn-group button.btn-approve {
+    background-color: #32cd32;
+    color: #fff;
+}
+
+.service-listing .btn-group button:hover {
+    opacity: 0.8;
 }

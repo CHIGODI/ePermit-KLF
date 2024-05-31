@@ -212,6 +212,7 @@ $(function () {
                         type: 'GET',
                         success: function(data) {
                             console.log(data);
+                            getPermit(businessDataReqPermit['business_id']);
                             window.location.href = 'https://www.epermit.live/dashboard';
                         },
                         error: function(data) {
@@ -336,4 +337,23 @@ function handlePaymentStatus(resultCode, callback) {
         fadeOut('error-p-f');
         callback(1); // Return 1 indicating other error
     }
+}
+
+// This functions gets permit
+function getPermit(business_id) {
+    console.log(business_id)
+    $.ajax({
+        url: 'https://www.epermit.live/api/v1/generatepermit/' + business_id,
+        type: 'GET',
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function (data) {
+            console.log(data)
+        },
+        error: function (data) {
+            showAlert('An error occurred while processing. Please try again later.', 'error', 'flash-error-p');
+            console.log('Error getting permit')
+        }
+    });
 }

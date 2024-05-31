@@ -6,9 +6,7 @@
             <h3 class="title">Pay Your Bills Here</h3>
             <p>Simply select a business and pay</p>
         </div>
-        {% if not bswithexpired_permits %}
-                <p>You  have no pending bills</p>
-        {% else %}
+	{% if new_businesses %}
             <div class="payment">
                 <form class="form-control" id="mpesa-form" method="post">
                     <label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
@@ -16,7 +14,7 @@
                     <div class="mb-3">
                         <label for="business_name" class="form-label">Business Name<span class="required">*</span></label>
                         <select name="business_id" class="form-select" required>
-                            {% for business in bswithexpired_permits %}
+                            {% for business in new_businesses %}
                                 <option value="" selected></option>
                                 <option value="{{ business.id }}">{{ business.business_name }}</option>
                             {% endfor %}
@@ -27,6 +25,27 @@
                     </div>
                 </form>
             </div>
+	    {% elif bswithexpired_permits %}
+	    <div class="payment">
+	      <form class="form-control" id="mpesa-form" method="post">
+		<label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
+		<input type="text" name="phone_number" id="phone_number" class="form-control" required>
+		<div class="mb-3">
+		  <label for="business_name" class="form-label">Business Name<span class="required">*</span></label>
+		  <select name="business_id" class="form-select" required>
+		    {% for business in bswithexpired_permits %}
+		    <option value="" selected></option>
+		    <option value="{{ business.id }}">{{ business.business_name }}</option>
+		    {% endfor %}
+		  </select>
+		</div>
+		<div class="btn-pay">
+		  <button type="submit" class="btn-success btn pay-btn" id="pay-permit">Pay</button>
+		</div>
+	      </form>
+	    </div>
+        {% else %}
+        <p>You  have no pending bills</p>
         {% endif %}
     </div>
 {% endblock %}
