@@ -1,0 +1,66 @@
+.business-details {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.business-details h2 {
+    margin-top: 0;
+}
+
+.business-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.business-details ul li {
+    margin-bottom: 5px;
+}
+
+.btn-group {
+    margin-top: 10px;
+
+}
+
+.btn-group button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-group button.btn-reject {
+    background-color: #ff6347; /* Red */
+    color: #fff;
+}
+
+.btn-group button.btn-approve {
+    background-color: #32cd32; /* Green */
+    color: #fff;
+}
+
+.btn-group button:hover {
+    opacity: 0.8;
+}
+
+.no-pending {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    margin-top: 20px;
+    
+}
+
+.card-body ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}

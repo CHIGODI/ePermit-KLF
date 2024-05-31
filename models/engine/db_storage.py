@@ -10,13 +10,15 @@ from models.user import User
 from models.business import Business
 from models.category import Category
 from models.permit import Permit
+from models.mpesa import Mpesa
 
 
 load_dotenv()
 
 
 classes = {"User": User, "Business": Business,
-           "Category": Category, "Permit": Permit}
+           "Category": Category, "Permit": Permit,
+           "Mpesa": Mpesa}
 
 
 class DBStorage:
@@ -73,6 +75,49 @@ class DBStorage:
         if email is None:
             return None
         return self.__session.query(User).filter(User.email == email).first()
+
+
+
+    # added function to get unverified/rejected businesses
+    def get_unverified_businesses(self):
+        """ retrieves all unverified businesses """
+        return self.__session.query(Business).filter(Business.verified == False).all()
+
+    # Get a business details
+    def get_business_details(self, business_id):
+        """ Retrieve details of a specific business by its ID """
+        return self.__session.query(Business).filter_by(id=business_id).first()
+
+    # get approved businesses
+    def get_approved_businesses(self):
+        """ Retrieve approved businesses """
+        return self.__session.query(Business).filter(Business.verified == True).all()
+
+    # save rejected businesses
+    def reject_business(self, business_id):
+        """Rejects a business by setting its verified status to False"""
+        business = self.get_obj_by_id(Business, business_id)
+        if business:
+            business.verified = False
+            self.save()
+
+    # save approve businesses
+    def approve_business(self, business_id):
+        """Approves a business by setting its verified status to True"""
+        business = self.get_obj_by_id(Business, business_id)
+        if business:
+            business.verified = True
+            self.save()
+
+    def get_permit_by_business_id(self, business_id):
+        """ retrieves a permit by business id """
+        if business_id is None:
+            return None
+        permit = self.__session.query(Permit).filter(Permit.business_id == business_id).first()
+        if permit:
+            return permit
+        else:
+            return None
 
     def delete(self, obj=None):
         """ deletes an object from the current database """
