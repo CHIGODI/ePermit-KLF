@@ -19,7 +19,7 @@ def get_businesses():
 @app_views.route('/businesses/<business_id>', methods=['GET'], strict_slashes=False)
 def get_business(business_id):
     """ method that retrieves a business """
-    business = storage.get(Business, business_id)
+    business = storage.get_obj_by_id(Business, business_id)
     if business is None:
         abort(404)
     return jsonify(business.to_dict())
@@ -28,7 +28,7 @@ def get_business(business_id):
 @app_views.route('/businesses/<business_id>', methods=['DELETE'], strict_slashes=False)
 def delete_business(business_id):
     """ method that deletes a business """
-    business = storage.get(Business, business_id)
+    business = storage.get_obj_by_id(Business, business_id)
     if business is None:
         abort(404)
     storage.delete(business)
@@ -64,7 +64,7 @@ def create_business():
 @app_views.route('/businesses/<business_id>', methods=['PUT'], strict_slashes=False)
 def update_business(business_id):
     """ method that updates a business """
-    business = storage.get(Business, business_id)
+    business = storage.get_obj_by_id(Business, business_id)
     if business is None:
         abort(404)
     business_json = request.get_json()

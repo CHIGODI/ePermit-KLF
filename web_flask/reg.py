@@ -43,21 +43,32 @@ def mpesa_express():
     businesses = [business for business in current_user.businesses if business.verified]
     business_ids = [business.id for business in businesses]
 
-    print(businesses)
+    print(f'{businesses}--------------businesses')
     permits = []
+    new_businesses = []
     for business_id in business_ids:
         permit = storage.get_permit_by_business_id(business_id)
-        permits.append(permit)
+        print(permit)
+        if permit:
+            permits.append(permit)
+        else:
+            business = storage.get_obj_by_id(Business, business_id)
+            new_businesses.append(business)
 
-    print(permits)
-    if all(permit is None for permit in permits):
+    print(f'{permits}-------permits')
+    print(f"{new_businesses}----------------------------new_businesses")
+    if not permits:
         return render_template('payment.html',
-                               businesses=businesses)
+                               new_businesses=new_businesses)
     else:
         bswithexpired_permits = []
         for permit in permits:
-            if permit.check_validity() is False:
+            if permit and permit.check_validity() is False:
                 business = storage.get_obj_by_id(Business, permit.business_id)
+                print(business)
                 bswithexpired_permits.append(business)
+        
+        bswithexpired_permits.extend(new_businesses)
+        print(bswithexpired_permits)
         return render_template('payment.html',
                             bswithexpired_permits=bswithexpired_permits)

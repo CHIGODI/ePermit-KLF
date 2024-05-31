@@ -6,9 +6,7 @@
             <h3 class="title">Pay Your Bills Here</h3>
             <p>Simply select a business and pay</p>
         </div>
-        {% if not businesses %}
-                <p>You  have no pending bills</p>
-        {% elif businesses %}
+	{% if new_businesses %}
             <div class="payment">
                 <form class="form-control" id="mpesa-form" method="post">
                     <label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
@@ -16,7 +14,7 @@
                     <div class="mb-3">
                         <label for="business_name" class="form-label">Business Name<span class="required">*</span></label>
                         <select name="business_id" class="form-select" required>
-                            {% for business in businesses %}
+                            {% for business in new_businesses %}
                                 <option value="" selected></option>
                                 <option value="{{ business.id }}">{{ business.business_name }}</option>
                             {% endfor %}
@@ -27,7 +25,7 @@
                     </div>
                 </form>
             </div>
-	    {% else %}
+	    {% elif bswithexpired_permits %}
 	    <div class="payment">
 	      <form class="form-control" id="mpesa-form" method="post">
 		<label for="phone_number" class="form-label">Enter Phone Number<span class="required">*</span></label>
@@ -46,7 +44,8 @@
 		</div>
 	      </form>
 	    </div>
-	    
+        {% else %}
+        <p>You  have no pending bills</p>
         {% endif %}
     </div>
 {% endblock %}
