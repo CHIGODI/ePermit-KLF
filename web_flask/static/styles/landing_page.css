@@ -3,6 +3,10 @@
     padding-top: 100px; /* Adjust this value to be greater than the navbar height */
 }
 
+body {
+    color: aliceblue;
+}
+
 .hero {
     background: url('../images/background.svg') no-repeat center center/cover;
     height: 100vh;
@@ -458,3 +462,14 @@ footer section{
     color: aliceblue;
     background: linear-gradient(90deg, #01000bd8, #06354d, #000006e6);
 }
+
+.py-4 #quicklinks:hover {
+    color: green;
+}
+
+/* Hover state for footer links */
+footer a:hover {
+    color: #ff6347; /* Desired hover color */
+    text-decoration: underline; /* Adds an underline on hover */
+}
+.
