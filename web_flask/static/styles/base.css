@@ -75,9 +75,8 @@
         transition: width 0.3s ease-in-out, visibility 0.3s ease-in-out;
     }
 
-    .nav-link:hover::before,
-    .nav-link.active::before {
-        width: 100%;
+    .nav-link:hover::before, .nav-link.active::before {
+        width: 60%;
         visibility: visible;
     }
 }

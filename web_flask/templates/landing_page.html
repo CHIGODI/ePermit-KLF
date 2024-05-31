@@ -23,19 +23,19 @@
                         <i class="fa-solid fa-id-card"></i>
                         <h2>Business Registration</h2>
                         <p>Submit your application online, upload necessary documents</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View Service</button></a>
+                        <a href="{{ url_for('auth.login') }}" class="apply-link"><button class="apply-button">View Service</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-layer-group"></i>
                         <h2>Permit Renewal</h2>
                         <p>Renew your existing permits effortlessly</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View Service</button></a>
+                        <a href="{{ url_for('auth.login') }}" class="apply-link"><button class="apply-button">View Service</button></a>
                     </div>
                     <div class="card">
                         <i class="fa-solid fa-file-signature"></i>
                         <h2>Other Services</h2>
                         <p>Explore  environmental permits, event permits, and more.</p>
-                        <a href="{{ url_for('auth.signup') }}" class="apply-link"><button class="apply-button">View more</button></a>
+                        <a href="{{ url_for('auth.login') }}" class="apply-link"><button class="apply-button">View more</button></a>
                     </div>
                 </div>
             </div>
@@ -160,16 +160,16 @@
                     </div>
                     <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                         <h6 class="text-uppercase fw-bold mb-4">Useful Links</h6>
-                        <p>
-                            <a href="#" class="text-reset">Home</a>
+                        <p id="quicklinks">
+                            <a href="{{ url_for('main.landing')}}# " class="text-reset">Home</a>
                         </p>
-                        <p>
-                            <a href="#services" class="text-reset">Services</a>
+                        <p id="quicklinks">
+                            <a href="{{ url_for('main.landing')}}#services" class="text-reset">Services</a>
                         </p>
-                        <p>
-                            <a href="#faq" class="text-reset">FAQs</a>
+                        <p id="quicklinks">
+                            <a href="{{ url_for('main.landing')}}#faq" class="text-reset">FAQs</a>
                         </p>
-                        <p>
+                        <p id="quicklinks">
                             <a href="{{ url_for('auth.login') }}" class="text-reset">Login</a>
                         </p>
                     </div>
