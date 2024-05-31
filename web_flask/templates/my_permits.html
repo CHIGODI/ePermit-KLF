@@ -1,13 +1,40 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="dashboard-pages">
-    {% if not permits %}
-        <h1>You have no permits</h1>
-    {% else %}
-        {% for permit in permits %}
-        <p>{{ permit.permit_number }}</p>
-        {% endfor %}
-    {% endif %}
-</div>
+    <div class="permit-listing">
+        <table>
+            <tr>
+                <th>Date Granted</th>
+                <th>Permit No.</th>
+                <th>Status</th>
+                <th>Expiry date</th>
+                <th>Action</th>
+            </tr>
+            {% if not permits %}
+            <tr>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+            </tr>
+            {% else %}
+                {% for permit in permits %}
+                    <tr>
+                        <td>{{ permit.created_at }}</td>
+                        <td>{{ permit.permit_number }}</td>
+                        {% if permit.check_validity() %}
+                            <td>Active</td>
+                        {% else %}
+                            <td>Expired</td>
+                        {% endif %}
+                        <td>{{ permit.expiry_date() }}</td>
+                        {% if permit.check_validity() is false %}
+                           <td class="renew"><a href="{{ url_for('register.mpesa_express')}}">Renew</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+    </div>
 {% endblock %}
 

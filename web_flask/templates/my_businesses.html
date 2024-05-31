@@ -1,15 +1,24 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="dashboard-pages">
-    <h1>Manage Your Businesess</h1>
+    <div class="quick-actions-bs">
+        <ul class="ul-qa-bs">
+            <a href="{{ url_for('register.register_page') }}">
+                <li class="li-qa-bs">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add business</span>
+                </li>
+            </a>
+        </ul>
+    </div>
     <div class="table-bs">
+        <h4>All Businesess</h4>
         <table>
             <tr>
                 <th>Business Name</th>
                 <th>Date created</th>
                 <th>Permit No.</th>
                 <th>Status</th>
-                <th>Action</th>
             </tr>
             {% if not businesses %}
                 <tr>
@@ -30,43 +39,11 @@
                                 <td>-</td>
                             {% endif %}
                         <td>{{ 'Verified' if business.verified else 'Pending' }}</td>
-                        <td>
-                            {% if business.verified %}
-                                {% if permit and permit.is_expired %}
-                                    <a href="{{ url_for('register.mpesa_express')}}"></a><button class="renew-p">Renew Permit</button></a>
-                                {% elif not permit %}
-                                    <a href="{{ url_for('register.mpesa_express') }}"><button class="pay-new">Pay for Permit</button></a>
-                                {% else %}
-                                     Active
-                                {% endif %}
-                            {% else %}
-                                Awaiting Verification
-                            {% endif %}
-                        </td>
                     </tr>
                 {% endfor %}
             {% endif %}
         </table>
     </div>
-
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-        }
-
-        th,
-        td {
-            padding: 8px;
-            text-align: left;
-        }
-    </style>
 </div>
 
 {% endblock %}

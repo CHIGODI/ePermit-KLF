@@ -31,3 +31,8 @@ class Permit(BaseModel, Base):
         if datetime.utcnow() > self.created_at + timedelta(days=365):
             self.is_valid = False
         return self.is_valid
+
+    def expiry_date(self):
+        """ returns expiry date of permit """
+        expiry_date = self.created_at + timedelta(days=365)
+        return expiry_date.strftime("%Y-%m-%d")

@@ -1,15 +1,14 @@
 .coming-soon {
-    padding: 50px;
-    border-radius: 15px;
+    padding: 3rem;
+    border-radius: 1rem;
     background: linear-gradient(135deg, #7dd56f, #4caf50);
-    /* background: linear-gradient(135deg, #e09, #d0e); */
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .title {
     font-family: 'Arial', sans-serif;
-    font-weight: bold;
+    font-weight: 700;
     text-transform: uppercase;
 }
 

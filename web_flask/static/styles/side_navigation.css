@@ -1,6 +1,6 @@
 .dashboard-pages {
     width: 64%;
-    height: 100vh;
+    /* height: 100vh; */
     z-index: 0;
     margin-left: 29%;
     display: flex;
@@ -9,34 +9,47 @@
     align-items: center;
     position: relative;
 }
-
 .myprofile {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
     margin: 50px auto;
     width: 90%;
+    grid-template-areas:
+        'user-i header-p header-p header-p header-p'
+        'profile-c profile-c profile-c profile-c profile-c';
 }
+
+.user-icon {grid-area: user-i;}
+.p-text {grid-area: header-p;}
+.profile-content {grid-area: profile-c;}
 
 .user-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    border: 2px solid #34495e;
+    width: 5rem;
+    height: 5rem;
+    border: 0.2rem solid #34495e;
     margin-right: 20px;
     margin-left: 10px;
+    border-radius: 50%;
 }
 
+.p-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #DDDDDD;
+    border-radius: 1rem;
+}
 .user {
-    font-size: 100px;
+    font-size: 2rem;
 }
 
 .profile-content {
+    margin-top: 2rem;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     flex: 1;
 }
@@ -45,39 +58,105 @@
     display: block;
     width: 100%;
     padding: 4px 8px;
-    font-size: 16px;
-    line-height: 1.2;
-    color: #333;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    color: #34495e;
     border-radius: 4px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
     height: 36px;
 }
 
-.profile-content .hide {
-    display: none;
-    background-color: red;
-}
 
 /* ----------mybusinesses------ */
-.table-bs {
-    margin: 10% auto;
-    width: 90%;
-    padding: 24px;
+.permit-listing{
+    width: 100%;
+    margin-top: 5%;
+}
+
+.quick-actions-bs{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+}
+.quick-actions-bs a{
+    margin: 0;
+    text-decoration: none;
+}
+
+.ul-qa-bs{
+    margin: 0;
+    padding: 6px;
+}
+.ul-qa-bs:hover{
+    background-color: #DDDDDD;
+    border-radius: 0.5rem;
+}
+
+.ul-qa-bs li{
+    list-style: none;
+}
+.li-qa-bs i,
+.li-qa-bs span{
+    font-size: 0.9rem;
+    color: grey;
 
 }
 
+.table-bs {
+    background-color: #DDDDDD;
+    margin: auto auto auto 2%;
+    width: 100%;
+    padding: 1.5rem;
 
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th,
+td {
+    padding: 0.5rem;
+    text-align: left;
+}
+.renew{
+    background-color: #DDDDDD;
+}
+.renew a{
+    text-decoration: none;
+    color: #34495e;
+}
+.renew :hover{
+    cursor: pointer;
+    opacity: 90%;
+}
 
 /* --payment page-- */
+.bill-hero-section {
+    width: 100%;
+    height: 30%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 10%;
+    z-index: 0;
+}
+.bill-hero-section{
+    color: green;
+}
+.bill-hero-section p{
+    color: red;
+    font-weight: 600;
+}
+
 .payment {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
-    margin: 50px auto;
-    width: 70%;
-
+    width: 60%;
+    border-radius: 2rem;
 }
 
 .pay-btn {
@@ -88,7 +167,6 @@
 .btn-pay {
     margin: 24px auto;
     width: 30%;
-    background-color: green;
 }
 
 #flash-error-p {
@@ -100,19 +178,13 @@
     left: 35%;
     top: 70px;
     display: hidden;
+    z-index: 10;
 }
-
-.bill-hero-section {
-    width: 100%;
-    height: 30%;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+/* ---permits-- */
+.permit-listing{
+    margin-left: 5%;
+    background-color: #DDDDDD;
 }
-
-
 /* Tablets (landscape) */
 @media (max-width: 768px) {
     .dashboard-pages {
@@ -141,12 +213,37 @@
         font-size: 14px;
     }
 
+    /* -----my-businesses---- */
+
+    .quick-actions-bs{
+        padding: 0;
+    }
     .table-bs {
         width: 100%;
+        margin: auto auto;
+        padding: 0;
+    }
+    .table-bs h4{
+        font-size: 1rem;
+        padding: 2%;
+        margin: 0;
+    }
+    table,
+    td,
+    th{
+        width: 100%;
+        padding: 2%;
+    }
+    tr,
+    th,
+    td{
+        width: 10%;
+        font-size: 0.6rem;
+        gap: 2px;
     }
 
     .payment {
-        margin: 20px auto;
+       width: 100%;
     }
 
     .pay-btn {
