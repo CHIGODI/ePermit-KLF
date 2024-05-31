@@ -20,7 +20,8 @@ def dashboard():
     """ User dashboard where normal users can register businesses """
     current_user = g.get('current_user')
     businesses = current_user.businesses
-    return render_template('services.html', businesses=businesses)
+    return render_template('dashboard.html', businesses=businesses,
+                           current_user=current_user)
 
 @main.route('/mybusinesses', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -31,14 +32,15 @@ def mybusinesses():
     permits = storage.all(Permit).values()
     return render_template('my_businesses.html',
                            businesses=businesses,
-                           permits=permits)
+                           permits=permits,
+                           current_user=current_user)
 
 @main.route('/myprofile', methods=['GET'], strict_slashes=False)
 @token_required('user')
 def myprofile():
     """ user profile """
     current_user = g.get('current_user')
-    return render_template('my_profile.html', current_user=current_user)
+    return render_template('my_profile.html', current_user=current_user,)
 
 
 @main.route('/mypermits', methods=['GET'], strict_slashes=False)
@@ -51,14 +53,17 @@ def mypermits():
     permits = [p for p in storage.all(Permit).values() if p.business_id in business_ids]
 
     print(permits)
-    return render_template('my_permits.html', permits=permits)
+    return render_template('my_permits.html', permits=permits,
+                           current_user=current_user)
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
 @token_required('user')
 def coming_soon():
     """ These renders a page for all services that are currently not available"""
-    return render_template('coming_soon.html')
+    current_user = g.get('current_user')
+    return render_template('coming_soon.html',
+                           current_user=current_user)
 
 
 # ADMIN DASHBOARD
@@ -66,14 +71,18 @@ def coming_soon():
 @token_required('admin')
 def admin_dashboard():
     """ Admin dashboard where admins can verify business registrations """
+    current_user = g.get('current_user')
     unverified_businesses = storage.get_unverified_businesses()
-    return render_template('admin_services.html', unverified_businesses=unverified_businesses)
+    return render_template('admin_services.html', unverified_businesses=unverified_businesses,
+                           current_user=current_user)
 
 @main.route('/pending_approval', methods=['GET'], strict_slashes=False)
 @token_required('admin')
 def pending_approval():
+    current_user = g.get('current_user')
     """ Admin dashboard where admins can verify business registrations """
-    return render_template('pending_approval.html')
+    return render_template('pending_approval.html',
+                           current_user=current_user)
 
 
 # business details
@@ -98,14 +107,18 @@ def business_details(business_id=None):
 @token_required('admin')
 def approved_businesses():
     """ Page to display approved businesses """
+    current_user = g.get('current_user')
     approved_businesses = storage.get_approved_businesses()
-    return render_template('approved_businesses.html', approved_businesses=approved_businesses)
+    return render_template('approved_businesses.html', approved_businesses=approved_businesses,
+                           current_user=current_user)
 
 # rejected businesses
 @main.route('/rejected_businesses', methods=['GET'], strict_slashes=False)
 @token_required('admin')
 def rejected_businesses():
     """ Page to display rejected/unverfied businesses """
+    current_user = g.get('current_user')
     rejected_businesses = storage.get_unverified_businesses() # Get unverified same as rejected businesses
-    return render_template('rejected_businesses.html', rejected_businesses=rejected_businesses)
+    return render_template('rejected_businesses.html', rejected_businesses=rejected_businesses,
+                           current_user=current_user)
 

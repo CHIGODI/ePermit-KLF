@@ -58,8 +58,10 @@
         </div>
       </div>
       <div class="profile-details">
-        <span class="name">ANTONY ABOUD</span>
-        <span class="email">chiegody254@gmail.com</span>
+        {% if current_user.first_name and current_user.last_name %}
+          <span class="name">{{ first_name + last_name }}</span>
+        {% endif %}
+        <span class="email">{{ current_user.email }}</span>
       </div>
     </div>
   </nav>
