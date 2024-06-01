@@ -176,7 +176,7 @@
                 <select id="category" class="form-select" name="category" required>
                     <option value="" selected></option>
                     {% for category in categories %}
-                    <option value="{{ category.id }}">{{ category.activity_code }} {{ category.category_name }}</option>
+                    <option value="{{ category.id }}" data-fee="{{ category.fee }}" data-fire_fee="{{ category.fire_fee }}">{{ category.activity_code }} {{ category.category_name }}</option>
                     {% endfor %}
                 </select>
             </div>
@@ -196,14 +196,15 @@
         </div>
 
         <div id="map"></div>
+        <p class="map-description">Select your business location on the map to autofill</p>
 
         <div class="position-bs">
             <div class="col latitude-dv">
-                <label for="latitude" class="form-label">Latitude:</label>
+                <label for="latitude" class="form-label">Latitude: <span class="required">*</span></label>
                 <input type="text" id="latitude" class="form-control" name="latitude" required><br><br>
             </div>
             <div class="col longitude-dv">
-                <label for="longitude" class="form-label">Longitude:</label>
+                <label for="longitude" class="form-label">Longitude: <span class="required">*</span></label>
                 <input type="text" id="longitude" class="form-control" name="longitude" required><br><br>
             </div>
         </div>

@@ -52,7 +52,13 @@ $(function () {
     $('.latitude-dv, .longitude-dv').find('input').blur(function () {
         $(this).closest('.col').removeClass('focus-highlight');
     });
-
+    $('#category').on('change', function () {
+        let fee = $(this).find('option:selected').data('fee');
+        let fire_fee = $(this).find('option:selected').data('fire_fee');
+        let total_fee = fee + fire_fee;
+        $(this).text(`Total fee: ${total_fee}`);
+        
+    });
     // submiting business details for registration
     $('.register-bs-btn').click(function (e) {
         e.preventDefault();

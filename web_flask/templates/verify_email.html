@@ -22,9 +22,10 @@
             <div class="field">
                 <input type="hidden" name="email" value="{{ email }}">
             </div>
-
-            <button type="submit" name="action" value="verify" class="btn btn-primary auth verify-b">Verify</button>
-            <button type="submit" name="action" value="resend" class="btn btn-secondary auth verify-b">Resend Code</button>
+            <div class="choice">
+                <button type="submit" name="action" value="verify" class="choice-btn">Verify</button>
+                <button type="submit" name="action" value="resend" class="choice-btn" id="s-choice">Resend Code</button>
+            </div>
         </form>
     </div>
 </div>

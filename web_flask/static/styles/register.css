@@ -64,6 +64,10 @@
    align-items: center;
    gap: 12px;
 }
+.map-description {
+   color: #B4B4B8;
+   font-style: italic;
+}
 
 .latitude-dv,
 .longitude-dv {
