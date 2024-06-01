@@ -29,7 +29,8 @@ def register_page():
         print(user_id)
         return render_template('register.html',
                                user_id=user_id,
-                               categories=categories)
+                               categories=categories,
+                               current_user=current_user)
     else:
         print('here')
         flash(f'Something went wrong!', 'error')
@@ -59,7 +60,8 @@ def mpesa_express():
     print(f"{new_businesses}----------------------------new_businesses")
     if not permits:
         return render_template('payment.html',
-                               new_businesses=new_businesses)
+                               new_businesses=new_businesses,
+                               current_user=current_user)
     else:
         bswithexpired_permits = []
         for permit in permits:

@@ -23,7 +23,7 @@
 <body>
   <nav class="nav-dashboard fixed-top">
     <p class="menu">
-      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
+      <button class="btn btn-menu" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample"
         aria-expanded="false" aria-controls="collapseWidthExample">
         <i class="fa-solid fa-sliders"></i>
       </button>
@@ -59,7 +59,7 @@
       </div>
       <div class="profile-details">
         {% if current_user.first_name and current_user.last_name %}
-          <span class="name">{{ first_name + last_name }}</span>
+          <span class="name">{{ current_user.first_name ~ ' ' ~ current_user.last_name }}</span>
         {% endif %}
         <span class="email">{{ current_user.email }}</span>
       </div>
@@ -113,11 +113,6 @@
           </li>
         </a>
         </ul>
-      <div class="information-btn">
-        <a href="{{ url_for('auth.logout') }}">
-          <button class="logout">Sign Out<i class="fa-solid fa-right-from-bracket"></i></button>
-        </a>
-      </div>
     </div>
     <!-- all pages have dashboard structure -->
     {% block content %}

@@ -20,7 +20,7 @@ def dashboard():
     """ User dashboard where normal users can register businesses """
     current_user = g.get('current_user')
     businesses = current_user.businesses
-    return render_template('dashboard.html', businesses=businesses,
+    return render_template('services.html', businesses=businesses,
                            current_user=current_user)
 
 @main.route('/mybusinesses', methods=['GET'], strict_slashes=False)
@@ -90,6 +90,7 @@ def pending_approval():
 @token_required('admin')
 def business_details(business_id=None):
     """ Admin dashboard where admins can view business details """
+    current_user = g.get('current_user')
     if request.method == 'POST':
         action = request.form.get('action')  # Get the action (approve or reject)
         if action == 'approve':
@@ -100,7 +101,8 @@ def business_details(business_id=None):
             return redirect(url_for('main.admin_dashboard'))  # Redirect to admin dashboard
 
     business_details = storage.get_business_details(business_id)
-    return render_template('business_details.html', business_details=business_details)
+    return render_template('business_details.html', business_details=business_details,
+                           current_user=current_user)
 
 # approved businesses
 @main.route('/approved_businesses', methods=['GET'], strict_slashes=False)
