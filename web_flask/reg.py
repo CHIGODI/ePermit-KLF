@@ -10,12 +10,14 @@ from models.business import Business
 from models import storage
 from models.category import Category
 from models.permit import Permit
-import uuid
 from web_flask import register
 from base64 import b64encode
 from requests.auth import HTTPBasicAuth
 from . import token_required
 from os import getenv
+import uuid
+
+cache_id = uuid.uuid4()
 
 @register.route('/register', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -30,11 +32,13 @@ def register_page():
         return render_template('register.html',
                                user_id=user_id,
                                categories=categories,
-                               current_user=current_user)
+                               current_user=current_user,
+                               cache_id=cache_id)
     else:
         print('here')
         flash(f'Something went wrong!', 'error')
-        return render_template('dashboard.html', current_user=current_user)
+        return render_template('dashboard.html', current_user=current_user,
+                               cache_id=cache_id)
 
 @register.route('/pay', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -61,7 +65,8 @@ def mpesa_express():
     if not permits:
         return render_template('payment.html',
                                new_businesses=new_businesses,
-                               current_user=current_user)
+                               current_user=current_user,
+                               cache_id=cache_id)
     else:
         bswithexpired_permits = []
         for permit in permits:
@@ -74,4 +79,5 @@ def mpesa_express():
         print(bswithexpired_permits)
         return render_template('payment.html',
                             bswithexpired_permits=bswithexpired_permits,
-                            current_user=current_user)
+                            current_user=current_user,
+                            cache_id=cache_id)

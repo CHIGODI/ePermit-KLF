@@ -12,7 +12,6 @@ import uuid
 
 load_dotenv()
 
-cache_id = uuid.uuid4()
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = getenv('SECRET_KEY')

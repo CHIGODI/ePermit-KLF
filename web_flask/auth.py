@@ -14,9 +14,11 @@ from os import getenv
 from werkzeug.security import generate_password_hash, check_password_hash
 from web_flask.reused_functions import *
 from web_flask import auth
+import uuid
 from models.user import User
 from models import storage
 
+cache_id = uuid.uuid4()
 
 # loading environment variables
 load_dotenv()

@@ -8,10 +8,13 @@ from models.permit import Permit
 from models.business import Business
 from web_flask import main
 from . import token_required
+import uuid
+
+cache_id = uuid.uuid4()
 
 @main.route('/', methods=['GET'], strict_slashes=False)
 def landing():
-    return render_template('landing_page.html')
+    return render_template('landing_page.html', cache_id=cache_id)
 
 
 @main.route('/dashboard', methods=['GET'], strict_slashes=False)
@@ -21,7 +24,8 @@ def dashboard():
     current_user = g.get('current_user')
     businesses = current_user.businesses
     return render_template('services.html', businesses=businesses,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 @main.route('/mybusinesses', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -33,14 +37,16 @@ def mybusinesses():
     return render_template('my_businesses.html',
                            businesses=businesses,
                            permits=permits,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 @main.route('/myprofile', methods=['GET'], strict_slashes=False)
 @token_required('user')
 def myprofile():
     """ user profile """
     current_user = g.get('current_user')
-    return render_template('my_profile.html', current_user=current_user,)
+    return render_template('my_profile.html', current_user=current_user,
+                           cache_id=cache_id)
 
 
 @main.route('/mypermits', methods=['GET'], strict_slashes=False)
@@ -54,7 +60,8 @@ def mypermits():
 
     print(permits)
     return render_template('my_permits.html', permits=permits,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 
 @main.route('/comingsoon', methods=['GET'], strict_slashes=False)
@@ -63,7 +70,8 @@ def coming_soon():
     """ These renders a page for all services that are currently not available"""
     current_user = g.get('current_user')
     return render_template('coming_soon.html',
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 
 # ADMIN DASHBOARD
@@ -74,7 +82,8 @@ def admin_dashboard():
     current_user = g.get('current_user')
     unverified_businesses = storage.get_unverified_businesses()
     return render_template('admin_services.html', unverified_businesses=unverified_businesses,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 @main.route('/pending_approval', methods=['GET'], strict_slashes=False)
 @token_required('admin')
@@ -82,7 +91,8 @@ def pending_approval():
     current_user = g.get('current_user')
     """ Admin dashboard where admins can verify business registrations """
     return render_template('pending_approval.html',
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 
 # business details
@@ -102,7 +112,8 @@ def business_details(business_id=None):
 
     business_details = storage.get_business_details(business_id)
     return render_template('business_details.html', business_details=business_details,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 # approved businesses
 @main.route('/approved_businesses', methods=['GET'], strict_slashes=False)
@@ -112,7 +123,8 @@ def approved_businesses():
     current_user = g.get('current_user')
     approved_businesses = storage.get_approved_businesses()
     return render_template('approved_businesses.html', approved_businesses=approved_businesses,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
 # rejected businesses
 @main.route('/rejected_businesses', methods=['GET'], strict_slashes=False)
@@ -122,5 +134,6 @@ def rejected_businesses():
     current_user = g.get('current_user')
     rejected_businesses = storage.get_unverified_businesses() # Get unverified same as rejected businesses
     return render_template('rejected_businesses.html', rejected_businesses=rejected_businesses,
-                           current_user=current_user)
+                           current_user=current_user,
+                           cache_id=cache_id)
 
