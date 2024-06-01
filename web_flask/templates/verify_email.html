@@ -16,14 +16,15 @@
         <form class="form-auth" method="POST" action="/verify_email/">
             <div class="field">
                 <label for="verification_code" class="form-label">Enter Verification code<span class="required">*</span></label>
-                <input type="text" name="verification_code" class="form-control" required>
+                <input type="text" name="verification_code" class="form-control">
             </div>
 
             <div class="field">
                 <input type="hidden" name="email" value="{{ email }}">
             </div>
 
-            <button type="submit" class="btn btn-primary auth verify-b">Verify</button>
+            <button type="submit" name="action" value="verify" class="btn btn-primary auth verify-b">Verify</button>
+            <button type="submit" name="action" value="resend" class="btn btn-secondary auth verify-b">Resend Code</button>
         </form>
     </div>
 </div>

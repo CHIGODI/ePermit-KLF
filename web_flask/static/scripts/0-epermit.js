@@ -97,6 +97,12 @@ $(function () {
                 owner_info[obj.name] = obj.value;
             });
 
+            if (!Number.isInteger(Number(business_registration_data['Certificate_of_Registration_No']))) {
+                showAlert('Certificate_of_Registration_No must be an number', 'error', 'flash-form-error');
+                fadeOut('flash-msg');
+                return;
+            }
+
             let ownerInfoSubmitted = false;
             let businessInfoSubmitted = false;
             // send business info to the server

@@ -4,6 +4,7 @@
 from datetime import datetime
 import random
 import string
+from flask_mail import Message
 
 def time_diff_from_now(timestamp):
     """
@@ -21,3 +22,12 @@ def generate_verification_code(length=6):
     return ''.join(random.choices(string.ascii_uppercase +
                                   string.digits,
                                   k=length))
+
+
+def send_code(email, verification_code, message, f_app):
+    """ send the email verification code """
+    msg = Message('Verification ePermit',
+                sender='chiegody254@gmail.com',
+                recipients=[email])
+    msg.body = f'{message}: {verification_code}'
+    f_app.extensions['mail'].send(msg)

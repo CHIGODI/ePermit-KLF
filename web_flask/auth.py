@@ -156,44 +156,70 @@ def signup():
     return make_response(render_template('sign_up.html'), 200)
 
 
-@auth.route('/verify_email/', methods=['POST', 'GET'],
-            strict_slashes=False)
+
+@auth.route('/verify_email/', methods=['POST', 'GET'], strict_slashes=False)
 def verify_email():
     """ This route allows users to verify their email address """
     if request.method == 'POST':
-        data = session.get('verification_data')
-        verification_code = request.form.get('verification_code')
+        action = request.form.get('action')
+        verification_data = session.get('verification_data', {})
 
+        if 'resend_attempts' not in verification_data:
+            verification_data['resend_attempts'] = 0
+        if 'resend_lock_time' not in verification_data:
+            verification_data['resend_lock_time'] = None
 
-        if not data or data.get('verification_code') != verification_code:
-            flash('Invalid verification code.', 'error')
-            return redirect(url_for('auth.verify_email'))
+        # Check if user is locked for resending the code
+        if verification_data['resend_lock_time']:
+            lock_time = datetime.strptime(verification_data['resend_lock_time'], '%Y-%m-%d %H:%M:%S')
+            if datetime.now() < lock_time:
+                flash('Too many attempts to resend the code. Please try again in 1 hour.', 'error')
+                return redirect(url_for('auth.verify_email'))
 
-        # Calculate time difference
-        time_diff = time_diff_from_now(data.get('timestamp'))
+        if action == 'verify':
+            verification_code = request.form.get('verification_code')
 
-        # if time diff is more that 5 minutes / verification code expired
-        if time_diff > 300:
-            flash('Verification code expired. '
-                  'Account creation was not successful.', 'error')
+            if not verification_data or verification_data.get('verification_code') != verification_code:
+                flash('Invalid verification code. Please check and try again.', 'error')
+                return redirect(url_for('auth.verify_email'))
+
+            # Calculate time difference
+            time_diff = time_diff_from_now(verification_data.get('timestamp'))
+
+            # if time diff is more than 5 minutes / verification code expired
+            if time_diff > 300:
+                flash('Verification code expired. Please try to request another code.', 'error')
+                return redirect(url_for('auth.verify_email'))
+
+            # Create user
+            user = User(
+                email=verification_data.get('email'),
+                password=verification_data.get('password')
+            )
+
+            # Saving user after they verify themselves/persists to DB
+            user.save()
+
+            flash('Your email has been verified successfully. Please log in.', 'success')
+            # Clear verification data from session after verification
             session.pop('verification_data', None)
-            return redirect(url_for('auth.signup'))
+            return redirect(url_for('auth.login'))
+        elif action == 'resend':
+            if verification_data['resend_attempts'] >= 3:
+                verification_data['resend_lock_time'] = (datetime.now() + timedelta(hours=1)).strftime('%Y-%m-%d %H:%M:%S')
+                session['verification_data'] = verification_data
+                flash('Too many attempts to resend the code. Please try again in 1 hour.', 'error')
+                return redirect(url_for('auth.verify_email'))
 
-        # Create user
-        user = User(
-            email=data.get('email'),
-            password=data.get('password')
-        )
-
-        # saving user after they verify themselves/persists to DB
-        user.save()
-
-        flash('Your email has been verified successfully. Please Login',
-              'success')
-        # Clear verification data from session after verification
-        session.pop('verification_data', None)
-
-        return redirect(url_for('auth.login'))
+            email = verification_data.get('email')
+            verification_code = generate_verification_code()
+            verification_data['verification_code'] = verification_code
+            verification_data['resend_attempts'] += 1
+            session['verification_data'] = verification_data
+            message = 'Your verification code is:'
+            send_code(email, verification_code, message, current_app)
+            flash('Verification code resent. Check your email.', 'success')
+            return redirect(url_for('auth.verify_email'))
     return render_template('verify_email.html')
 
 
