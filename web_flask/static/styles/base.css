@@ -54,7 +54,7 @@ body{
 }
 
 .nav-link.active:hover {
-    color: green;
+    color: green !important;
 }
 
 @media (min-width: 991px) {

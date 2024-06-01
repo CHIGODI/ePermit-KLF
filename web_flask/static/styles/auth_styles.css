@@ -1,17 +1,17 @@
 /* ---styling for login and sign-up-------- */
 .auth-form-div {
-    margin-top: 2rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 50%;
-    margin: auto;
+    margin: 2rem auto;
     border-radius: 0.5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
 .auth-form-div h3 {
     text-align: center;
+    color: #003840;
 }
 
 .form-auth {
@@ -21,6 +21,11 @@
     flex-direction: column;
     width: 80%;
     height: 100%;
+}
+.form-auth label{
+    font-size: 1.1rem;
+    font-weight: 400;
+
 }
 
 .form-auth input:required:focus:invalid,
@@ -197,7 +202,7 @@
 
 .auth-form-div .t-forgot-pwd {
     color: #555555;
-    font-size: 24px;
+    font-size: 2rem;
 }
 
 .form-auth .auth {
@@ -232,7 +237,7 @@
 }
 
 #cancel-forgot{
-    background-color: #005757;
+    background-color: #038C7F;
 }
 /* --------------password reset-------------- */
 .pwd-reset {
@@ -256,13 +261,14 @@
 
     .auth-form-div {
         height: 80vh;
-        width: 100%;
+        width: 90%;
         margin-top: 0;
         box-shadow: none;
     }
 
+
     .auth-form-div .title {
-        padding-top: 24px;
+        padding-top: 2.5rem;
         margin: 0;
     }
 
@@ -283,7 +289,7 @@
 
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (min-width: 576px) and (max-width: 768px) {
 
     .auth-form-div {
         width: 80%;
@@ -297,10 +303,17 @@
 
     .form-auth {
         width: 100%;
+        height: 50%;
     }
 
     .autht,
     .sign-up {
-        margin: 16px auto;
+        margin: 1rem auto;
     }
+   .f-forgot-pwd {
+       height: 20rem;
+       width: 60%;
+       box-shadow: none;
+       background-color: red;
+   }
 }

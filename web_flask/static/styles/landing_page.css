@@ -1,11 +1,11 @@
 
 .main {
-    padding-top: 100px; /* Adjust this value to be greater than the navbar height */
+    padding-top: 70px; /* Adjust this value to be greater than the navbar height */
 }
 
 .hero {
     background: url('../images/background.svg') no-repeat center center/cover;
-    height: 100vh;
+    height: calc(100vh - 70px);
     width: 100%;
     background-size: 2400px;
     display: flex;
@@ -14,7 +14,7 @@
     text-align: center;
     flex-direction: column;
     color: white;
-    padding: 100px;
+    opacity: 0.9;
 }
 
 .hero-title {
@@ -277,15 +277,15 @@
         padding: 30px; /* Further reduce padding in hero section */
     }
     .hero-title {
-        font-size: 1.8rem; /* Adjust the font size of hero title */
+        font-size: 5rem; /* Adjust the font size of hero title */
     }
     .hero-subtitle {
-        font-size: 0.9rem; /* Adjust the font size of hero subtitle */
+        font-size: 2rem; /* Adjust the font size of hero subtitle */
         margin-bottom: 15px; /* Further reduce bottom margin */
     }
     .hero-button {
-        font-size: 1rem; /* Adjust the font size of hero button */
-        padding: 8px 15px; /* Further reduce padding of hero button */
+        font-size: 1.5rem; /* Adjust the font size of hero button */
+        padding: 1rem 1.5rem; /* Further reduce padding of hero button */
         margin: 8px 0; /* Adjust margin for better spacing */
     }
     .cards {

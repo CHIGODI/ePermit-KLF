@@ -8,6 +8,12 @@ $(function () {
         dataType: "script",
     });
 
+    // toggling nav active class
+    $('.nav-link').on('click', function () {
+        $('.nav-link').removeClass('active');
+        $(this).addClass('active');
+    });
+
     // forgot password cancel
     $('#cancel-forgot').on('click', function (e) {
         e.preventDefault();
