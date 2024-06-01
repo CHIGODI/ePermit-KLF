@@ -1,9 +1,11 @@
 {% extends "admin_dashboard.html" %}
 {% block content %}
 <div class="service-listing">
+    <h2>Details</h2>
     <div class="business-details">
-        <h2>{{ business_details.business_name }}</h2>
+        
         <ul>
+            <li>Business Name: {{ business_details.business_name }}</li>
             <li>Entity Origin: {{ business_details.entity_origin }}</li>
             <li>Certificate of Registration No: {{ business_details.Certificate_of_Registration_No }}</li>
             <li>KRA Pin: {{ business_details.KRA_pin }}</li>

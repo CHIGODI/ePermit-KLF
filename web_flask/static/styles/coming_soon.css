@@ -1,0 +1,23 @@
+.coming-soon {
+    padding: 3rem;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #7dd56f, #4caf50);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.title {
+    font-family: 'Arial', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.spinner-border {
+    margin-top: 20px;
+}
+
+.lead {
+    font-family: 'Georgia', serif;
+    margin-top: 20px;
+    font-size: 1.25rem;
+}

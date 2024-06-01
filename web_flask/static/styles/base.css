@@ -6,6 +6,9 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    font-family: "Source Sans 3", sans-serif;;
+}
 
 
  .navbar {
@@ -74,7 +77,7 @@
     }
 
     .nav-link:hover::before, .nav-link.active::before {
-        width: 100%;
+        width: 50%;
         visibility: visible;
     }
 }

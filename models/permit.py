@@ -11,8 +11,8 @@ class Permit(BaseModel, Base):
     """Class for permit instances"""
     __tablename__ = 'permits'
     permit_number = Column(String(60), nullable=False, unique=True)
-    is_valid = Column(Boolean, default=False, nullable=False)
-    business_id = Column(String(60), ForeignKey('businesses.id'), nullable=False)
+    is_valid = Column(Boolean, default=True, nullable=False)
+    business_id = Column(String(60), ForeignKey('businesses.id'), nullable=True)
 
     def __init__(self, *args, **kwargs):
         """ Override the default init method to set the permit number"""
@@ -31,3 +31,8 @@ class Permit(BaseModel, Base):
         if datetime.utcnow() > self.created_at + timedelta(days=365):
             self.is_valid = False
         return self.is_valid
+
+    def expiry_date(self):
+        """ returns expiry date of permit """
+        expiry_date = self.created_at + timedelta(days=365)
+        return expiry_date.strftime("%Y-%m-%d")

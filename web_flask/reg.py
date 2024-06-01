@@ -29,11 +29,12 @@ def register_page():
         print(user_id)
         return render_template('register.html',
                                user_id=user_id,
-                               categories=categories)
+                               categories=categories,
+                               current_user=current_user)
     else:
         print('here')
         flash(f'Something went wrong!', 'error')
-        return render_template('dashboard.html')
+        return render_template('dashboard.html', current_user=current_user)
 
 @register.route('/pay', methods=['GET'], strict_slashes=False)
 @token_required('user')
@@ -43,16 +44,34 @@ def mpesa_express():
     businesses = [business for business in current_user.businesses if business.verified]
     business_ids = [business.id for business in businesses]
 
-
+    print(f'{businesses}--------------businesses')
     permits = []
+    new_businesses = []
     for business_id in business_ids:
-        permits.extend(storage.get_permit_by_business_id(business_id))
+        permit = storage.get_permit_by_business_id(business_id)
+        print(permit)
+        if permit:
+            permits.append(permit)
+        else:
+            business = storage.get_obj_by_id(Business, business_id)
+            new_businesses.append(business)
 
-    bswithexpired_permits = []
+    print(f'{permits}-------permits')
+    print(f"{new_businesses}----------------------------new_businesses")
+    if not permits:
+        return render_template('payment.html',
+                               new_businesses=new_businesses,
+                               current_user=current_user)
+    else:
+        bswithexpired_permits = []
+        for permit in permits:
+            if permit and permit.check_validity() is False:
+                business = storage.get_obj_by_id(Business, permit.business_id)
+                print(business)
+                bswithexpired_permits.append(business)
 
-    for permit in permits:
-        if permit.check_validity() is False:
-            business = storage.get_obj_by_id(Business, permit.business_id)
-            bswithexpired_permits.append(business)
-    return render_template('payment.html',
-                           bswithexpired_permits=bswithexpired_permits)
+        bswithexpired_permits.extend(new_businesses)
+        print(bswithexpired_permits)
+        return render_template('payment.html',
+                            bswithexpired_permits=bswithexpired_permits,
+                            current_user=current_user)
