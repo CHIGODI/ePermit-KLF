@@ -89,7 +89,7 @@ def login():
             response = make_response(redirect(url_for(dashboard_route)))
 
             # Set HTTP-only cookie
-            response.set_cookie('x-access-token', token, httponly=True, max_age=1800)
+            response.set_cookie('x-access-token', token, httponly=True, max_age=1800, secure=True)
             return response
 
         flash("Wrong email or password.", 'error')

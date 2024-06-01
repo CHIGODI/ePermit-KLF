@@ -1,12 +1,12 @@
 /* ---styling for login and sign-up-------- */
 .auth-form-div {
-    margin-top: 32px;
+    margin-top: 2rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
     width: 50%;
     margin: auto;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
 }
 
@@ -192,7 +192,7 @@
 /* --------forgot passowrd page -------- */
 
 .f-forgot-pwd {
-    height: 256px;
+    height: 17rem;
 }
 
 .auth-form-div .t-forgot-pwd {
@@ -209,8 +209,31 @@
 .form-auth .auth:hover {
     background-color: #005757;
 }
+.choice{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5%;
+}
+.choice-btn,
+.choice-btn-li{
+   width: 30%;
+   height: 2rem;
+   padding: 0.2rem 0.8rem;
+   border: none;
+   color: white;
+   background-color: #007bff;
+   border-radius: 0.5rem;
+}
+.choice-btn:hover,
+.choice-btn-li:hover{
+    background-color: opacity(0.9);
+    cursor: pointer;
+}
 
-
+#cancel-forgot{
+    background-color: #005757;
+}
 /* --------------password reset-------------- */
 .pwd-reset {
     height: 356px;
@@ -222,7 +245,6 @@
 
 .form-auth .b-pwd-reset {
     background-color: #2196F3;
-    /* Vibrant Blue */
     color: #ffffff;
 }
 
@@ -247,10 +269,16 @@
     .form-auth {
         width: 100%;
     }
+    .form-auth input{
+        padding: 0.5rem;
+    }
 
     .autht,
     .sign-up {
         margin: 16px auto;
+    }
+    .t-forgot-pwd{
+        font-weight: 600;
     }
 
 }

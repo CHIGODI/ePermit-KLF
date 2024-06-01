@@ -8,6 +8,12 @@ $(function () {
         dataType: "script",
     });
 
+    // forgot password cancel
+    $('#cancel-forgot').on('click', function (e) {
+        e.preventDefault();
+        window.location.href = "https://www.epermit.live/login";
+    });
+
     // Alert timeouts
     setTimeout(function () {
         $('#flash-message, #flash-error-p').fadeOut('slow', function () {

@@ -8,6 +8,7 @@ __pycache__/
 dee/
 ePermit_key
 ePermit_key.pub
+epermit/
 
 # Environment Variables
 .env
