@@ -1,221 +1,163 @@
-.business-details {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Admin dashboard */
+.service-listing .table-services {
+    margin-left: 5%;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+   
+
+}
+.table-services .services-table {
+    background-color: #DDDDDD;
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    
 }
 
-.business-details h2 {
-    margin-top: 0;
+.bts {
+    background-color:#285943 ;
+    padding: 5px 5px;
+    border-radius: 5px;
+    color: aliceblue;
+    text-decoration: none;
+}
+
+.bts:hover {
+    background-color: rgb(57, 119, 98);
+}
+
+/* View business details after dashbaord*/
+.admin-upper .admin-upper-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+    margin: 5%;
+    color: #285943;
+    
+}
+
+
+
+
+/* Business details */
+.business-details {
+    background-color: #DDDDDD;
+    padding: 20px;
+    margin: 2%;
+    margin-left: 5%;
+    margin-top: 0px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    margin-bottom: 20px;
 }
 
 .business-details ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+    list-style: none;
+    padding: 10px;
 }
 
 .business-details ul li {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    padding: 8px;
 }
 
-.btn-group {
-    margin-top: 10px;
-
-}
-
-.btn-group button {
-    padding: 10px 20px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.btn-group button.btn-reject {
-    background-color: #ff6347;
-    /* Red */
-    color: #fff;
-    width: 100px;
-}
-
-.btn-group button.btn-approve {
-    background-color: #32cd32;
-    /* Green */
-    color: #fff;
-    width: 100px;
-}
-
-.btn-group button:hover {
-    opacity: 0.8;
-}
-
-.no-pending {
+/* buttons */
+.buttons {
     display: flex;
-    text-align: center;
-    justify-content: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #000;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.business-details form {
     margin-top: 20px;
-
 }
 
-
-
-
-/* Approved/rejected businesses style */
-.card-body ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-.service-listing h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #3498db;
-    /* Blue color for the text */
-    text-align: center;
-    position: relative;
-}
-
-.service-listing h2::after {
-    content: '';
-    display: block;
-    width: 50%;
-    height: 1px;
-    background-color: #023455;
-    /* Same blue color as the text */
-    margin: 10px auto 0 auto;
-}
-
-.card-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-}
-
-.card-group .card {
-    border: 1px solid #ffffff;
-    border-radius: 10px;
-    margin: 15px;
-    width: calc(33% - 30px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.card-title {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    font-weight: bold;
-    color: #333;
-}
-
-.business-details {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-}
-
-.business-details li {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
-.business-details li strong {
-    font-weight: bold;
-    color: #555;
-}
-
-/* business details styles */
-.service-listing .business-details {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.service-listing .business-details:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.service-listing .business-details h2 {
-    font-size: 2.5em;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #3498db;
-    text-align: center;
-    position: relative;
-}
-
-.service-listing .business-details h2::after {
-    content: '';
-    display: block;
-    width: 50%;
-    height: 3px;
-    background-color: #3498db;
-    margin: 10px auto 0 auto;
-}
-
-.service-listing .business-details ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    text-align: left;
-}
-
-.service-listing .business-details ul li {
-    margin-bottom: 10px;
-    font-size: 1.1em;
-}
-
-.service-listing .business-details ul li strong {
-    font-weight: bold;
-    color: #555;
-}
-
-.service-listing .btn-group {
-    margin-top: 10px;
-    text-align: center;
-}
-
-.service-listing .btn-group button {
+.buttons form button {
     padding: 10px 20px;
-    margin: 10px;
+    width: 200px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
 }
 
-.service-listing .btn-group button.btn-reject {
-    background-color: #ff6347;
+.business-details form .btn-approve:hover {
+    background-color: #28a745;;
+    color: #fff;
+}
+.business-details form .btn-reject:hover {
+    background-color: red;
     color: #fff;
 }
 
-.service-listing .btn-group button.btn-approve {
-    background-color: #32cd32;
-    color: #fff;
+
+.business-details form .btn-reject {
+    background-color: #dc3545;
+    color: #DDDDDD;
 }
 
-.service-listing .btn-group button:hover {
-    opacity: 0.8;
+.business-details form .btn-approve {
+    background-color:  #2f5745;
+    color: #DDDDDD;
+}
+
+/* Smartphones (portrait) */
+@media (max-width: 768px) {
+    .nav-dashboard {
+        width: 100vw;
+    }
+
+    .main-listing {
+        width: 100vw;
+        position: relative;
+    }
+
+    .side-nav {
+        overflow: hidden;
+        width: 0;
+        left: -5%;
+        z-index: 2;
+        white-space: nowrap;
+        height: 100vh;
+    }
+
+    .service-listing {
+        width: 100vw;
+        z-index: 0;
+        margin: auto auto;
+        background-color: white;
+    }
+    .upper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 98%;
+        margin: 1%;
+    }
+    .admin-services .table-services {
+        width: 100%;
+        margin: 0;
+    }
+    .admin-services .table-services .services-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+    
+    }
+    .bts {
+        display: flex;
+        background-color: #285943;
+        padding: 2px 2px;
+        border-radius: 5px;
+        width: 70px;
+        color: aliceblue;
+        text-decoration: none;
+        text-align: center;
+    }
+    .bts:hover {
+        background-color: rgb(57, 119, 98);
+    }
+    .admin-services{
+        background-color: red;
+    }
+    
 }

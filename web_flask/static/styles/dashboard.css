@@ -59,7 +59,7 @@ body{
     flex-direction: row;
     width: fit-content;
     gap: 0.4rem;
-    background-color: blue;
+    /* background-color: blue; */
     height: 100%;
 }
 
@@ -391,6 +391,7 @@ body{
     border-radius: 50%;
     margin-right: 60px;
 }
+
 
 .upper h2 {
     color: #285943;

@@ -1,0 +1,45 @@
+{% extends "admin_dashboard.html" %}
+{% block content %}
+<div class="service-listing admin-services">
+    <div class="admin-upper">
+        <div class="admin-upper-content">
+            <div class="admin-text-content">
+                <h2>Businesses</h2>
+                <p>Pending approval</p>
+            </div>
+        </div>
+    </div>
+    {% if unverified_businesses %}
+    <div class="table-services">
+        <table class="services-table">
+            <thead>
+                <tr>
+                    <th>Business Name</th>
+                    <th>Certificate of Registration</th>
+                    <th>Verification Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for business in unverified_businesses %}
+                <tr>
+                    <td>{{ business.business_name }}</td>
+                    <td>{{ business.Certificate_of_Registration_No }}</td>
+                    <td>{% if business.verified %} Yes {% else %} Pending {% endif %}</td>
+                    <td>
+                        <a href="{{ url_for('main.business_details', business_id=business.id) }}" class="bts bts-primary">View Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+    {% else %}
+    <!-- If no pending business -->
+    <div class="no-pending">
+        <h3>No pending businesses at the moment.</h3>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
