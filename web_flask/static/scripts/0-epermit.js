@@ -55,9 +55,15 @@ $(function () {
     $('#category').on('change', function () {
         let fee = $(this).find('option:selected').data('fee');
         let fire_fee = $(this).find('option:selected').data('fire_fee');
-        let total_fee = fee + fire_fee;
-        $(this).text(`Total fee: ${total_fee}`);
-        
+
+        let total_fee = parseFloat(fee) + parseFloat(fire_fee);
+        $('.exp-bill').text(`Total fee: ${total_fee}`).css({
+            'text-align':'center',
+            'display': 'flex',
+            'align-items': 'center',
+            'justify-content': 'center'
+        });
+
     });
     // submiting business details for registration
     $('.register-bs-btn').click(function (e) {

@@ -14,7 +14,11 @@
     text-align: center;
     flex-direction: column;
     color: white;
-    opacity: 0.9;
+}
+.background-tint{
+    background-color: rgba(200, 100, 0, .5);
+    background-blend-mode: multiply;
+
 }
 
 .hero-title {

@@ -17,10 +17,12 @@ body{
 }
 .exp-bill {
     position: absolute;
-    background-color: red;
     width: 10%;
     height: 100%;
-    left: 72%;
+    left: 66%;
+    color: #34495e;
+    font-weight: 600;
+    font-family: "Source Sans 3", sans-serif;
 }
 
 .logo {
@@ -59,7 +61,6 @@ body{
     flex-direction: row;
     width: fit-content;
     gap: 0.4rem;
-    background-color: blue;
     height: 100%;
 }
 
@@ -470,6 +471,11 @@ body{
         width: 100vw;
     }
 
+    .exp-bill{
+        left: 50%;
+        height: 80%;
+        width: 20%;
+    }
     .main-listing {
         width: 100vw;
         position: relative;
