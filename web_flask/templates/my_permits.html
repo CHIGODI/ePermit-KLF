@@ -4,49 +4,46 @@
     <div class="flash error-p-f  {{ category }}" id="flash-error-p"></div>
     <div class="permit-listing">
         <table>
-            <tr>
-                <th>Date Granted</th>
-                <th>Permit No.</th>
-                <th>Status</th>
-                <th>Expiry date</th>
-                <th>Action</th>
+            <thead>
+                <tr>
+                    <th>Date Granted</th>
+                    <th>Permit No.</th>
+                    <th>Status</th>
+                    <th>Expiry Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if not permits %}
+                <tr>
+                    <td colspan="6">No permits found.</td>
+                </tr>
+                {% else %}
                 {% for permit in permits %}
-                    {% if permit.check_validity() %}
-                    <th>Download</th>
-                    {% endif %}
-                {% endfor %}
-            </tr>
-            {% if not permits %}
-            <tr>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-            </tr>
-            {% else %}
-                {% for permit in permits %}
-                    <tr>
-                        <td>{{ permit.created_at }}</td>
-                        <td>{{ permit.permit_number }}</td>
+                <tr>
+                    <td>{{ permit.created_at }}</td>
+                    <td>{{ permit.permit_number }}</td>
+                    <td>
                         {% if permit.check_validity() %}
-                            <td>Active</td>
+                        Active
                         {% else %}
-                            <td>Expired</td>
+                        Expired
                         {% endif %}
-                        <td>{{ permit.expiry_date() }}</td>
-                        {% if permit.check_validity() is false %}
-                           <td class="renew"><a href="{{ url_for('register.mpesa_express')}}">Renew</a></td>
-                        {% endif %}
-                        {% if permit.check_validity() %}
-                        <td class="download-permit">
-                            <input type="hidden" id="permitInput" name="business_id" value="{{ permit.business_id }}">
-                            <button type="submit" id="download-permit-btn"><i class="fa-solid fa-download"></i></button>
-                        </td>
-                        {% endif %}
-                    </tr>
+                    </td>
+                    <td>{{ permit.expiry_date() }}</td>
+                    {% if permit.check_validity() %}
+                    <td class="download-permit">
+                        <input type="hidden" id="permitInput" name="business_id" value="{{ permit.business_id }}">
+                        <button type="button" class="download-permit-btn p-action"><i class="fa-solid fa-download"></i></button>
+                    </td>
+                    {% else %}
+                    <td class="renew"><a class="p-action" href="{{ url_for('register.mpesa_express') }}">Renew</a></td>
+                    {% endif %}
+                </tr>
                 {% endfor %}
-            {% endif %}
+                {% endif %}
+            </tbody>
         </table>
     </div>
+</div>
 {% endblock %}
-

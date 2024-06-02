@@ -126,17 +126,7 @@ td {
     text-align: left;
     color: #34495e;
 }
-.renew{
-    background-color: #DDDDDD;
-}
-.renew a{
-    text-decoration: none;
-    color: #34495e;
-}
-.renew :hover{
-    cursor: pointer;
-    opacity: 90%;
-}
+
 
 /* --payment page-- */
 .bill-hero-section {
@@ -196,24 +186,35 @@ td {
     display: hidden;
     z-index: 10;
 }
-/* ---permits-- */
+/* ---mypermits-- */
 .permit-listing {
     width: 90%;
     background-color: #DDDDDD;
-    /* margin-top: 5%; */
 }
+
 #download-permit-btn{
     outline: none;
     border: none;
     background-color: #DDDDDD;
-}x
+}
+.renew {
+    background-color: #DDDDDD;
+}
+
+.renew a {
+    text-decoration: none;
+    color: #34495e;
+}
 .fa-downaload{
     text-align: center;
     font-size: 1rem;
 }
-.fa-download:hover{
+.fa-download:hover,
+.p-action:hover{
     color: green;
+    cursor: pointer;
 }
+
 
 /* Tablets (landscape) */
 @media (max-width: 768px) {
