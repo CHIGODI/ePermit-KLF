@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 
-body{
+*{
   font-family: "Source Sans 3", sans-serif;
 }
+
 /* -----------------------*/
 .nav-dashboard {
     height: 70px;
@@ -181,10 +182,9 @@ body{
     text-align: center;
 }
 
-/* ---- */
+/* ---main listing- */
 
 .main-listing {
-    background-color: #f8f9fa;
     margin-top: 70px;
     display: flex;
     flex-direction: row;
@@ -306,7 +306,8 @@ body{
 .service-listing {
     width: 64%;
     z-index: 0;
-    margin-left: 29%;
+    margin-left: 31%;
+    height: 100%;
 }
 
 .btn-logout {
@@ -340,13 +341,6 @@ body{
 
 
 /* styles take efect in service page */
-.upper img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 10px;
-}
-
 .upper {
     display: flex;
     align-items: center;
@@ -399,9 +393,9 @@ body{
 }
 
 .upper p {
+    text-align: center;
     font-size: 18px;
     color: #34495e;
-    margin: 0;
     font-family: "Source Sans 3", sans-serif;
 }
 
@@ -455,6 +449,10 @@ body{
     transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
+.btn-x:hover {
+    background-color: #0056b3;
+    color: #fff;
+}
 .btn-x:active {
     opacity: 0.8;
 }

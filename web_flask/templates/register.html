@@ -9,7 +9,7 @@
 
             <div class="mb bs-info">
                 <label for="name" class="form-label">Business Name <span class="required">*</span></label>
-                <input type="name" id="name" class="form-control" name="business_name" aria-describedby="businessNameHelpBlock" required>
+                <input type="name" id="name" class="form-control" name="business_name" placeholder="e.g KILIMO SOLUTIONS"  aria-describedby="businessNameHelpBlock" required>
                 <div id="charCount" class="form-text">Max 64 characters</div>
                 <div id="businessNameHelpBlock" class="form-text">Entered: 0 characters.</div>
             </div>
@@ -17,7 +17,7 @@
             <div class="mb bs-info">
                 <label for="origin" class="form-label" >Business Entity Origin<span class="required">*</span></label>
                 <select name="entity_origin" class="form-select" id="origin" required>
-                    <option selected></option>
+                    <option selected class="selected">--origin--</option>
                     <option value="kenyan">Kenyan</option>
                     <option value="foreigner">Foreigner</option>
                 </select>
@@ -25,7 +25,7 @@
 
             <div class="mb bs-info">
                 <label for="Certificate_of_Registration_No" class="form-label">Certificate of Registration No/ID No. <span class="required">*</span></label>
-                <input type="text" id="Certificate_of_Registration_No" class="form-control" name="Certificate_of_Registration_No" aria-describedby="Certificate_of_Registration_NoHelpBlock" required>
+                <input type="text" id="Certificate_of_Registration_No" class="form-control" name="Certificate_of_Registration_No" placeholder="A unique number on certificate of registration" aria-describedby="Certificate_of_Registration_NoHelpBlock" required>
             </div>
 
             <div class="mb bs-info">
@@ -43,7 +43,7 @@
 
             <div class="mb bs-info">
                 <label for="box" class="form-label">P.O BOX <span class="required">*</span></label>
-                <input type="box" id="box" class="form-control" name="po_box" required aria-describedby="boxHelpBlock">
+                <input type="box" id="box" class="form-control" name="po_box" placeholder="e.g 80114" required aria-describedby="boxHelpBlock">
                 <div class="form-text">Max 10 characters</div>
                 <div id="boxHelpBlock" class="form-text">Entered: 0 characters.</div>
             </div>
@@ -51,7 +51,7 @@
             <div class="mb bs-info">
                 <label for="postal_code">Postal Code <span class="required">*</span></label>
                 <select id="postal_ode" class="form-select" name="postal_code" required>
-                    <option value="" selected></option>
+                    <option value="" selected>--postal code--</option>
                     <option value="80100">80100 Malindi</option>
                     <option value="80200">80200 Mambrui</option>
                     <option value="80300">80300 Watamu</option>
@@ -98,13 +98,13 @@
 
             <div class="mb bs-info">
                 <label for="business_email" class="form-label">Business Email</label>
-                <input type="business_email" id="business_email" class="form-control" name="business_email">
+                <input type="business_email" id="business_email" class="form-control" name="business_email" placeholder="e.g abc@gmail.ac.ke">
             </div>
 
             <div class="mb bs-info">
                 <label for="sub_county" class="form-label">Sub county<span class="required">*</span></label>
                 <select name="sub_county" class="form-select" id="sub_county" required>
-                    <option value="" selected></option>
+                    <option value="" selected>--sub county--</option>
                     <option value="Chonyi">Chonyi</option>
                     <option value="Ganze">Ganze</option>
                     <option value="Kaloleni">Kaloleni</option>
@@ -122,42 +122,42 @@
             <div class="mb bs-info">
                 <label for="ward" class="form-label">Ward<span class="required">*</span></label>
                 <select name="ward" class="form-select" id="ward" required>
-                    <option selected></option>
-                    <option value="Tezo">Tezo</option>
-                    <option value="Sokoni">Sokoni</option>
-                    <option value="Kibarani">Kibarani</option>
-                    <option value="Dabaso">Dabaso</option>
-                    <option value="Matsangoni">Matsangoni</option>
-                    <option value="Watamu">Watamu</option>
-                    <option value="Mnarani">Mnarani</option>
-                    <option value="Junju">Junju</option>
-                    <option value="Mwarakaya">Mwarakaya</option>
-                    <option value="Shimo la Tewa">Shimo la Tewa</option>
-                    <option value="Chasimba">Chasimba</option>
-                    <option value="Mtepeni">Mtepeni</option>
-                    <option value="Mariakani">Mariakani</option>
-                    <option value="Kayafungo">Kayafungo</option>
-                    <option value="Kaloleni">Kaloleni</option>
-                    <option value="Mwanamwinga">Mwanamwinga</option>
-                    <option value="Mwawesa">Mwawesa</option>
-                    <option value="Ruruma">Ruruma</option>
-                    <option value="Jibana">Jibana</option>
-                    <option value="Rabai/Kisurutuni">Rabai/Kisurutuni</option>
-                    <option value="Dungicha">Dungicha</option>
-                    <option value="Bamba">Bamba</option>
-                    <option value="Jaribuni">Jaribuni</option>
-                    <option value="Sokoke">Sokoke</option>
-                    <option value="Jilore">Jilore</option>
-                    <option value="Kakuyuni">Kakuyuni</option>
-                    <option value="Ganda">Ganda</option>
-                    <option value="Malindi Town">Malindi Town</option>
-                    <option value="Shella">Shella</option>
-                    <option value="Maarafa">Maarafa</option>
-                    <option value="Magarini">Magarini</option>
-                    <option value="Gongoni">Gongoni</option>
+                    <option selected>--Ward--</option>
                     <option value="Adu">Adu</option>
+                    <option value="Bamba">Bamba</option>
+                    <option value="Chasimba">Chasimba</option>
+                    <option value="Dabaso">Dabaso</option>
+                    <option value="Dungicha">Dungicha</option>
                     <option value="Garashi">Garashi</option>
+                    <option value="Ganda">Ganda</option>
+                    <option value="Gongoni">Gongoni</option>
+                    <option value="Jaribuni">Jaribuni</option>
+                    <option value="Jibana">Jibana</option>
+                    <option value="Jilore">Jilore</option>
+                    <option value="Junju">Junju</option>
+                    <option value="Kakuyuni">Kakuyuni</option>
+                    <option value="Kaloleni">Kaloleni</option>
+                    <option value="Kayafungo">Kayafungo</option>
+                    <option value="Kibarani">Kibarani</option>
+                    <option value="Magarini">Magarini</option>
+                    <option value="Maarafa">Maarafa</option>
+                    <option value="Malindi Town">Malindi Town</option>
+                    <option value="Mariakani">Mariakani</option>
+                    <option value="Matsangoni">Matsangoni</option>
+                    <option value="Mnarani">Mnarani</option>
+                    <option value="Mtepeni">Mtepeni</option>
+                    <option value="Mwanamwinga">Mwanamwinga</option>
+                    <option value="Mwarakaya">Mwarakaya</option>
+                    <option value="Mwawesa">Mwawesa</option>
+                    <option value="Rabai/Kisurutuni">Rabai/Kisurutuni</option>
+                    <option value="Ruruma">Ruruma</option>
                     <option value="Sabaki">Sabaki</option>
+                    <option value="Shella">Shella</option>
+                    <option value="Shimo la Tewa">Shimo la Tewa</option>
+                    <option value="Sokoke">Sokoke</option>
+                    <option value="Sokoni">Sokoni</option>
+                    <option value="Tezo">Tezo</option>
+                    <option value="Watamu">Watamu</option>
                 </select>
             </div>
 
@@ -174,7 +174,7 @@
             <div class="mb bs-info">
                 <label for="category">Activity code<span class="required">*</span></label>
                 <select id="category" class="form-select" name="category" required>
-                    <option value="" selected></option>
+                    <option value="" selected>--Activity code--</option>
                     {% for category in categories %}
                     <option value="{{ category.id }}" data-fee="{{ category.fee }}" data-fire_fee="{{ category.fire_fee }}">{{ category.activity_code }} {{ category.category_name }}</option>
                     {% endfor %}
