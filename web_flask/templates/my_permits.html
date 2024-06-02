@@ -1,6 +1,7 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="dashboard-pages">
+    <div class="flash error-p-f  {{ category }}" id="flash-error-p"></div>
     <div class="permit-listing">
         <table>
             <tr>
@@ -9,6 +10,11 @@
                 <th>Status</th>
                 <th>Expiry date</th>
                 <th>Action</th>
+                {% for permit in permits %}
+                    {% if permit.check_validity() %}
+                    <th>Download</th>
+                    {% endif %}
+                {% endfor %}
             </tr>
             {% if not permits %}
             <tr>
@@ -30,6 +36,12 @@
                         <td>{{ permit.expiry_date() }}</td>
                         {% if permit.check_validity() is false %}
                            <td class="renew"><a href="{{ url_for('register.mpesa_express')}}">Renew</a></td>
+                        {% endif %}
+                        {% if permit.check_validity() %}
+                        <td class="download-permit">
+                            <input type="hidden" id="permitInput" name="business_id" value="{{ permit.business_id }}">
+                            <button type="submit" id="download-permit-btn"><i class="fa-solid fa-download"></i></button>
+                        </td>
                         {% endif %}
                     </tr>
                 {% endfor %}

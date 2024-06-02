@@ -161,7 +161,7 @@ def generate_pdf(business_id):
         return jsonify({"error": "Business is not verified"}), 400
 
 
-@app_views.route('/generatepermit/<business_id>', methods=['GET'],
+@app_views.route('/download_permit/<business_id>', methods=['GET'],
                  strict_slashes=False)
 def downlaod_pdf(business_id):
     """ Returns pdf file permit """

@@ -8,6 +8,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    margin-top: 5%;
 }
 .myprofile {
     display: grid;
@@ -75,17 +76,13 @@
 
 
 /* ----------mybusinesses------ */
-.permit-listing{
-    width: 100%;
-    margin-top: 5%;
-}
-
 .quick-actions-bs{
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 100%;
-    padding: 1rem;
+    justify-content: flex-start;
+    width: 90%;
+    padding-bottom: 1rem;
 }
 .quick-actions-bs a{
     margin: 0;
@@ -113,8 +110,7 @@
 
 .table-bs {
     background-color: #DDDDDD;
-    margin: auto auto auto 2%;
-    width: 100%;
+    width: 90%;
     padding: 1.5rem;
 
 }
@@ -151,7 +147,7 @@ td {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 10%;
+    margin-top: 8%;
     z-index: 0;
 }
 .bill-hero-section{
@@ -201,17 +197,37 @@ td {
     z-index: 10;
 }
 /* ---permits-- */
-.permit-listing{
-    margin-left: 5%;
+.permit-listing {
+    width: 90%;
     background-color: #DDDDDD;
+    /* margin-top: 5%; */
 }
+#download-permit-btn{
+    outline: none;
+    border: none;
+    background-color: #DDDDDD;
+}x
+.fa-downaload{
+    text-align: center;
+    font-size: 1rem;
+}
+.fa-download:hover{
+    color: green;
+}
+
 /* Tablets (landscape) */
 @media (max-width: 768px) {
     .dashboard-pages {
-        width: 100%;
+        width: 100vw;
         margin-left: 0;
     }
+    .permit-listing{
+        width: 100%;
+    }
 
+    .bill-hero-section{
+        width: 100%;
+    }
     .myprofile {
         margin: 20px auto;
     }

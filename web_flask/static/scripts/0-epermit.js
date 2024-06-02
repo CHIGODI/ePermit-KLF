@@ -255,6 +255,35 @@ $(function () {
                 }
         });
     })
+    // permit download
+    $('#download-permit-btn').on('click', function(){
+        let business_id = $('#permitInput').val()
+        console.log(business_id)
+        $.ajax({
+            url: 'www.epermit.live/api/v1/download_permit/'+ business_id,
+            type: 'GET',
+            xhrFields: {
+                responseType: 'blob' // Ensures the response is treated as a blob
+            },
+            success: function(res){
+                let pdf = new Blob([res], { type: 'application/pdf' })
+                let link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download ="ePermit.pdf";
+                document.body.appendChild(link);
+
+                // Trigger the download
+                link.click();
+
+                // Cleanup
+                document.body.removeChild(link);
+            },
+            error : function(){
+                showAlert('Downlaod failed, please try again', 'error', 'flash-error-p')
+                fadeOut('error-p-f', 10000)
+            }
+        });
+    });
 });
 
 // -------------------------------- End of document ready -------------------------------------------
