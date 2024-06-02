@@ -1,0 +1,36 @@
+#!/usr/bin/bash
+
+# Update the package list
+sudo apt-get update -y
+
+# Install Python 3
+sudo apt-get install python3 -y
+
+# Install pip for Python 3
+sudo apt-get install python3-pip -y
+
+# Install virtualenv
+sudo apt-get install python3-venv -y
+
+
+# Install MySQL client and server
+sudo apt-get install mysql-client -y
+sudo apt-get install mysql-server -y
+
+# Install necessary Python packages using pip
+pip3 install Flask
+pip3 install num2words
+pip3 install PyJWT  # Corrected JWT to PyJWT
+pip3 install SQLAlchemy
+pip3 install Flask-Cors
+pip3 install Flask-Mail
+pip3 install flask-session
+pip3 install flask-sqlalchemy
+pip3 install cryptography
+pip3 install greenlet
+pip3 install mysql-connector-python
+pip3 install mysqlclient
+pip3 install pytz
+pip3 install requests
+pip3 install gunicorn
+pip3 install dotenv

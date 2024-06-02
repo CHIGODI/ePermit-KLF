@@ -5,20 +5,17 @@ from datetime import datetime, timezone
 import uuid
 from sqlalchemy.ext.declarative import declarative_base
 import models
-# from flask_sqlalchemy import SQLAlchemy
-
-
-# db = SQLAlchemy()
+import pytz
 
 Base = declarative_base()
-# Used this in the to_dict method
-time = "%Y-%m-%dT%H:%M:%S.%f"
+nairobi_time = pytz.timezone('Africa/Nairobi')
+time = "%d-%b-%Y"
 
 class BaseModel:
     """ Base class for all other classes """
     from sqlalchemy import Column, DateTime, String
-    created_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
-    updated_at = Column(DateTime, default=datetime.now(timezone.utc), nullable=False)
+    created_at = Column(DateTime, default=datetime.now(nairobi_time), nullable=False)
+    updated_at = Column(DateTime, default=datetime.now(nairobi_time), nullable=False)
     id = Column(String(60), unique=True, primary_key=True,  nullable=False)
 
     def __init__(self, *args, **kwargs):
