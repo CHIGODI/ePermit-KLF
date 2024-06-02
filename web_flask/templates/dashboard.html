@@ -75,44 +75,51 @@
           <span>Dashboard</span>
         </div>
       </a>
-      <a href="{{ url_for('main.mybusinesses') }}">
-        <ul class="information">
+      <ul class="information">
+        <a href="{{ url_for('main.mybusinesses') }}">
           <li class="permit-info">
             <i class="fa-solid fa-briefcase"></i>
             <span>My Businesses</span>
           </li>
-        </ul>
-      </a>
-      <a href="{{ url_for('main.mypermits') }}">
-        <ul class="information">
+        </a>
+        <a href="{{ url_for('main.mypermits') }}">
           <li class="permit-info">
             <i class="fa-solid fa-certificate"></i>
-            <span>View Permits</span>
+            <span>My Permits</span>
           </li>
-        </ul>
-      </a>
-      <a href="{{ url_for('register.mpesa_express') }}">
-        <ul class="information">
+        </a>
+        <a href="{{ url_for('register.mpesa_express') }}">
           <li class="permit-info">
             <i class="fa-solid fa-stamp"></i>
             <span>Bills</span>
           </li>
-        </ul>
-      </a>
+        </a>
+      </ul>
       <div class="title-divider">
           <i class="fa-brands fa-servicestack"></i>
           <span>Services</span>
       </div>
         <ul class="information">
-          <a href="{{ url_for('register.register_page') }}"><li class="permit-info">
-            <span>Register Business</span>
-          </li>
-        </a>
-        <a href="{{ url_for('register.mpesa_express')}} ">
-          <li class="permit-info">
-            <span>Renew permit</span>
-          </li>
-        </a>
+          <a href="{{ url_for('register.register_page') }}">
+            <li class="permit-info">
+              <span>Register Business</span>
+            </li>
+          </a>
+          <a href="{{ url_for('register.mpesa_express')}} ">
+            <li class="permit-info">
+              <span>Renew permit</span>
+            </li>
+          </a>
+          <a href="{{ url_for('main.coming_soon') }}">
+            <li class="permit-info">
+              <span>Book Parking</span>
+            </li>
+          </a>
+          <a href="{{ url_for('main.coming_soon') }}">
+            <li class="permit-info">
+              <span>Construction Permit</span>
+            </li>
+          </a>
         </ul>
     </div>
     <!-- all pages have dashboard structure -->

@@ -20,7 +20,7 @@ sudo apt-get install mysql-server -y
 # Install necessary Python packages using pip
 pip3 install Flask
 pip3 install num2words
-pip3 install PyJWT  # Corrected JWT to PyJWT
+pip3 install PyJWT
 pip3 install SQLAlchemy
 pip3 install Flask-Cors
 pip3 install Flask-Mail
@@ -34,3 +34,5 @@ pip3 install pytz
 pip3 install requests
 pip3 install gunicorn
 pip3 install dotenv
+pip3 install reportlab
+pip install qrcode

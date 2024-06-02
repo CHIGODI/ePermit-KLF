@@ -15,6 +15,7 @@ import os
 from flask_mail import Message
 from dotenv import load_dotenv
 from os import getenv
+import qrcode
 
 load_dotenv()
 
@@ -24,16 +25,13 @@ def generate_pdf(business_id):
     # Create a PDF file
     business = storage.get_obj_by_id(Business, business_id)
     owner = storage.get_obj_by_id(User, business.owner)
-    print(business)
     category = storage.get_obj_by_id(Category, business.category)
     permit = storage.get_permit_by_business_id(business.id)
-    print(permit)
 
     if business.verified is True:
-        pdf_filename = "countygovtofklf_permit.pdf"
-        doc = SimpleDocTemplate(pdf_filename, pagesize=A4)
-
-        elements = []
+        pdf_filename = f"/tmp/permits/{business_id}.pdf"
+        qrcode_path = generate_qr_code(business_id, permit.permit_number,
+                                       (datetime.now() + timedelta(days=365)).strftime("%d-%b-%Y"))
         width, height = A4
 
         c = canvas.Canvas(pdf_filename, pagesize=A4)
@@ -41,13 +39,14 @@ def generate_pdf(business_id):
         image_path = "/home/ubuntu/ePermit-KLF/web_flask/static/images/klf.jpeg"
 
         # Logo
-        c.drawImage(image_path, 30, height - 50, width=100, height=70)
+        c.drawImage(image_path, 100, -50, width=50, height=50)
+        c.drawImage(qrcode_path, 410, -900, width=100, height=100)
 
         # Header and title
         c.setFont("Helvetica-Bold", 14)
         c.drawString(200, height - 50, "SINGLE BUSINESS PERMIT")
         c.setFont("Helvetica", 12)
-        c.drawString(500, height - 50, str(datetime.now().year))
+        c.drawString(700, height - 50, str(datetime.now().year))
         c.drawString(400, height - 50, permit.permit_number)
 
         # Permit Information
@@ -146,11 +145,11 @@ def generate_pdf(business_id):
         c.drawString(400, height - 870, "for Chief Officer Finance & Economic Planning")
 
         c.save()
-        recipient_email = owner.email  # Assuming business object has email field
+        recipient_email = owner.email
         subject = "Your Business Permit"
         body = "Please find attached your business permit."
 
-        msg = Message('Your Business Permit',
+        msg = Message(subject,
                   sender=getenv('MAIL_USERNAME'),
                   recipients=[recipient_email])
         msg.body = body
@@ -160,3 +159,39 @@ def generate_pdf(business_id):
         return jsonify({"status": "Email sent"}), 200
     else:
         return jsonify({"error": "Business is not verified"}), 400
+
+
+@app_views.route('/generatepermit/<business_id>', methods=['GET'],
+                 strict_slashes=False)
+def downlaod_pdf(business_id):
+    """ Returns pdf file permit """
+    pdf_filename = f"{business_id}.pdf"
+    if os.path.exists(pdf_filename):
+        return send_file(pdf_filename, as_attachment=True)
+    else:
+        return jsonify({"error": "File not found"}), 404
+
+
+
+
+def generate_qr_code(business_id, permit_number, expiry_date):
+    data = f"Business ID: {business_id}\nPermit Number: {permit_number}\nExpiry Date: {expiry_date}"
+    # Create QR code instance
+    qr = qrcode.QRCode(
+        version=1,
+        error_correction=qrcode.constants.ERROR_CORRECT_L,
+        box_size=10,
+        border=4,
+    )
+
+    # Add data to QR code
+    qr.add_data(data)
+    qr.make(fit=True)
+
+    # Create an image from the QR code
+    img = qr.make_image(fill_color="black", back_color="white")
+
+    file_path = '/tmp/qrcode/'
+    # Save the image to a file
+    img.save(file_path)
+    return file_path

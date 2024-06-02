@@ -1,8 +1,8 @@
 /* --business information--- */
 #register-bs {
-   margin: 5% auto;
+   margin: 5% auto auto auto;
    width: 90%;
-   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
 .business-info {
@@ -67,6 +67,7 @@
 .map-description {
    color: #B4B4B8;
    font-style: italic;
+   margin-bottom: 0;
 }
 
 .latitude-dv,

@@ -194,12 +194,13 @@
 /* ---------side nav ---- */
 .side-nav {
     position: fixed;
-    width: 24%;
-    margin-left: 5%;
+    width: 20%;
+    margin-left: 10%;
     height: 100vh;
     white-space: nowrap;
     background-color: white;
     z-index: 2;
+    border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -243,7 +244,7 @@
     flex-direction: row;
     justify-content: start;
     align-items: center;
-    padding: 8px;
+    padding: 1rem;
     gap: 6px;
     margin: auto auto;
     width: 100%;
@@ -263,7 +264,6 @@
     text-decoration: none;
     margin: 0;
     color: #34495e;
-    padding: 0.2rem;
 }
 
 .information li:hover {
@@ -304,9 +304,9 @@
 
 
 .service-listing {
-    width: 64%;
+    width: 60%;
     z-index: 0;
-    margin-left: 31%;
+    margin-left: 30%;
     height: 100%;
 }
 
@@ -462,6 +462,8 @@
 }
 
 
+
+
 /* Smartphones (portrait) */
 @media (max-width: 768px) {
 
@@ -482,9 +484,10 @@
     .side-nav {
         overflow: hidden;
         width: 0;
-        left: -5%;
+        left: -10%;
         z-index: 2;
         white-space: nowrap;
+        border-top-left-radius: 0;
         height: 100vh;
     }
 

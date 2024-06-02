@@ -1,4 +1,4 @@
-# ePermit Web App 
+# ePermit Web App
 
 This project is a web application designed for handling user registration, business registration, and role-based access control. The application allows normal users to register and apply for permits, while administrators have the ability to verify business registrations.
 
@@ -67,7 +67,14 @@ The App was contextualised for Kilifi County - Kenya
     MAIL_PASSWORD=''
     MAPS_API_KEY = ''
     CONSUMER_KEY =''
-    CONSUMER_SECRET=''
+    CONSUMER_SECRET='L'
+    SHORT_CODE=""
+    PASS_KEY=""
+    EPERMIT_ENV=production
+    EPERMIT_MYSQL_USER=epermit_dev
+    EPERMIT_MYSQL_PWD=epermit_pwd
+    EPERMIT_MYSQL_HOST=localhost
+    EPERMIT_MYSQL_DB=epermit_dev_db
     ```
 
 5. **Create the database:**
@@ -77,9 +84,13 @@ The App was contextualised for Kilifi County - Kenya
     ```
 
 7. **Run the application:**
-
     ```bash
-        EPERMIT_MYSQL_USER=epermit_dev EPERMIT_MYSQL_PWD=epermit_pwd EPERMIT_MYSQL_HOST=localhost EPERMIT_MYSQL_DB=epermit_dev_db python3 -m web_flask.app
+       python3 -m web_flask.app
+    ```
+
+8. **Run the api service:**
+    ```bash
+        python3 -m api.v1.app
     ```
 
 ## Usage
@@ -107,10 +118,47 @@ The App was contextualised for Kilifi County - Kenya
 - Normal users can register businesses and apply for permits.
 - Admin users can log in and verify business registrations.
 
+# Dashboard
+
+The dashboard serves as a centralized hub for users to manage their ePermit-related activities. Here are the key functionalities available on the dashboard:
+
+## Service Selection
+
+Upon logging in, users are presented with a panel where they can select a service. At present, only two services are available:
+
+- **Business Registration**: Users can register a new business by filling out a registration form and submitting it for approval.
+
+- **Renew Business**: Users can renew an existing business registration by submitting a renewal request.
+
+## Business Registration
+
+When users select the "Business Registration" service, they are directed to a registration form where they can provide details about the new business.
+
+After filling out the form, users can submit it for review. The submission triggers an approval process by the admin.
+
+## Admin Approval
+
+Admin users have the authority to approve or reject business registration requests. They can access the pending requests from their admin dashboard.
+
+Once the admin approves a registration request, the status of the business registration is updated, and users can view it in the "My Business" section of the side navigation.
+
+## Payment and Permit Issuance
+
+After the business registration request is approved, users have the option to proceed with payment for the permit.
+
+Upon successful payment, a system-generated permit is issued to the user. The permit is valid for one year from the date of issuance.
+
+## My Business
+
+In the "My Business" section of the side navigation, users can view the status of their business registrations. This includes pending, approved, and rejected registrations.
+
+## My Permits
+
+Users can access their active permits under the "My Permits" section of the side navigation.
+
+Downloading of active permits is available for one month from the date of issuance. After this period, users will not be able to download the permit.
+
+
 ### Logout
 
 - Users can log out by navigating to the logout route, which will clear the JWT token from the cookies.
-
-## Project Structure
-
-
