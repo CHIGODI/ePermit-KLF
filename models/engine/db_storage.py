@@ -82,7 +82,7 @@ class DBStorage:
     # added function to get unverified/rejected businesses
     def get_unverified_businesses(self):
         """ retrieves all unverified businesses """
-        return self.__session.query(Business).filter(Business.verified == False).all()
+        return self.__session.query(Business).filter(Business.status == 'Pending').all()
 
     # Get a business details
     def get_business_details(self, business_id):
@@ -92,7 +92,7 @@ class DBStorage:
     #get rejected businesses
     def get_rejected_businesses(self):
         """ retrieves all rejected businesses """
-        return self.__session.query(Business).filter(Business.status == False).all()
+        return self.__session.query(Business).filter(Business.status == 'Rejected').all()
 
     # get rejected business by id
     def get_rejected_businesses_by_id(self, id):
@@ -100,13 +100,13 @@ class DBStorage:
         if id is None:
             return None
         else:
-            rej = self.__session.query(Business).filter(Business.status == False).first()
+            rej = self.__session.query(Business).filter(Business.status == 'Rejected').first()
             print(rej)
             return rej
     # get approved businesses
     def get_approved_businesses(self):
         """ retrieves all approved businesses """
-        return self.__session.query(Business).filter(Business.verified == True).all()
+        return self.__session.query(Business).filter(Business.status == 'Approved' ).all()
     
     def get_approved_businesses_by_id(self, id):
         """ Retrieve approved businesses """
