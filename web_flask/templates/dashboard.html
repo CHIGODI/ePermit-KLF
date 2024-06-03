@@ -8,13 +8,10 @@
   <link rel="stylesheet" href="../static/styles/register.css?{{ cache_id }}">
   <link rel="stylesheet" href="../static/styles/side_navigation.css?{{ cache_id }}">
   <link rel="stylesheet" href="../static/styles/coming_soon.css?{{ cache_id }}">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css?{{ cache_id }}" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH?{{ cache_id }}" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-3.2.1.min.js?{{ cache_id }}"></script>
   <script src="https://kit.fontawesome.com/5c143bf368.js?{{ cache_id }}" crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css?{{ cache_id }}" rel="stylesheet">
-  <link href="https://getbootstrap.com/docs/5.3/assets/css/docs.css?{{ cache_id }}" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js?{{ cache_id }}"></script>
   <script src="../static/scripts/0-epermit.js?{{ cache_id }}"></script>
   <link rel="icon" href="../static/images/klf.jpeg?{{ cache_id }}" />
   <title>ePermit</title>
@@ -126,12 +123,74 @@
     {% block content %}
     {% endblock %}
   </section>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-    integrity="sha384-oBqDVmMz4fnFO9gybDhpmnjyE4xCkAiSnIq8VfKuwrJJFsC/qcCHe/+I2a7g2eQS"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-    integrity="sha384-rbsA2VBKQjMpoaJQmxFtr02ijZZoVtHdGkws3Ohf5pVVATbdeAlRxCjv4rKcZIxD"
-    crossorigin="anonymous"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
 
+<!-- Google Maps API Bootstrap Loader -->
+<script>
+  (g => {
+    var h, a, k, p = "The Google Maps JavaScript API", c = "google", l = "importLibrary", q = "__ib__", m = document, b = window;
+    b = b[c] || (b[c] = {});
+    var d = b.maps || (b.maps = {}), r = new Set, e = new URLSearchParams, u = () => h || (h = new Promise(async (f, n) => {
+      await (a = m.createElement("script"));
+      e.set("libraries", [...r] + "");
+      for (k in g) e.set(k.replace(/[A-Z]/g, t => "_" + t[0].toLowerCase()), g[k]);
+      e.set("callback", c + ".maps." + q);
+      a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+      d[q] = f;
+      a.onerror = () => h = n(Error(p + " could not load."));
+      a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+      m.head.append(a);
+    }));
+    d[l] ? console.warn(p + " only loads once. Ignoring:", g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n))
+  })({
+    key: "AIzaSyB7DvaMrr77CKuCqUnQ2xQTQ3WKbAwgCMw",
+    v: "weekly",
+  });
+</script>
+<script>
+  async function initMap() {
+    const { Map } = await google.maps.importLibrary("maps");
+    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+    const map = new Map(document.getElementById("map"), {
+      center: { lat: -3.8825, lng: 39.6211 },
+      zoom: 10,
+      disableDefaultUI: true,
+      gestureHandling: "cooperative",
+      mapId: "DEMO_MAP_ID",
+      mapTypeId: 'hybrid',
+    });
+
+    let marker = new AdvancedMarkerElement({
+      position: { lat: -3.8825, lng: 39.6211 },
+      map: map,
+    });
+
+    map.addListener("click", (event) => {
+      // Remove the existing marker
+      marker.map = null;
+
+      // Create a new marker at the clicked location
+      marker = new AdvancedMarkerElement({
+        position: event.latLng.toJSON(),
+        map: map,
+      });
+
+      // Capture the coordinates of the new marker
+      const latitude = event.latLng.lat();
+      const longitude = event.latLng.lng();
+
+      // Auto fill latitude and longitude on front end
+      document.querySelector('.latitude-dv input').value = latitude;
+      document.querySelector('.longitude-dv input').value = longitude;
+
+      // Debug
+      console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    });
+  }
+  initMap();
+</script>
+</body>
 </html>

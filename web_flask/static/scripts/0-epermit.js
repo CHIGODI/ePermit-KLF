@@ -1,21 +1,19 @@
 // Load this script on all pages
 $(function () {
-    apiKey =''
+    const faqs = document.querySelectorAll(".faq");
+    faqs.forEach(faq => {
+        faq.addEventListener("click", () => {
+            faq.classList.toggle("active");
+        })
+    })
 
-    // Adding a map for location
-    $.ajax({
-        url: 'https://maps.googleapis.com/maps/api/js?key=' + apiKey + '&callback=initMap',
-        dataType: "script",
-    });
-
-    // toggling nav active class
     $('.nav-link').on('click', function () {
         $('.nav-link').removeClass('active');
         $(this).addClass('active');
     });
 
     // forgot password cancel
-    $('#cancel-forgot').on('click', function (e) {
+    $('.cancel-forgot').on('click', function (e) {
         e.preventDefault();
         window.location.href = "https://www.epermit.live/login";
     });
@@ -256,33 +254,10 @@ $(function () {
         });
     })
     // permit download
-    $('#download-permit-btn').on('click', function(){
+    $('.download-permit-btn').on('click', function(){
         let business_id = $('#permitInput').val()
         console.log(business_id)
-        $.ajax({
-            url: 'www.epermit.live/api/v1/download_permit/'+ business_id,
-            type: 'GET',
-            xhrFields: {
-                responseType: 'blob' // Ensures the response is treated as a blob
-            },
-            success: function(res){
-                let pdf = new Blob([res], { type: 'application/pdf' })
-                let link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download ="ePermit.pdf";
-                document.body.appendChild(link);
-
-                // Trigger the download
-                link.click();
-
-                // Cleanup
-                document.body.removeChild(link);
-            },
-            error : function(){
-                showAlert('Downlaod failed, please try again', 'error', 'flash-error-p')
-                fadeOut('error-p-f', 10000)
-            }
-        });
+        getPermit(business_id)
     });
 });
 
@@ -306,29 +281,6 @@ function fadeOut(className, timeInSec=8000) {
 // This function shows an alert message
 function showAlert(message, type, id) {
     $('#' + id).addClass(type).text(message).css({ 'padding-top': '18px' }).show();
-}
-
-// callback function for google maps api
-function initMap() {
-    const mapElement = $("#map").get(0);
-    const map = new google.maps.Map(mapElement, {
-        center: { lat: -3.8825, lng: 39.6211 },
-        disableDefaultUI: true,
-        gestureHandling: "cooperative",
-        mapTypeId: 'hybrid',
-        zoom: 10,
-    });
-
-    map.addListener('click', function (e) {
-        $('.latitude-dv').find('input').val(e.latLng.lat());
-        $('.longitude-dv').find('input').val(e.latLng.lng());
-
-        const marker = new google.maps.Marker({
-            position: e.latLng,
-            map: map,
-            title: "Clicked Location",
-        });
-    });
 }
 
 // STK push
@@ -402,17 +354,27 @@ function handlePaymentStatus(resultCode, callback) {
 function getPermit(business_id) {
     console.log(business_id)
     $.ajax({
-        url: 'https://www.epermit.live/api/v1/generatepermit/' + business_id,
+        url: 'https://www.epermit.live/api/v1/generatepermit/'+ business_id,
         type: 'GET',
         xhrFields: {
-            responseType: 'blob'
+            responseType: 'blob' // Ensures the response is treated as a blob
         },
-        success: function (data) {
-            console.log(data)
+        success: function (res) {
+            let pdf = new Blob([res], { type: 'application/pdf' })
+            let link = document.createElement('a');
+            link.href = window.URL.createObjectURL(pdf);
+            link.download = "ePermit.pdf";
+            document.body.appendChild(link);
+
+            // Trigger the download
+            link.click();
+
+            // Cleanup
+            document.body.removeChild(link);
         },
-        error: function (data) {
-            showAlert('An error occurred while processing. Please try again later.', 'error', 'flash-error-p');
-            console.log('Error getting permit')
+        error: function () {
+            showAlert('Downlaod failed, please try again', 'error', 'flash-error-p')
+            fadeOut('error-p-f', 10000)
         }
     });
 }

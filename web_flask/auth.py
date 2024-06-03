@@ -237,38 +237,44 @@ def logout():
 def forgot_password():
     """ Route for requesting password reset """
     if request.method == 'POST':
-        email = request.form.get('email')
+        action = request.form.get('action')
 
-        if not email:
-            flash('Please fill out missing field', 'error')
+        if action == 'search':
+            email = request.form.get('email')
 
-        user = storage.get_user_by_email(email)
-        if user:
-            # Generate token
-            token = jwt.encode({
-                'id': user.id,
-                'exp': datetime.utcnow() + timedelta(minutes=30)
-            }, getenv('SECRET_KEY'), algorithm='HS256')
+            if not email:
+                flash('Email field cannot be empty', 'error')
+            else:
+                user = storage.get_user_by_email(email)
+                if user:
+                    # Generate token
+                    token = jwt.encode({
+                        'id': user.id,
+                        'exp': datetime.utcnow() + timedelta(minutes=30)
+                    }, getenv('SECRET_KEY'), algorithm='HS256')
 
-            # Send reset email set with a JWT
-            password_reset_link = url_for('auth.reset_password', token=token, _external=True)
+                    # Send reset email set with a JWT
+                    password_reset_link = url_for('auth.reset_password', token=token, _external=True)
 
-            #add current user to session object
-            session['data'] = {
-                'timestamp': datetime.utcnow().isoformat(),
-                'user': user,
-            }
-            message = Message('Password Reset ePermit',
-                              sender=getenv('MAIL_USERNAME'),
-                              recipients=[email])
-            message.body = f'Click the link to reset your password: {password_reset_link} '\
-                'If you did not make this request then simply ignore this email and no changes will be made.'
-            current_app.extensions['mail'].send(message)
+                    #add current user to session object
+                    session['data'] = {
+                        'timestamp': datetime.utcnow().isoformat(),
+                        'user': user,
+                    }
+                    message = Message('Password Reset ePermit',
+                                    sender=getenv('MAIL_USERNAME'),
+                                    recipients=[email])
+                    message.body = f'Click the link to reset your password: {password_reset_link} '\
+                        'If you did not make this request then simply ignore this email and no changes will be made.'
+                    current_app.extensions['mail'].send(message)
 
-            flash('Password reset email sent. Check email.', 'success')
+                    flash('Password reset email sent. Check email.', 'success')
+                    return redirect(url_for('auth.login'))
+                else:
+                    flash('Email address not found.', 'error')
+        elif action == 'cancel':
             return redirect(url_for('auth.login'))
-        else:
-            flash('Email address not found.', 'error')
+
     return render_template('forgot_password.html')
 
 

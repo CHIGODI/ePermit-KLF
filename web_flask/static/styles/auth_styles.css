@@ -217,17 +217,24 @@
 .choice{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 5%;
     padding: 5%;
+}
+.cancel-forgot{
+    color: #003840;
+    background-color: #DDDDDD;
+}
+.search-forgot{
+    color: white;
+    background-color: #007bff;
 }
 .choice-btn,
 .choice-btn-li{
-   width: 30%;
+   width: 20%;
    height: 2rem;
    padding: 0.2rem 0.8rem;
    border: none;
-   color: white;
-   background-color: #007bff;
    border-radius: 0.5rem;
 }
 .choice-btn:hover,
