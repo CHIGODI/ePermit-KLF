@@ -74,7 +74,15 @@ def coming_soon():
                            cache_id=cache_id)
 
 
-# ADMIN DASHBOARD Render unverified businesses
+# ADMIN DASHBOARD 
+@main.route('/adminprofile', methods=['GET'], strict_slashes=False)
+@token_required('admin')
+def admin_profile():
+    """ admin profile """
+    current_user = g.get('current_user')
+    return render_template('admin_profile.html', current_user=current_user,
+                           cache_id=cache_id)
+#Render unverified businesses
 @main.route('/admin_dashboard', methods=['GET'], strict_slashes=False)
 @token_required('admin')
 def admin_dashboard():
