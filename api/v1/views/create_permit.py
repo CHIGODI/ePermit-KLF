@@ -67,7 +67,8 @@ def generate_pdf(business_id):
     # Create an in-memory bytes buffer
     pdf_buffer = BytesIO()
 
-    image_path = "/home/ubuntu/ePermit-KLF/web_flask/static/images/klf.jpeg"
+    # image_path = "/home/ubuntu/ePermit-KLF/web_flask/static/images/klf.jpeg"
+    image_path = "/home/chigow/ePermit-KLF/web_flask/static/images/klf.jpeg"
     qrcode_buffer = generate_qr_code(business_id, permit.permit_number,
                                     (datetime.now() + timedelta(days=365)).strftime("%d-%b-%Y"))
     width, height = A4

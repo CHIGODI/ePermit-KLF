@@ -253,8 +253,11 @@ $(function () {
                 }
         });
     })
+
     // permit download
     $('.download-permit-btn').on('click', function(){
+        showAlert('Your request is being processed, Kinldy wait', 'success', 'flash-error-p')
+        fadeOut('error-p-f', 80000);
         let business_id = $('#permitInput').val()
         console.log(business_id)
         getPermit(business_id)
@@ -357,9 +360,13 @@ function getPermit(business_id) {
         url: 'https://www.epermit.live/api/v1/generatepermit/'+ business_id,
         type: 'GET',
         xhrFields: {
-            responseType: 'blob' // Ensures the response is treated as a blob
+            // Ensures the response is treated as a blob
+            responseType: 'blob'
         },
         success: function (res) {
+            showAlert('Download was successfull!', 'success', 'flash-error-p')
+            fadeOut('error-p-f')
+
             let pdf = new Blob([res], { type: 'application/pdf' })
             let link = document.createElement('a');
             link.href = window.URL.createObjectURL(pdf);
