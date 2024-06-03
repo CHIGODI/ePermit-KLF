@@ -8,7 +8,7 @@ from flask_mail import Mail
 from models import storage
 from os import getenv
 from web_flask import auth, register, main
-import uuid
+
 
 load_dotenv()
 
