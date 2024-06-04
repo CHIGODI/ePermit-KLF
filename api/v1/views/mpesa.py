@@ -12,7 +12,6 @@ import uuid
 from web_flask import register
 from base64 import b64encode
 from requests.auth import HTTPBasicAuth
-from . import token_required
 from os import getenv
 from api.v1.views import app_views
 from dotenv import load_dotenv
