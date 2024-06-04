@@ -91,7 +91,8 @@ def login():
             response = make_response(redirect(url_for(dashboard_route)))
 
             # Set HTTP-only cookie
-            response.set_cookie('x-access-token', token, httponly=True, max_age=1800, secure=True)
+            response.set_cookie('x-access-token', token, httponly=True,
+                                max_age=1800, secure=True)
             return response
 
         flash("Wrong email or password.", 'error')
@@ -171,7 +172,8 @@ def verify_email():
 
         # Check if user is locked for resending the code
         if verification_data['resend_lock_time']:
-            lock_time = datetime.strptime(verification_data['resend_lock_time'], '%Y-%m-%d %H:%M:%S')
+            lock_time = datetime.strptime(verification_data['resend_lock_time'],
+                                          '%Y-%m-%d %H:%M:%S')
             if datetime.now() < lock_time:
                 flash('Too many attempts to resend the code. Please try again in 1 hour.', 'error')
                 return redirect(url_for('auth.verify_email'))
@@ -254,7 +256,8 @@ def forgot_password():
                     }, getenv('SECRET_KEY'), algorithm='HS256')
 
                     # Send reset email set with a JWT
-                    password_reset_link = url_for('auth.reset_password', token=token, _external=True)
+                    password_reset_link = url_for('auth.reset_password',
+                                                  token=token, _external=True)
 
                     #add current user to session object
                     session['data'] = {

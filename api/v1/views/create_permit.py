@@ -22,11 +22,12 @@ from models.user import User
 from dotenv import load_dotenv
 from os import getenv
 
+
 load_dotenv()
 
 
 def generate_qr_code(business_id, permit_number, expiry_date):
-    """Generates QR code encoded with permit details """
+    """ Generates QR code encoded with permit details """
     data = f"Business ID: {business_id}\nPermit Number: {permit_number}\nExpiry Date: {expiry_date}"
     # Create QR code instance
     qr = qrcode.QRCode(
@@ -50,9 +51,9 @@ def generate_qr_code(business_id, permit_number, expiry_date):
     return buffer
 
 
-
 @app_views.route('/generatepermit/<business_id>', methods=['GET'], strict_slashes=False)
 def generate_pdf(business_id):
+    """ Generate a PDF permit for a business """
     business = storage.get_obj_by_id(Business, business_id)
     if not business:
         abort(404)

@@ -21,5 +21,4 @@ def stats():
                "category": storage.count("Category"),
                "permit": storage.count("Permit"),
                }
-
     return jsonify(count_stats)

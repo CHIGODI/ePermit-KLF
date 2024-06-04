@@ -34,6 +34,7 @@ app.register_blueprint(auth)
 app.register_blueprint(main)
 app.register_blueprint(register)
 
+
 @app.teardown_appcontext
 def close_session(exception):
     """ Closes the current SQLAlchemy session. """
