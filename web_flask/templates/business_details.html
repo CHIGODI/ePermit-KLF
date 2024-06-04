@@ -1,44 +1,51 @@
 {% extends "admin_dashboard.html" %}
 {% block content %}
 <div class="service-listing">
-    <h2>Details</h2>
+    <div class="admin-upper">
+        <div class="admin-upper-content">
+            <div class="admin-text-content">
+                <h2>Business Details</h2>
+            </div>
+        </div>
+    </div>
     <div class="business-details">
-        
         <ul>
-            <li>Business Name: {{ business_details.business_name }}</li>
-            <li>Entity Origin: {{ business_details.entity_origin }}</li>
-            <li>Certificate of Registration No: {{ business_details.Certificate_of_Registration_No }}</li>
-            <li>KRA Pin: {{ business_details.KRA_pin }}</li>
-            <li>VAT No: {{ business_details.vat_no }}</li>
-            <li>PO Box: {{ business_details.po_box }}</li>
-            <li>Postal Code: {{ business_details.postal_code }}</li>
-            <li>Business Telephone: {{ business_details.business_telephone }}</li>
-            <li>Business Telephone Two: {{ business_details.business_telephone_two }}</li>
-            <li>Business Email: {{ business_details.business_email }}</li>
-            <li>Sub County: {{ business_details.sub_county }}</li>
-            <li>Ward: {{ business_details.ward }}</li>
-            <li>Physical Address: {{ business_details.physical_address }}</li>
-            <li>Plot No: {{ business_details.plot_no }}</li>
-            <li>Category: {{ business_details.category }}</li>
-            <li>Detailed Description: {{ business_details.detailed_description }}</li>
-            <li>Number of Employees: {{ business_details.number_of_employees }}</li>
-            <li>Latitude: {{ business_details.latitude }}</li>
-            <li>Longitude: {{ business_details.longitude }}</li>
-            <li>Owner: {{ business_details.owner }}</li>
-            <li>Verified: {% if business_details.verified %} Yes {% else %} No {% endif %}</li>
+            <li><strong>Business Name:</strong> {{ business_details.business_name }}</li>
+            <li><strong>Entity Origin:</strong> {{ business_details.entity_origin }}</li>
+            <li><strong>Certificate of Registration No:</strong> {{ business_details.Certificate_of_Registration_No }}</li>
+            <li><strong>KRA Pin:</strong> {{ business_details.KRA_pin }}</li>
+            <li><strong>VAT No:</strong> {{ business_details.vat_no }}</li>
+            <li><strong>PO Box:</strong> {{ business_details.po_box }}</li>
+            <li><strong>Postal Code:</strong> {{ business_details.postal_code }}</li>
+            <li><strong>Business Telephone:</strong> {{ business_details.business_telephone }}</li>
+            <li><strong>Business Telephone Two:</strong> {{ business_details.business_telephone_two }}</li>
+            <li><strong>Business Email:</strong> {{ business_details.business_email }}</li>
+            <li><strong>Sub County:</strong> {{ business_details.sub_county }}</li>
+            <li><strong>Ward:</strong> {{ business_details.ward }}</li>
+            <li><strong>Physical Address:</strong> {{ business_details.physical_address }}</li>
+            <li><strong>Plot No:</strong> {{ business_details.plot_no }}</li>
+            <li><strong>Category:</strong> {{ business_details.category }}</li>
+            <li><strong>Detailed Description:</strong> {{ business_details.detailed_description }}</li>
+            <li><strong>Number of Employees:</strong> {{ business_details.number_of_employees }}</li>
+            <li><strong>Latitude:</strong> {{ business_details.latitude }}</li>
+            <li><strong>Longitude:</strong> {{ business_details.longitude }}</li>
+            <li><strong>Owner:</strong> {{ business_details.owner }}</li>
+            <li><strong>Status:</strong> {{ business_details.status }} </li>
         </ul>
-        <form action="" method="post">
-            <div class="btn-group">
-                <input type="hidden" name="action" value="reject">
-                <button type="submit" class="btn-reject">Reject</button>
-            </div>
-        </form>
-        <form action="" method="post">
-            <div class="btn-group">
-                <input type="hidden" name="action" value="approve">
-                <button type="submit" class="btn-approve">Approve</button>
-            </div>
-        </form>
+        <div class="buttons">
+            <form action="" method="post">
+                <div class="bts-group">
+                    <input type="hidden" name="action" value="approve">
+                    <button type="submit" class="btn btn-approve">Approve</button>
+                </div>
+            </form>
+            <form action="" method="post">
+                <div class="bts-group">
+                    <input type="hidden" name="action" value="reject">
+                    <button type="submit" class="btn btn-reject">Reject</button>
+                </div>
+            </form>
+        </div>
         
     </div>
 </div>

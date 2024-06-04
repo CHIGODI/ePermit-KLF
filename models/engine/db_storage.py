@@ -82,23 +82,45 @@ class DBStorage:
     # added function to get unverified/rejected businesses
     def get_unverified_businesses(self):
         """ retrieves all unverified businesses """
-        return self.__session.query(Business).filter(Business.verified == False).all()
+        return self.__session.query(Business).filter(Business.status == 'Pending').all()
 
     # Get a business details
     def get_business_details(self, business_id):
         """ Retrieve details of a specific business by its ID """
         return self.__session.query(Business).filter_by(id=business_id).first()
 
+    #get rejected businesses
+    def get_rejected_businesses(self):
+        """ retrieves all rejected businesses """
+        return self.__session.query(Business).filter(Business.status == 'Rejected').all()
+
+    # get rejected business by id
+    def get_rejected_businesses_by_id(self, id):
+        """ Retrieve rejected businesses """
+        if id is None:
+            return None
+        else:
+            rej = self.__session.query(Business).filter(Business.status == 'Rejected').first()
+            print(rej)
+            return rej
     # get approved businesses
     def get_approved_businesses(self):
+        """ retrieves all approved businesses """
+        return self.__session.query(Business).filter(Business.status == 'Approved' ).all()
+    
+    def get_approved_businesses_by_id(self, id):
         """ Retrieve approved businesses """
-        return self.__session.query(Business).filter(Business.verified == True).all()
+        if id is None:
+            return None
+        else:
+            return self.__session.query(Business).filter(Business.verified == True).first()
 
     # save rejected businesses
     def reject_business(self, business_id):
         """Rejects a business by setting its verified status to False"""
         business = self.get_obj_by_id(Business, business_id)
         if business:
+            business.status = 'Rejected'
             business.verified = False
             self.save()
 
@@ -107,6 +129,7 @@ class DBStorage:
         """Approves a business by setting its verified status to True"""
         business = self.get_obj_by_id(Business, business_id)
         if business:
+            business.status = 'Approved'
             business.verified = True
             self.save()
 

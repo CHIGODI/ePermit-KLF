@@ -1,36 +1,38 @@
 {% extends "admin_dashboard.html" %}
 {% block content %}
 <div class="service-listing">
-    <h2>Rejected Businesses</h2>
-    <div class="card-group">
-        {% for business in rejected_businesses %}
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Business Name: {{ business.business_name }}</h5>
-                <ul>
-                    <li>Entity Origin: {{ business.entity_origin }}</li>
-                    <li>Certificate of Registration No: {{ business.Certificate_of_Registration_No }}</li>
-                    <li>KRA Pin: {{ business.KRA_pin }}</li>
-                    <li>VAT No: {{ business.vat_no }}</li>
-                    <li>PO Box: {{ business.po_box }}</li>
-                    <li>Postal Code: {{ business.postal_code }}</li>
-                    <li>Business Telephone: {{ business.business_telephone }}</li>
-                    <li>Business Telephone Two: {{ business.business_telephone_two }}</li>
-                    <li>Business Email: {{ business.business_email }}</li>
-                    <li>Sub County: {{ business.sub_county }}</li>
-                    <li>Ward: {{ business.ward }}</li>
-                    <li>Physical Address: {{ business.physical_address }}</li>
-                    <li>Plot No: {{ business.plot_no }}</li>
-                    <li>Category: {{ business.category }}</li>
-                    <li>Detailed Description: {{ business.detailed_description }}</li>
-                    <li>Number of Employees: {{ business.number_of_employees }}</li>
-                    <li>Latitude: {{ business.latitude }}</li>
-                    <li>Longitude: {{ business.longitude }}</li>
-                    <li>Owner: {{ business.owner }}</li>
-                    <li>Verified: {% if business.verified %} Yes {% else %} No {% endif %}</li>
+    <div class="admin-upper">
+        <div class="admin-upper-content">
+            <div class="admin-text-content">
+                <h2>Business Details</h2>
             </div>
         </div>
-        {% endfor %}
+    </div>
+    <div class="business-details">
+        <ul>
+            <li><strong>Business Name:</strong> {{ business_details.business_name }}</li>
+            <li><strong>Entity Origin:</strong> {{ business_details.entity_origin }}</li>
+            <li><strong>Certificate of Registration No:</strong> {{ business_details.Certificate_of_Registration_No }}</li>
+            <li><strong>KRA Pin:</strong> {{ business_details.KRA_pin }}</li>
+            <li><strong>VAT No:</strong> {{ business_details.vat_no }}</li>
+            <li><strong>PO Box:</strong> {{ business_details.po_box }}</li>
+            <li><strong>Postal Code:</strong> {{ business_details.postal_code }}</li>
+            <li><strong>Business Telephone:</strong> {{ business_details.business_telephone }}</li>
+            <li><strong>Business Telephone Two:</strong> {{ business_details.business_telephone_two }}</li>
+            <li><strong>Business Email:</strong> {{ business_details.business_email }}</li>
+            <li><strong>Sub County:</strong> {{ business_details.sub_county }}</li>
+            <li><strong>Ward:</strong> {{ business_details.ward }}</li>
+            <li><strong>Physical Address:</strong> {{ business_details.physical_address }}</li>
+            <li><strong>Plot No:</strong> {{ business_details.plot_no }}</li>
+            <li><strong>Category:</strong> {{ business_details.category }}</li>
+            <li><strong>Detailed Description:</strong> {{ business_details.detailed_description }}</li>
+            <li><strong>Number of Employees:</strong> {{ business_details.number_of_employees }}</li>
+            <li><strong>Latitude:</strong> {{ business_details.latitude }}</li>
+            <li><strong>Longitude:</strong> {{ business_details.longitude }}</li>
+            <li><strong>Owner:</strong> {{ business_details.owner }}</li>
+            <li><strong>Status:</strong> {{ business_details.status }} </li>
+        </ul>
+        
     </div>
 </div>
 {% endblock %}

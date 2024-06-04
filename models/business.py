@@ -31,3 +31,4 @@ class Business(BaseModel, Base):
     longitude = Column(Float, nullable=False)
     owner = Column(String(60), ForeignKey('users.id'), nullable=False)
     verified = Column(Boolean, nullable=True, default=False)
+    status = Column(String(20), nullable=True, default='Pending')

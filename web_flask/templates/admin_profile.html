@@ -1,0 +1,32 @@
+{% extends "admin_dashboard.html" %}
+{% block content %}
+    <div class="dashboard-pages">
+        <div class="myprofile">
+            <div class="user-icon">
+                <i class="fa-solid fa-user user"></i>
+            </div>
+            <div class="p-text">
+                <p>Manage your personal information.</p>
+            </div>
+            <div class="profile-content">
+                {% if current_user.first_name and current_user.last_name %}
+                    <p>Name: {{ current_user.first_name ~''~ current_user.last_name }}</p>
+                {% endif %}
+
+                {% if current_user.email  %}
+                    <p>Email: {{ current_user.email }}</p>
+                {% endif %}
+
+                {% if current_user.phone_number  %}
+                    <p>Phone Number: {{ current_user.phone_number }}</p>
+                {% endif %}
+
+                {% if current_user.ID_number %}
+                    <p>ID Number: {{ current_user.ID_number }}</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}

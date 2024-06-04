@@ -117,7 +117,7 @@ $(function () {
             let businessInfoSubmitted = false;
             // send business info to the server
             $.ajax({
-                url: "https://www.epermit.live/api/v1/businesses",
+                url: "http://localhost:5000/api/v1/businesses",
                 type: "POST",
                 data: JSON.stringify(business_registration_data),
                 contentType: "application/json",
@@ -127,7 +127,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('.flash-msg')
-                        window.location.href = "https://www.epermit.live/dashboard";
+                        window.location.href = "http://localhost:5000/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -143,7 +143,7 @@ $(function () {
 
             // send owner info to the server
             $.ajax({
-                url: "https://www.epermit.live/api/v1/users/" + user_id,
+                url: "http://localhost:5000/api/v1/users/" + user_id,
                 type: "PUT",
                 data: JSON.stringify(owner_info),
                 contentType: "application/json",
@@ -153,7 +153,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('flash-msg')
-                        window.location.href = "https://www.epermit.live/dashboard";
+                        window.location.href = "http://localhost:5000/dashboard";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
