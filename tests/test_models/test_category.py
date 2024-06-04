@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from datetime import datetime
-from models.category import Category  # Adjust the import according to your module structure
+from models.category import Category
 
 class TestCategory(unittest.TestCase):
 

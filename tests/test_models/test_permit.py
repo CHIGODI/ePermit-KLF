@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch
 from datetime import datetime, timedelta
-from models.permit import Permit  # Adjust the import according to your module structure
+from models.permit import Permit
 
 class TestPermit(unittest.TestCase):
 

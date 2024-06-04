@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from models.user import User  # Adjust the import according to your module structure
+from models.user import User
 
 class TestUser(unittest.TestCase):
 
