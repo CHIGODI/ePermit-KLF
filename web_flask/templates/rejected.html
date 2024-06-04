@@ -24,7 +24,7 @@
                 <tr>
                     <td>{{ business.business_name }}</td>
                     <td>{{ business.Certificate_of_Registration_No }}</td>
-                    <td>{% if business.verified %} Verified {% else %} Rejected {% endif %}</td>
+                    <td>{% if business.status == 'Approved' %} Approved {% else %} Rejected {% endif %}</td>
                     <td>
                         <a href="{{ url_for('main.business_view', business_id=business.id) }}" class="bts btn-primary">View Details</a>
                     </td>
