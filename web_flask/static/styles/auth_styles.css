@@ -216,9 +216,9 @@
 }
 .choice{
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    gap: 5%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 5%;
 }
 .cancel-forgot{
@@ -239,12 +239,13 @@
 }
 .choice-btn:hover,
 .choice-btn-li:hover{
-    background-color: opacity(0.9);
+    opacity: 90%;
     cursor: pointer;
 }
 
 #s-choice{
     background-color: #038C7F;
+    color: white;
 }
 /* --------------password reset-------------- */
 .pwd-reset {
@@ -258,6 +259,21 @@
 .form-auth .b-pwd-reset {
     background-color: #2196F3;
     color: #ffffff;
+}
+
+
+/* -----resend code--- */
+.resend-code {
+    text-decoration: underline;
+    outline: none;
+    border: none;
+    background-color: white;
+    margin-top: 2%;
+}
+
+.resend-code:hover {
+    color: red;
+    cursor: pointer;
 }
 
 @media (max-width: 575.98px) {
@@ -293,6 +309,9 @@
     .t-forgot-pwd{
         font-weight: 600;
     }
+    .choice-btn{
+        width: 50%;
+    }
 
 }
 
@@ -322,5 +341,8 @@
        width: 60%;
        box-shadow: none;
        background-color: red;
+   }
+   .choice-btn{
+    width: 100%;
    }
 }
