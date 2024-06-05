@@ -61,7 +61,7 @@ body{
 @media (min-width: 991px) {
     .nav-link {
         position: relative;
-        padding-bottom: 5px; /* Adjust padding as needed */
+        padding-bottom: 5px;
     }
 
     .nav-link::before {
