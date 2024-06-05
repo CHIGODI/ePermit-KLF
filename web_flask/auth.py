@@ -258,12 +258,6 @@ def forgot_password():
                     # Send reset email set with a JWT
                     password_reset_link = url_for('auth.reset_password',
                                                   token=token, _external=True)
-
-                    #add current user to session object
-                    session['data'] = {
-                        'timestamp': datetime.utcnow().isoformat(),
-                        'user': user,
-                    }
                     message = Message('Password Reset ePermit',
                                     sender=getenv('MAIL_USERNAME'),
                                     recipients=[email])
@@ -286,8 +280,11 @@ def reset_password(token):
     """ Route for handling password reset """
     try:
         jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])
-    except:
-        flash('The reset link has expired or is invalid.', 'error')
+    except jwt.ExpiredSignatureError:
+        flash('The reset link has expired.', 'error')
+        return redirect(url_for('auth.login'))
+    except jwt.InvalidTokenError:
+        flash('Invalid reset link.', 'error')
         return redirect(url_for('auth.login'))
 
     if request.method == 'POST':
@@ -302,7 +299,12 @@ def reset_password(token):
             flash('Passwords do not match', 'error')
             return redirect(url_for('auth.reset_password'))
 
-        user = session.get('user')
+        user_id = jwt.decode(token, getenv('SECRET_KEY'), algorithms=['HS256'])['id']
+        user = storage.get_obj_by_id(User, user_id)
+        if not user:
+            flash('User not found.', 'error')
+            return redirect(url_for('auth.login'))
+
         user.password = generate_password_hash(new_password)
         user.save()
         flash('Password updated successfully.', 'success')
