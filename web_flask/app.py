@@ -23,6 +23,7 @@ app.config['MAIL_PORT'] = int(getenv('MAIL_PORT'))
 app.config['MAIL_USE_TLS'] = getenv('MAIL_USE_TLS')
 app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
+app.config['SERVER_NAME'] = 'epermit.live'
 
 # Initialise mail service
 mail = Mail(app)

@@ -4,7 +4,7 @@
 }
 
 .hero {
-    background: url('../images/background.svg') no-repeat center center/cover;
+    background: url('../images/background.png') no-repeat center center/cover;
     height: calc(100vh - 70px);
     width: 100%;
     background-size: 2400px;
