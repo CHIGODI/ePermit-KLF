@@ -23,7 +23,7 @@ app.config['MAIL_PORT'] = int(getenv('MAIL_PORT'))
 app.config['MAIL_USE_TLS'] = getenv('MAIL_USE_TLS')
 app.config['MAIL_USERNAME'] = getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = getenv('MAIL_PASSWORD')
-app.config['SERVER_NAME'] = 'epermit.live, www.epermit.live'
+app.config['SERVER_NAME'] = 'www.epermit.live'
 
 # Initialise mail service
 mail = Mail(app)
@@ -44,4 +44,4 @@ def close_session(exception):
 
 if __name__ == '__main__':
     """ Runs the Flask app."""
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5003)
