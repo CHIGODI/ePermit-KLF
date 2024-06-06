@@ -16,7 +16,7 @@
     color: white;
 }
 .background-tint{
-    background-color: rgba(200, 100, 0, .5);
+    background-color: #3d4145;
     background-blend-mode: multiply;
 
 }
@@ -200,6 +200,34 @@
 .service-box {
     margin-bottom: 30px;
 }
+
+/* ============about section============== */
+.about img {
+    max-width: 150px;
+    border-radius: 50%;
+}
+
+.about{
+    border-radius: 0.5%;
+    background-color: #F5F5F5;
+}
+
+.about p{
+    text-align: center;
+    color: #040404;
+}
+
+.about h2 {
+    font-size: 2rem;
+}
+.about .row{
+    padding: 2%;
+}
+.text-center H4{
+    padding: 2px;
+    font-weight: 600;
+}
+
 
 @media screen and (max-width:1200px){
     .hero-title {
