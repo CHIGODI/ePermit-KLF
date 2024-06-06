@@ -127,7 +127,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('.flash-msg')
-                        window.location.href = "https://www.epermit.live/dashboard";
+                        window.location.href = "https://www.epermit.live/mybusinesses";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -153,7 +153,7 @@ $(function () {
                         $('.register-bs-btn').text("Submit");
                         showAlert("Successfully submited!!", 'success', 'flash-form-error');
                         fadeOut('flash-msg')
-                        window.location.href = "https://www.epermit.live/dashboard";
+                        window.location.href = "https://www.epermit.live/mybusinesses";
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -286,6 +286,17 @@ function showAlert(message, type, id) {
     $('#' + id).addClass(type).text(message).css({ 'padding-top': '18px' }).show();
 }
 
+
+// Function to show the waiting modal
+function showWaitingModal() {
+    $('#waitingModal').show();
+}
+
+// Function to hide the waiting modal
+function hideWaitingModal() {
+    $('#waitingModal').hide();
+}
+
 // STK push
 function stkPush(businessDataReqPermit, callback) {
     $.ajax({
@@ -295,7 +306,8 @@ function stkPush(businessDataReqPermit, callback) {
         contentType: "application/json",
         success: function(data) {
             showAlert('Payment request sent, Please check your phone.', 'success', 'flash-error-p');
-            fadeOut('error-p-f', 10000);
+            fadeOut('error-p-f', 8000);
+            showWaitingModal();
             // Give client 15sec before checking payment status
             setTimeout(function() {
                 stkQuery(callback); // Call stkQuery with the callback
@@ -304,6 +316,7 @@ function stkPush(businessDataReqPermit, callback) {
         error: function(data) {
             console.error('Error sending STK push request.');
             showAlert('An error occurred. Please try again.', 'error', 'flash-error-p');
+            hideWaitingModal();
             callback(1); // Return 1 indicating error
         }
     });
@@ -319,6 +332,7 @@ function stkQuery(callback) {
             if (errorCode) {
                 showAlert('An error occurred while processing. Please try again later.', 'error', 'flash-error-p');
                 fadeOut('error-p-f');
+                hideWaitingModal();
                 callback(1); // Return 1 indicating error
             } else {
                 console.log(data);
@@ -329,6 +343,7 @@ function stkQuery(callback) {
         },
         error: function() {
             console.log('Error querying payment status.');
+            hideWaitingModal();
             callback(1); // Return 1 indicating error
         }
     });
@@ -345,10 +360,12 @@ function handlePaymentStatus(resultCode, callback) {
     } else if (resultCode === '1032') {
         showAlert('The payment request was canceled.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
+        hideWaitingModal();
         callback(1032); // Return 1032 indicating cancellation
     } else {
         showAlert('An error occurred while processing payment. Please try again later.', 'error', 'flash-error-p');
         fadeOut('error-p-f');
+        hideWaitingModal();
         callback(1); // Return 1 indicating other error
     }
 }
