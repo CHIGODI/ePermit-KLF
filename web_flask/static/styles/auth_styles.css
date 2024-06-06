@@ -196,9 +196,7 @@
 
 /* --------forgot passowrd page -------- */
 
-.f-forgot-pwd {
-    height: 17rem;
-}
+
 
 .auth-form-div .t-forgot-pwd {
     color: #555555;
@@ -248,6 +246,15 @@
     color: white;
 }
 /* --------------password reset-------------- */
+.choice-find-acc{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 5%;
+    height: 10%;
+    gap: 3%;
+}
 .pwd-reset {
     height: 356px;
 }
