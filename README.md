@@ -162,3 +162,7 @@ Downloading of active permits is available for one month from the date of issuan
 ### Logout
 
 - Users can log out by navigating to the logout route, which will clear the JWT token from the cookies.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
